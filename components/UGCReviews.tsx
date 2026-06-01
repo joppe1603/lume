@@ -1,54 +1,46 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 
-const ugcCards = [
-  {
-    quote: 'Na 4 weken echt zichtbaar verschil in textuur. Ik had het niet verwacht maar het werkt gewoon.',
-    author: 'Sophie van den Berg',
-    location: 'Amsterdam',
-    skin: 'Droge huid · 4 weken',
-    initials: 'SV',
-    color: '#d4a5a5',
-    rating: 5,
-  },
-  {
-    quote: 'Gevoelige huid, altijd bang voor retinol. Dit is de eerste formule die ik dagelijks gebruik zonder problemen.',
-    author: 'Emma Clarke',
-    location: 'London',
-    skin: 'Gevoelige huid · 6 weken',
-    initials: 'EC',
-    color: '#b5c4a5',
-    rating: 5,
-    image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=70&fit=crop&crop=face',
-  },
-  {
-    quote: '3 maanden verder. Mijn vriendinnen vragen wat ik doe. Eerlijk antwoord: minder dan vroeger, en dit serum.',
-    author: 'Lisa Müller',
-    location: 'Berlijn',
-    skin: 'Gemengde huid · 12 weken',
-    initials: 'LM',
-    color: '#a5b5d4',
-    rating: 5,
-  },
-  {
-    quote: 'Ik word wakker en mijn huid ziet er al goed uit. Reset Serum doet echt iets overnight.',
-    author: 'Fleur de Jong',
-    location: 'Utrecht',
-    skin: 'Vette huid · 3 weken',
-    initials: 'FJ',
-    color: '#d4c4a5',
-    rating: 5,
-  },
-]
+type Review = {
+  id: string
+  name: string
+  rating: number
+  title: string | null
+  body: string
+  created_at: string
+  verified_purchase: boolean
+}
+
+const HEX_COLORS = ['#d4a5a5', '#b5c4a5', '#a5b5d4', '#d4c4a5', '#c4b5a5', '#a5d4c4', '#d4a5c4', '#c4d4a5']
+
+function getInitials(name: string) {
+  return name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()
+}
+
+function getHexColor(name: string) {
+  let h = 0
+  for (const c of name) h = (h * 31 + c.charCodeAt(0)) & 0xff
+  return HEX_COLORS[h % HEX_COLORS.length]
+}
 
 export default function UGCReviews() {
+  const [reviews, setReviews] = useState<Review[]>([])
+
+  useEffect(() => {
+    fetch('/api/reviews?slug=reset-serum')
+      .then(r => r.json())
+      .then(data => { if (Array.isArray(data) && data.length > 0) setReviews(data.slice(0, 4)) })
+      .catch(() => {})
+  }, [])
+
+  if (reviews.length === 0) return null
+
   return (
     <section className="py-28 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-
-        {/* Header */}
         <div className="mb-16">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -58,7 +50,7 @@ export default function UGCReviews() {
             className="flex items-center gap-3 mb-4"
           >
             <div className="w-6 h-px bg-[#C9A96E]" />
-            <span className="section-label">Sample testers</span>
+            <span className="section-label">Klanten aan het woord</span>
           </motion.div>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <motion.h2
@@ -81,17 +73,16 @@ export default function UGCReviews() {
             >
               <span className="inline-flex items-center gap-2 text-[11px] font-medium text-[#9A9590] bg-[#FAF8F5] border border-stone-100 px-3 py-1.5 rounded-full">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
-                Ervaringen van sample testers · Pre-launch formule
+                Geverifieerde klantreviews · Reset Serum
               </span>
             </motion.div>
           </div>
         </div>
 
-        {/* Masonry grid */}
         <div className="columns-1 sm:columns-2 lg:columns-2 xl:columns-4 gap-4 space-y-4">
-          {ugcCards.map((card, i) => (
+          {reviews.map((card, i) => (
             <motion.div
-              key={card.author}
+              key={card.id}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -99,49 +90,43 @@ export default function UGCReviews() {
               className="break-inside-avoid"
             >
               <div className="bg-[#FAF8F5] rounded-2xl p-6 border border-stone-100 hover:border-stone-200 transition-colors duration-200">
-
-                {/* Photo */}
-                {card.image && (
-                  <div className="w-full h-40 rounded-xl overflow-hidden mb-5 relative">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={card.image}
-                      alt={`Review van ${card.author}`}
-                      className="w-full h-full object-cover object-top"
-                      style={{ filter: 'saturate(0.82) contrast(1.02)' }}
-                    />
-                  </div>
+                <div className="flex gap-0.5 mb-4">
+                  {Array.from({ length: card.rating }).map((_, j) => (
+                    <svg key={j} width="13" height="13" viewBox="0 0 13 13" fill="#C9A96E" aria-hidden>
+                      <path d="M6.5 1L7.9 4.7H12L8.8 7L10 11L6.5 8.8L3 11L4.2 7L1 4.7H5.1L6.5 1Z"/>
+                    </svg>
+                  ))}
+                </div>
+                {card.title && (
+                  <p className="text-[#1A1A1A] text-sm font-semibold mb-2">{card.title}</p>
                 )}
-
-                {/* Quote */}
                 <p className="text-[#1A1A1A] text-[14px] leading-[1.7] mb-5">
-                  &ldquo;{card.quote}&rdquo;
+                  &ldquo;{card.body}&rdquo;
                 </p>
-
-                {/* Author */}
                 <div className="flex items-center gap-3 pt-4 border-t border-stone-200">
                   <div
                     className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0"
-                    style={{ backgroundColor: card.color }}
+                    style={{ backgroundColor: getHexColor(card.name) }}
                   >
-                    {card.initials}
+                    {getInitials(card.name)}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="text-sm font-semibold text-[#1A1A1A]">{card.author}</p>
+                    <p className="text-sm font-semibold text-[#1A1A1A]">{card.name}</p>
                     <p className="text-xs text-[#9A9590] truncate">
-                      {card.location} · {card.skin}
+                      {new Date(card.created_at).toLocaleDateString('nl-NL', { month: 'long', year: 'numeric' })}
                     </p>
                   </div>
-                  <span className="shrink-0 text-[10px] font-medium text-[#C9A96E] bg-[#FDF8F0] px-2 py-0.5 rounded-full border border-[#C9A96E]/15 whitespace-nowrap">
-                    Reset Serum
-                  </span>
+                  {card.verified_purchase && (
+                    <span className="shrink-0 text-[10px] font-medium text-green-600 bg-green-50 px-2 py-0.5 rounded-full border border-green-200 whitespace-nowrap">
+                      ✓ Geverifieerd
+                    </span>
+                  )}
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Bottom CTA */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -150,10 +135,10 @@ export default function UGCReviews() {
           className="mt-14 text-center"
         >
           <Link
-            href="/launch#waitlist"
+            href="/products/reset-serum"
             className="btn-gold inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl font-medium text-sm"
           >
-            Word als eerste uitgenodigd
+            Bestel Reset Serum
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
               <path d="M2 6h8M6 2l4 4-4 4" />
             </svg>

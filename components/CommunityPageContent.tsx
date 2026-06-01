@@ -1,55 +1,30 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 
-const reviews = [
-  {
-    quote: 'Na 4 weken echt zichtbaar verschil in textuur. Ik had het niet verwacht maar het werkt gewoon.',
-    author: 'Sophie van den Berg', location: 'Amsterdam', skin: 'Droge huid', weeks: '4 weken',
-    product: 'Reset Serum', initials: 'SV', color: '#d4a5a5', rating: 5, verified: true,
-  },
-  {
-    quote: 'Gevoelige huid, altijd bang voor retinol. Dit is de eerste formule die ik dagelijks gebruik zonder problemen.',
-    author: 'Emma Clarke', location: 'London', skin: 'Gevoelige huid', weeks: '6 weken',
-    product: 'Reset Serum', initials: 'EC', color: '#b5c4a5', rating: 5, verified: true,
-  },
-  {
-    quote: '3 maanden verder. Mijn vriendinnen vragen wat ik doe. Eerlijk antwoord: minder dan vroeger.',
-    author: 'Lisa Müller', location: 'Berlijn', skin: 'Gemengde huid', weeks: '12 weken',
-    product: 'The Glow Ritual', initials: 'LM', color: '#a5b5d4', rating: 5, verified: true,
-  },
-  {
-    quote: 'Mijn barrière was kapot van te veel scrubben. Na 8 weken MAUYI voelt mijn huid eindelijk normaal.',
-    author: 'Hannah Park', location: 'Seoul', skin: 'Gevoelige huid', weeks: '8 weken',
-    product: 'Sensitive Skin Edit', initials: 'HP', color: '#c4b5a5', rating: 5, verified: true,
-  },
-  {
-    quote: 'Ik word wakker en mijn huid ziet er al goed uit. Dat was eerder nooit zo.',
-    author: 'Fleur de Jong', location: 'Utrecht', skin: 'Vette huid', weeks: '3 weken',
-    product: 'Reset Serum', initials: 'FJ', color: '#d4c4a5', rating: 5, verified: true,
-  },
-  {
-    quote: 'Ik had een kast vol producten. Nu 3. Mijn huid ziet er beter uit en ik snap eindelijk wat ik gebruik.',
-    author: 'Julia Rossi', location: 'Milaan', skin: 'Normale huid', weeks: '5 weken',
-    product: 'The Glow Ritual', initials: 'JR', color: '#a5d4c4', rating: 5, verified: true,
-  },
-  {
-    quote: 'Poriën veel minder zichtbaar na 5 weken. Ik gebruik het nu als basis en bouw niets meer bovenop.',
-    author: 'Noor Bakker', location: 'Rotterdam', skin: 'Gemengde huid', weeks: '5 weken',
-    product: 'Reset Serum', initials: 'NB', color: '#d4a5c4', rating: 5, verified: true,
-  },
-  {
-    quote: 'Op impuls besteld, geen verwachtingen. Nu kan ik niet meer zonder. Het serum is gewoon goed.',
-    author: 'Charlotte Webb', location: 'Manchester', skin: 'Droge huid', weeks: '10 weken',
-    product: 'Reset Serum', initials: 'CW', color: '#c4d4a5', rating: 5, verified: true,
-  },
-  {
-    quote: 'Dermatologisch geteste producten en geen parfum. Eindelijk een merk dat begrijpt wat gevoelige huid nodig heeft.',
-    author: 'Anna Kowalski', location: 'Warschau', skin: 'Gevoelige huid', weeks: '7 weken',
-    product: 'Sensitive Skin Edit', initials: 'AK', color: '#a5c4d4', rating: 5, verified: true,
-  },
-]
+type Review = {
+  id: string
+  name: string
+  rating: number
+  title: string | null
+  body: string
+  created_at: string
+  verified_purchase: boolean
+}
+
+const HEX_COLORS = ['#d4a5a5', '#b5c4a5', '#a5b5d4', '#d4c4a5', '#c4b5a5', '#a5d4c4', '#d4a5c4', '#c4d4a5', '#a5c4d4']
+
+function getInitials(name: string) {
+  return name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()
+}
+
+function getHexColor(name: string) {
+  let h = 0
+  for (const c of name) h = (h * 31 + c.charCodeAt(0)) & 0xff
+  return HEX_COLORS[h % HEX_COLORS.length]
+}
 
 function Stars({ count = 5 }: { count?: number }) {
   return (
@@ -64,6 +39,24 @@ function Stars({ count = 5 }: { count?: number }) {
 }
 
 export default function CommunityPageContent() {
+  const [reviews, setReviews] = useState<Review[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch('/api/reviews?slug=reset-serum')
+      .then(r => r.json())
+      .then(data => { if (Array.isArray(data)) setReviews(data) })
+      .catch(() => {})
+      .finally(() => setLoading(false))
+  }, [])
+
+  const avgRating = reviews.length
+    ? Math.round(reviews.reduce((s, r) => s + r.rating, 0) / reviews.length * 10) / 10
+    : null
+  const pctRecommend = reviews.length
+    ? Math.round(reviews.filter(r => r.rating >= 4).length / reviews.length * 100)
+    : null
+
   return (
     <main>
       {/* Hero */}
@@ -89,24 +82,29 @@ export default function CommunityPageContent() {
               Geverifieerde aankopen. Geen geselecteerde uitzonderingen. Geen betaalde reviews.
             </p>
 
-            {/* Stats */}
-            <div className="flex items-center justify-center gap-8">
-              <div>
-                <p className="text-3xl font-semibold text-[#C9A96E] font-[family-name:var(--font-cormorant)]">4.9</p>
-                <Stars />
-                <p className="text-stone-500 text-xs mt-1">Gemiddelde score</p>
+            {reviews.length > 0 && (
+              <div className="flex items-center justify-center gap-8">
+                <div>
+                  <p className="text-3xl font-semibold text-[#C9A96E] font-[family-name:var(--font-cormorant)]">{avgRating}</p>
+                  <Stars />
+                  <p className="text-stone-500 text-xs mt-1">Gemiddelde score</p>
+                </div>
+                <div className="w-px h-10 bg-white/10" />
+                <div>
+                  <p className="text-3xl font-semibold text-white font-[family-name:var(--font-cormorant)]">{reviews.length}</p>
+                  <p className="text-stone-500 text-xs mt-1.5">Geverifieerde {reviews.length === 1 ? 'review' : 'reviews'}</p>
+                </div>
+                {pctRecommend !== null && (
+                  <>
+                    <div className="w-px h-10 bg-white/10" />
+                    <div>
+                      <p className="text-3xl font-semibold text-white font-[family-name:var(--font-cormorant)]">{pctRecommend}%</p>
+                      <p className="text-stone-500 text-xs mt-1.5">Zou het aanbevelen</p>
+                    </div>
+                  </>
+                )}
               </div>
-              <div className="w-px h-10 bg-white/10" />
-              <div>
-                <p className="text-3xl font-semibold text-white font-[family-name:var(--font-cormorant)]">12.400+</p>
-                <p className="text-stone-500 text-xs mt-1.5">Geverifieerde reviews</p>
-              </div>
-              <div className="w-px h-10 bg-white/10" />
-              <div>
-                <p className="text-3xl font-semibold text-white font-[family-name:var(--font-cormorant)]">94%</p>
-                <p className="text-stone-500 text-xs mt-1.5">Zou het aanbevelen</p>
-              </div>
-            </div>
+            )}
           </motion.div>
         </div>
       </section>
@@ -114,47 +112,61 @@ export default function CommunityPageContent() {
       {/* Reviews masonry */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 space-y-5">
-            {reviews.map((r, i) => (
-              <motion.div
-                key={r.author}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.05 }}
-                className="break-inside-avoid"
-              >
-                <div className="bg-[#FAF8F5] rounded-2xl border border-stone-100 p-6 hover:border-stone-200 transition-colors duration-200">
-                  <div className="flex items-start justify-between mb-4">
-                    <Stars count={r.rating} />
-                    {r.verified && (
-                      <span className="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full border border-green-100">
-                        ✓ Geverifieerd
-                      </span>
+          {loading ? (
+            <p className="text-center text-sm text-[#9A9590] py-20">Reviews laden...</p>
+          ) : reviews.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-sm text-[#9A9590] mb-4">Nog geen reviews.</p>
+              <Link href="/products/reset-serum" className="btn-gold px-6 py-3 rounded-xl text-sm font-medium">
+                Bestel als eerste
+              </Link>
+            </div>
+          ) : (
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 space-y-5">
+              {reviews.map((r, i) => (
+                <motion.div
+                  key={r.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.05 }}
+                  className="break-inside-avoid"
+                >
+                  <div className="bg-[#FAF8F5] rounded-2xl border border-stone-100 p-6 hover:border-stone-200 transition-colors duration-200">
+                    <div className="flex items-start justify-between mb-4">
+                      <Stars count={r.rating} />
+                      {r.verified_purchase && (
+                        <span className="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full border border-green-100">
+                          ✓ Geverifieerd
+                        </span>
+                      )}
+                    </div>
+                    {r.title && (
+                      <p className="text-[#1A1A1A] text-sm font-semibold mb-2">{r.title}</p>
                     )}
-                  </div>
-
-                  <p className="text-[#1A1A1A] text-sm leading-relaxed mb-5 font-light">&ldquo;{r.quote}&rdquo;</p>
-
-                  <div className="flex items-center gap-3 pt-4 border-t border-stone-200">
-                    <div
-                      className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0"
-                      style={{ backgroundColor: r.color }}
-                    >
-                      {r.initials}
+                    <p className="text-[#1A1A1A] text-sm leading-relaxed mb-5 font-light">&ldquo;{r.body}&rdquo;</p>
+                    <div className="flex items-center gap-3 pt-4 border-t border-stone-200">
+                      <div
+                        className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0"
+                        style={{ backgroundColor: getHexColor(r.name) }}
+                      >
+                        {getInitials(r.name)}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-semibold text-[#1A1A1A]">{r.name}</p>
+                        <p className="text-xs text-[#9A9590] truncate">
+                          {new Date(r.created_at).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })}
+                        </p>
+                      </div>
+                      <span className="shrink-0 text-[10px] font-medium text-[#C9A96E] bg-[#FDF8F0] px-2 py-0.5 rounded-full border border-[#C9A96E]/15 whitespace-nowrap">
+                        Reset Serum
+                      </span>
                     </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="text-sm font-semibold text-[#1A1A1A]">{r.author}</p>
-                      <p className="text-xs text-[#9A9590] truncate">{r.location} · {r.skin} · {r.weeks}</p>
-                    </div>
-                    <span className="shrink-0 text-[10px] font-medium text-[#C9A96E] bg-[#FDF8F0] px-2 py-0.5 rounded-full border border-[#C9A96E]/15 whitespace-nowrap">
-                      {r.product}
-                    </span>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -175,7 +187,7 @@ export default function CommunityPageContent() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
-                href="https://www.instagram.com/lumeskincare"
+                href="https://www.instagram.com/mauyi"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-gold inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl font-medium text-sm"
@@ -185,8 +197,8 @@ export default function CommunityPageContent() {
                 </svg>
                 @mauyi
               </a>
-              <Link href="/shop" className="btn-outline inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl font-medium text-sm">
-                Probeer MAUYI
+              <Link href="/products/reset-serum" className="btn-outline inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl font-medium text-sm">
+                Bestel Reset Serum
               </Link>
             </div>
           </motion.div>

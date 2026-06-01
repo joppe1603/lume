@@ -3,104 +3,30 @@
 import { useRef, useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-const reviews = [
-  {
-    quote: 'Na 4 weken echt zichtbaar verschil in textuur. Ik had het niet verwacht maar het werkt gewoon.',
-    author: 'Sophie van den Berg',
-    location: 'Amsterdam',
-    skin: 'Droge huid',
-    weeks: '4 weken',
-    rating: 5,
-    product: 'Radiance Serum',
-    verified: true,
-    initials: 'SV',
-    color: 'bg-rose-400',
-  },
-  {
-    quote: 'Gevoelige huid, altijd bang voor retinol. Dit is de eerste formule die ik dagelijks gebruik zonder problemen.',
-    author: 'Emma Clarke',
-    location: 'London',
-    skin: 'Gevoelige huid',
-    weeks: '6 weken',
-    rating: 5,
-    product: 'Radiance Serum',
-    verified: true,
-    initials: 'EC',
-    color: 'bg-amber-500',
-  },
-  {
-    quote: '3 maanden verder. Mijn vriendinnen vragen wat ik doe. Eerlijk antwoord: minder dan vroeger.',
-    author: 'Lisa Müller',
-    location: 'Berlijn',
-    skin: 'Gemengde huid',
-    weeks: '12 weken',
-    rating: 5,
-    product: 'The Glow Ritual',
-    verified: true,
-    initials: 'LM',
-    color: 'bg-indigo-400',
-  },
-  {
-    quote: 'Mijn barrière was kapot van te veel scrubben. Na 8 weken MAUYI voelt mijn huid eindelijk normaal.',
-    author: 'Hannah Park',
-    location: 'Seoul / Amsterdam',
-    skin: 'Gevoelige huid',
-    weeks: '8 weken',
-    rating: 5,
-    product: 'Sensitive Skin Edit',
-    verified: true,
-    initials: 'HP',
-    color: 'bg-teal-500',
-  },
-  {
-    quote: 'Ik word wakker en mijn huid ziet er al goed uit. Dat was eerder nooit zo. De overnight olie doet echt iets.',
-    author: 'Fleur de Jong',
-    location: 'Utrecht',
-    skin: 'Vette huid',
-    weeks: '3 weken',
-    rating: 5,
-    product: 'Overnight Oil',
-    verified: true,
-    initials: 'FJ',
-    color: 'bg-purple-400',
-  },
-  {
-    quote: 'Ik had een kast vol producten. Nu 3. Mijn huid ziet er beter uit en ik snap eindelijk wat ik gebruik.',
-    author: 'Julia Rossi',
-    location: 'Milaan',
-    skin: 'Normale huid',
-    weeks: '5 weken',
-    rating: 5,
-    product: 'The Glow Ritual',
-    verified: true,
-    initials: 'JR',
-    color: 'bg-emerald-500',
-  },
-  {
-    quote: 'Poriën veel minder zichtbaar na 5 weken. Ik gebruik het nu als basis en bouw niets meer bovenop.',
-    author: 'Noor Bakker',
-    location: 'Rotterdam',
-    skin: 'Gemengde huid',
-    weeks: '5 weken',
-    rating: 5,
-    product: 'Radiance Serum',
-    verified: true,
-    initials: 'NB',
-    color: 'bg-pink-400',
-  },
-  {
-    quote: 'Op impuls besteld, geen verwachtingen. Nu kan ik niet meer zonder. Het serum is gewoon goed.',
-    author: 'Charlotte Webb',
-    location: 'Manchester',
-    skin: 'Droge huid',
-    weeks: '10 weken',
-    rating: 5,
-    product: 'Radiance Serum',
-    verified: true,
-    initials: 'CW',
-    color: 'bg-orange-400',
-  },
+type Review = {
+  id: string
+  name: string
+  rating: number
+  title: string | null
+  body: string
+  created_at: string
+  verified_purchase: boolean
+}
+
+const COLORS = [
+  'bg-rose-400', 'bg-amber-500', 'bg-indigo-400', 'bg-teal-500',
+  'bg-purple-400', 'bg-emerald-500', 'bg-pink-400', 'bg-orange-400',
 ]
+
+function getInitials(name: string) {
+  return name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()
+}
+
+function getColor(name: string) {
+  let h = 0
+  for (const c of name) h = (h * 31 + c.charCodeAt(0)) & 0xff
+  return COLORS[h % COLORS.length]
+}
 
 function Stars({ count = 5 }: { count?: number }) {
   return (
@@ -114,32 +40,32 @@ function Stars({ count = 5 }: { count?: number }) {
   )
 }
 
-function ReviewCard({ r, className = '' }: { r: typeof reviews[0]; className?: string }) {
+function ReviewCard({ r, className = '' }: { r: Review; className?: string }) {
   return (
     <div className={`bg-white rounded-2xl border border-stone-100 p-6 shadow-sm shrink-0 ${className}`}>
       <div className="flex items-start justify-between mb-4">
         <Stars count={r.rating} />
-        {r.verified && (
+        {r.verified_purchase && (
           <span className="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full flex items-center gap-1">
             <svg width="9" height="9" viewBox="0 0 9 9" fill="currentColor"><path d="M4.5 0L5.5 3.5H9L6.3 5.5L7.3 9L4.5 7L1.7 9L2.7 5.5L0 3.5H3.5L4.5 0Z"/></svg>
             Geverifieerd
           </span>
         )}
       </div>
-
-      <p className="text-[#1A1A1A] text-sm leading-relaxed mb-5">&ldquo;{r.quote}&rdquo;</p>
-
+      <p className="text-[#1A1A1A] text-sm leading-relaxed mb-5">&ldquo;{r.body}&rdquo;</p>
       <div className="flex items-center gap-3 pt-4 border-t border-stone-100">
-        <div className={`w-9 h-9 ${r.color} rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0`}>
-          {r.initials}
+        <div className={`w-9 h-9 ${getColor(r.name)} rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0`}>
+          {getInitials(r.name)}
         </div>
         <div className="min-w-0">
-          <p className="text-sm font-semibold text-[#1A1A1A] truncate">{r.author}</p>
-          <p className="text-xs text-[#6B6560] truncate">{r.location} · {r.skin}</p>
+          <p className="text-sm font-semibold text-[#1A1A1A] truncate">{r.name}</p>
+          <p className="text-xs text-[#6B6560] truncate">
+            {new Date(r.created_at).toLocaleDateString('nl-NL', { month: 'long', year: 'numeric' })}
+          </p>
         </div>
         <div className="ml-auto shrink-0">
           <span className="text-[10px] text-[#C9A96E] font-medium bg-[#FDF8F0] px-2 py-0.5 rounded-full whitespace-nowrap">
-            {r.product}
+            Reset Serum
           </span>
         </div>
       </div>
@@ -148,21 +74,26 @@ function ReviewCard({ r, className = '' }: { r: typeof reviews[0]; className?: s
 }
 
 export default function Reviews() {
+  const [reviews, setReviews] = useState<Review[]>([])
   const [featured, setFeatured] = useState(0)
   const trackRef = useRef<HTMLDivElement>(null)
   const animRef = useRef<number>(0)
   const pausedRef = useRef(false)
 
-  // Auto-scroll ticker
+  useEffect(() => {
+    fetch('/api/reviews?slug=reset-serum')
+      .then(r => r.json())
+      .then(data => { if (Array.isArray(data) && data.length > 0) setReviews(data) })
+      .catch(() => {})
+  }, [])
+
   useEffect(() => {
     const track = trackRef.current
-    if (!track) return
+    if (!track || reviews.length === 0) return
     let pos = 0
-    const speed = 0.5
-
     const tick = () => {
       if (!pausedRef.current) {
-        pos += speed
+        pos += 0.5
         if (pos >= track.scrollWidth / 2) pos = 0
         track.style.transform = `translateX(-${pos}px)`
       }
@@ -170,20 +101,23 @@ export default function Reviews() {
     }
     animRef.current = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(animRef.current)
-  }, [])
+  }, [reviews])
 
-  // Auto-cycle featured review
   useEffect(() => {
-    const id = setInterval(() => setFeatured((f) => (f + 1) % reviews.length), 5000)
+    if (reviews.length === 0) return
+    const id = setInterval(() => setFeatured(f => (f + 1) % reviews.length), 5000)
     return () => clearInterval(id)
-  }, [])
+  }, [reviews])
+
+  if (reviews.length === 0) return null
 
   const fr = reviews[featured]
+  const avgRating = Math.round(reviews.reduce((s, r) => s + r.rating, 0) / reviews.length * 10) / 10
+  const pctRecommend = Math.round(reviews.filter(r => r.rating >= 4).length / reviews.length * 100)
 
   return (
     <section id="reviews" className="py-28 overflow-hidden scroll-mt-28" style={{ background: '#0F0E0C' }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-14">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -192,7 +126,7 @@ export default function Reviews() {
           className="text-center mb-12"
         >
           <span className="inline-block text-xs font-bold uppercase tracking-[0.2em] text-[#C9A96E] bg-[#C9A96E]/10 px-4 py-1.5 rounded-full mb-4">
-            12.400+ reviews
+            {reviews.length} geverifieerde {reviews.length === 1 ? 'review' : 'reviews'}
           </span>
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4 leading-tight">
             Echte mensen.
@@ -204,7 +138,6 @@ export default function Reviews() {
           </p>
         </motion.div>
 
-        {/* Featured review (cycles) */}
         <AnimatePresence mode="wait">
           <motion.div
             key={featured}
@@ -214,9 +147,7 @@ export default function Reviews() {
             transition={{ duration: 0.4 }}
             className="bg-white/5 border border-white/10 rounded-2xl p-8 mb-4 relative overflow-hidden"
           >
-            {/* Glow */}
             <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#C9A96E]/10 rounded-full blur-3xl pointer-events-none" />
-
             <div className="flex gap-1 mb-5">
               {reviews.map((_, i) => (
                 <button
@@ -227,20 +158,21 @@ export default function Reviews() {
                 />
               ))}
             </div>
-
             <Stars count={fr.rating} />
             <p className="text-white text-xl sm:text-2xl font-medium leading-relaxed mt-4 mb-6">
-              &ldquo;{fr.quote}&rdquo;
+              &ldquo;{fr.body}&rdquo;
             </p>
             <div className="flex items-center gap-3">
-              <div className={`w-11 h-11 ${fr.color} rounded-full flex items-center justify-center text-white text-sm font-bold`}>
-                {fr.initials}
+              <div className={`w-11 h-11 ${getColor(fr.name)} rounded-full flex items-center justify-center text-white text-sm font-bold`}>
+                {getInitials(fr.name)}
               </div>
               <div>
-                <p className="text-white font-semibold">{fr.author}</p>
-                <p className="text-stone-400 text-sm">{fr.location} · {fr.skin} · {fr.weeks}</p>
+                <p className="text-white font-semibold">{fr.name}</p>
+                <p className="text-stone-400 text-sm">
+                  {new Date(fr.created_at).toLocaleDateString('nl-NL', { month: 'long', year: 'numeric' })}
+                </p>
               </div>
-              {fr.verified && (
+              {fr.verified_purchase && (
                 <span className="ml-auto text-xs font-bold text-green-400 bg-green-400/10 px-3 py-1 rounded-full">
                   ✓ Geverifieerd
                 </span>
@@ -249,7 +181,6 @@ export default function Reviews() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Aggregate score */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -257,40 +188,33 @@ export default function Reviews() {
           className="flex items-center justify-center gap-6 py-4"
         >
           <div className="text-center">
-            <p className="text-4xl font-black text-[#C9A96E]">4.9</p>
+            <p className="text-4xl font-black text-[#C9A96E]">{avgRating}</p>
             <Stars />
             <p className="text-stone-500 text-xs mt-1">Gemiddelde score</p>
           </div>
           <div className="w-px h-12 bg-white/10" />
           <div className="text-center">
-            <p className="text-4xl font-black text-white">12.4k</p>
+            <p className="text-4xl font-black text-white">{reviews.length}</p>
             <p className="text-stone-500 text-xs mt-1">Geverifieerde reviews</p>
           </div>
           <div className="w-px h-12 bg-white/10" />
           <div className="text-center">
-            <p className="text-4xl font-black text-white">94%</p>
+            <p className="text-4xl font-black text-white">{pctRecommend}%</p>
             <p className="text-stone-500 text-xs mt-1">Zou het aanbevelen</p>
           </div>
         </motion.div>
       </div>
 
-      {/* Infinite scroll ticker */}
       <div
         className="relative"
         onMouseEnter={() => { pausedRef.current = true }}
         onMouseLeave={() => { pausedRef.current = false }}
       >
         <div className="flex" ref={trackRef} style={{ width: 'max-content' }}>
-          {/* Doubled for seamless loop */}
           {[...reviews, ...reviews].map((r, i) => (
-            <ReviewCard
-              key={i}
-              r={r}
-              className="w-[min(88vw,340px)] mx-3"
-            />
+            <ReviewCard key={i} r={r} className="w-[min(88vw,340px)] mx-3" />
           ))}
         </div>
-        {/* Fade edges */}
         <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#0F0E0C] to-transparent pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#0F0E0C] to-transparent pointer-events-none" />
       </div>
