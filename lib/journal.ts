@@ -767,6 +767,304 @@ const POSTS: JournalPost[] = [
     ],
   },
   {
+    slug: 'retinol-niacinamide-samen-gebruiken',
+    title: 'Retinol en niacinamide samen gebruiken: werkt dat?',
+    excerpt: 'Veel mensen vragen zich af of retinol en niacinamide tegelijk in één routine kunnen. Het antwoord is ja — en ze versterken elkaar.',
+    category: 'Ingrediënten',
+    readTime: '5 min',
+    date: 'Juni 2026',
+    dateISO: '2026-06-14',
+    image: '/reset-serum-new.jpg',
+    seo: {
+      title: 'Retinol en Niacinamide Samen Gebruiken: werkt dat? | MAUYI Journal',
+      description: 'Kun je retinol en niacinamide samen gebruiken? Ja — en ze versterken elkaars werking. Alles over de combinatie, volgorde en waarom één serum beter is.',
+    },
+    body: [
+      {
+        type: 'p',
+        content: 'Retinol en niacinamide zijn twee van de meest wetenschappelijk onderbouwde skincare-ingrediënten. En een van de meest gestelde vragen is: kun je ze samen gebruiken? Het korte antwoord is ja — ze zijn niet alleen compatibel, ze versterken elkaars werking aantoonbaar.',
+      },
+      {
+        type: 'h2',
+        content: 'De mythe: retinol en niacinamide combineren geeft niacine flush',
+      },
+      {
+        type: 'p',
+        content: 'Jarenlang werd beweerd dat niacinamide en retinol niet samen gebruikt mochten worden omdat de combinatie niacine (nicotinezuur) zou vormen, wat roodheid en flushing veroorzaakt. Dit klopt in theorie alleen bij zeer hoge temperaturen of zure pH — omstandigheden die in een normale huidverzorgingsroutine niet voorkomen. Moderne formuleringen en wetenschappelijk onderzoek hebben deze mythe weerlegd.',
+      },
+      {
+        type: 'callout',
+        content: 'In klinisch onderzoek wordt de combinatie van retinol en niacinamide juist aanbevolen: niacinamide vermindert de irritatie die retinol kan veroorzaken en versterkt de huidbarrière, waardoor retinol effectiever kan worden opgenomen.',
+      },
+      {
+        type: 'h2',
+        content: 'Hoe retinol en niacinamide elkaar versterken',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Niacinamide versterkt de huidbarrière via ceramideproductie — dit buffert de irritatie die retinol in de beginperiode kan veroorzaken',
+          'Retinol stimuleert celvernieuwing; niacinamide vermindert hyperpigmentatie en egaliseer de huidtoon — samen een krachtige anti-aging combinatie',
+          'Niacinamide reguleert talgproductie; retinol verbetert huidtextuur en poriën — beide ingrediënten richten zich op dezelfde zichtbare problemen',
+          'Niacinamide heeft een kalmerend effect op roodheid, waardoor de "retinol purge" in de eerste weken milder verloopt',
+        ],
+      },
+      {
+        type: 'h2',
+        content: 'In welke volgorde gebruik je ze?',
+      },
+      {
+        type: 'p',
+        content: 'Als je afzonderlijke producten gebruikt: breng niacinamide eerst aan (of in de toner/serum-stap), gevolgd door retinol als avondserum. Niacinamide stabiliseert de huid, waarna retinol beter getolereerd wordt. Laat elk product 1–2 minuten intrekken voor je de volgende stap toepast.',
+      },
+      {
+        type: 'p',
+        content: 'Nog eenvoudiger is een formule die beide ingrediënten combineert. Dan is er geen volgorde meer om te onthouden, en zijn de concentraties afgestemd op samenwerking.',
+      },
+      {
+        type: 'h2',
+        content: 'Welke concentraties werken samen?',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Niacinamide 5–10% — 10% is de klinisch effectieve dosering voor barrièreversterking, talgcontrole en egalisering',
+          'Retinol 0.1–0.5% — 0.3% is de ideale instapconcentratie: effectief voor celvernieuwing, zonder de agressiviteit van hogere doseringen',
+          'Bakuchiol 0.5% (optioneel toevoeging) — vermindert retinol-irritatie extra, ondersteunt de werking via een andere receptor',
+        ],
+      },
+      {
+        type: 'h2',
+        content: 'Wanneer zie je resultaten?',
+      },
+      {
+        type: 'ul',
+        content: [
+          '2–4 weken: huid voelt gladder, talgproductie meer in balans, minder glans',
+          '4–8 weken: zichtbare verbetering in huidtoon en poriegrootte door niacinamide',
+          '8–12 weken: celvernieuwing door retinol zichtbaar in textuur, fijne lijntjes en huidkleur',
+          '3–6 maanden: cumulatief resultaat van beide ingrediënten; aanzienlijk egaler en jonger aandoende huid',
+        ],
+      },
+      {
+        type: 'cta',
+        content: 'Reset Serum combineert Retinol 0.3%, Niacinamide 10% en Bakuchiol 0.5% in één parfumvrije avondformule. Geen volgorde, geen conflict — gewoon beide ingrediënten in de concentraties die klinisch werken.',
+      },
+      {
+        type: 'h2',
+        content: 'Conclusie',
+      },
+      {
+        type: 'p',
+        content: 'Retinol en niacinamide zijn een van de sterkste combinaties in evidence-based skincare. Ze werken niet alleen veilig samen, ze maken elkaar effectiever. Als je twijfelde over de combinatie: de wetenschap is duidelijk. Gebruik ze samen.',
+      },
+    ],
+  },
+  {
+    slug: 'pigmentvlekken-verminderen-serum',
+    title: 'Pigmentvlekken verminderen: welke ingrediënten werken echt?',
+    excerpt: 'Zon, acne of ouderdom — pigmentvlekken hebben verschillende oorzaken maar dezelfde oplossing: de juiste ingrediënten, consequent gebruikt.',
+    category: 'Huidverzorging',
+    readTime: '6 min',
+    date: 'Juni 2026',
+    dateISO: '2026-06-16',
+    image: '/journal-barrier.jpg',
+    seo: {
+      title: 'Pigmentvlekken Verminderen: welke ingrediënten werken? | MAUYI Journal',
+      description: 'Pigmentvlekken door zon, acne of leeftijd verminderen met retinol, niacinamide en vitamine C. Wat werkt wetenschappelijk en hoe lang duurt het?',
+    },
+    body: [
+      {
+        type: 'p',
+        content: 'Pigmentvlekken zijn een van de meest voorkomende huidzorgen in Nederland. Ze ontstaan door overproductie van melanine — het pigment dat kleur geeft aan je huid — en kunnen het gevolg zijn van zonschade, acnelittekens of hormonale veranderingen. Het goede nieuws: met de juiste ingrediënten zijn ze goed te behandelen.',
+      },
+      {
+        type: 'h2',
+        content: 'Wat zijn pigmentvlekken precies?',
+      },
+      {
+        type: 'p',
+        content: 'Hyperpigmentatie ontstaat wanneer melanocyten (pigmentcellen) plaatselijk meer melanine produceren dan normaal. Dit kan door UV-straling worden getriggerd, door post-inflammatoire hyperpigmentatie na acne of door melasma (hormonaal). De kleur varieert van lichtbruin tot donkergrijs, afhankelijk van hoe diep in de huid het melanine ligt.',
+      },
+      {
+        type: 'h2',
+        content: 'Ingrediënten die wetenschappelijk werken',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Niacinamide (5–10%) — remt de overdracht van melanine naar huidcellen (melanosoom-transfer), waardoor nieuwe vlekken niet donkerder worden. Effectief na 4–8 weken consistent gebruik.',
+          'Retinol — versnelt celvernieuwing, waardoor gepigmenteerde huidcellen sneller worden afgestoten. Werkt het effectiefst bij oppervlakkige pigmentvlekken.',
+          'Vitamine C (L-ascorbinezuur 10–20%) — remt het enzym tyrosinase, dat melanineproductie aanstuurt. Krachtigst overdag als antioxidant aangevuld met SPF.',
+          'Azelaïnezuur (15–20%) — effectief bij post-acne pigmentatie en melasma, ook tijdens zwangerschap veilig te gebruiken.',
+          'Alpha-arbutin — mildere tyrosinase-remmer, geschikt voor gevoelige huid die vitamine C niet verdraagt.',
+          'Kojic acid — schimmelafgeleid ingrediënt dat melanineproductie remt; effectief maar kan irriterend zijn bij hogere concentraties.',
+        ],
+      },
+      {
+        type: 'callout',
+        content: 'Onderzoek toont aan dat niacinamide 5% na 8 weken vergelijkbaar effectief is als 4% hydrochinon (de klinische goudstandaard) voor het verminderen van hyperpigmentatie — zonder de bijwerkingen en veiliger voor langdurig gebruik.',
+      },
+      {
+        type: 'h2',
+        content: 'De meest effectieve aanpak: combineer',
+      },
+      {
+        type: 'p',
+        content: 'De sterkste resultaten komen van het combineren van ingrediënten die via verschillende mechanismen werken: niacinamide remt melanine-overdracht, retinol versnelt het afstoten van gepigmenteerde cellen, vitamine C blokkeert nieuwe aanmaak. Overdag SPF is niet-onderhandelbaar — UV-straling triggert opnieuw pigmentatie en maakt elk behandelresultaat teniet.',
+      },
+      {
+        type: 'h2',
+        content: 'Welk type pigmentvlek reageert het beste op behandeling?',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Post-acne hyperpigmentatie (PIH) — reageert goed op niacinamide en retinol; oppervlakkige pigmentatie gaat sneller weg',
+          'Zonnevlekken — goed te behandelen met retinol en vitamine C; dieper pigment vraagt langere behandeling',
+          'Melasma — hormonaal en hardnekkiger; azelaïnezuur en niacinamide zijn veiliger dan vitamine C bij hormonaal getriggerd pigment; SPF is cruciaal',
+          'Ouderdomsvlekken — vergelijkbaar met zonnevlekken; retinol en niacinamide meest effectief',
+        ],
+      },
+      {
+        type: 'h2',
+        content: 'Hoe lang duurt het voor je resultaat ziet?',
+      },
+      {
+        type: 'ul',
+        content: [
+          '4–6 weken: niacinamide zichtbaar effect op melanine-overdracht; oppervlakkige vlekken beginnen te vervagen',
+          '8–12 weken: retinol-gedreven celvernieuwing; gepigmenteerde cellen worden sneller afgestoten',
+          '3–6 maanden: diepere pigmentatie (melasma, zonnevlekken) — volledige resultaten vragen geduld en consistentie',
+          'Terugval mogelijk: zonder SPF keert pigmentatie terug, ook bij goede ingrediënten',
+        ],
+      },
+      {
+        type: 'h2',
+        content: 'Wat werkt niet (of minder)',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Hydrochinon — effectief maar beperkt toegestaan in EU-cosmetica; wordt doorgaans alleen door dermatologen voorgeschreven',
+          'Scrubs en exfolianten alleen — verwijderen dode huidcellen maar niet de oorzaak van pigmentaanmaak',
+          'Eenmalige behandelingen — pigmentatie keert terug zonder continue bescherming en behandeling',
+          'SPF weglaten — het meest gemaakte fout; zonder bescherming wordt elk behandelresultaat binnen weken ongedaan gemaakt',
+        ],
+      },
+      {
+        type: 'cta',
+        content: 'Reset Serum combineert Niacinamide 10% en Retinol 0.3% — de twee effectiefste ingrediënten voor het verminderen van pigmentvlekken in één parfumvrije avondformule. Combineer \'s ochtends met vitamine C en SPF voor maximaal resultaat.',
+      },
+    ],
+  },
+  {
+    slug: 'retinol-bijwerkingen-gevoelige-huid',
+    title: 'Retinol bijwerkingen bij gevoelige huid: zo voorkom je irritatie',
+    excerpt: 'Roodheid, schilfering, droogheid — retinol-irritatie is reëel maar vermijdbaar. Hoe bouw je retinol op zonder je huidbarrière te beschadigen.',
+    category: 'Ingrediënten',
+    readTime: '6 min',
+    date: 'Juni 2026',
+    dateISO: '2026-06-18',
+    image: '/journal-barrier.jpg',
+    seo: {
+      title: 'Retinol Bijwerkingen Gevoelige Huid: zo voorkom je irritatie | MAUYI Journal',
+      description: 'Retinol veroorzaakt roodheid, schilfering of droogheid bij gevoelige huid? Lees hoe je retinol opbouwt zonder irritatie — met wetenschappelijke tips.',
+    },
+    body: [
+      {
+        type: 'p',
+        content: 'Retinol is het meest onderbouwde anti-aging ingrediënt in skincare. Maar voor mensen met een gevoelige huid is de opstartfase vaak een struikelblok. Roodheid, schilfering, droogheid — de zogenaamde "retinisatie" — schrikt velen af. Terwijl het grotendeels vermijdbaar is als je de juiste aanpak volgt.',
+      },
+      {
+        type: 'h2',
+        content: 'Wat zijn de bijwerkingen van retinol?',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Droogheid — retinol versnelt celvernieuwing, waardoor de buitenste huidlaag sneller afschilfert. Dit is normaal, maar kan overdreven worden als de barrière al verzwakt is.',
+          'Roodheid — inflammatoire reactie die bij hogere concentraties of te frequente toepassing optreedt.',
+          'Schilfering — dode huidcellen die sneller loslaten door verhoogde turnover; met name bij de eerste 2–4 weken gebruik.',
+          'Fotogevoeligheid — retinol maakt de huid gevoeliger voor UV-schade. Dagelijkse SPF is verplicht.',
+          'Prikken of branden — bij beschadigde huidbarrière of te hoge concentratie meteen bij de start.',
+        ],
+      },
+      {
+        type: 'callout',
+        content: 'De meeste retinol-bijwerkingen treden op in de eerste 2–4 weken en nemen daarna aanzienlijk af. Bij de juiste startconcentratie en opbouwfrequentie ervaart de meerderheid van de gebruikers weinig tot geen irritatie.',
+      },
+      {
+        type: 'h2',
+        content: 'Waarom gevoelige huid extra gevoelig reageert',
+      },
+      {
+        type: 'p',
+        content: 'Gevoelige huid heeft doorgaans een verzwakte huidbarrière — de beschermende laag van ceramiden, vetzuren en cholesterol die vochtverlies tegengaat en irritanten buiten houdt. Als deze barrière al compromis heeft, penetreert retinol dieper en sneller, wat de kans op irritatie verhoogt. Het herstel is ook langzamer.',
+      },
+      {
+        type: 'h2',
+        content: 'Zo bouw je retinol op bij gevoelige huid',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Begin laag — start met 0.1–0.3% retinol. Hogere concentraties zijn niet noodzakelijk bij de start en verhogen het risico significant.',
+          'Begin langzaam — gebruik de eerste maand 1–2 keer per week. Pas na 4 weken zonder irritatie verhoog je de frequentie.',
+          'Buffer-methode — breng eerst een lichte moisturizer aan, dan retinol. Dit vertraagt de opname en vermindert irritatie, zonder de effectiviteit significant te verlagen.',
+          'Vermijd combinatie met exfolianten — gebruik geen AHA, BHA of vitamine C op dezelfde avond in de eerste maanden.',
+          'Verzorg de barrière actief — voeg niacinamide toe aan je routine: het stimuleert ceramideproductie en vermindert aantoonbaar retinol-geïnduceerde irritatie.',
+          'Gebruik alleen \'s avonds — retinol breekt af door UV-straling en verhoogt fotogevoeligheid; altijd SPF overdag.',
+        ],
+      },
+      {
+        type: 'h2',
+        content: 'De rol van niacinamide en bakuchiol als buffer',
+      },
+      {
+        type: 'p',
+        content: 'Niacinamide is aangetoond de barrièrefunctie te versterken door ceramide- en vetzuurproductie te stimuleren. Wanneer je niacinamide combineert met retinol, vermindert de kans op roodheid en droogheid aanzienlijk. Bakuchiol — een plantaardige verbinding — versterkt de retinoïde-activiteit via andere receptorpaden en heeft zelf een kalmerend effect, waardoor de irritatiedrempel verder wordt verhoogd.',
+      },
+      {
+        type: 'callout',
+        content: 'Een gerandomiseerde studie (British Journal of Dermatology) toonde aan dat bakuchiol dezelfde anti-aging effecten heeft als retinol, maar significant minder irritatie veroorzaakt. De combinatie van alle drie — retinol, niacinamide en bakuchiol — levert maximale effectiviteit met minimale bijwerkingen.',
+      },
+      {
+        type: 'h2',
+        content: 'Wanneer moet je stoppen met retinol?',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Aanhoudende ernstige roodheid of brandend gevoel na 6+ weken — verlaag concentratie of stop tijdelijk',
+          'Open wonden of actieve eczeem — wacht tot de huid hersteld is voor je retinol introduceert',
+          'Zwangerschap of borstvoeding — retinol is officieel af te raden; bakuchiol is het veilige alternatief',
+          'Gebruik van isotretinoïne (Roaccutane) — geen extra retinol gebruiken tijdens of kort na orale behandeling',
+        ],
+      },
+      {
+        type: 'h2',
+        content: 'Is retinol geschikt voor elke gevoelige huid?',
+      },
+      {
+        type: 'p',
+        content: 'Ja, in de meeste gevallen. De sleutel is niet de concentratie of de frequentie bij de start, maar de voorbereiding: versterk eerst de huidbarrière (2–4 weken niacinamide zonder retinol), start dan laag en langzaam. De meeste mensen met gevoelige huid verdragen retinol uitstekend na een goed voorbereide introductie.',
+      },
+      {
+        type: 'cta',
+        content: 'Reset Serum combineert Retinol 0.3% met Niacinamide 10% en Bakuchiol 0.5% — precies de drie-ingrediënten combinatie die irritatie minimaliseert en effectiviteit maximaliseert. Ontworpen voor consistent gebruik, ook bij gevoelige huid.',
+      },
+      {
+        type: 'h2',
+        content: 'Conclusie',
+      },
+      {
+        type: 'p',
+        content: 'Retinol-bijwerkingen bij gevoelige huid zijn reëel maar grotendeels te voorkomen. Begin laag, bouw langzaam op, versterk de barrière met niacinamide en buffeer met bakuchiol. Dan is retinol ook voor gevoelige huid het effectiefste ingrediënt voor celvernieuwing en anti-aging.',
+      },
+    ],
+  },
+  {
     slug: 'porieen-verkleinen-tips',
     title: 'Poriën verkleinen: wat echt werkt (en wat niet)',
     excerpt: 'Poriën kun je niet "sluiten" — maar je kunt ze minder zichtbaar maken. Wat werkt wetenschappelijk gezien, en wat is marketing?',
