@@ -98,6 +98,14 @@ function renderSection(section: Section, i: number) {
   }
 }
 
+function getRelatedPosts(currentSlug: string, currentCategory: string) {
+  const all = getAllPosts()
+  // Same category first, then others, exclude current
+  const sameCategory = all.filter((p) => p.slug !== currentSlug && p.category === currentCategory)
+  const others = all.filter((p) => p.slug !== currentSlug && p.category !== currentCategory)
+  return [...sameCategory, ...others].slice(0, 3)
+}
+
 export default async function JournalPostPage({
   params,
 }: {
@@ -106,6 +114,8 @@ export default async function JournalPostPage({
   const { slug } = await params
   const post = getPost(slug)
   if (!post) notFound()
+
+  const related = getRelatedPosts(slug, post.category)
 
   const articleSchema = {
     '@context': 'https://schema.org',
@@ -202,8 +212,34 @@ export default async function JournalPostPage({
             {post.body.map((section, i) => renderSection(section, i))}
           </div>
 
+          {/* Related articles */}
+          {related.length > 0 && (
+            <div className="mt-16 pt-10 border-t border-stone-200">
+              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] mb-6">
+                Gerelateerde artikelen
+              </p>
+              <div className="grid gap-4 sm:grid-cols-3">
+                {related.map((r) => (
+                  <Link
+                    key={r.slug}
+                    href={`/journal/${r.slug}`}
+                    className="group block bg-white rounded-xl p-5 hover:shadow-md transition-shadow"
+                  >
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#C9A96E] mb-2 block">
+                      {r.category}
+                    </span>
+                    <p className="text-[14px] font-medium text-[#1A1A1A] leading-snug group-hover:text-[#C9A96E] transition-colors line-clamp-3">
+                      {r.title}
+                    </p>
+                    <p className="text-[12px] text-[#9A9590] mt-2">{r.readTime} lezen</p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Back */}
-          <div className="mt-16 pt-8 border-t border-stone-200">
+          <div className="mt-10 pt-8 border-t border-stone-200">
             <Link href="/journal" className="inline-flex items-center gap-2 text-[13px] text-[#9A9590] hover:text-[#C9A96E] transition-colors">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                 <path d="M10 6H2M6 2L2 6l4 4" />
