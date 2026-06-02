@@ -16,6 +16,8 @@ import PDPFaq from './PDPFaq'
 import { getProduct, getAllProducts, getPublicProducts, getRelatedProducts } from '@/lib/products'
 import PDPBundleUpsell from './PDPBundleUpsell'
 import PDPReviews from './PDPReviews'
+import PDPScrollIngredients from './PDPScrollIngredients'
+import PDPScrollProgress from './PDPScrollProgress'
 
 const BASE_URL = 'https://mauyi.nl'
 
@@ -219,6 +221,7 @@ export default async function ProductPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
+      <PDPScrollProgress />
       <Navbar />
 
       <main className="bg-[#FAF8F5] min-h-screen">
@@ -259,8 +262,13 @@ export default async function ProductPage({
         {/* ─── 3. TEXTURE GALLERY ───────────────────────── */}
         <PDPTextureGallery product={product} />
 
-        {/* ─── 4. WAAROM DIT WERKT ──────────────────────── */}
-        <PDPWhyThisWorks product={product} />
+        {/* ─── 4. WAAROM DIT WERKT — mobile ────────────── */}
+        <div className="lg:hidden">
+          <PDPWhyThisWorks product={product} />
+        </div>
+
+        {/* ─── 4. SCROLL INGREDIENTS — desktop ─────────── */}
+        <PDPScrollIngredients product={product} />
 
         {/* ─── 5. INGREDIËNTEN ──────────────────────────── */}
         <section className="py-20 bg-white">
