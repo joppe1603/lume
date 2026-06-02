@@ -1165,7 +1165,7 @@ const POSTS: JournalPost[] = [
     readTime: '5 min',
     date: 'Juni 2026',
     dateISO: '2026-06-02',
-    image: '/reset-serum-new.jpg',
+    image: '/journal-skincare-volgorde.jpg',
     seo: {
       title: 'Skincare Routine Volgorde: Welk Product Eerst? | MAUYI Journal',
       description: 'In welke volgorde breng je toner, serum, moisturizer en SPF aan? De juiste skincare volgorde bepaalt of je ingrediënten echt werken. Lees het hier.',
@@ -1251,7 +1251,7 @@ const POSTS: JournalPost[] = [
     readTime: '6 min',
     date: 'Juni 2026',
     dateISO: '2026-06-02',
-    image: '/reset-serum-new.jpg',
+    image: '/journal-collageen.jpg',
     seo: {
       title: 'Collageenproductie Stimuleren: Wat Werkt Echt? | MAUYI Journal',
       description: 'Hoe stimuleer je collageenproductie in je huid? We bespreken de ingrediënten die wetenschappelijk bewezen collageen aanmaken bevorderen — en de mythen die dat niet doen.',
@@ -1344,7 +1344,7 @@ const POSTS: JournalPost[] = [
     readTime: '7 min',
     date: 'Juni 2026',
     dateISO: '2026-06-02',
-    image: '/reset-serum-new.jpg',
+    image: '/journal-acne-littekens.jpg',
     seo: {
       title: 'Acne Littekens Verminderen: Wat Werkt Echt? | MAUYI Journal',
       description: 'Hoe verminder je acne littekens en post-acne vlekken? We bespreken de ingrediënten en methoden die wetenschappelijk bewezen werken — en welke niet.',
