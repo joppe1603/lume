@@ -1,11 +1,11 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { useRef, useState } from 'react'
 import type { Product } from '@/lib/products'
 import { useCart } from '@/contexts/CartContext'
+import WaitlistForm from '@/components/WaitlistForm'
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 22 },
@@ -291,18 +291,12 @@ export default function PDPHero({ product }: { product: Product }) {
                   </button>
                 </>
               ) : (
-                <>
-                  <Link
-                    href="/launch#waitlist"
-                    className="btn-gold w-full py-[1.05rem] rounded-2xl font-medium text-[15px] tracking-[0.01em] flex items-center justify-center gap-2.5"
-                  >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                      <polyline points="22,6 12,13 2,6"/>
-                    </svg>
-                    Word als eerste uitgenodigd
-                  </Link>
-                </>
+                <div className="space-y-3">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#C9A96E]">
+                    Schrijf je in — ontvang een bericht zodra de eerste batch beschikbaar is
+                  </p>
+                  <WaitlistForm source="product-page" productSlug={product.slug} />
+                </div>
               )}
             </motion.div>
 
