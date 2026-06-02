@@ -61,9 +61,10 @@ export default async function ProductPage({
 
   const related = getRelatedProducts(product.relatedSlugs)
 
-  // Fetch review aggregate for structured data (star ratings in Google SERP)
+  // Fetch reviews for structured data (star ratings + individual reviews in Google SERP)
   let reviewCount = 0
   let avgRating: number | null = null
+  let reviewRows: { name: string; rating: number; body: string; created_at: string }[] = []
   try {
     const db = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -71,10 +72,13 @@ export default async function ProductPage({
     )
     const { data: rows } = await db
       .from('reviews')
-      .select('rating')
+      .select('name, rating, body, created_at')
       .eq('product_slug', slug)
       .eq('approved', true)
+      .order('created_at', { ascending: false })
+      .limit(10)
     if (rows && rows.length > 0) {
+      reviewRows = rows
       reviewCount = rows.length
       avgRating = Math.round(rows.reduce((s: number, r: { rating: number }) => s + r.rating, 0) / rows.length * 10) / 10
     }
@@ -99,6 +103,42 @@ export default async function ProductPage({
       availability,
       url: `${BASE_URL}/products/${slug}`,
       seller: { '@type': 'Organization', name: 'MAUYI' },
+      shippingDetails: {
+        '@type': 'OfferShippingDetails',
+        shippingRate: {
+          '@type': 'MonetaryAmount',
+          value: '0',
+          currency: 'EUR',
+        },
+        shippingDestination: {
+          '@type': 'DefinedRegion',
+          addressCountry: 'NL',
+        },
+        deliveryTime: {
+          '@type': 'ShippingDeliveryTime',
+          handlingTime: {
+            '@type': 'QuantitativeValue',
+            minValue: 0,
+            maxValue: 1,
+            unitCode: 'DAY',
+          },
+          transitTime: {
+            '@type': 'QuantitativeValue',
+            minValue: 1,
+            maxValue: 3,
+            unitCode: 'DAY',
+          },
+        },
+      },
+      hasMerchantReturnPolicy: {
+        '@type': 'MerchantReturnPolicy',
+        applicableCountry: 'NL',
+        returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+        merchantReturnDays: 14,
+        returnMethod: 'https://schema.org/ReturnByMail',
+        returnFees: 'https://schema.org/ReturnFeesCustomerResponsibility',
+        merchantReturnLink: `${BASE_URL}/retourbeleid`,
+      },
     },
     ...(reviewCount > 0 && {
       aggregateRating: {
@@ -108,6 +148,18 @@ export default async function ProductPage({
         bestRating: 5,
         worstRating: 1,
       },
+      review: reviewRows.map((r) => ({
+        '@type': 'Review',
+        author: { '@type': 'Person', name: r.name },
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: r.rating,
+          bestRating: 5,
+          worstRating: 1,
+        },
+        reviewBody: r.body,
+        datePublished: r.created_at.slice(0, 10),
+      })),
     }),
   }
 
