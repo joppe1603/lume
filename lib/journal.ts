@@ -26,7 +26,7 @@ const POSTS: JournalPost[] = [
     readTime: '6 min',
     date: 'Juni 2026',
     dateISO: '2026-06-01',
-    image: '/reset-serum-new.jpg',
+    image: '/journal-serum.jpg',
     featured: true,
     seo: {
       title: 'Bakuchiol vs Retinol: wat is het verschil? | MAUYI Journal',
@@ -122,7 +122,7 @@ const POSTS: JournalPost[] = [
     readTime: '5 min',
     date: 'Mei 2026',
     dateISO: '2026-05-15',
-    image: '/journal-featured.jpg',
+    image: '/journal-minder-beter.jpg',
     seo: {
       title: 'Waarom minder huidverzorging beter werkt | MAUYI Journal',
       description: 'De gemiddelde vrouw gebruikt 12 producten per dag. Dermatologen raden 3–4 aan. Wat doen de andere 8 eigenlijk met je huid? Een eerlijk antwoord.',
@@ -199,7 +199,7 @@ const POSTS: JournalPost[] = [
     readTime: '6 min',
     date: 'April 2026',
     dateISO: '2026-04-10',
-    image: '/reset-serum-new.jpg',
+    image: '/journal-retinol-gids.jpg',
     seo: {
       title: 'Retinol voor beginners: hoe start je zonder irritatie | MAUYI Journal',
       description: 'Alles wat je moet weten over retinol als beginner: welke concentratie, hoe je opbouwt, wat je niet combineert en wanneer je resultaat ziet.',
@@ -290,7 +290,7 @@ const POSTS: JournalPost[] = [
     readTime: '6 min',
     date: 'Mei 2026',
     dateISO: '2026-05-20',
-    image: '/journal-barrier.jpg',
+    image: '/journal-barriere.jpg',
     seo: {
       title: 'Huidbarrière herstellen: oorzaken en oplossingen | MAUYI Journal',
       description: 'Beschadigde huidbarrière? Herken de signalen — roodheid, trekkerigheid, gevoeligheid — en leer welke ingrediënten herstel versnellen.',
@@ -391,7 +391,7 @@ const POSTS: JournalPost[] = [
     readTime: '5 min',
     date: 'Juni 2026',
     dateISO: '2026-06-01',
-    image: '/reset-serum-new.jpg',
+    image: '/journal-niacinamide.jpg',
     seo: {
       title: 'Niacinamide Serum: wat het doet en welke concentratie werkt | MAUYI Journal',
       description: 'Niacinamide 10% verkleint poriën, versterkt de huidbarrière en vermindert roodheid. Alles over dit multitasker-ingrediënt: werking, concentratie en combinaties.',
@@ -494,7 +494,7 @@ const POSTS: JournalPost[] = [
     readTime: '6 min',
     date: 'Juni 2026',
     dateISO: '2026-06-05',
-    image: '/reset-serum-new.jpg',
+    image: '/journal-vitaminec.jpg',
     seo: {
       title: 'Vitamine C Serum: werking, concentratie en gebruik | MAUYI Journal',
       description: 'Vitamine C serum verkleint poriën, egalisert huidtoon en beschermt tegen vrije radicalen. Welke vorm werkt het beste en wat is de juiste concentratie?',
@@ -585,7 +585,7 @@ const POSTS: JournalPost[] = [
     readTime: '5 min',
     date: 'Juni 2026',
     dateISO: '2026-06-08',
-    image: '/journal-barrier.jpg',
+    image: '/journal-hyaluronzuur.jpg',
     seo: {
       title: 'Hyaluronzuur Serum: werking, molecuulgewicht en gebruik | MAUYI Journal',
       description: 'Hyaluronzuur bindt tot 1000x zijn eigen gewicht aan vocht. Maar maakt molecuulgewicht uit? En wanneer helpt het serum écht voor jouw huid?',
@@ -680,7 +680,7 @@ const POSTS: JournalPost[] = [
     readTime: '7 min',
     date: 'Juni 2026',
     dateISO: '2026-06-10',
-    image: '/journal-featured.jpg',
+    image: '/journal-routine.jpg',
     seo: {
       title: 'Skincare Routine Opbouwen: volgorde ochtend en avond | MAUYI Journal',
       description: 'De juiste volgorde voor een skincare routine: van reiniger tot SPF. Welke producten in welke stap, en wat is het verschil tussen ochtend en avond?',
@@ -774,7 +774,7 @@ const POSTS: JournalPost[] = [
     readTime: '5 min',
     date: 'Juni 2026',
     dateISO: '2026-06-14',
-    image: '/reset-serum-new.jpg',
+    image: '/journal-retinol-niacinamide.jpg',
     seo: {
       title: 'Retinol en Niacinamide Samen Gebruiken: werkt dat? | MAUYI Journal',
       description: 'Kun je retinol en niacinamide samen gebruiken? Ja — en ze versterken elkaars werking. Alles over de combinatie, volgorde en waarom één serum beter is.',
@@ -868,7 +868,7 @@ const POSTS: JournalPost[] = [
     readTime: '6 min',
     date: 'Juni 2026',
     dateISO: '2026-06-16',
-    image: '/journal-barrier.jpg',
+    image: '/journal-pigmentvlekken.jpg',
     seo: {
       title: 'Pigmentvlekken Verminderen: welke ingrediënten werken? | MAUYI Journal',
       description: 'Pigmentvlekken door zon, acne of leeftijd verminderen met retinol, niacinamide en vitamine C. Wat werkt wetenschappelijk en hoe lang duurt het?',
@@ -966,7 +966,7 @@ const POSTS: JournalPost[] = [
     readTime: '6 min',
     date: 'Juni 2026',
     dateISO: '2026-06-18',
-    image: '/journal-barrier.jpg',
+    image: '/journal-retinol-bijwerkingen.jpg',
     seo: {
       title: 'Retinol Bijwerkingen Gevoelige Huid: zo voorkom je irritatie | MAUYI Journal',
       description: 'Retinol veroorzaakt roodheid, schilfering of droogheid bij gevoelige huid? Lees hoe je retinol opbouwt zonder irritatie — met wetenschappelijke tips.',
@@ -1072,7 +1072,7 @@ const POSTS: JournalPost[] = [
     readTime: '5 min',
     date: 'Juni 2026',
     dateISO: '2026-06-12',
-    image: '/reset-serum-new.jpg',
+    image: '/journal-porieen.jpg',
     seo: {
       title: 'Poriën Verkleinen: wat werkt en wat niet | MAUYI Journal',
       description: 'Poriën kun je niet "sluiten", maar wel minder zichtbaar maken. Welke ingrediënten werken echt en welke claims zijn marketing? De wetenschap.',
