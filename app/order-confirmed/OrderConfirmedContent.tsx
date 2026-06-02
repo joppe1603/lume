@@ -109,7 +109,7 @@ export default function OrderConfirmedContent() {
             Je bestelling wordt zo snel mogelijk verwerkt en verstuurd.
           </p>
           <p className="text-[13px] text-stone-600 font-light leading-relaxed italic">
-            Vragen? Stuur een mail naar hello@mauyi.nl
+            Vragen? Stuur een mail naar hallo@mauyi.nl
           </p>
         </motion.div>
 

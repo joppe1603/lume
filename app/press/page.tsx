@@ -91,10 +91,10 @@ export default function PressPage() {
               Persmateriaal MAUYI
             </h1>
             <p className="text-stone-400 text-lg font-light leading-relaxed max-w-2xl">
-              Alles wat redacteuren, bloggers en journalisten nodig hebben over MAUYI en het Reset Serum. Voor vragen of samples: hello@mauyi.nl
+              Alles wat redacteuren, bloggers en journalisten nodig hebben over MAUYI en het Reset Serum. Voor vragen of samples: hallo@mauyi.nl
             </p>
             <a
-              href="mailto:hello@mauyi.nl?subject=Persverzoek MAUYI"
+              href="mailto:hallo@mauyi.nl?subject=Persverzoek MAUYI"
               className="inline-flex items-center gap-2 mt-8 bg-[#C9A96E] hover:bg-[#D4B47A] text-[#1A1A1A] px-6 py-3 rounded-xl text-sm font-semibold transition-colors"
             >
               Stuur een persverzoek
@@ -173,8 +173,8 @@ export default function PressPage() {
             <div className="bg-white rounded-2xl px-8 py-8">
               <p className="text-[14px] text-[#4A4540] leading-relaxed mb-4">
                 Hoge resolutie productfoto&apos;s zijn beschikbaar op aanvraag via{' '}
-                <a href="mailto:hello@mauyi.nl?subject=Beeldmateriaal MAUYI" className="text-[#C9A96E] hover:underline">
-                  hello@mauyi.nl
+                <a href="mailto:hallo@mauyi.nl?subject=Beeldmateriaal MAUYI" className="text-[#C9A96E] hover:underline">
+                  hallo@mauyi.nl
                 </a>
                 . Stuur een kort berichtje met het gewenste formaat en gebruik.
               </p>
@@ -214,7 +214,7 @@ export default function PressPage() {
           <section>
             <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] mb-6">Perscontact</p>
             <div className="bg-[#1A1A1A] rounded-2xl px-8 py-8 text-white">
-              <p className="text-[15px] font-semibold mb-1">hello@mauyi.nl</p>
+              <p className="text-[15px] font-semibold mb-1">hallo@mauyi.nl</p>
               <p className="text-stone-400 text-[13px] mb-6">Voor samplingverzoeken, interviews, redactionele vragen en beeldmateriaal.</p>
               <div className="space-y-2 text-[13px] text-stone-400">
                 <p>Reactie binnen 2 werkdagen.</p>
@@ -222,10 +222,10 @@ export default function PressPage() {
                 <p>Geen vergoeding voor redactionele plaatsingen — alleen eerlijke coverage.</p>
               </div>
               <a
-                href="mailto:hello@mauyi.nl?subject=Persverzoek MAUYI"
+                href="mailto:hallo@mauyi.nl?subject=Persverzoek MAUYI"
                 className="inline-flex items-center gap-2 mt-6 bg-[#C9A96E] hover:bg-[#D4B47A] text-[#1A1A1A] px-5 py-2.5 rounded-xl text-sm font-semibold transition-colors"
               >
-                hello@mauyi.nl
+                hallo@mauyi.nl
               </a>
             </div>
           </section>

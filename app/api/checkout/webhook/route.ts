@@ -197,7 +197,7 @@ export async function POST(req: NextRequest) {
 
                       <p style="margin:0;font-size:13px;color:#9A9590;line-height:1.7;font-style:italic;">
                         Vragen over je bestelling? Stuur een e-mail naar
-                        <a href="mailto:hello@mauyi.nl" style="color:#C9A96E;text-decoration:none;">hello@mauyi.nl</a>
+                        <a href="mailto:hallo@mauyi.nl" style="color:#C9A96E;text-decoration:none;">hallo@mauyi.nl</a>
                       </p>
                     </td>
                   </tr>

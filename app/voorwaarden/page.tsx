@@ -42,7 +42,7 @@ export default function VoorwaardenPage() {
               <h2 className="text-[18px] font-semibold text-[#1A1A1A] mb-3">1. Wie zijn wij</h2>
               <p>
                 MAUYI B.V., gevestigd in Nederland, ingeschreven bij de Kamer van Koophandel. Bereikbaar via{' '}
-                <a href="mailto:hello@mauyi.nl" className="text-[#C9A96E] underline underline-offset-2">hello@mauyi.nl</a>.
+                <a href="mailto:hallo@mauyi.nl" className="text-[#C9A96E] underline underline-offset-2">hallo@mauyi.nl</a>.
               </p>
             </section>
 
@@ -108,7 +108,7 @@ export default function VoorwaardenPage() {
               <h2 className="text-[18px] font-semibold text-[#1A1A1A] mb-3">10. Contact</h2>
               <p>
                 Vragen over deze voorwaarden? Stuur een e-mail naar{' '}
-                <a href="mailto:hello@mauyi.nl" className="text-[#C9A96E] underline underline-offset-2">hello@mauyi.nl</a>.
+                <a href="mailto:hallo@mauyi.nl" className="text-[#C9A96E] underline underline-offset-2">hallo@mauyi.nl</a>.
               </p>
             </section>
 

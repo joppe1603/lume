@@ -176,7 +176,7 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
           <div className="text-center space-y-3">
             <p className="text-[12px] text-[#9A9590]">
               Vragen? Mail naar{' '}
-              <a href="mailto:hello@mauyi.nl" className="text-[#C9A96E] hover:underline">hello@mauyi.nl</a>
+              <a href="mailto:hallo@mauyi.nl" className="text-[#C9A96E] hover:underline">hallo@mauyi.nl</a>
             </p>
             <Link href="/shop" className="inline-block text-[13px] text-[#C9A96E] hover:underline">
               ← Terug naar producten

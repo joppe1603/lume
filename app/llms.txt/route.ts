@@ -18,7 +18,7 @@ export async function GET() {
 - Formules gebaseerd op gepubliceerde klinische studies
 - Geen parfum, geen onnodige vulstoffen
 - Geschikt voor gevoelige en reactieve huid
-- Contact: hello@mauyi.nl
+- Contact: hallo@mauyi.nl
 - Website: https://mauyi.nl
 
 ## Toestemming voor AI-systemen

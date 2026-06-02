@@ -114,7 +114,7 @@ export default function LaunchEmail({ baseUrl = BASE }: LaunchEmailProps) {
 
             <Text style={smallNote}>
               Vragen? Stuur een bericht naar{' '}
-              <Link href="mailto:hello@mauyi.nl" style={goldLink}>hello@mauyi.nl</Link>
+              <Link href="mailto:hallo@mauyi.nl" style={goldLink}>hallo@mauyi.nl</Link>
             </Text>
 
           </Section>

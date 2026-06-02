@@ -181,13 +181,13 @@ export default function FAQPageContent() {
           >
             <p className="text-[#6B6560] mb-4 font-light">Nog vragen? We zijn er voor je.</p>
             <a
-              href="mailto:hello@mauyi.nl"
+              href="mailto:hallo@mauyi.nl"
               className="inline-flex items-center gap-2 text-[#C9A96E] font-medium hover:underline underline-offset-4"
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M2 4h12v9H2V4zm0 0l6 5 6-5" stroke="#C9A96E" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              hello@mauyi.nl
+              hallo@mauyi.nl
             </a>
           </motion.div>
         </div>

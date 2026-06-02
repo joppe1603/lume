@@ -68,7 +68,7 @@ export default function RetourbeleidPage() {
               <h2 className="text-[18px] font-semibold text-[#1A1A1A] mb-3">3. Retour aanmelden</h2>
               <p>
                 Stuur een e-mail naar{' '}
-                <a href="mailto:hello@mauyi.nl" className="text-[#C9A96E] underline underline-offset-2">hello@mauyi.nl</a>{' '}
+                <a href="mailto:hallo@mauyi.nl" className="text-[#C9A96E] underline underline-offset-2">hallo@mauyi.nl</a>{' '}
                 met je ordernummer en reden van retour. Wij sturen je vervolgens de retourinstructies toe.
               </p>
             </section>
@@ -84,7 +84,7 @@ export default function RetourbeleidPage() {
               <h2 className="text-[18px] font-semibold text-[#1A1A1A] mb-3">5. Defect of verkeerd product</h2>
               <p>
                 Is er iets mis met je bestelling? Neem binnen 7 dagen na ontvangst contact op via{' '}
-                <a href="mailto:hello@mauyi.nl" className="text-[#C9A96E] underline underline-offset-2">hello@mauyi.nl</a>.
+                <a href="mailto:hallo@mauyi.nl" className="text-[#C9A96E] underline underline-offset-2">hallo@mauyi.nl</a>.
                 Wij lossen het op — retourkosten zijn dan voor onze rekening.
               </p>
             </section>
@@ -93,7 +93,7 @@ export default function RetourbeleidPage() {
               <h2 className="text-[18px] font-semibold text-[#1A1A1A] mb-3">6. Contact</h2>
               <p>
                 Voor vragen over retourneren kun je ons bereiken via{' '}
-                <a href="mailto:hello@mauyi.nl" className="text-[#C9A96E] underline underline-offset-2">hello@mauyi.nl</a>.
+                <a href="mailto:hallo@mauyi.nl" className="text-[#C9A96E] underline underline-offset-2">hallo@mauyi.nl</a>.
                 Wij reageren binnen 2 werkdagen.
               </p>
             </section>

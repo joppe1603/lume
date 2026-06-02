@@ -101,7 +101,7 @@ export async function GET(req: NextRequest) {
                   <div style="height:1px;background:linear-gradient(to right,transparent,#C9A96E,transparent);margin:32px 0;"></div>
 
                   <p style="margin:0;font-size:13px;color:#9A9590;line-height:1.7;font-style:italic;">
-                    Vragen? Stuur een bericht naar <a href="mailto:hello@mauyi.nl" style="color:#C9A96E;text-decoration:none;">hello@mauyi.nl</a>
+                    Vragen? Stuur een bericht naar <a href="mailto:hallo@mauyi.nl" style="color:#C9A96E;text-decoration:none;">hallo@mauyi.nl</a>
                   </p>
                 </td></tr>
                 <tr><td style="background:#FAF8F5;padding:24px 40px;text-align:center;border-top:1px solid #E8E4DF;">

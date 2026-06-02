@@ -21,7 +21,7 @@ const footerLinks: Record<string, { label: string; href: string }[]> = {
     { label: 'Retourbeleid',        href: '/retourbeleid' },
     { label: 'Cookiebeleid',       href: '/privacy#cookies' },
     { label: 'Pers & Media',       href: '/press' },
-    { label: 'Contact',            href: 'mailto:hello@mauyi.nl' },
+    { label: 'Contact',            href: 'mailto:hallo@mauyi.nl' },
   ],
 }
 

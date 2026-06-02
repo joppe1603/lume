@@ -45,7 +45,7 @@ export default function PrivacyPage() {
               <h2 className="text-[18px] font-semibold text-[#1A1A1A] mb-3">1. Wie zijn wij</h2>
               <p>
                 MAUYI B.V. (hierna: &ldquo;MAUYI&rdquo;, &ldquo;wij&rdquo;, &ldquo;ons&rdquo;) is verantwoordelijk voor de verwerking van persoonsgegevens zoals beschreven in dit privacybeleid. Wij zijn bereikbaar via{' '}
-                <a href="mailto:hello@mauyi.nl" className="text-[#C9A96E] underline underline-offset-2">hello@mauyi.nl</a>.
+                <a href="mailto:hallo@mauyi.nl" className="text-[#C9A96E] underline underline-offset-2">hallo@mauyi.nl</a>.
               </p>
             </section>
 
@@ -152,7 +152,7 @@ export default function PrivacyPage() {
               </ul>
               <p className="mt-4">
                 Stuur een e-mail naar{' '}
-                <a href="mailto:hello@mauyi.nl" className="text-[#C9A96E] underline underline-offset-2">hello@mauyi.nl</a>{' '}
+                <a href="mailto:hallo@mauyi.nl" className="text-[#C9A96E] underline underline-offset-2">hallo@mauyi.nl</a>{' '}
                 om gebruik te maken van jouw rechten. Wij reageren binnen 30 dagen.
               </p>
               <p className="mt-3">
