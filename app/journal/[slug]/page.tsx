@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { getPost, getAllPosts } from '@/lib/journal'
-import type { Section } from '@/lib/journal'
+import type { Section, FaqItem } from '@/lib/journal'
 
 const BASE_URL = 'https://mauyi.nl'
 
@@ -93,6 +93,20 @@ function renderSection(section: Section, i: number) {
           </Link>
         </div>
       )
+    case 'faq':
+      return (
+        <div key={i} className="mt-10 mb-2">
+          <h2 className="text-[22px] font-semibold text-[#1A1A1A] mb-6 leading-snug">Veelgestelde vragen</h2>
+          <div className="space-y-4">
+            {(section.content as FaqItem[]).map((item, j) => (
+              <div key={j} className="bg-white rounded-xl border border-stone-100 px-5 py-4">
+                <p className="text-[15px] font-semibold text-[#1A1A1A] mb-2">{item.q}</p>
+                <p className="text-[14px] text-[#5C5754] leading-relaxed font-light">{item.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )
     default:
       return null
   }
@@ -116,6 +130,17 @@ export default async function JournalPostPage({
   if (!post) notFound()
 
   const related = getRelatedPosts(slug, post.category)
+
+  const faqItems = post.body.filter((s) => s.type === 'faq').flatMap((s) => s.content as FaqItem[])
+  const faqSchema = faqItems.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  } : null
 
   const articleSchema = {
     '@context': 'https://schema.org',
@@ -149,6 +174,7 @@ export default async function JournalPostPage({
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
       <Navbar />
 
       <main className="bg-[#FAF8F5] min-h-screen">

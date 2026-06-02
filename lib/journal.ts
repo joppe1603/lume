@@ -12,9 +12,11 @@ export type JournalPost = {
   featured?: boolean
 }
 
+export type FaqItem = { q: string; a: string }
+
 export type Section = {
-  type: 'h2' | 'h3' | 'p' | 'ul' | 'callout' | 'cta'
-  content: string | string[]
+  type: 'h2' | 'h3' | 'p' | 'ul' | 'callout' | 'cta' | 'faq'
+  content: string | string[] | FaqItem[]
 }
 
 const POSTS: JournalPost[] = [
@@ -280,6 +282,16 @@ const POSTS: JournalPost[] = [
         type: 'cta',
         content: 'Reset Serum bevat Retinol 0.3% — de ideale beginconcentratie — samen met Niacinamide 10% en Bakuchiol 0.5% die de irritatie opvangen. Ontworpen voor een inloopperiode die soepel verloopt.',
       },
+      {
+        type: 'faq',
+        content: [
+          { q: 'Hoe begin ik met retinol?', a: 'Begin met een lage concentratie (0.1–0.3%), gebruik het 2x per week \'s avonds en bouw langzaam op. Combineer met niacinamide om irritatie te voorkomen.' },
+          { q: 'Welke retinolconcentratie is geschikt voor beginners?', a: '0.1% tot 0.3% is ideaal voor beginners. Hogere concentraties zijn niet effectiever in de eerste weken en verhogen alleen het risico op irritatie.' },
+          { q: 'Hoe vaak gebruik je retinol als beginner?', a: 'Start met 2x per week gedurende de eerste 4 weken. Daarna kun je ophogen naar 3–4x per week als je huid het goed verdraagt.' },
+          { q: 'Wanneer zie je resultaat van retinol?', a: 'Eerste verbeteringen in huidtextuur zijn na 2–4 weken zichtbaar. Significante resultaten op fijne lijntjes zijn na 8–12 weken aantoonbaar.' },
+          { q: 'Kan retinol gecombineerd worden met niacinamide?', a: 'Ja. Niacinamide vermindert aantoonbaar de irritatie van retinol en versterkt de huidbarrière. Het is de aanbevolen combinatie voor beginners.' },
+        ] as FaqItem[],
+      },
     ],
   },
   {
@@ -380,6 +392,15 @@ const POSTS: JournalPost[] = [
       {
         type: 'cta',
         content: 'Reset Serum combineert Niacinamide 10% met Bakuchiol en Retinol 0.3% — precies de combinatie die celvernieuwing stimuleert terwijl de barrière beschermd blijft. Geschikt ook voor huid in herstelperiode.',
+      },
+      {
+        type: 'faq',
+        content: [
+          { q: 'Hoe weet ik of mijn huidbarrière beschadigd is?', a: 'Signalen zijn trekkerigheid na het wassen, roodheid, verhoogde gevoeligheid, schilfering en een brandend gevoel bij het aanbrengen van producten. Als je huid op meerdere producten reageert, is de barrière waarschijnlijk beschadigd.' },
+          { q: 'Hoe lang duurt het om een huidbarrière te herstellen?', a: 'Bij milde beschadiging 1–2 weken. Bij ernstigere beschadiging 4–8 weken. Een minimale routine consequent volhouden versnelt het herstel aanzienlijk.' },
+          { q: 'Welke ingrediënten helpen de huidbarrière herstellen?', a: 'Ceramiden, niacinamide, hyaluronzuur en squalaan zijn klinisch bewezen effectief voor barrièreherstel. Niacinamide is het meest veelzijdig en het veiligst tijdens herstel.' },
+          { q: 'Wat moet je vermijden bij een beschadigde huidbarrière?', a: 'Vermijd sterke zuren (AHA/BHA), retinol, parfums, scrubs en reinigingsmiddelen met sulfaten. Houd je routine minimaal: reinigen, niacinamide serum, moisturizer, SPF.' },
+        ] as FaqItem[],
       },
     ],
   },
@@ -483,6 +504,16 @@ const POSTS: JournalPost[] = [
       {
         type: 'p',
         content: 'Niacinamide is geen trend — het is een van de best onderbouwde ingrediënten in moderne huidverzorging. Het doet wat de meeste serums beloven: poriënverfijning, barrièreondersteuning, egalisatie en anti-aging in één formule. Als je maar één actief ingrediënt aan je routine toevoegt en je huid gevoelig of reactief is, is niacinamide de meest logische keuze.',
+      },
+      {
+        type: 'faq',
+        content: [
+          { q: 'Wat doet niacinamide voor je huid?', a: 'Niacinamide (vitamine B3) verfijnt poriën, versterkt de huidbarrière, vermindert roodheid en pigmentvlekken, en reguleert talgproductie. Het is een van de meest veelzijdige actieve ingrediënten in huidverzorging.' },
+          { q: 'Welke concentratie niacinamide werkt het beste?', a: '10% niacinamide is de meest onderzochte en effectieve concentratie voor poriënverfijning en barrièreondersteuning. Concentraties onder de 5% hebben minder aantoonbaar effect.' },
+          { q: 'Kan niacinamide gecombineerd worden met retinol?', a: 'Ja. Niacinamide en retinol werken uitstekend samen. Niacinamide vermindert de irritatie die retinol kan veroorzaken en versterkt de huidbarrière. Ze kunnen tegelijk worden gebruikt.' },
+          { q: 'Is niacinamide geschikt voor gevoelige huid?', a: 'Ja. Niacinamide is een van de best getolereerde actieve ingrediënten en geschikt voor vrijwel alle huidtypen, inclusief gevoelige en reactieve huid.' },
+          { q: 'Hoe snel werkt niacinamide?', a: 'Verbetering in huidtextuur en poriëngrootte is na 4–6 weken zichtbaar. Significante vermindering van pigmentvlekken duurt 8–12 weken bij consequent gebruik.' },
+        ] as FaqItem[],
       },
     ],
   },
@@ -858,6 +889,15 @@ const POSTS: JournalPost[] = [
         type: 'p',
         content: 'Retinol en niacinamide zijn een van de sterkste combinaties in evidence-based skincare. Ze werken niet alleen veilig samen, ze maken elkaar effectiever. Als je twijfelde over de combinatie: de wetenschap is duidelijk. Gebruik ze samen.',
       },
+      {
+        type: 'faq',
+        content: [
+          { q: 'Kun je retinol en niacinamide tegelijk gebruiken?', a: 'Ja. De theorie dat ze niet samen kunnen, is achterhaald. Uit onderzoek blijkt dat de combinatie veilig is en dat niacinamide de irritatie van retinol aantoonbaar vermindert.' },
+          { q: 'In welke volgorde gebruik je retinol en niacinamide?', a: 'Als je ze apart gebruikt: niacinamide eerst (dunste textuur naar dikste), dan retinol. In een gecombineerde formule is volgorde niet van toepassing.' },
+          { q: 'Annuleert niacinamide het effect van retinol?', a: 'Nee. Vroeger dacht men dat ze een nevenproduct (nicotinezuur) zouden vormen, maar dit is bij normale huidverzorgingsomstandigheden niet relevant. Ze versterken elkaars werking.' },
+          { q: 'Helpt niacinamide bij retinol irritatie?', a: 'Ja. Niacinamide versterkt de huidbarrière en vermindert aantoonbaar de irritatie — roodheid en schilfering — die retinol bij sommige mensen veroorzaakt.' },
+        ] as FaqItem[],
+      },
     ],
   },
   {
@@ -1061,6 +1101,16 @@ const POSTS: JournalPost[] = [
       {
         type: 'p',
         content: 'Retinol-bijwerkingen bij gevoelige huid zijn reëel maar grotendeels te voorkomen. Begin laag, bouw langzaam op, versterk de barrière met niacinamide en buffeer met bakuchiol. Dan is retinol ook voor gevoelige huid het effectiefste ingrediënt voor celvernieuwing en anti-aging.',
+      },
+      {
+        type: 'faq',
+        content: [
+          { q: 'Wat zijn de bijwerkingen van retinol?', a: 'Roodheid, schilfering, droogheid en een licht brandend gevoel zijn de meest voorkomende bijwerkingen. Ze treden vooral op in de eerste 2–4 weken en verminderen daarna naarmate de huid gewend raakt.' },
+          { q: 'Hoe voorkom je irritatie van retinol?', a: 'Begin met een lage concentratie (0.1–0.3%), gebruik het maximaal 2x per week, combineer het met niacinamide en kies een gebufferde formule met squalaan of ceramiden.' },
+          { q: 'Is retinol geschikt voor gevoelige huid?', a: 'Ja, mits je het correct introduceert. Begin laag en langzaam, versterk eerst de huidbarrière met niacinamide, en kies een gebufferde formule. De meeste mensen met gevoelige huid verdragen retinol uitstekend na een goede opbouwperiode.' },
+          { q: 'Hoe lang duren retinol bijwerkingen?', a: 'De meeste bijwerkingen — droogheid en schilfering — verdwijnen na 3–6 weken. Dit heet retinization: de huid past zich aan. Als irritatie langer aanhoudt, verlaag dan de frequentie.' },
+          { q: 'Wat doe je als retinol te veel irriteert?', a: 'Stop tijdelijk met retinol, herstel de barrière met een minimale routine (reiniger, niacinamide serum, moisturizer) en start opnieuw met lagere frequentie — 1x per week — na 1–2 weken herstel.' },
+        ] as FaqItem[],
       },
     ],
   },
