@@ -79,7 +79,7 @@ const organizationSchema = {
   url: BASE_URL,
   description: 'Premium Nederlands huidverzorgingsmerk gebouwd op klinische wetenschap.',
   contactPoint: { '@type': 'ContactPoint', email: 'hello@mauyi.nl', contactType: 'customer service' },
-  sameAs: ['https://www.instagram.com/lumeskincare', 'https://www.tiktok.com/@mauyi'],
+  sameAs: ['https://www.instagram.com/mauyi', 'https://www.tiktok.com/@mauyi'],
 }
 
 const websiteSchema = {

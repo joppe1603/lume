@@ -73,5 +73,35 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.5,
     },
+    {
+      url: `${BASE_URL}/press`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: `${BASE_URL}/why-lume`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.55,
+    },
+    {
+      url: `${BASE_URL}/community`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.5,
+    },
+    {
+      url: `${BASE_URL}/retourbeleid`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: `${BASE_URL}/voorwaarden`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
   ]
 }

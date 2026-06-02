@@ -1157,6 +1157,294 @@ const POSTS: JournalPost[] = [
       },
     ],
   },
+  {
+    slug: 'skincare-routine-volgorde',
+    title: 'Skincare routine volgorde: in welke stap gebruik je welk product?',
+    excerpt: 'Toner voor serum? Serum voor moisturizer? De volgorde van je skincare-producten bepaalt of ze werken of elkaar blokkeren.',
+    category: 'Routines',
+    readTime: '5 min',
+    date: 'Juni 2026',
+    dateISO: '2026-06-02',
+    image: '/reset-serum-new.jpg',
+    seo: {
+      title: 'Skincare Routine Volgorde: Welk Product Eerst? | MAUYI Journal',
+      description: 'In welke volgorde breng je toner, serum, moisturizer en SPF aan? De juiste skincare volgorde bepaalt of je ingrediënten echt werken. Lees het hier.',
+    },
+    body: [
+      {
+        type: 'p',
+        content: 'Je kunt de beste ingrediënten kopen, maar als je ze in de verkeerde volgorde aanbrengt, blokkeer je hun werking — of verlaag je de effectiviteit drastisch. De volgorde van je skincare-routine is geen arbitraire keuze: het volgt de logica van molecuulgewicht, pH en penetratiediepte.',
+      },
+      {
+        type: 'h2',
+        content: 'De basisregel: van licht naar zwaar',
+      },
+      {
+        type: 'p',
+        content: 'De algemene vuistregel is simpel: breng producten aan van dunste naar dikste textuur. Lichte, waterige producten (toners, essences, serums) penetreren dieper en moeten als eerste op een schone huid. Dikkere producten (moisturizer, olie) sluiten de actieve stoffen af en voorkomen waterverlies.',
+      },
+      {
+        type: 'h2',
+        content: 'Correcte volgorde voor een avondroutine',
+      },
+      {
+        type: 'ul',
+        content: [
+          '1. Reiniger — verwijder make-up, vuil en sebum; begin altijd op een schone basis',
+          '2. Toner (optioneel) — brengt de huid-pH in balans en prepareert voor actieve stoffen',
+          '3. Serum — de kern van je routine; actieve stoffen (retinol, niacinamide, vitamine C) horen hier',
+          '4. Oogcrème (optioneel) — aan te brengen voor de moisturizer omdat het dunner is',
+          '5. Moisturizer — hydratatie en barrièrebescherming; sluit het serum af',
+          '6. Gezichtsolie (optioneel) — altijd als laatste stap \'s avonds; verzegelt alles eronder',
+        ],
+      },
+      {
+        type: 'h2',
+        content: 'En \'s ochtends?',
+      },
+      {
+        type: 'ul',
+        content: [
+          '1. Reiniger (of alleen water bij droge huid)',
+          '2. Toner (optioneel)',
+          '3. Vitamine C serum — overdag effectiever dan \'s avonds voor antioxidantbescherming',
+          '4. Moisturizer',
+          '5. SPF — altijd als allerlaatste stap, nooit onder andere producten',
+        ],
+      },
+      {
+        type: 'callout',
+        content: 'SPF is altijd de allerlaatste stap. Als je iets daarna aanbrengt, verdun je de zonbeschermingsfactor en verlaag je de effectiviteit — ook als het "maar" een beetje foundation is.',
+      },
+      {
+        type: 'h2',
+        content: 'Moet je wachten tussen stappen?',
+      },
+      {
+        type: 'p',
+        content: 'Voor de meeste producten is wachten niet strikt noodzakelijk. Uitzonderingen: retinol werkt het best op een droge huid — breng het aan 20–30 minuten na het reinigen om irritatie te verminderen (de "buffering"-techniek). En vitamine C heeft een optimale pH rond 3.5; breng het nooit direct na een hoog-pH toner aan.',
+      },
+      {
+        type: 'h2',
+        content: 'Veelgemaakte fouten',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Retinol onder moisturizer — retinol hoort onder de moisturizer, niet erna; de moisturizer buffert en vermindert irritatie',
+          'SPF voor moisturizer — SPF aanbrengen voor moisturizer vermindert de beschermende werking',
+          'Twee actieve serums tegelijk — niet per se fout, maar verhoog je irritatierisico; gebruik sterk actieve stoffen liever op aparte avonden',
+          'Olie voor waterige producten — olie blokkeert penetratie van waterige actieve stoffen; olie altijd als laatste',
+        ],
+      },
+      {
+        type: 'cta',
+        content: 'MAUYI Reset Serum past in stap 3 van elke avondroutine: na reiniging en toner, voor je moisturizer. Retinol 0.3% + Niacinamide 10% + Bakuchiol in één stap — geen stapeling van aparte producten nodig.',
+      },
+    ],
+  },
+  {
+    slug: 'collageen-stimuleren-huid',
+    title: 'Collageenproductie stimuleren: welke ingrediënten werken wetenschappelijk bewezen?',
+    excerpt: 'Collageen is het eiwit dat je huid stevig en veerkrachtig houdt. Maar wat stimuleert de aanmaak ervan écht — en wat is marketing?',
+    category: 'Wetenschap',
+    readTime: '6 min',
+    date: 'Juni 2026',
+    dateISO: '2026-06-02',
+    image: '/reset-serum-new.jpg',
+    seo: {
+      title: 'Collageenproductie Stimuleren: Wat Werkt Echt? | MAUYI Journal',
+      description: 'Hoe stimuleer je collageenproductie in je huid? We bespreken de ingrediënten die wetenschappelijk bewezen collageen aanmaken bevorderen — en de mythen die dat niet doen.',
+    },
+    body: [
+      {
+        type: 'p',
+        content: 'Collageen is het meest voorkomende eiwit in het menselijk lichaam en vormt de structurele basis van je huid. Vanaf je 25e neemt de collageenproductie af met gemiddeld 1% per jaar. Dat klinkt weinig, maar de cumulatieve impact over decennia is zichtbaar: minder stevigheid, diepere lijntjes en een dunner wordende huid.',
+      },
+      {
+        type: 'h2',
+        content: 'Waarom collageen crèmes nauwelijks werken',
+      },
+      {
+        type: 'p',
+        content: 'Collageen-moleculen in crèmes en serums zijn te groot om door de huidbarrière te dringen. Ze zitten op de huid als een dunne film en geven tijdelijk een "gevulder" gevoel — maar stimuleren geen eigenlijke aanmaak. Gehydrolyseerd collageen (opgebroken in kleinere peptiden) penetreert iets beter, maar het effect op endogene collageensynthese blijft beperkt.',
+      },
+      {
+        type: 'callout',
+        content: 'Echte collageenstimulatie werkt van binnenuit: ingrediënten moeten fibroblast-activiteit verhogen — de huidcellen die collageen produceren.',
+      },
+      {
+        type: 'h2',
+        content: 'Ingrediënten die collageenproductie wetenschappelijk bewezen stimuleren',
+      },
+      {
+        type: 'h3',
+        content: 'Retinol (vitamine A)',
+      },
+      {
+        type: 'p',
+        content: 'Retinol is het best gedocumenteerde topicale ingrediënt voor collageenstimulatie. Het bindt aan retinoïde-receptoren in de huid en verhoogt fibroblastactiviteit direct. Studies tonen aan dat retinol gebruik over 12 weken leidt tot meetbare toename van collageen type I en III — de primaire structuurproteïnen van de dermis.',
+      },
+      {
+        type: 'h3',
+        content: 'Vitamine C (ascorbinezuur)',
+      },
+      {
+        type: 'p',
+        content: 'Vitamine C is een essentiële cofactor bij de biosynthese van collageen: zonder vitamine C kunnen prolyl- en lysyl-hydroxylase-enzymen niet functioneren, waardoor collageen niet correct wordt gevormd. Topisch vitamine C (10–20%) stimuleert fibroblastactiviteit en beschermt bestaand collageen tegen UV-geïnduceerde afbraak.',
+      },
+      {
+        type: 'h3',
+        content: 'Niacinamide (vitamine B3)',
+      },
+      {
+        type: 'p',
+        content: 'Niacinamide stimuleert indirect de collageenproductie door ceramide-synthese te verhogen en de huidbarrière te versterken. Een sterkere barrière betekent minder chronische laaggradige inflammatie — en inflammatie is één van de primaire oorzaken van collageenafbraak. Studies tonen ook een directe upregulatie van collageen type IV aan.',
+      },
+      {
+        type: 'h3',
+        content: 'Peptiden',
+      },
+      {
+        type: 'p',
+        content: 'Signaalpeptiden (zoals Matrixyl / palmitoyl pentapeptide-4) imiteren de signaalmoleculen die ontstaan bij collageenafbraak en activeren zo fibroblast-collageen-synthese. Ze zijn milder dan retinol en geschikt als aanvulling — maar de evidence base is minder sterk dan voor retinol.',
+      },
+      {
+        type: 'h2',
+        content: 'Wat heeft geen bewezen effect op collageensynthese',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Collageen-supplementen oraal — limiteerde evidence; aminozuren worden wel opgenomen maar niet specifiek naar de huid gedirigeerd',
+          'Collageen crèmes — moleculen te groot voor echte penetratie',
+          '"Collageen boost" claims op producten zonder retinol of vitamine C — marketingterm zonder klinische onderbouwing',
+          'Jade rollers en gua sha — verbeteren circulatie tijdelijk maar stimuleren geen synthese',
+        ],
+      },
+      {
+        type: 'h2',
+        content: 'De meest effectieve aanpak',
+      },
+      {
+        type: 'p',
+        content: 'Combineer retinol \'s avonds met vitamine C \'s ochtends. Voeg niacinamide toe voor barrièreondersteuning. Draag overdag altijd SPF — UV-straling is de snelste weg naar collageenafbraak en maakt alle andere inspanningen deels teniet.',
+      },
+      {
+        type: 'cta',
+        content: 'MAUYI Reset Serum bevat Retinol 0.3% voor collageenstimulatie, Niacinamide 10% voor barrièreondersteuning en Bakuchiol als antioxidant-synergie — de drie meest effectieve collageenondersteunende stoffen in één avondformule.',
+      },
+    ],
+  },
+  {
+    slug: 'acne-littekens-verminderen',
+    title: 'Acne littekens verminderen: ingrediënten die echt werken',
+    excerpt: 'Acne verdwijnt, maar de vlekken en littekens die overblijven zijn soms hardnekkiger dan de puistjes zelf. Wat werkt echt?',
+    category: 'Huidproblemen',
+    readTime: '7 min',
+    date: 'Juni 2026',
+    dateISO: '2026-06-02',
+    image: '/reset-serum-new.jpg',
+    seo: {
+      title: 'Acne Littekens Verminderen: Wat Werkt Echt? | MAUYI Journal',
+      description: 'Hoe verminder je acne littekens en post-acne vlekken? We bespreken de ingrediënten en methoden die wetenschappelijk bewezen werken — en welke niet.',
+    },
+    body: [
+      {
+        type: 'p',
+        content: 'Acne verdwijnt — maar wat overblijft zijn rode of bruine vlekken, ongelijkmatige textuur en soms echte littekens. Het goede nieuws: de meeste post-acne huidveranderingen zijn behandelbaar met de juiste topicale ingrediënten. Het slechte nieuws: geduld is vereist. Huidvernieuwing gaat niet snel.',
+      },
+      {
+        type: 'h2',
+        content: 'Twee typen "acne littekens"',
+      },
+      {
+        type: 'p',
+        content: 'Wat mensen "acne littekens" noemen, zijn vaak twee verschillende problemen met andere aanpakken:',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Post-inflammatoire hyperpigmentatie (PIH) — platte, donkere of rode vlekken na een ontstekingsreactie; geen echte littekens maar pigmentveranderingen die langzaam vervagen',
+          'Atrofische littekens (icepick, rolling, boxcar) — echte weefselschade met verlies van huidstructuur; moeilijker te behandelen topicaal, soms professionele behandeling nodig',
+        ],
+      },
+      {
+        type: 'p',
+        content: 'PIH reageert goed op topicale behandeling. Echte atrofische littekens verbeteren ook met de juiste ingrediënten, maar volledig herstel vereist vaak aanvullende behandelingen zoals microneedling of lasers.',
+      },
+      {
+        type: 'h2',
+        content: 'Ingrediënten die wetenschappelijk werken',
+      },
+      {
+        type: 'h3',
+        content: 'Retinol',
+      },
+      {
+        type: 'p',
+        content: 'Retinol versnelt celvernieuwing, wat pigmentvlekken sneller naar de oppervlakte brengt en afvoert. Tegelijkertijd stimuleert het collageensynthese, wat atrofische littekens geleidelijk opvult. Het is het meest veelzijdige ingrediënt voor post-acne herstel: het pakt zowel PIH als textuurrobleme aan.',
+      },
+      {
+        type: 'h3',
+        content: 'Niacinamide',
+      },
+      {
+        type: 'p',
+        content: 'Niacinamide remt de overdracht van melanosomen van melanocyten naar keratinocyten — het mechanisme achter PIH. Studies met 5% niacinamide tonen significante vermindering van donkere vlekken na 8 weken. Daarnaast kalmeert het roodheid en versterkt het de huidbarrière, essentieel tijdens herstel.',
+      },
+      {
+        type: 'h3',
+        content: 'Vitamine C',
+      },
+      {
+        type: 'p',
+        content: 'Vitamine C remt tyrosinase, het enzym dat melanineproductie aanstuurt. Het verhelpt daarmee pigmentvlekken en geeft de huid een egaler tint. Combineer \'s ochtends vitamine C met SPF voor maximale bescherming tegen UV — want UV verergert PIH aanzienlijk.',
+      },
+      {
+        type: 'h3',
+        content: 'AHA\'s (glycolzuur, melkzuur)',
+      },
+      {
+        type: 'p',
+        content: 'Alpha-hydroxy zuren exfoliëren de bovenste huidlaag en versnellen daarmee de afschilfering van gepigmenteerde cellen. Glycolzuur (kleinste molecuul, diepste penetratie) en melkzuur (milder, ook hydraterende eigenschappen) zijn effectief bij PIH. Gebruik maximaal 2–3× per week om de barrière niet te beschadigen.',
+      },
+      {
+        type: 'callout',
+        content: 'Nooit uitknijpen. Puistjes die worden uitgeknepen raken dieper beschadigd, ontwikkelen vaker atrofische littekens en laten meer PIH achter. Laat ze met rust of behandel ze met een spot treatment.',
+      },
+      {
+        type: 'h2',
+        content: 'Wat werkt niet of nauwelijks',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Citroen op de huid — te zuur, beschadigt de barrière en kan juist PIH verergeren door fototoxische reactie',
+          'Baking soda — verstoort de huid-pH en verhoogt het risico op irritatie en uitdroging',
+          '"Litteken gels" zonder actieve stoffen — geen bewezen effect op post-acne huid',
+          'Overmatig scrubben — verwijdert de barrière, verhoogt inflammatie en vertraagt herstel',
+        ],
+      },
+      {
+        type: 'h2',
+        content: 'Realistische tijdlijn',
+      },
+      {
+        type: 'ul',
+        content: [
+          '4–6 weken: oppervlakkige PIH begint te vervagen door versnelde celvernieuwing',
+          '8–12 weken: duidelijke vermindering van rode en bruine vlekken zichtbaar',
+          '3–6 maanden: ongelijkmatige textuur verbetert merkbaar; atrofische littekens worden minder zichtbaar',
+          '6–12 maanden: maximale verbetering bij consistente routine; diepe atrofische littekens verbeteren maar verdwijnen zelden volledig',
+        ],
+      },
+      {
+        type: 'cta',
+        content: 'MAUYI Reset Serum combineert Retinol 0.3% (celvernieuwing en collageenstimulatie) met Niacinamide 10% (pigmentremming en kalmering) — de twee meest effectieve ingrediënten voor post-acne herstel, in één parfumvrije formule die ook gevoelige huid verdraagt.',
+      },
+    ],
+  },
 ]
 
 export function getAllPosts(): JournalPost[] {
