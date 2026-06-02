@@ -28,7 +28,7 @@ export default function InstagramGrid() {
               className="flex items-center gap-3 mb-3"
             >
               <div className="w-6 h-px bg-[#C9A96E]" />
-              <span className="section-label">@mauyi</span>
+              <span className="section-label">@mauyiskincare</span>
             </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 16 }}
@@ -47,7 +47,7 @@ export default function InstagramGrid() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            href="https://instagram.com/lumeskincare"
+            href="https://instagram.com/mauyiskincare"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden md:inline-flex items-center gap-2 btn-outline px-5 py-2.5 rounded-xl text-sm font-medium"
@@ -66,7 +66,7 @@ export default function InstagramGrid() {
           {posts.map((post, i) => (
             <motion.a
               key={i}
-              href="https://instagram.com/lumeskincare"
+              href="https://instagram.com/mauyiskincare"
               target="_blank"
               rel="noopener noreferrer"
               initial={{ opacity: 0, scale: 0.96 }}
@@ -106,7 +106,7 @@ export default function InstagramGrid() {
         {/* Mobile CTA */}
         <div className="md:hidden mt-6 text-center">
           <a
-            href="https://instagram.com/lumeskincare"
+            href="https://instagram.com/mauyiskincare"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 btn-outline px-5 py-2.5 rounded-xl text-sm font-medium"
