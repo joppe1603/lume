@@ -247,6 +247,21 @@ export default function TheOrdinaryAlternativePage() {
             ))}
           </div>
 
+          {/* Related */}
+          <div className="border border-stone-100 rounded-2xl p-6 mb-12">
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#9A9590] mb-4">Meer vergelijkingen</p>
+            <Link href="/vs/the-ordinary" className="flex items-start gap-3 group">
+              <div>
+                <p className="text-[14px] font-semibold text-[#1A1A1A] group-hover:text-[#C9A96E] transition-colors">
+                  MAUYI vs The Ordinary →
+                </p>
+                <p className="text-[13px] text-[#9A9590] font-light mt-0.5">
+                  Directe vergelijking op formule, prijs en gebruiksgemak
+                </p>
+              </div>
+            </Link>
+          </div>
+
           {/* CTA */}
           <div className="bg-[#1A1A1A] rounded-2xl px-6 py-8 text-center">
             <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#C9A96E] mb-3">MAUYI Reset Serum</p>
