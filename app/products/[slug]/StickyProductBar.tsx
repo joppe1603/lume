@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useCart } from '@/contexts/CartContext'
@@ -108,16 +107,12 @@ export default function StickyProductBar({
                   </AnimatePresence>
                 </button>
               ) : (
-                <Link
-                  href={`/launch?source=sticky-bar&product=${slug}#waitlist`}
-                  className="btn-gold shrink-0 px-5 py-2.5 rounded-xl text-sm font-semibold min-w-[160px] text-center flex items-center justify-center gap-2"
+                <button
+                  onClick={() => document.getElementById('product-hero-cta')?.scrollIntoView({ behavior: 'smooth', block: 'center' })}
+                  className="btn-gold shrink-0 px-5 py-2.5 rounded-xl text-sm font-semibold min-w-[160px] text-center flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                    <polyline points="22,6 12,13 2,6"/>
-                  </svg>
                   Schrijf je in
-                </Link>
+                </button>
               )}
             </div>
           </div>
