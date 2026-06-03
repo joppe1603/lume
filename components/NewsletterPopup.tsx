@@ -8,28 +8,50 @@ export default function NewsletterPopup() {
   const [email, setEmail] = useState('')
   const [done, setDone] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const CODE = 'MAUYI15'
 
   useEffect(() => {
-    // Don't show if already dismissed this session
-    if (sessionStorage.getItem('mauyi-popup-dismissed')) return
+    // Don't show if already dismissed or signed up
+    if (localStorage.getItem('mauyi-popup-dismissed')) return
 
-    // Show after 6 seconds
-    const t = setTimeout(() => setVisible(true), 6000)
-    return () => clearTimeout(t)
+    let shown = false
+    const show = () => {
+      if (shown) return
+      shown = true
+      setVisible(true)
+    }
+
+    // Show after 20 seconds OR after scrolling 55%
+    const t = setTimeout(show, 20000)
+    const onScroll = () => {
+      const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight)
+      if (pct > 0.55) show()
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => { clearTimeout(t); window.removeEventListener('scroll', onScroll) }
   }, [])
 
   const dismiss = () => {
     setVisible(false)
-    sessionStorage.setItem('mauyi-popup-dismissed', '1')
+    localStorage.setItem('mauyi-popup-dismissed', '1')
   }
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!email.includes('@')) return
+    if (!email.includes('@') || loading) return
+    setLoading(true)
+    try {
+      await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source: 'popup' }),
+      })
+    } catch { /* ignore */ }
+    setLoading(false)
     setDone(true)
-    sessionStorage.setItem('mauyi-popup-dismissed', '1')
+    localStorage.setItem('mauyi-popup-dismissed', '1')
   }
 
   const copyCode = () => {
@@ -124,9 +146,10 @@ export default function NewsletterPopup() {
                         />
                         <button
                           type="submit"
-                          className="w-full btn-gold py-3 text-sm"
+                          disabled={loading}
+                          className="w-full btn-gold py-3 text-sm disabled:opacity-60"
                         >
-                          Claim mijn 15% korting ✨
+                          {loading ? 'Moment...' : 'Claim mijn 15% korting'}
                         </button>
                       </form>
 

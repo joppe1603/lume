@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import JournalNewsletterBlock from '@/components/JournalNewsletterBlock'
 import { getPost, getAllPosts } from '@/lib/journal'
 import type { Section, FaqItem, ComparisonLink } from '@/lib/journal'
 
@@ -251,6 +252,9 @@ export default async function JournalPostPage({
           <div className="space-y-5">
             {post.body.map((section, i) => renderSection(section, i))}
           </div>
+
+          {/* Newsletter signup */}
+          <JournalNewsletterBlock slug={slug} />
 
           {/* Related articles */}
           {related.length > 0 && (
