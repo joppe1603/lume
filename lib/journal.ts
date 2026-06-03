@@ -1407,7 +1407,7 @@ const POSTS: JournalPost[] = [
     readTime: '5 min',
     date: 'Juni 2026',
     dateISO: '2026-06-03',
-    image: '/journal-niacinamide.jpg',
+    image: '/journal-niacinamide-gevoelige-huid.jpg',
     seo: {
       title: 'Niacinamide voor Gevoelige Huid: werkt het? | MAUYI Journal',
       description: 'Niacinamide is een van de veiligste actieve ingrediënten voor gevoelige huid. Hoe werkt het, welke concentratie is veilig en hoe combineer je het zonder irritatie?',
@@ -1530,7 +1530,7 @@ const POSTS: JournalPost[] = [
     readTime: '5 min',
     date: 'Juni 2026',
     dateISO: '2026-06-04',
-    image: '/journal-serum.jpg',
+    image: '/journal-bakuchiol-zwangerschap.jpg',
     seo: {
       title: 'Bakuchiol tijdens Zwangerschap: veilig voor retinol? | MAUYI Journal',
       description: 'Retinol is af te raden tijdens zwangerschap — bakuchiol is het plantaardige alternatief. Is bakuchiol veilig als je zwanger bent of borstvoeding geeft?',
@@ -1653,7 +1653,7 @@ const POSTS: JournalPost[] = [
     readTime: '4 min',
     date: 'Juni 2026',
     dateISO: '2026-06-05',
-    image: '/journal-serum.jpg',
+    image: '/journal-wat-is-bakuchiol.jpg',
     seo: {
       title: 'Wat is Bakuchiol? Het plantaardige retinol-alternatief uitgelegd | MAUYI Journal',
       description: 'Bakuchiol is een plantaardig ingrediënt dat vergelijkbare effecten heeft als retinol — zonder de irritatie. Alles over de herkomst, werking en wetenschappelijke onderbouwing.',
