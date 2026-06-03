@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -6,13 +7,30 @@ import Footer from '@/components/Footer'
 const BASE_URL = 'https://mauyi.nl'
 
 export const metadata: Metadata = {
-  title: 'The Ordinary Alternatief: waarom mensen overstappen naar MAUYI | MAUYI',
-  description: 'Op zoek naar een alternatief voor The Ordinary? Vergelijk ingrediënten, formules en aanpak. MAUYI combineert retinol, niacinamide en hyaluronzuur in één gebufferde formule — zonder de verwarring.',
+  title: 'The Ordinary Alternatief (2024): MAUYI als eenvoudiger alternatief | MAUYI',
+  description: 'Op zoek naar een alternatief voor The Ordinary? MAUYI combineert retinol 0.3%, niacinamide 10% en hyaluronzuur in één formule — geen combinatiepuzzel, minder irritatie. Eerlijke vergelijking.',
+  alternates: {
+    canonical: `${BASE_URL}/alternatives/the-ordinary`,
+  },
   openGraph: {
-    title: 'The Ordinary Alternatief | MAUYI',
-    description: 'Vergelijk The Ordinary met MAUYI. Eén formule versus tien losse producten — wat werkt beter voor jouw huid?',
+    title: 'The Ordinary Alternatief: MAUYI vs The Ordinary vergeleken',
+    description: 'Waarom mensen overstappen van The Ordinary naar MAUYI. Eerlijke vergelijking op formule, prijs en gebruiksgemak.',
     url: `${BASE_URL}/alternatives/the-ordinary`,
-    type: 'website',
+    type: 'article',
+    images: [
+      {
+        url: `${BASE_URL}/mauyi-vs-the-ordinary.jpg`,
+        width: 1280,
+        height: 853,
+        alt: 'MAUYI Reset Serum naast The Ordinary producten — vergelijking',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'The Ordinary Alternatief | MAUYI',
+    description: 'Eén formule met retinol, niacinamide en hyaluronzuur — geen losse producten, geen combinatiepuzzel.',
+    images: [`${BASE_URL}/mauyi-vs-the-ordinary.jpg`],
   },
 }
 
@@ -50,6 +68,22 @@ const faqSchema = {
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'The Ordinary biedt uitstekende toegankelijkheid: transparante ingrediëntenlijsten, een grote productrange en lage prijzen. Voor mensen die graag experimenteren met losse ingrediënten is het een sterke keuze.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Welk alternatief voor The Ordinary retinol is er?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'MAUYI Reset Serum bevat retinol 0.3% — gebufferd met niacinamide 10% zodat het minder irriteert dan het standaard The Ordinary Retinol 0.5% product. Ideaal voor mensen die met retinol willen beginnen of gevoelige huid hebben.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is er een Nederlands alternatief voor The Ordinary?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Ja. MAUYI is een Nederlands huidverzorgingsmerk dat geformuleerd is op basis van klinisch bewijs. Het Reset Serum is het enige Nederlandse serum dat retinol, niacinamide en hyaluronzuur combineert in één gebufferde formule.',
       },
     },
   ],
@@ -99,6 +133,18 @@ export default function TheOrdinaryAlternativePage() {
             <p className="text-[17px] text-[#6B6560] font-light leading-relaxed">
               The Ordinary heeft huidverzorging democratisch gemaakt. Maar het productaanbod van 100+ SKU's, de complexe combinatieregels en de verwarring over volgorde zorgen er bij veel mensen voor dat ze op zoek gaan naar iets eenvoudigers. Dit is een eerlijke vergelijking.
             </p>
+          </div>
+
+          {/* Hero image */}
+          <div className="rounded-2xl overflow-hidden mb-10 aspect-[3/2] relative">
+            <Image
+              src="/mauyi-vs-the-ordinary.jpg"
+              alt="MAUYI Reset Serum naast The Ordinary producten op marmeren ondergrond"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 768px"
+              priority
+            />
           </div>
 
           {/* TL;DR */}

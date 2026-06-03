@@ -82,14 +82,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${BASE_URL}/alternatives/the-ordinary`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.75,
+      changeFrequency: 'weekly',
+      priority: 0.85,
     },
     {
       url: `${BASE_URL}/vs/the-ordinary`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.75,
+      changeFrequency: 'weekly',
+      priority: 0.8,
     },
     {
       url: `${BASE_URL}/community`,
