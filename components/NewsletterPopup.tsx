@@ -7,10 +7,7 @@ export default function NewsletterPopup() {
   const [visible, setVisible] = useState(false)
   const [email, setEmail] = useState('')
   const [done, setDone] = useState(false)
-  const [copied, setCopied] = useState(false)
   const [loading, setLoading] = useState(false)
-
-  const CODE = 'MAUYI15'
 
   useEffect(() => {
     // Don't show if already dismissed or signed up
@@ -52,13 +49,6 @@ export default function NewsletterPopup() {
     setLoading(false)
     setDone(true)
     localStorage.setItem('mauyi-popup-dismissed', '1')
-  }
-
-  const copyCode = () => {
-    navigator.clipboard.writeText(CODE).then(() => {
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    })
   }
 
   return (
@@ -169,22 +159,13 @@ export default function NewsletterPopup() {
                           <path d="M5 12L10 17L19 7" stroke="#C9A96E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                       </div>
-                      <p className="text-[#1A1A1A] font-bold text-lg mb-1">Welkom bij MAUYI ✨</p>
-                      <p className="text-[#6B6560] text-sm mb-6">Gebruik deze code bij checkout:</p>
-
-                      <button
-                        onClick={copyCode}
-                        className="relative w-full bg-[#1A1A1A] text-white rounded-xl py-3 px-4 font-mono text-lg font-bold tracking-[0.15em] hover:bg-[#2A2A2A] transition-colors"
-                      >
-                        {CODE}
-                        <span className={`absolute right-4 top-1/2 -translate-y-1/2 text-xs font-normal font-sans transition-all ${copied ? 'text-green-400' : 'text-stone-400'}`}>
-                          {copied ? '✓ Gekopieerd!' : 'Klik om te kopiëren'}
-                        </span>
-                      </button>
+                      <p className="text-[#1A1A1A] font-bold text-lg mb-1">Je kortingscode is onderweg!</p>
+                      <p className="text-[#6B6560] text-sm mb-1">Check je inbox — de code staat in je mail.</p>
+                      <p className="text-[11px] text-stone-400 mb-6">Niet in je inbox? Check je spam.</p>
 
                       <button
                         onClick={dismiss}
-                        className="mt-4 w-full btn-ghost py-3 text-sm"
+                        className="w-full btn-gold py-3 text-sm"
                       >
                         Shop nu →
                       </button>

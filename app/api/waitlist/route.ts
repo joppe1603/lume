@@ -142,7 +142,7 @@ export async function POST(req: NextRequest) {
       await resend.emails.send({
         from: FROM,
         to: email,
-        subject: 'Je staat op de MAUYI wachtlijst',
+        subject: 'Je kortingscode: MAUYI15 — welkom bij MAUYI',
         html,
       })
     } catch (emailError) {
