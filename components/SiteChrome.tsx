@@ -35,7 +35,7 @@ export default function SiteChrome() {
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             aria-label="Terug naar boven"
-            className="fixed bottom-6 right-6 z-[90] w-12 h-12 rounded-2xl bg-white border border-stone-200 shadow-lg text-stone-500 hover:text-[#C9A96E] hover:border-[#C9A96E] cursor-pointer transition-all flex items-center justify-center"
+            className="fixed bottom-32 sm:bottom-6 right-6 z-[90] w-12 h-12 rounded-2xl bg-white border border-stone-200 shadow-lg text-stone-500 hover:text-[#C9A96E] hover:border-[#C9A96E] cursor-pointer transition-all flex items-center justify-center"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 19V5M5 12l7-7 7 7" />
