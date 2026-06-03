@@ -1400,6 +1400,365 @@ const POSTS: JournalPost[] = [
     ],
   },
   {
+    slug: 'niacinamide-gevoelige-huid',
+    title: 'Niacinamide voor gevoelige huid: werkt het echt?',
+    excerpt: 'Gevoelige huid reageert op vrijwel alles. Niacinamide is een van de weinige actieve ingrediënten die bewezen goed wordt verdragen — zelfs bij reactieve en rosacea-gevoelige huid.',
+    category: 'Ingrediënten',
+    readTime: '5 min',
+    date: 'Juni 2026',
+    dateISO: '2026-06-03',
+    image: '/journal-niacinamide.jpg',
+    seo: {
+      title: 'Niacinamide voor Gevoelige Huid: werkt het? | MAUYI Journal',
+      description: 'Niacinamide is een van de veiligste actieve ingrediënten voor gevoelige huid. Hoe werkt het, welke concentratie is veilig en hoe combineer je het zonder irritatie?',
+    },
+    body: [
+      {
+        type: 'p',
+        content: 'Als je een gevoelige huid hebt, weet je hoe het voelt om een product te proberen dat goed werkt voor anderen — en direct te reageren met roodheid, prikken of irritatie. De meeste actieve ingrediënten in skincare vragen een inloopperiode of veroorzaken bijwerkingen. Niacinamide niet. Het is een van de weinige effectieve actieven die ook bij gevoelige en reactieve huid vrijwel altijd wordt verdragen.',
+      },
+      {
+        type: 'h2',
+        content: 'Waarom gevoelige huid zo reageert',
+      },
+      {
+        type: 'p',
+        content: 'Gevoelige huid heeft doorgaans een verzwakte huidbarrière — de beschermende laag van ceramiden, vetzuren en cholesterol die vochtverlies tegengaat en irritanten buiten houdt. Wanneer die barrière niet optimaal functioneert, dringen actieve ingrediënten dieper en sneller door, wat irritatie veroorzaakt. De meeste actieven — retinol, AHA\'s, vitamine C in hoge concentraties — verergeren dit tijdelijk voordat ze verbeteren.',
+      },
+      {
+        type: 'h2',
+        content: 'Wat niacinamide anders maakt',
+      },
+      {
+        type: 'p',
+        content: 'Niacinamide (vitamine B3) werkt anders dan de meeste actieven. In plaats van de huid te exfoliëren of celvernieuwing te forceren, versterkt het de huidbarrière actief. Het stimuleert de productie van ceramiden — de bouwstenen van de beschermende laag. Een sterkere barrière betekent minder vochtuitdroging, minder binnendringen van irritanten en minder gevoeligheid.',
+      },
+      {
+        type: 'callout',
+        content: 'In klinisch onderzoek is niacinamide consistent aangetoond als goed verdragen bij gevoelige, rosacea-gevoelige en atopische huid — zelfs bij dagelijks gebruik van 10% zonder inloopperiode.',
+      },
+      {
+        type: 'h2',
+        content: 'Wat niacinamide doet voor gevoelige huid',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Barrière versterken — stimuleert ceramide- en vetzuurproductie in de huid, waardoor de beschermende laag dichter en effectiever wordt',
+          'Roodheid verminderen — anti-inflammatoire werking vermindert de zichtbaarheid van roodheid, ook bij rosacea-gevoelige huid',
+          'Vochtretentie verbeteren — verlaagt transepidermaal vochtverlies (TEWL), waardoor huid minder droog aanvoelt',
+          'Poriënverfijning — reguleert talgproductie, effectief ook bij gevoelige huid met verstopte poriën',
+          'Verlichting van pigmentvlekken — remt melanineoverdracht, ook bruikbaar bij huid die niet geschikt is voor sterkere lightening agents',
+        ],
+      },
+      {
+        type: 'h2',
+        content: 'Welke concentratie is veilig bij gevoelige huid?',
+      },
+      {
+        type: 'p',
+        content: 'Klinisch onderzoek is gedaan op concentraties van 2% tot 10%. Voor gevoelige huid is 5–10% veilig en effectief gebleken — er is geen aanbeveling om bij gevoelige huid lager te beginnen dan bij andere huidtypen. Boven de 10% neemt het risico op tijdelijke roodheid toe, maar onder de 10% is niacinamide zo goed als nooit de oorzaak van irritatie.',
+      },
+      {
+        type: 'callout',
+        content: 'De mythe dat niacinamide en vitamine C niet gecombineerd mogen worden (vanwege nicotinezuur-vorming en flushing) is bij normale gebruikstemperaturen en pH-waarden niet relevant. Niacinamide is veilig naast alle gangbare actieve ingrediënten.',
+      },
+      {
+        type: 'h2',
+        content: 'Niacinamide bij rosacea',
+      },
+      {
+        type: 'p',
+        content: 'Rosacea is een chronische huidaandoening met roodheid, zichtbare vaatjes en gevoeligheid. Voor deze huid zijn de meeste actieven te agressief. Niacinamide is een van de weinige ingrediënten die klinisch getest is op rosacea-huid en positieve resultaten laat zien: vermindering van roodheid, verbetering van de huidbarrière en minder gevoeligheid voor externe triggers.',
+      },
+      {
+        type: 'h2',
+        content: 'Niacinamide bij atopische huid (eczeem)',
+      },
+      {
+        type: 'p',
+        content: 'Bij atopische dermatitis is de huidbarrière structureel aangedaan. Niacinamide is aangetoond TEWL te verlagen en de barrièrefunctie te verbeteren bij atopische huid — wat jeuken en droogheid vermindert. Het is geen behandeling voor eczeem, maar een veilige ondersteunende stap in de dagelijkse routine.',
+      },
+      {
+        type: 'h2',
+        content: 'Hoe begin je met niacinamide bij gevoelige huid?',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Geen inloopperiode nodig — niacinamide kan direct dagelijks worden gebruikt, ook \'s ochtends en \'s avonds',
+          'Begin met één product tegelijk — introduceer niacinamide los van andere nieuwe producten om reacties goed te kunnen herleiden',
+          'Combineer met een milde cleanser en een ceramide-rijke moisturizer voor optimale barrièreondersteuning',
+          'Voeg retinol pas toe nádat je minimaal 4 weken alleen niacinamide hebt gebruikt — niacinamide bereidt de barrière voor op retinol',
+          'Dagelijks gebruik levert cumulatieve barrièreverbetering op — overla niet met agressieve actieven in de eerste periode',
+        ],
+      },
+      {
+        type: 'h2',
+        content: 'Wanneer zie je resultaat?',
+      },
+      {
+        type: 'ul',
+        content: [
+          '1–2 weken: huid voelt minder droog en minder "reactief" op dagelijkse prikkels',
+          '4–6 weken: zichtbare verbetering in roodheid en huidtoon, poriën minder zichtbaar',
+          '8–12 weken: barrièrehervorming meetbaar; huid tolereert externe factoren beter',
+          '3 maanden+: langetermijnverbetering in huidtextuur, pigmentegalisatie, en gevoeligheidsprofiel',
+        ],
+      },
+      {
+        type: 'cta',
+        content: 'Reset Serum bevat Niacinamide 10% — samen met Bakuchiol 0.5% en Retinol 0.3% in een parfumvrije formule. De combinatie is specifiek geschikt voor gevoelige huid: bakuchiol kalmeert, niacinamide versterkt de barrière en retinol vernieuwt op de laagste effectieve dosis.',
+      },
+      {
+        type: 'faq',
+        content: [
+          { q: 'Is niacinamide geschikt voor gevoelige huid?', a: 'Ja. Niacinamide is een van de best getolereerde actieve ingrediënten in huidverzorging en wordt consequent aanbevolen voor gevoelige, reactieve en rosacea-gevoelige huid. Er is geen inloopperiode nodig.' },
+          { q: 'Welke concentratie niacinamide is veilig bij gevoelige huid?', a: '5–10% niacinamide is effectief en veilig bij gevoelige huid. Er zijn geen aanwijzingen dat gevoelige huid met een lagere concentratie moet beginnen dan andere huidtypen.' },
+          { q: 'Kan niacinamide roodheid veroorzaken?', a: 'Zelden en niet bij concentraties onder 10%. De mythe over niacinamide-gerelateerde flushing is gebaseerd op verouderde informatie over nicotinezuurvorming — dit treedt bij normale huidverzorgingsomstandigheden niet op.' },
+          { q: 'Werkt niacinamide bij rosacea?', a: 'Ja. Niacinamide is klinisch getest op rosacea-huid en laat vermindering van roodheid en verbetering van de huidbarrière zien. Het is een van de weinige actieve ingrediënten die door dermatologen wordt aanbevolen bij rosacea.' },
+          { q: 'Kan ik niacinamide combineren met retinol bij gevoelige huid?', a: 'Ja — en de combinatie is juist aan te raden. Niacinamide versterkt de huidbarrière en vermindert de irritatie die retinol bij gevoelige huid kan veroorzaken. Begin eerst 4 weken met alleen niacinamide voor je retinol introduceert.' },
+        ] as FaqItem[],
+      },
+    ],
+  },
+  {
+    slug: 'bakuchiol-zwangerschap',
+    title: 'Bakuchiol tijdens zwangerschap: veilig alternatief voor retinol',
+    excerpt: 'Retinol is af te raden tijdens zwangerschap. Bakuchiol wel veilig? Wat de wetenschap zegt over bakuchiol in je routine als je zwanger bent of borstvoeding geeft.',
+    category: 'Ingrediënten',
+    readTime: '5 min',
+    date: 'Juni 2026',
+    dateISO: '2026-06-04',
+    image: '/journal-serum.jpg',
+    seo: {
+      title: 'Bakuchiol tijdens Zwangerschap: veilig voor retinol? | MAUYI Journal',
+      description: 'Retinol is af te raden tijdens zwangerschap — bakuchiol is het plantaardige alternatief. Is bakuchiol veilig als je zwanger bent of borstvoeding geeft?',
+    },
+    body: [
+      {
+        type: 'p',
+        content: 'Een van de eerste dingen die dermatologen adviseren bij zwangerschap: stop met retinol. Vitamine A-derivaten — waaronder retinol en retinoïden zoals tretinoin — zijn in hoge doses teratogeen en worden officieel afgeraden tijdens zwangerschap en borstvoeding. Maar wat doe je als je je huid wilt blijven verzorgen? Bakuchiol is het antwoord dat de wetenschap steeds vaker geeft.',
+      },
+      {
+        type: 'h2',
+        content: 'Waarom is retinol af te raden tijdens zwangerschap?',
+      },
+      {
+        type: 'p',
+        content: 'Retinol en andere vitamine A-derivaten (retinoïden) zijn in hoge systemische doses aangetoond teratogeen bij mensen — ze kunnen de foetale ontwikkeling beïnvloeden. Hoewel de systemische opname via topisch retinol zeer beperkt is, hebben dermatologen en gynaecologen het voorzorgsbeginsel toegepast: geen retinol tijdens zwangerschap of borstvoeding. De wetenschappelijke organisaties zijn consistent in dit advies.',
+      },
+      {
+        type: 'h2',
+        content: 'Wat is bakuchiol en waarom is het een alternatief?',
+      },
+      {
+        type: 'p',
+        content: 'Bakuchiol is een meroterpeen — een plantaardige bioactieve verbinding — afkomstig uit het zaad van de Psoralea corylifolia-plant. Het heeft een compleet andere chemische structuur dan retinol, maar activeert in studies vergelijkbare genen en signaalwegen die verantwoordelijk zijn voor celvernieuwing, collageensynthese en pigmentegalisatie.',
+      },
+      {
+        type: 'callout',
+        content: 'In een gerandomiseerde dubbelblinde studie (British Journal of Dermatology, 2019) was bakuchiol 0.5% even effectief als retinol 0.5% in het verminderen van rimpels en huidverkleuring — maar met significant minder irritatie.',
+      },
+      {
+        type: 'h2',
+        content: 'Is bakuchiol veilig tijdens zwangerschap?',
+      },
+      {
+        type: 'p',
+        content: 'Bakuchiol heeft een fundamenteel ander veiligheidsprofiel dan retinol. Het is geen vitamine A-derivaat, bindt niet aan retinoïde-receptoren en heeft geen bekende teratogene eigenschappen. In Ayurvedische tradities wordt de plant al eeuwen gebruikt, ook door zwangere vrouwen. Klinisch is er geen bewijs van schadelijkheid bij topisch gebruik.',
+      },
+      {
+        type: 'p',
+        content: 'Belangrijk voorbehoud: zoals bij elk ingrediënt geldt dat volledige gerandomiseerde veiligheidsdata bij zwangere vrouwen beperkt is — simpelweg omdat klinische trials op zwangere vrouwen ethisch moeilijk uitvoerbaar zijn. Dermatologisch advies: bakuchiol is een acceptabele keuze, maar bespreek altijd je routine met je verloskundige of arts.',
+      },
+      {
+        type: 'h2',
+        content: 'Wat doet bakuchiol voor je huid tijdens zwangerschap?',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Anti-aging werking — vergelijkbare activering van celvernieuwingsgenen als retinol, zonder de vitamine A-risico\'s',
+          'Anti-inflammatoir — kalmeert de huid, nuttig bij de hormonale huidveranderingen tijdens zwangerschap',
+          'Antioxidant — beschermt huidcellen tegen oxidatieve schade',
+          'Zachte tekstuurverbetering — vergemakkelijkt celvernieuwing zonder agressieve exfoliatie',
+          'Kan overdag worden gebruikt — geen verhoogde fotogevoeligheid, in tegenstelling tot retinol',
+        ],
+      },
+      {
+        type: 'h2',
+        content: 'Welke andere ingrediënten zijn veilig tijdens zwangerschap?',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Niacinamide (vitamine B3) — veilig en effectief; versterkt de barrière, vermindert pigmentvlekken (inclusief melasma)',
+          'Hyaluronzuur — veilig; hydratatie en plumping zonder actieve penetratie',
+          'Vitamine C (L-ascorbinezuur) — veilig; antioxidant en collageenstimulatie',
+          'Azelaïnezuur — specifiek goedgekeurd voor gebruik tijdens zwangerschap door dermatologen; effectief bij melasma en acne',
+          'Ceramiden en peptiden — veilig; barrièreondersteuning en collageenstimulatie zonder bekende risico\'s',
+        ],
+      },
+      {
+        type: 'h2',
+        content: 'Wat te vermijden tijdens zwangerschap',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Retinol en alle retinoïden (tretinoine, adapaleen, isotretinoïne) — officieel afgeraden',
+          'Salicylzuur in hoge concentraties — lage concentraties (0.5–2%) worden doorgaans als acceptabel beschouwd; hoge concentraties vermijden',
+          'Hydrochinon — weinig data bij zwangerschap; voorzorgsmaatregel is vermijden',
+          'Formaldehydereleasers (in sommige conserveermiddelen) — bij voorkeur vermijden',
+          'Essentiële oliën in hoge concentraties — sommige zijn gecontra-indiceerd; check individueel',
+        ],
+      },
+      {
+        type: 'h2',
+        content: 'Bakuchiol vs retinol: samenvatting voor zwangerschap',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Retinol — effectief, bewezen anti-aging, maar officieel af te raden tijdens zwangerschap en borstvoeding',
+          'Bakuchiol — vergelijkbare werkzaamheid voor celvernieuwing, geen vitamine A-risico\'s, brede acceptatie door dermatologen als zwangerschapsalternatief',
+          'Beide — kunnen na zwangerschap worden gecombineerd voor synergistisch effect',
+        ],
+      },
+      {
+        type: 'cta',
+        content: 'Reset Serum bevat Bakuchiol 0.5% en Niacinamide 10% — beide ingrediënten die breed worden geaccepteerd als veilig tijdens de zwangerschap — naast Retinol 0.3%. Voor gebruik tijdens zwangerschap: bespreek het met je zorgverlener en overweeg een retinol-vrije routine in die periode.',
+      },
+      {
+        type: 'comparison',
+        content: { text: 'Wil je het volledige verschil tussen bakuchiol en retinol begrijpen?', href: '/journal/bakuchiol-vs-retinol', label: 'Bakuchiol vs retinol lezen' },
+      },
+      {
+        type: 'faq',
+        content: [
+          { q: 'Mag je bakuchiol gebruiken tijdens zwangerschap?', a: 'Bakuchiol wordt door dermatologen breed geaccepteerd als alternatief voor retinol tijdens zwangerschap. Het heeft geen bekende teratogene eigenschappen en een andere chemische structuur dan vitamine A-derivaten. Bespreek altijd je routine met je verloskundige of arts.' },
+          { q: 'Waarom is retinol af te raden tijdens zwangerschap?', a: 'Retinol is een vitamine A-derivaat. Vitamine A in hoge doses is teratogeen. Hoewel topisch retinol beperkt wordt opgenomen, geldt uit voorzorg het advies om alle vitamine A-derivaten te vermijden tijdens zwangerschap en borstvoeding.' },
+          { q: 'Wat kan retinol vervangen tijdens zwangerschap?', a: 'Bakuchiol is het meest onderzochte en geaccepteerde alternatief voor retinol tijdens zwangerschap. Het heeft vergelijkbare anti-aging effecten zonder de vitamine A-risico\'s. Andere veilige opties zijn niacinamide en azelaïnezuur.' },
+          { q: 'Is niacinamide veilig tijdens zwangerschap?', a: 'Ja. Niacinamide (vitamine B3) wordt als veilig beschouwd tijdens zwangerschap en borstvoeding. Het heeft geen bekende risico\'s en is effectief voor barrièreondersteuning, roodheidsvermindering en pigmentegalisatie — inclusief melasma.' },
+        ] as FaqItem[],
+      },
+    ],
+  },
+  {
+    slug: 'wat-is-bakuchiol',
+    title: 'Wat is bakuchiol? Het plantaardige alternatief voor retinol uitgelegd',
+    excerpt: 'Bakuchiol duikt steeds vaker op in serums en crèmes. Maar wat is het precies, hoe werkt het en waarom noemen zoveel merken het "plantaardig retinol"?',
+    category: 'Ingrediënten',
+    readTime: '4 min',
+    date: 'Juni 2026',
+    dateISO: '2026-06-05',
+    image: '/journal-serum.jpg',
+    seo: {
+      title: 'Wat is Bakuchiol? Het plantaardige retinol-alternatief uitgelegd | MAUYI Journal',
+      description: 'Bakuchiol is een plantaardig ingrediënt dat vergelijkbare effecten heeft als retinol — zonder de irritatie. Alles over de herkomst, werking en wetenschappelijke onderbouwing.',
+    },
+    body: [
+      {
+        type: 'p',
+        content: 'Bakuchiol — je ziet het steeds vaker op serumverpakkingen, soms met de claim "plantaardig retinol" of "retinol-alternatief zonder irritatie". Maar wat is het precies? Is de vergelijking met retinol terecht? En voor wie is het relevant?',
+      },
+      {
+        type: 'h2',
+        content: 'De herkomst van bakuchiol',
+      },
+      {
+        type: 'p',
+        content: 'Bakuchiol is een meroterpeen — een klasse bioactieve plantaardige verbindingen — afkomstig uit het zaad en de bladeren van de Psoralea corylifolia-plant. Deze plant, ook bekend als babchi, groeit in India en China en wordt al eeuwen gebruikt in de Ayurvedische en traditionele Chinese geneeskunde voor huid- en haarbehandelingen.',
+      },
+      {
+        type: 'p',
+        content: 'De moderne wetenschappelijke interesse in bakuchiol begon serieus na publicaties in de jaren 2000 die aantoonden dat bakuchiol vergelijkbare genexpressie-effecten heeft als retinol — zonder de vitamine A-structuur.',
+      },
+      {
+        type: 'h2',
+        content: 'Hoe werkt bakuchiol?',
+      },
+      {
+        type: 'p',
+        content: 'Retinol werkt door te binden aan retinoïde-receptoren in de huid, die vervolgens celvernieuwing, collageensynthese en huidreparatie stimuleren. Bakuchiol heeft een fundamenteel andere moleculaire structuur maar activeert in studies vergelijkbare genen en biologische routes. Het resultaat: vergelijkbare effecten op huidtextuur, fijne lijntjes en pigmentegalisatie — via een ander mechanisme.',
+      },
+      {
+        type: 'callout',
+        content: 'In een gerandomiseerde dubbelblinde klinische studie (British Journal of Dermatology, 2019) bleken bakuchiol 0.5% en retinol 0.5% even effectief in het verminderen van rimpels, huidverkleuring en fijne lijntjes. Bakuchiol scoorde significant beter op tolerantie.',
+      },
+      {
+        type: 'h2',
+        content: 'Wat doet bakuchiol voor de huid?',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Celvernieuwing — stimuleert de vervanging van oudere huidcellen door nieuwe, vergelijkbaar met retinol',
+          'Collageenstimulatie — ondersteunt collageensynthese in de dermis voor steviger, veerkrachtiger huid',
+          'Anti-aging — vermindert zichtbaarheid van fijne lijntjes en rimpels bij consistent gebruik',
+          'Antioxidant — beschermt huidcellen tegen oxidatieve schade door UV en vervuiling',
+          'Anti-inflammatoir — kalmeert de huid, effectief ook bij gevoelige en reactieve huidtypen',
+          'Pigmentegalisatie — werkt op melanineproductie, vermindert ongelijkmatige huidtoon',
+        ],
+      },
+      {
+        type: 'h2',
+        content: 'Bakuchiol vs retinol: de kern van het verschil',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Herkomst — bakuchiol: plantaardig; retinol: vitamine A-derivaat (synthetisch of dierlijk)',
+          'Receptorbinding — bakuchiol bindt niet aan retinoïde-receptoren; retinol wel',
+          'Irritatierisico — bakuchiol: laag, geen inloopperiode nodig; retinol: in de beginperiode roodheid en schilfering mogelijk',
+          'Fotogevoeligheid — bakuchiol: geen; retinol: verhoogde UV-gevoeligheid, alleen \'s avonds gebruiken',
+          'Zwangerschap — bakuchiol: breed geaccepteerd als alternatief; retinol: officieel afgeraden',
+          'Gebruik overdag — bakuchiol: veilig; retinol: alleen \'s avonds',
+        ],
+      },
+      {
+        type: 'h2',
+        content: 'Is "plantaardig retinol" een terechte vergelijking?',
+      },
+      {
+        type: 'p',
+        content: 'Grotendeels wel — met een kanttekening. Bakuchiol heeft aantoonbaar vergelijkbare effecten op anti-aging-parameters. Maar de mechanismen zijn anders, en retinol heeft een bredere en diepere onderzoekshistorie. "Plantaardig retinol" is een marketingvereenvoudiging, maar de wetenschappelijke parallel is reëel: bakuchiol produceert vergelijkbare huidresultaten via een alternatieve route.',
+      },
+      {
+        type: 'h2',
+        content: 'Voor wie is bakuchiol het meest relevant?',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Gevoelige of reactieve huid — voor wie retinol te veel irritatie geeft',
+          'Zwangerschap en borstvoeding — veilig alternatief zonder vitamine A-risico\'s',
+          'Beginners met anti-aging — ingang zonder inloopperiode of bijwerkingen',
+          'Mensen die retinol al gebruiken — als aanvulling: bakuchiol versterkt de retinol-activiteit en vermindert irritatie',
+          'Dagelijkse gebruikers — bakuchiol kan overdag worden gebruikt, retinol niet',
+        ],
+      },
+      {
+        type: 'cta',
+        content: 'Reset Serum combineert Bakuchiol 0.5% met Retinol 0.3% en Niacinamide 10% — precies om de synergistische werking te benutten: bakuchiol versterkt de retinol-activiteit en absorbeert de irritatie, niacinamide beschermt de barrière.',
+      },
+      {
+        type: 'comparison',
+        content: { text: 'Wil je de volledige vergelijking tussen bakuchiol en retinol lezen?', href: '/journal/bakuchiol-vs-retinol', label: 'Bakuchiol vs retinol' },
+      },
+      {
+        type: 'faq',
+        content: [
+          { q: 'Wat is bakuchiol?', a: 'Bakuchiol is een plantaardig bioactief ingrediënt afkomstig uit de Psoralea corylifolia-plant. Het heeft vergelijkbare anti-aging effecten als retinol — celvernieuwing, collageenstimulatie, pigmentegalisatie — zonder de vitamine A-structuur of bijbehorende irritatierisico\'s.' },
+          { q: 'Is bakuchiol hetzelfde als retinol?', a: 'Nee. Bakuchiol heeft een andere moleculaire structuur en werkt via andere receptoren dan retinol. De effecten op huidkwaliteit zijn vergelijkbaar, maar de mechanismen, het veiligheidsprofiel en de toepassingsregels zijn anders.' },
+          { q: 'Hoe gebruik je bakuchiol?', a: 'Bakuchiol kan zowel \'s ochtends als \'s avonds worden gebruikt, heeft geen inloopperiode nodig en verhoogt de fotogevoeligheid niet. Gebruik het als serum na het reinigen, voor je moisturizer.' },
+          { q: 'Is bakuchiol veilig voor gevoelige huid?', a: 'Ja. Bakuchiol is een van de best getolereerde actieve ingrediënten voor gevoelige en reactieve huid. Het heeft anti-inflammatoire eigenschappen en veroorzaakt zelden irritatie.' },
+        ] as FaqItem[],
+      },
+    ],
+  },
+  {
     slug: 'acne-littekens-verminderen',
     title: 'Acne littekens verminderen: ingrediënten die echt werken',
     excerpt: 'Acne verdwijnt, maar de vlekken en littekens die overblijven zijn soms hardnekkiger dan de puistjes zelf. Wat werkt echt?',
