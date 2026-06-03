@@ -80,6 +80,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.55,
     },
     {
+      url: `${BASE_URL}/alternatives/the-ordinary`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.75,
+    },
+    {
+      url: `${BASE_URL}/vs/the-ordinary`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.75,
+    },
+    {
       url: `${BASE_URL}/community`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
