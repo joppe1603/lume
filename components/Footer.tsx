@@ -11,6 +11,10 @@ const footerLinks: Record<string, { label: string; href: string }[]> = {
     { label: 'Ingrediënten',   href: '/ingredients' },
     { label: 'FAQ',            href: '/faq' },
   ],
+  'Vergelijken': [
+    { label: 'The Ordinary alternatief', href: '/alternatives/the-ordinary' },
+    { label: 'MAUYI vs The Ordinary',    href: '/vs/the-ordinary' },
+  ],
   'Producten': [
     { label: 'Reset Serum',        href: '/products/reset-serum' },
     { label: 'Lancering volgen',   href: '/launch' },
