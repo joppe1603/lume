@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { getPost, getAllPosts } from '@/lib/journal'
-import type { Section, FaqItem } from '@/lib/journal'
+import type { Section, FaqItem, ComparisonLink } from '@/lib/journal'
 
 const BASE_URL = 'https://mauyi.nl'
 
@@ -93,6 +93,20 @@ function renderSection(section: Section, i: number) {
           </Link>
         </div>
       )
+    case 'comparison': {
+      const cl = section.content as ComparisonLink
+      return (
+        <div key={i} className="my-6 border border-stone-100 rounded-2xl px-5 py-4 flex items-start justify-between gap-4">
+          <p className="text-[14px] text-[#5C5754] font-light leading-relaxed">{cl.text}</p>
+          <Link
+            href={cl.href}
+            className="shrink-0 text-[13px] font-semibold text-[#C9A96E] hover:underline underline-offset-2 whitespace-nowrap"
+          >
+            {cl.label} →
+          </Link>
+        </div>
+      )
+    }
     case 'faq':
       return (
         <div key={i} className="mt-10 mb-2">

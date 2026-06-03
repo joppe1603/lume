@@ -13,10 +13,11 @@ export type JournalPost = {
 }
 
 export type FaqItem = { q: string; a: string }
+export type ComparisonLink = { text: string; href: string; label: string }
 
 export type Section = {
-  type: 'h2' | 'h3' | 'p' | 'ul' | 'callout' | 'cta' | 'faq'
-  content: string | string[] | FaqItem[]
+  type: 'h2' | 'h3' | 'p' | 'ul' | 'callout' | 'cta' | 'faq' | 'comparison'
+  content: string | string[] | FaqItem[] | ComparisonLink
 }
 
 const POSTS: JournalPost[] = [
@@ -107,6 +108,10 @@ const POSTS: JournalPost[] = [
         content: 'Reset Serum combineert Retinol 0.3% met Bakuchiol 0.5% — precies om die reden. Effectief voor celvernieuwing, zonder de irritatie die retinol-beginners doorgaans tegenhouden.',
       },
       {
+        type: 'comparison',
+        content: { text: 'Gebruik je The Ordinary retinol en zoek je iets dat makkelijker werkt?', href: '/alternatives/the-ordinary', label: 'The Ordinary alternatief' },
+      },
+      {
         type: 'h2',
         content: 'Conclusie',
       },
@@ -178,6 +183,10 @@ const POSTS: JournalPost[] = [
       {
         type: 'p',
         content: 'De logica van "meer is beter" klopt niet in huidverzorging. Een serum met Retinol 0.3%, Niacinamide 10% en Bakuchiol doet wat drie aparte producten beloven — zonder de interacties, zonder de overbelasting, en met minder kans op bijwerkingen. Dat is geen beperking. Dat is een betere formulering.',
+      },
+      {
+        type: 'comparison',
+        content: { text: 'Gebruik je losse The Ordinary producten en wil je weten of er een eenvoudiger alternatief bestaat?', href: '/alternatives/the-ordinary', label: 'The Ordinary alternatief bekijken' },
       },
       {
         type: 'cta',
@@ -281,6 +290,10 @@ const POSTS: JournalPost[] = [
       {
         type: 'cta',
         content: 'Reset Serum bevat Retinol 0.3% — de ideale beginconcentratie — samen met Niacinamide 10% en Bakuchiol 0.5% die de irritatie opvangen. Ontworpen voor een inloopperiode die soepel verloopt.',
+      },
+      {
+        type: 'comparison',
+        content: { text: 'Kom je van The Ordinary retinol? Lees wat het verschil is met een gecombineerde formule.', href: '/alternatives/the-ordinary', label: 'The Ordinary alternatief' },
       },
       {
         type: 'faq',
