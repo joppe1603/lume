@@ -44,7 +44,7 @@ const principles = [
   },
 ]
 
-export default function WhyLumeContent() {
+export default function WaaromMauyiContent() {
   return (
     <main>
 

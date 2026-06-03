@@ -9,7 +9,7 @@ import { useCart } from '@/contexts/CartContext'
 
 const exploreLinks = [
   { label: 'Filosofie',       href: '/philosophy',    desc: 'Waarom minder meer is' },
-  { label: 'Waarom MAUYI',     href: '/why-lume',      desc: 'Ons verhaal & onze principes' },
+  { label: 'Waarom MAUYI',     href: '/waarom-mauyi',  desc: 'Ons verhaal & onze principes' },
   { label: 'Wetenschap',      href: '/science',       desc: 'Hoe we formuleren' },
   { label: 'Ingrediënten',    href: '/ingredients',   desc: 'Wat werkt. En waarom.' },
   { label: 'Journal',         href: '/journal',       desc: 'Editoriaal & wetenschap' },
@@ -98,7 +98,7 @@ export default function Navbar() {
                   <button
                     type="button"
                     className={`px-4 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all flex items-center gap-1 ${
-                      ['/philosophy', '/why-lume', '/science', '/ingredients', '/journal', '/community', '/faq'].some(p => pathname.startsWith(p))
+                      ['/philosophy', '/waarom-mauyi', '/science', '/ingredients', '/journal', '/community', '/faq'].some(p => pathname.startsWith(p))
                         ? 'text-[#C9A96E]'
                         : 'text-stone-600 hover:text-[#C9A96E]'
                     }`}

@@ -275,7 +275,7 @@ export default function ScienceContent() {
                 </svg>
               </Link>
               <Link
-                href="/why-lume"
+                href="/waarom-mauyi"
                 className="btn-outline inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-medium text-[15px]"
               >
                 Waarom MAUYI

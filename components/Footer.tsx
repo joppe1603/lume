@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 const footerLinks: Record<string, { label: string; href: string }[]> = {
   'Ontdekken': [
-    { label: 'Waarom MAUYI',    href: '/why-lume' },
+    { label: 'Waarom MAUYI',    href: '/waarom-mauyi' },
     { label: 'Wetenschap',     href: '/science' },
     { label: 'Filosofie',      href: '/philosophy' },
     { label: 'Ingrediënten',   href: '/ingredients' },

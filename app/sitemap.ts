@@ -74,7 +74,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     },
     {
-      url: `${BASE_URL}/why-lume`,
+      url: `${BASE_URL}/waarom-mauyi`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.55,

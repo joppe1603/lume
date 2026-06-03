@@ -17,6 +17,15 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/why-lume',
+        destination: '/waarom-mauyi',
+        permanent: true,
+      },
+    ]
+  },
   async headers() {
     return [
       {

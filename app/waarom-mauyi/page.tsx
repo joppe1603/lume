@@ -1,18 +1,18 @@
 import type { Metadata } from 'next'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import WhyLumeContent from './WhyLumeContent'
+import WaaromMauyiContent from './WaaromMauyiContent'
 
 export const metadata: Metadata = {
   title: 'Waarom MAUYI | Huidverzorging zonder compromis',
   description: 'MAUYI bestaat omdat de huidverzorgingsindustrie te ingewikkeld is geworden. Lees onze filosofie, onze principes en wat we bewust weglaten.',
 }
 
-export default function WhyLumePage() {
+export default function WaaromMauyiPage() {
   return (
     <>
       <Navbar />
-      <WhyLumeContent />
+      <WaaromMauyiContent />
       <Footer />
     </>
   )
