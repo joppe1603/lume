@@ -118,17 +118,17 @@ export default function SlideCart() {
                     Je ritueel is nog leeg.
                   </p>
                   <p className="text-[13px] text-[#9A9590] font-light mb-2 leading-relaxed max-w-[220px]">
-                    Reset Serum wordt voorbereid voor de eerste batch.
+                    Voeg Reset Serum toe om te beginnen.
                   </p>
                   <div className="divider-gold w-12 mx-auto my-5" />
 
                   {/* CTA */}
                   <Link
-                    href="/launch#waitlist"
+                    href="/products/reset-serum"
                     onClick={() => dispatch({ type: 'CLOSE' })}
                     className="btn-gold px-7 py-3 rounded-xl text-[13px] font-semibold"
                   >
-                    Word als eerste uitgenodigd
+                    Bekijk Reset Serum
                   </Link>
                 </motion.div>
               ) : (

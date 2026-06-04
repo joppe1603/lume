@@ -61,7 +61,7 @@ export default function UGCReviews() {
               className="leading-[1.05] font-semibold text-[#1A1A1A]"
               style={{ fontSize: 'clamp(2.6rem, 5vw, 4rem)' }}
             >
-              Echte huid.
+              Echte huid.{' '}
               <br />
               <span className="text-[#9A9590] font-normal italic">Geen filters.</span>
             </motion.h2>

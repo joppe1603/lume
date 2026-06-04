@@ -77,7 +77,7 @@ export default function IngredientPhilosophy() {
             }}
             className="mb-6"
           >
-            Elk ingrediënt
+            Elk ingrediënt{' '}
             <br />
             <em className="text-stone-500 font-normal">heeft een reden.</em>
           </motion.h2>

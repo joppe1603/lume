@@ -33,7 +33,7 @@ export default function WhyResetExists() {
               className="text-[#1A1A1A] leading-[1.06] tracking-[-0.025em] mb-9"
               style={{ fontSize: 'clamp(2.2rem, 4vw, 3.6rem)', fontWeight: 600 }}
             >
-              Moderne huid is
+              Moderne huid is{' '}
               <br />
               <span className="text-[#9A9590] font-normal italic">chronisch overprikkeld.</span>
             </motion.h2>

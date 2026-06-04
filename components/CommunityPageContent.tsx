@@ -110,7 +110,7 @@ export default function CommunityPageContent() {
       const res = await fetch('/api/reviews', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, product_slug: 'reset-serum' }),
+        body: JSON.stringify({ ...form, slug: 'reset-serum' }),
       })
       if (res.ok) {
         setFormState('sent')

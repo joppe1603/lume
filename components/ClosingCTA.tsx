@@ -58,7 +58,7 @@ export default function ClosingCTA() {
             className="text-white leading-[1.06] tracking-[-0.025em] mb-7"
             style={{ fontSize: 'clamp(2.8rem, 5.5vw, 4.4rem)', fontWeight: 600 }}
           >
-            De eerste batch
+            De eerste batch{' '}
             <br />
             <span className="text-stone-500 font-normal italic">is bijna klaar.</span>
           </h2>
