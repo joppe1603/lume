@@ -197,7 +197,7 @@ export default function SkincareQuiz() {
                   <div className="text-center mb-7">
                     <div className="w-14 h-14 rounded-full bg-[#FDF8F0] flex items-center justify-center mx-auto mb-4">
                       <svg width="28" height="28" viewBox="0 0 30 30" fill="none" aria-hidden>
-                        <circle cx="15" cy="15" r="13" fill="#C9A96E"/>
+                        <rect width="30" height="30" rx="15" fill="#C9A96E"/>
                         <circle cx="19" cy="15" r="10" fill="#FAF8F5"/>
                       </svg>
                     </div>

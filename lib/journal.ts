@@ -119,6 +119,16 @@ const POSTS: JournalPost[] = [
         type: 'p',
         content: 'Bakuchiol is geen marketing. Het is een klinisch onderbouwd ingrediënt dat voor veel mensen beter werkt dan retinol alleen. De vraag is niet "wat is beter?" maar "wat past bij jouw huid en je doelen?" — en steeds vaker is het antwoord: allebei.',
       },
+      {
+        type: 'faq',
+        content: [
+          { q: 'Wat is het verschil tussen bakuchiol en retinol?', a: 'Bakuchiol is een plantaardig ingrediënt dat vergelijkbare celvernieuwende en anti-aging effecten heeft als retinol, maar zonder de bijbehorende irritatie. Retinol is sterker klinisch onderbouwd, maar veroorzaakt vaker bijwerkingen zoals roodheid en schilfering.' },
+          { q: 'Werkt bakuchiol even goed als retinol?', a: 'Klinisch onderzoek (British Journal of Dermatology, 2019) toont dat bakuchiol vergelijkbare verbeteringen geeft op fijne lijntjes en huidtextuur, maar milder is voor gevoelige huid. Het effect treedt iets geleidelijker op dan bij retinol.' },
+          { q: 'Kan ik bakuchiol en retinol combineren?', a: 'Ja. Bakuchiol vermindert aantoonbaar de irritatie van retinol en versterkt de werking ervan. Een combinatieformule met beide ingrediënten is effectiever én milder dan retinol alleen.' },
+          { q: 'Is bakuchiol geschikt tijdens de zwangerschap?', a: 'Bakuchiol is in tegenstelling tot retinol niet gecontra-indiceerd bij zwangerschap. Er zijn geen bekende risico\'s. Raadpleeg altijd je arts bij twijfel.' },
+          { q: 'Wie moet kiezen voor bakuchiol in plaats van retinol?', a: 'Mensen met gevoelige huid, rosacea, zwangere vrouwen of beginners met anti-aging verzorging profiteren het meest van bakuchiol als retinol-alternatief of aanvulling.' },
+        ] as FaqItem[],
+      },
     ],
   },
   {
@@ -199,6 +209,15 @@ const POSTS: JournalPost[] = [
       {
         type: 'p',
         content: 'Begin met weglaten, niet toevoegen. Verwijder alles wat parfum of alcohol bevat. Elimineer dubbele producten die hetzelfde doen. Houd alleen wat bewezen werkt en wat jij consistent gebruikt. Een eenvoudige routine die je elke avond uitvoert, overtreft altijd een complexe routine die je half vergeet.',
+      },
+      {
+        type: 'faq',
+        content: [
+          { q: 'Hoeveel skincare producten heb ik echt nodig?', a: 'Voor de meeste mensen zijn 3-4 stappen voldoende: reiniger, actief serum en SPF (ochtend) of moisturizer (avond). Meer producten vergroot de kans op irritatie en ingrediëntenconflicten zonder extra resultaat.' },
+          { q: 'Wat is skincare overloading?', a: 'Skincare overloading betekent te veel actieve stoffen tegelijk gebruiken, waardoor producten elkaars werking blokkeren of de huidbarrière beschadigen. Signalen zijn roodheid, irritatie of een verslechterende huidtoestand.' },
+          { q: 'Is een dure skincare routine beter dan een eenvoudige?', a: 'Nee. De effectiviteit hangt af van de actieve ingrediënten en hun concentraties, niet van de prijs of het aantal producten. Een eenvoudige routine met bewezen stoffen overtreft een complexe routine met ineffectieve ingrediënten.' },
+          { q: 'Welke producten kan ik weglaten uit mijn routine?', a: 'Toners zonder actieve stoffen, essenties en boosters zijn voor de meeste mensen niet noodzakelijk. Investeer liever in één goed actief serum met bewezen ingrediënten zoals retinol, niacinamide of vitamine C.' },
+        ] as FaqItem[],
       },
     ],
   },
@@ -619,6 +638,15 @@ const POSTS: JournalPost[] = [
         type: 'cta',
         content: 'MAUYI Reset Serum bevat Niacinamide 10% — een stabiele antioxidant die overdag én \'s avonds de huidbarrière versterkt. Combineer het \'s ochtends met vitamine C voor maximale bescherming.',
       },
+      {
+        type: 'faq',
+        content: [
+          { q: 'Welke concentratie vitamine C serum is het effectiefst?', a: '10-20% L-ascorbinezuur is klinisch het meest onderbouwd voor zichtbare resultaten. Begin met 10% bij gevoelige huid. Hogere concentraties zijn niet altijd effectiever en verhogen het irritatierisico.' },
+          { q: 'Kan ik vitamine C combineren met retinol?', a: 'Ja, maar gebruik ze op verschillende momenten: vitamine C \'s ochtends voor bescherming, retinol \'s avonds voor celvernieuwing. Zo profiteren ze elk van hun optimale werkomstandigheden.' },
+          { q: 'Hoe weet ik of mijn vitamine C serum geoxideerd is?', a: 'Een licht gele kleur is normaal. Donkergeel, oranje of bruin betekent dat het serum geoxideerd is en minder effectief. Gooi het dan weg en koop een nieuwe fles.' },
+          { q: 'Welk type vitamine C is het stabielst?', a: 'Ascorbylglucoside en natriumascorbylfosfaat zijn stabieler dan L-ascorbinezuur en minder irriterend voor gevoelige huid. Ze zijn iets minder potent maar een goede keuze voor beginners of gevoelige huid.' },
+        ] as FaqItem[],
+      },
     ],
   },
   {
@@ -714,6 +742,15 @@ const POSTS: JournalPost[] = [
         type: 'p',
         content: 'Hyaluronzuur werkt — maar alleen als je de juiste formulering kiest en het correct gebruikt. Let op molecuulgewichten, breng het aan op vochtige huid en sluit altijd af. Dan is het een van de beste vochtbinders in skincare.',
       },
+      {
+        type: 'faq',
+        content: [
+          { q: 'Werkt hyaluronzuur op een droge huid?', a: 'Ja, maar alleen als je het correct gebruikt. Breng het aan op licht vochtige huid en sluit direct af met een moisturizer. Zonder afsluiting werkt hyaluronzuur averechts en trekt het vocht uit de diepere huidlagen.' },
+          { q: 'Wat is het verschil tussen hoog en laag moleculair hyaluronzuur?', a: 'Hoog moleculair hyaluronzuur zit op de huidoppervlakte en vult tijdelijk oppervlakkige rimpels. Laag moleculair HA penetreert dieper voor langdurigere hydratatie. Een combinatie van beide molecuulgewichten geeft de beste resultaten.' },
+          { q: 'Hoe vaak moet ik hyaluronzuur gebruiken?', a: 'Hyaluronzuur is zo mild dat het ochtend én avond gebruikt kan worden, 7 dagen per week. Er is geen inloopperiode of opbouwschema nodig.' },
+          { q: 'Kan ik hyaluronzuur combineren met retinol?', a: 'Ja. Hyaluronzuur vermindert de droogheid die retinol kan veroorzaken en ondersteunt de huidbarrière. Gebruik hyaluronzuur na retinol, gevolgd door een moisturizer voor het beste resultaat.' },
+        ] as FaqItem[],
+      },
     ],
   },
   {
@@ -807,6 +844,15 @@ const POSTS: JournalPost[] = [
       {
         type: 'cta',
         content: 'Reset Serum vervangt drie aparte stappen: celvernieuwing (retinol 0.3%), barrièreondersteuning (niacinamide 10%) en kalmering (bakuchiol 0.5%) in één avondserum. Eenvoudiger en effectiever dan een complexe meerstaps routine.',
+      },
+      {
+        type: 'faq',
+        content: [
+          { q: 'Wat is de beste basisroutine voor de ochtend?', a: 'Reinigen (of alleen water bij droge huid), vitamine C serum, moisturizer en SPF 30+. Dit zijn de vier meest effectieve stappen voor bescherming en helderheid overdag.' },
+          { q: 'Wat is de beste avondroutine voor de huid?', a: 'Reinigen, actief serum (retinol of bakuchiol), en moisturizer. Optioneel een hyaluronzuur toner voor droge huid. Wacht 20-30 minuten na reiniging voor je retinol aanbrengt voor minder irritatie.' },
+          { q: 'Moet ik een toner gebruiken in mijn skincare routine?', a: 'Toners zijn voor de meeste huidtypen geen noodzakelijke stap. Uitzondering: een toner met niacinamide of hyaluronzuur kan zinvol zijn als je droge of gevoelige huid hebt.' },
+          { q: 'Hoe bouw ik een skincare routine op als beginner?', a: 'Begin met drie stappen: reiniger, eenvoudig serum en SPF. Voeg pas na 4 weken een actief ingrediënt toe zodat je huid kan wennen en je kunt zien wat werkt en wat niet.' },
+        ] as FaqItem[],
       },
     ],
   },
@@ -1008,6 +1054,15 @@ const POSTS: JournalPost[] = [
       {
         type: 'cta',
         content: 'Reset Serum combineert Niacinamide 10% en Retinol 0.3% — de twee effectiefste ingrediënten voor het verminderen van pigmentvlekken in één parfumvrije avondformule. Combineer \'s ochtends met vitamine C en SPF voor maximaal resultaat.',
+      },
+      {
+        type: 'faq',
+        content: [
+          { q: 'Wat veroorzaakt pigmentvlekken in het gezicht?', a: 'Overmatige melanineaanmaak door UV-straling (zonnevlekken), hormonale schommelingen (melasma), acne-ontsteking (post-inflammatoire hyperpigmentatie) of genetische aanleg. Alle vormen reageren op dezelfde ingrediënten maar vragen verschillende behandeltijden.' },
+          { q: 'Welk ingrediënt werkt het snelst tegen pigmentvlekken?', a: 'Niacinamide 10% remt de overdracht van melanine naar huidcellen en is al na 4-6 weken zichtbaar effectief. Vitamine C is aanvullend effectief overdag. Retinol versnelt celvernieuwing voor dieper en langduriger effect.' },
+          { q: 'Hoe lang duurt het om pigmentvlekken te verminderen?', a: 'Oppervlakkige vlekken: 6-8 weken. Zonnevlekken en post-acne hyperpigmentatie: 3-4 maanden bij consistent gebruik. Melasma: 4-6+ maanden, en alleen met dagelijkse SPF als onmisbare basis.' },
+          { q: 'Is SPF nodig bij de behandeling van pigmentvlekken?', a: 'Ja, SPF is de belangrijkste stap. Zonder zonnebescherming maakt UV-straling elk behandelresultaat binnen weken ongedaan. SPF 30+ dagelijks is niet optioneel bij pigmentatiebehandeling.' },
+        ] as FaqItem[],
       },
     ],
   },
@@ -1218,6 +1273,15 @@ const POSTS: JournalPost[] = [
           '6 maanden+: consistente verbetering; huidtextuur gladder en meer egaal',
         ],
       },
+      {
+        type: 'faq',
+        content: [
+          { q: 'Kunnen poriën echt kleiner worden?', a: 'Poriën kunnen niet anatomisch kleiner worden, maar ze kunnen minder zichtbaar zijn. Niacinamide, retinol en exfoliatie verminderen de talg en celophoping die poriën doen uitzetten — met als resultaat een verfijnder huidoppervlak.' },
+          { q: 'Wat zijn de beste ingrediënten om poriën te verkleinen?', a: 'Niacinamide 10% (reguleert talg en vermindert zichtbaarheid direct), retinol (verhoogt celvernieuwing en collageenproductie) en salicylzuur (reinigt poriën van binnenuit). De combinatie van niacinamide en retinol is het meest effectief.' },
+          { q: 'Welk huidtype heeft het meest last van grote poriën?', a: 'Mensen met een vette of combinatiehuid hebben vaker zichtbare poriën, omdat verhoogde talgproductie de poriën opspant. Maar ook droge huid kan grote poriën hebben door verlies van elasticiteit met de leeftijd.' },
+          { q: 'Hoe snel zie je verbetering bij poriënverkleining?', a: 'Niacinamide werkt al na 2-4 weken zichtbaar. Retinol geeft diepere verbetering na 8-12 weken. Langetermijn resultaten op textuur zijn zichtbaar na 3-6 maanden consistente routine.' },
+        ] as FaqItem[],
+      },
     ],
   },
   {
@@ -1303,6 +1367,15 @@ const POSTS: JournalPost[] = [
       {
         type: 'cta',
         content: 'MAUYI Reset Serum past in stap 3 van elke avondroutine: na reiniging en toner, voor je moisturizer. Retinol 0.3% + Niacinamide 10% + Bakuchiol in één stap — geen stapeling van aparte producten nodig.',
+      },
+      {
+        type: 'faq',
+        content: [
+          { q: 'In welke volgorde gebruik je skincare producten?', a: 'De algemene regel is dun-naar-dik: reiniger, toner (optioneel), serum, oogcrème (optioneel), moisturizer, SPF (ochtend). Actieve stoffen zoals retinol komen altijd vóór de moisturizer.' },
+          { q: 'Wanneer gebruik je retinol in je skincare routine?', a: 'Retinol hoort als actief serum na het reinigen en vóór de moisturizer, \'s avonds. Gebruik het op een droge huid en wacht eventueel 20-30 minuten na het reinigen om irritatie te verminderen.' },
+          { q: 'Wat is de volgorde van SPF in de skincare routine?', a: 'SPF is altijd de allerlaatste stap in de ochtendroutine, na moisturizer. Niets daarna aanbrengen — ook geen foundation direct erop — want dat verdunt de beschermingsfactor.' },
+          { q: 'Moet je wachten tussen skincare stappen?', a: 'Voor de meeste producten is wachten niet nodig. Uitzondering: retinol werkt beter op volledig droge huid. Vitamine C bij lage pH heeft meer effect als het niet direct wordt gecombineerd met hoog-pH producten.' },
+        ] as FaqItem[],
       },
     ],
   },
@@ -1396,6 +1469,15 @@ const POSTS: JournalPost[] = [
       {
         type: 'cta',
         content: 'MAUYI Reset Serum bevat Retinol 0.3% voor collageenstimulatie, Niacinamide 10% voor barrièreondersteuning en Bakuchiol als antioxidant-synergie — de drie meest effectieve collageenondersteunende stoffen in één avondformule.',
+      },
+      {
+        type: 'faq',
+        content: [
+          { q: 'Welke ingrediënten stimuleren de collageenproductie?', a: 'Retinol (het best klinisch bewezen), vitamine C (essentiële cofactor voor collageen-synthese) en bakuchiol (plantaardig alternatief met vergelijkbare fibroblast-activering). Peptiden zijn een aanvulling met minder sterke evidence base.' },
+          { q: 'Werken collageen crèmes echt?', a: 'Nee. Collageenmoleculen zijn te groot om de huidbarrière te penetreren. Topische crèmes met collageen hydrateren tijdelijk het huidoppervlak maar stimuleren geen nieuwe aanmaak. Ingrediënten die de aanmaak activeren, zoals retinol en vitamine C, zijn effectiever.' },
+          { q: 'Is collageen drinken effectief voor de huid?', a: 'Beperkte evidence. Collageen-supplementen leveren aminozuren die overal in het lichaam worden ingezet, maar niet specifiek naar de huid gedirigeerd worden. Retinol en vitamine C zijn bewezen effectiever voor huidspecifieke collageenstimulatie.' },
+          { q: 'Vanaf welke leeftijd begin je met collageenstimulerende huidverzorging?', a: 'Collageenproductie daalt al vanaf je mid-twintig. Preventief gebruik van retinol en vitamine C is zinvol vanaf je late twintig, of zodra je de eerste tekenen van veroudering opmerkt.' },
+        ] as FaqItem[],
       },
     ],
   },
@@ -1864,6 +1946,269 @@ const POSTS: JournalPost[] = [
       {
         type: 'cta',
         content: 'MAUYI Reset Serum combineert Retinol 0.3% (celvernieuwing en collageenstimulatie) met Niacinamide 10% (pigmentremming en kalmering) — de twee meest effectieve ingrediënten voor post-acne herstel, in één parfumvrije formule die ook gevoelige huid verdraagt.',
+      },
+      {
+        type: 'faq',
+        content: [
+          { q: 'Wat is het verschil tussen een acnelitteken en een post-acne vlek?', a: 'Rode of bruine vlekken na acne zijn post-inflammatoire hyperpigmentatie (PIH) — geen echte littekens. Ze verdwijnen met de juiste ingrediënten. Echte acnelittekens zijn structurele huidveranderingen (verdiepingen of verhogingen) die moeilijker te behandelen zijn.' },
+          { q: 'Hoe verwijder je post-acne vlekken?', a: 'Niacinamide 10% remt melanineoverdracht en verlicht vlekken na 4-8 weken. Retinol 0.3% versnelt celvernieuwing voor snellere afshedding van gepigmenteerde cellen. SPF dagelijks is verplicht om nieuw pigment door UV te voorkomen.' },
+          { q: 'Werkt retinol op acnelittekens?', a: 'Ja. Retinol stimuleert celvernieuwing en collageenproductie, waardoor ondiepe atrofische littekens (rolling scars, boxcar scars) minder diep lijken. Het verwijdert structurele littekens niet volledig maar verbetert de textuur merkbaar.' },
+          { q: 'Wanneer zie je resultaat bij de behandeling van acnelittekens?', a: 'Post-acne vlekken (PIH): 6-12 weken. Ongelijkmatige textuur: 3-6 maanden. Atrofische littekens: 6-12 maanden bij consistente routine. Diepe littekens verbeteren maar verdwijnen zelden volledig zonder professionele behandeling.' },
+        ] as FaqItem[],
+      },
+    ],
+  },
+  {
+    slug: 'zonnebescherming-skincare-routine',
+    title: 'Zonnebescherming in je skincare routine: waarom SPF het meest onderschatte product is',
+    excerpt: 'SPF is niet optioneel. Het is het product dat al je andere huidverzorging effectief maakt — of saboteert. Alles over dagelijkse zonnebescherming.',
+    category: 'Gids',
+    readTime: '5 min',
+    date: 'Juni 2026',
+    dateISO: '2026-06-15',
+    image: '/journal-spf-routine.jpg',
+    seo: {
+      title: 'Zonnebescherming in je Skincare Routine: waarom SPF dagelijks essentieel is | MAUYI Journal',
+      description: 'Waarom is SPF het belangrijkste product in je skincare routine? Hoe gebruik je zonnebescherming correct, welke SPF factor heb je nodig en wanneer breng je het aan?',
+    },
+    body: [
+      {
+        type: 'p',
+        content: 'Elke dermatoloog is het erover eens: als je maar één product kiest voor je huid, is het zonnebescherming. Niet retinol, niet vitamine C, niet een luxe nachtcrème — SPF. Toch is het het product dat het vaakst wordt overgeslagen, half aangebracht of pas vergeten als de zon al te fel schijnt.',
+      },
+      {
+        type: 'h2',
+        content: 'Waarom SPF zoveel meer doet dan verbranding voorkomen',
+      },
+      {
+        type: 'p',
+        content: 'UV-straling is de grootste externe oorzaak van huidveroudering. Onderzoek suggereert dat 80–90% van de zichtbare huidveroudering — rimpels, pigmentvlekken, ongelijkmatige huidtoon, verlies van elasticiteit — terug te voeren is op chronische UV-blootstelling, niet op leeftijd zelf. Dit heet foto-aging.',
+      },
+      {
+        type: 'callout',
+        content: 'Een studie uit 2013 (Annals of Internal Medicine) toonde aan dat mensen die dagelijks SPF gebruikten significant minder huidveroudering hadden na 4,5 jaar dan mensen die dat niet deden — onafhankelijk van leeftijd.',
+      },
+      {
+        type: 'h2',
+        content: 'Welke SPF factor heb je nodig?',
+      },
+      {
+        type: 'p',
+        content: 'SPF 30 blokkeert ~97% van UVB-straling. SPF 50 blokkeert ~98%. Het verschil lijkt klein, maar bij dagelijks gebruik en herhaalde blootstelling is het relevant. De aanbeveling van de meeste dermatologen: minimaal SPF 30 voor dagelijks gebruik, idealiter SPF 50.',
+      },
+      {
+        type: 'ul',
+        content: [
+          'SPF 30: ~97% UVB-blokkering — voldoende voor dagelijks kantoorgebruik',
+          'SPF 50: ~98% UVB-blokkering — aanbevolen voor buiten, stadsgebruik en gevoelige huid',
+          'Breedspectrum / PA+++ — kies altijd breedspectrum voor zowel UVA- als UVB-bescherming',
+          'Applicatiehoeveelheid is belangrijker dan de factor — een kwart theelepel voor het gezicht',
+        ],
+      },
+      {
+        type: 'h2',
+        content: 'Chemische vs minerale zonnebescherming',
+      },
+      {
+        type: 'p',
+        content: 'Chemische filters (zoals octinoxaat, avobenzone) absorberen UV-straling en zetten het om in warmte. Ze zijn dunner van textuur en laten minder witte waas achter. Minerale filters (zinkoxide, titaniumdioxide) reflecteren UV-straling letterlijk. Ze zijn milder voor gevoelige huid maar geven bij donkere huidtinten vaker een witte gloed.',
+      },
+      {
+        type: 'h3',
+        content: 'Welke kies je bij gevoelige huid?',
+      },
+      {
+        type: 'p',
+        content: 'Minerale zonnebescherming met zinkoxide is de standaardkeuze bij gevoelige of reactieve huid, rosacea en na retinol-gebruik. Hybride formules (mix van mineraal en chemisch) bieden de beste combinatie van comfort en brede bescherming.',
+      },
+      {
+        type: 'h2',
+        content: 'Hoe breng je SPF correct aan?',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Hoeveelheid: een kwart theelepel of twee vingertoppen voor het gezicht — de meeste mensen gebruiken te weinig',
+          'Volgorde: altijd als laatste stap, na moisturizer maar vóór makeup',
+          'Timing: 15–20 minuten voor blootstelling voor chemische filters; minerale filters werken direct',
+          'Herhaling: elke 2 uur bij directe zonblootstelling; bij binnenzit minder kritisch',
+          'Geen SPF in foundation vertrouwen: de hoeveelheid is te klein voor echte bescherming',
+        ],
+      },
+      {
+        type: 'h2',
+        content: 'SPF en actieve ingrediënten',
+      },
+      {
+        type: 'p',
+        content: 'Retinol verhoogt de fotogevoeligheid van de huid tijdelijk — de huid vernieuwt sneller en is gevoeliger voor UV-schade. Zonder SPF overdag maak je de voordelen van retinol deels ongedaan. Hetzelfde geldt voor AHA-exfolianten en vitamine C. SPF is de beschermende laag die het resultaat van actieve ingrediënten vastzet.',
+      },
+      {
+        type: 'h2',
+        content: 'SPF in de juiste volgorde',
+      },
+      {
+        type: 'p',
+        content: 'SPF hoort altijd als allerlaatste stap van de ochtendroutine. Zelfs een kleine hoeveelheid makeup daarna verstoort de beschermende film. De correcte volgorde: reinigen → serum → moisturizer → SPF. Niets daarna.',
+      },
+      {
+        type: 'comparison',
+        content: { text: 'Hoe combineer je SPF met retinol en niacinamide in één complete routine?', href: '/journal/huidverzorging-routine-ochtend-avond', label: 'Lees de routine gids' },
+      },
+      {
+        type: 'cta',
+        content: 'MAUYI Reset Serum gebruik je \'s avonds — zodat jij \'s ochtends vrij bent voor vitamine C en SPF. Retinol 0.3% + Niacinamide 10% + Bakuchiol in één avondstap, zonder interferentie met zonnebescherming.',
+      },
+      {
+        type: 'faq',
+        content: [
+          { q: 'Moet je elke dag SPF gebruiken, ook bij bewolkt weer?', a: 'Ja. UVA-straling penetreert wolken en glas. Op een bewolkte dag bereikt nog steeds ~80% van de UV-straling de huid. Dagelijks SPF is de basisaanbeveling van dermatologen, ongeacht het weer.' },
+          { q: 'Welke SPF factor is goed voor dagelijks gebruik?', a: 'SPF 30 is het minimum (97% UVB-blokkering). SPF 50 (98%) is de standaardaanbeveling voor dagelijks gebruik. Kies altijd breedspectrum voor zowel UVA- als UVB-bescherming.' },
+          { q: 'Moet ik SPF opnieuw aanbrengen als ik binnenzit?', a: 'Bij normale kantoorsituaties hoef je SPF niet elk uur te herhalen. Zit je bij een raam of ga je tussendoor naar buiten, breng SPF dan elke 2 uur opnieuw aan — UVA penetreert ramen.' },
+          { q: 'Kan ik SPF combineren met retinol?', a: 'Ja, maar gebruik ze op verschillende momenten. Retinol altijd \'s avonds, SPF altijd \'s ochtends als laatste stap. Retinol verhoogt de fotogevoeligheid, waardoor SPF nog belangrijker wordt voor retinolgebruikers.' },
+          { q: 'Is SPF in foundation voldoende bescherming?', a: 'Nee. Foundation met SPF wordt in te kleine hoeveelheid aangebracht om echte bescherming te bieden. Gebruik altijd een aparte zonnebrandcrème als basis van je ochtendroutine.' },
+        ] as FaqItem[],
+      },
+    ],
+  },
+  {
+    slug: 'droge-huid-routine-verzorging',
+    title: 'Droge huid verzorgen: de beste routine en ingrediënten die écht helpen',
+    excerpt: 'Droge huid is meer dan een gebrek aan vocht. Het is een barrièreprobleem. Leer wat er achter zit en welke ingrediënten structureel verbeteren.',
+    category: 'Gids',
+    readTime: '6 min',
+    date: 'Juni 2026',
+    dateISO: '2026-06-16',
+    image: '/journal-droge-huid.jpg',
+    seo: {
+      title: 'Droge Huid Verzorgen: de beste routine en ingrediënten | MAUYI Journal',
+      description: 'Droge huid verzorgen begint met begrijpen waarom je huid droog is. Welke ingrediënten werken echt bij een droge huid en hoe bouw je een effectieve routine?',
+    },
+    body: [
+      {
+        type: 'p',
+        content: 'Een droge huid voelt strak, schilfert, heeft snel last van roodheid en reageert op bijna elk product. Maar droge huid is zelden alleen een vochttekort — het is vrijwel altijd een signaal van een verzwakte huidbarrière. Die barrière is het eerste wat je moet aanpakken.',
+      },
+      {
+        type: 'h2',
+        content: 'Wat veroorzaakt een droge huid?',
+      },
+      {
+        type: 'p',
+        content: 'De huidbarrière bestaat uit huidcellen (corneocyten) gevuld met keratine-eiwitten, omgeven door lipiden (vetten) — ceramiden, vetzuren en cholesterol. Bij een droge huid zijn deze lipiden uitgeput of beschadigd, waardoor vocht sneller verdampt (transepidermaal waterverlies, TEWL) en de huid gevoeliger is voor irritatie.',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Genetica — sommige mensen produceren van nature minder talg en ceramiden',
+          'Overmatig reinigen — agressieve reinigingsmiddelen verwijderen beschermende vetten',
+          'Te veel actieve stoffen — retinol, AHA en BHA kunnen de barrière tijdelijk verzwakken',
+          'Lage luchtvochtigheid — koude lucht en centrale verwarming verdrogen de huid',
+          'Veroudering — ceramideproductie daalt met de leeftijd',
+        ],
+      },
+      {
+        type: 'h2',
+        content: 'De beste ingrediënten voor droge huid',
+      },
+      {
+        type: 'h3',
+        content: 'Ceramiden',
+      },
+      {
+        type: 'p',
+        content: 'Ceramiden zijn de bouwstenen van de huidbarrière. Ze maken 40–50% uit van de lipiden in de bovenste huidlaag. Topische ceramiden vullen verloren lipiden aan en verbeteren aantoonbaar de barrièrefunctie. Zoek naar ceramide NP, AP of EOP op het etiket.',
+      },
+      {
+        type: 'h3',
+        content: 'Niacinamide',
+      },
+      {
+        type: 'p',
+        content: 'Niacinamide 5–10% stimuleert de ceramideproductie van binnenuit. Het vermindert transepidermaal waterverlies, kalmeert roodheid en versterkt de barrière structureel. Het is een van de weinige actieve stoffen die ook bij een beschadigde barrière goed wordt verdragen.',
+      },
+      {
+        type: 'h3',
+        content: 'Hyaluronzuur',
+      },
+      {
+        type: 'p',
+        content: 'Hyaluronzuur is een krachtige vochtbinder die tot 1000x zijn gewicht in water kan vasthouden. Het vervangt geen ceramiden maar zorgt voor directe hydratatie van de hoornlaag. Essentieel: breng het aan op licht vochtige huid en sluit af met een ceramide-rijke moisturizer, anders werkt het averechts.',
+      },
+      {
+        type: 'h3',
+        content: 'Bakuchiol',
+      },
+      {
+        type: 'p',
+        content: 'Voor een droge huid die toch wil profiteren van celvernieuwendewerking is bakuchiol idealer dan retinol. Het heeft vergelijkbare anti-aging effecten maar is zachter voor de huidbarrière en veroorzaakt geen extra droogheid.',
+      },
+      {
+        type: 'callout',
+        content: 'Vermijd: parfum, alcohol denat, menthol en eucalyptus in je producten. Deze ingrediënten beschadigen de huidbarrière en verergeren droogheid — ook als het product "voor droge huid" wordt verkocht.',
+      },
+      {
+        type: 'h2',
+        content: 'De beste routine voor droge huid',
+      },
+      {
+        type: 'h3',
+        content: 'Ochtend',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Reinigen: alleen water of een zeer zachte, sulfaatvrije reiniger — te veel reinigen beschadigt de barrière',
+          'Toner (optioneel): hyaluronzuur toner op vochtige huid',
+          'Serum: niacinamide 10% voor barrièreondersteuning',
+          'Moisturizer: rijke ceramide-crème of -balsem',
+          'SPF 30–50: afsluitend, altijd',
+        ],
+      },
+      {
+        type: 'h3',
+        content: 'Avond',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Reinigen: zachte olie-cleanser of melkreiniger',
+          'Serum: bakuchiol of retinol (laag percentage, 2-3x per week)',
+          'Moisturizer: rijke nachtcrème met ceramiden of occlusieven zoals sheaboter',
+          'Optioneel: een druppel gezichtsolie (rozenbottelolie, arganolie) over de moisturizer voor extra bescherming',
+        ],
+      },
+      {
+        type: 'h2',
+        content: 'Wat je niet moet doen bij een droge huid',
+      },
+      {
+        type: 'ul',
+        content: [
+          'Scrubben — fysieke exfoliatie beschadigt de al fragiele barrière',
+          'Retinol elke avond starten — begin met 2x per week en bouw op als de barrière stabiel is',
+          'Foam cleansers met sulfaten — te agressief voor droge huid',
+          'Producten met alcohol denat — drogen de huid verder uit',
+          'Vergeten af te sluiten na hyaluronzuur — zonder moisturizer zuigt HA vocht uit de diepere huidlagen',
+        ],
+      },
+      {
+        type: 'comparison',
+        content: { text: 'Wil je weten welke ingrediënten je huidbarrière herstellen na schade?', href: '/journal/huidbarriere-herstellen', label: 'Lees over huidbarrière herstel' },
+      },
+      {
+        type: 'cta',
+        content: 'MAUYI Reset Serum bevat Niacinamide 10% voor barrièreondersteuning en Bakuchiol 0.5% als zachter alternatief voor retinol — geschikt voor droge en gevoelige huid die toch wil profiteren van actieve verzorging.',
+      },
+      {
+        type: 'faq',
+        content: [
+          { q: 'Wat is het verschil tussen een droge huid en een uitgedroogde huid?', a: 'Een droge huid is een huidtype: de huid produceert structureel te weinig talg. Een uitgedroogde huid is een tijdelijke toestand door vochtverlies, die bij elk huidtype kan voorkomen. Droge huid behandel je met ceramiden en vetten; uitdroging met hyaluronzuur en hydratatie.' },
+          { q: 'Welke ingrediënten zijn het beste voor droge huid?', a: 'Ceramiden (barrièreherstel), niacinamide (stimuleert ceramideproductie), hyaluronzuur (vochtbinding) en bakuchiol (actieve anti-aging zonder barrièreschade). Vermijd parfum, alcohol denat en sterke exfolianten.' },
+          { q: 'Kan ik retinol gebruiken als ik een droge huid heb?', a: 'Ja, maar begin langzaam: 2x per week bij een lage concentratie (0.1–0.3%). Combineer met niacinamide en een rijke moisturizer. Bakuchiol is een milder alternatief als je barrière kwetsbaar is.' },
+          { q: 'Hoe vaak moet ik mijn gezicht reinigen bij een droge huid?', a: 'Maximaal één keer per dag \'s avonds met een zachte, sulfaatvrije reiniger. \'s Ochtends is water of micellair water voldoende — te veel reinigen vernietigt de beschermende vetten van de huid.' },
+          { q: 'Helpt een gezichtsolie bij droge huid?', a: 'Ja. Een gezichtsolie (rozenbottelolie, arganolie, squalaan) legt een occlusieve laag over de moisturizer en vermindert vochtverlies. Gebruik als laatste stap in de avondroutine, niet als vervanging van een moisturizer.' },
+        ] as FaqItem[],
       },
     ],
   },

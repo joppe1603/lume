@@ -35,7 +35,7 @@ export default function StickyCart() {
                 {/* Mini product icon */}
                 <div className="w-10 h-10 rounded-xl bg-[#FAF8F5] flex items-center justify-center shrink-0">
                   <svg width="20" height="20" viewBox="0 0 30 30" fill="none" aria-hidden>
-                    <circle cx="15" cy="15" r="13" fill="#C9A96E"/>
+                    <rect width="30" height="30" rx="15" fill="#C9A96E"/>
                     <circle cx="19" cy="15" r="10" fill="#FAF8F5"/>
                   </svg>
                 </div>

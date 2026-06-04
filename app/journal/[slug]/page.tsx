@@ -25,11 +25,16 @@ export async function generateMetadata({
   return {
     title: post.seo.title,
     description: post.seo.description,
+    alternates: {
+      canonical: `${BASE_URL}/journal/${slug}`,
+    },
     openGraph: {
       title: post.seo.title,
       description: post.seo.description,
       url: `${BASE_URL}/journal/${slug}`,
       type: 'article',
+      publishedTime: post.dateISO,
+      authors: ['MAUYI'],
       images: [{ url: `${BASE_URL}${post.image}`, width: 1200, alt: post.title }],
     },
     twitter: {

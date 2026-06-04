@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAUYI — Retinol Timeline Carousel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #C9A96E;
+      --dark: #0F0E0C;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #18161310;
+      background: #1C1A17;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 48px 24px; gap: 20px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .wrapper { position: relative; display: inline-block; }
+
+    .card {
+      width: 486px; height: 607px;
+      border-radius: 2px; overflow: hidden;
+      position: relative;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .slide {
+      width: 100%; height: 100%;
+      position: absolute; top: 0; left: 0;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .slide.active { opacity: 1; pointer-events: auto; }
+
+    .nav-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.12); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.18);
+      width: 36px; height: 36px; border-radius: 50%;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      z-index: 20; transition: all 0.2s;
+    }
+    .nav-btn:hover { background: rgba(255,255,255,0.24); }
+    .nav-prev { left: -18px; }
+    .nav-next { right: -18px; }
+
+    .dots { display: flex; gap: 6px; align-items: center; }
+    .dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: rgba(255,255,255,0.2); cursor: pointer; transition: all 0.2s;
+    }
+    .dot.active { background: var(--gold); width: 20px; border-radius: 3px; }
+
+    .hint { font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 0.06em; }
+
+    .bg-photo {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+    }
+
+    /* ─────────────────────────────
+       SLIDE 1 — Cover
+    ───────────────────────────── */
+    .s1 .bg-photo {
+      background-image: url('/editorial-avond.jpg');
+      background-position: center 35%;
+      filter: saturate(0.6) brightness(0.65);
+    }
+    .s1 .overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(10,9,8,0.3) 0%,
+        rgba(10,9,8,0.05) 30%,
+        rgba(10,9,8,0.7) 65%,
+        rgba(10,9,8,0.95) 100%
+      );
+    }
+    .s1 .content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+      padding: 26px 32px 38px;
+    }
+    .s1 .logo-row { display: flex; align-items: center; gap: 8px; }
+    .s1 .logo-text {
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.28em; color: rgba(255,255,255,0.65);
+    }
+    .s1 .bottom { display: flex; flex-direction: column; gap: 10px; }
+    .s1 .eyebrow {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--gold);
+    }
+    .s1 .headline {
+      font-family: 'Inter', sans-serif; font-size: 40px; font-weight: 900;
+      color: white; line-height: 0.95; letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+    .s1 .headline .accent { color: var(--gold); }
+    .s1 .sub {
+      font-size: 13px; color: rgba(255,255,255,0.45);
+      font-weight: 300; line-height: 1.65; max-width: 290px;
+    }
+    .s1 .swipe {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 9px; color: rgba(255,255,255,0.22);
+      letter-spacing: 0.14em; text-transform: uppercase;
+    }
+
+    /* ─────────────────────────────
+       SLIDES 2–4 — Week slides
+    ───────────────────────────── */
+    .week-slide .overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(10,9,8,0.5) 0%,
+        rgba(10,9,8,0.12) 28%,
+        rgba(10,9,8,0.65) 58%,
+        rgba(10,9,8,0.96) 100%
+      );
+    }
+    .week-slide .content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+      padding: 26px 32px 36px;
+    }
+    .week-slide .top-row {
+      display: flex; align-items: flex-start;
+      justify-content: space-between;
+    }
+    /* Big week number top-left */
+    .week-slide .week-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 100px; font-weight: 900;
+      color: rgba(255,255,255,0.06);
+      line-height: 1; letter-spacing: -0.04em;
+      position: absolute; top: 10px; left: 28px;
+      user-select: none;
+    }
+    .week-slide .logo-mini {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.26em; color: rgba(255,255,255,0.3);
+      position: relative; z-index: 2;
+    }
+    .week-slide .week-tag {
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(201,169,110,0.12);
+      border: 1px solid rgba(201,169,110,0.28);
+      padding: 5px 11px; border-radius: 20px;
+      position: relative; z-index: 2;
+    }
+
+    .week-slide .bottom { display: flex; flex-direction: column; gap: 6px; }
+    .week-slide .period {
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: rgba(255,255,255,0.28); margin-bottom: 4px;
+    }
+    .week-slide .title {
+      font-family: 'Inter', sans-serif; font-size: 34px; font-weight: 900;
+      color: white; line-height: 1.0; letter-spacing: -0.01em;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .week-slide .divider {
+      width: 24px; height: 1.5px; background: var(--gold); margin-bottom: 12px;
+    }
+    .week-slide .desc {
+      font-size: 13px; color: rgba(255,255,255,0.55);
+      font-weight: 300; line-height: 1.7; max-width: 340px;
+    }
+    .week-slide .desc strong {
+      color: rgba(255,255,255,0.82); font-weight: 500;
+    }
+    .week-slide .tip {
+      font-size: 11px;
+      color: var(--gold);
+      font-weight: 500;
+      margin-top: 8px;
+      opacity: 0.8;
+    }
+
+    /* Week slide photo backgrounds */
+    .s2 .bg-photo {
+      background-image: url('/journal-retinol-bijwerkingen.jpg');
+      background-position: center 40%;
+      filter: saturate(0.55) brightness(0.68);
+    }
+    .s3 .bg-photo {
+      background-image: url('/editorial-texture.jpg');
+      background-position: center 50%;
+      filter: saturate(0.5) brightness(0.66);
+    }
+    .s4 .bg-photo {
+      background-image: url('/journal-collageen.jpg');
+      background-position: center 35%;
+      filter: saturate(0.6) brightness(0.7);
+    }
+
+    /* ─────────────────────────────
+       SLIDE 5 — CTA
+    ───────────────────────────── */
+    .s5 .bg-photo {
+      background-image: url('/reset-serum-new.jpg');
+      background-position: center 20%;
+      filter: saturate(0.88) brightness(0.78);
+    }
+    .s5 .overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(15,14,12,0.5) 0%,
+        rgba(15,14,12,0.2) 30%,
+        rgba(15,14,12,0.72) 65%,
+        rgba(15,14,12,0.97) 100%
+      );
+    }
+    .s5 .content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+      padding: 28px 32px 38px;
+    }
+    .s5 .top-row {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .s5 .badge {
+      font-size: 8px; font-weight: 700;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(201,169,110,0.12);
+      border: 1px solid rgba(201,169,110,0.25);
+      padding: 5px 11px; border-radius: 20px;
+    }
+    .s5 .logo-mini {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.26em; color: rgba(255,255,255,0.32);
+    }
+    .s5 .bottom { display: flex; flex-direction: column; gap: 9px; }
+    .s5 .eyebrow {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--gold);
+    }
+    .s5 .product-name {
+      font-family: 'Inter', sans-serif; font-size: 44px; font-weight: 900;
+      color: white; line-height: 0.9; letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+    .s5 .formula {
+      font-family: 'Cormorant Garamond', serif; font-size: 15px;
+      font-weight: 300; font-style: italic;
+      color: var(--gold); letter-spacing: 0.04em;
+    }
+    .s5 .url {
+      font-size: 11px; color: rgba(255,255,255,0.25);
+      letter-spacing: 0.14em; text-transform: uppercase;
+      margin-top: 5px;
+    }
+
+    /* ── Download ── */
+    .dl-row { display: flex; gap: 10px; align-items: center; justify-content: center; }
+    .dl-btn {
+      background: var(--gold); color: #0F0E0C;
+      font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 10px 22px; border-radius: 24px; border: none; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .dl-btn:hover { background: #d4b47a; transform: translateY(-1px); }
+    .dl-all-btn {
+      background: transparent; color: rgba(255,255,255,0.38);
+      font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 10px 18px; border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.15); cursor: pointer; transition: all 0.2s;
+    }
+    .dl-all-btn:hover { color: rgba(255,255,255,0.65); border-color: rgba(255,255,255,0.28); }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <div class="card" id="card">
+
+      <!-- ═══ SLIDE 1 — Cover ═══ -->
+      <div class="slide s1 active">
+        <div class="bg-photo"></div>
+        <div class="overlay"></div>
+        <div class="content">
+          <div class="logo-row">
+            <svg width="22" height="22" viewBox="0 0 30 30" fill="none" aria-hidden>
+              <circle cx="15" cy="15" r="13" fill="#C9A96E"/>
+              <circle cx="19" cy="15" r="10" fill="#0F0E0C"/>
+            </svg>
+            <span class="logo-text">MAUYI</span>
+          </div>
+          <div class="bottom">
+            <div class="eyebrow">Retinol in de praktijk</div>
+            <div class="headline">
+              JE HUID<br>
+              NA <span class="accent">4</span><br>
+              WEKEN
+            </div>
+            <div class="sub">
+              Wat retinol per week doet — en waarom de eerste weken het moeilijkst zijn.
+            </div>
+            <div class="swipe">
+              <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                <path d="M1 4H11M8 1L11 4L8 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+              Swipe door
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ SLIDE 2 — Week 1 ═══ -->
+      <div class="slide s2 week-slide">
+        <div class="bg-photo"></div>
+        <div class="overlay"></div>
+        <div class="week-num">01</div>
+        <div class="content">
+          <div class="top-row">
+            <span class="week-tag">Week 1</span>
+            <span class="logo-mini">MAUYI</span>
+          </div>
+          <div class="bottom">
+            <div class="period">Dag 1 – 7</div>
+            <div class="title">IRRITATIE<br>IS NORMAAL.</div>
+            <div class="divider"></div>
+            <div class="desc">
+              Retinol versnelt celvernieuwing. In de eerste week kan je huid <strong>rood, droog of iets schilferiger</strong> zijn. Dit is geen allergische reactie — het is het bewijs dat het werkt.
+            </div>
+            <div class="tip">→ Gebruik 2× per week, altijd 's avonds</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ SLIDE 3 — Week 2–3 ═══ -->
+      <div class="slide s3 week-slide">
+        <div class="bg-photo"></div>
+        <div class="overlay"></div>
+        <div class="week-num">02</div>
+        <div class="content">
+          <div class="top-row">
+            <span class="week-tag">Week 2 – 3</span>
+            <span class="logo-mini">MAUYI</span>
+          </div>
+          <div class="bottom">
+            <div class="period">Dag 8 – 21</div>
+            <div class="title">JE HUID<br>WENT ERAAN.</div>
+            <div class="divider"></div>
+            <div class="desc">
+              De initiële reactie neemt af. Je huid past zich aan. Je begint <strong>egaler van tint</strong> te worden en poriën lijken kleiner. Sommigen zien na week 3 al eerste resultaten.
+            </div>
+            <div class="tip">→ Verhoog naar 3× per week als je huid klaar is</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ SLIDE 4 — Week 4+ ═══ -->
+      <div class="slide s4 week-slide">
+        <div class="bg-photo"></div>
+        <div class="overlay"></div>
+        <div class="week-num">04</div>
+        <div class="content">
+          <div class="top-row">
+            <span class="week-tag">Week 4+</span>
+            <span class="logo-mini">MAUYI</span>
+          </div>
+          <div class="bottom">
+            <div class="period">Dag 28+</div>
+            <div class="title">DE RESULTATEN<br>WORDEN ZICHTBAAR.</div>
+            <div class="divider"></div>
+            <div class="desc">
+              Huid voelt strakker, fijne lijntjes vervagen, <strong>pigmentvlekken worden lichter</strong>. Dit is waar weken consistentie zich uitbetalen. Collageen productie is op gang.
+            </div>
+            <div class="tip">→ Gebruik SPF overdag — retinol maakt huid gevoeliger</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ SLIDE 5 — CTA ═══ -->
+      <div class="slide s5">
+        <div class="bg-photo"></div>
+        <div class="overlay"></div>
+        <div class="content">
+          <div class="top-row">
+            <span class="badge">Begin vandaag</span>
+            <span class="logo-mini">MAUYI</span>
+          </div>
+          <div class="bottom">
+            <div class="eyebrow">Retinol · Niacinamide · Bakuchiol</div>
+            <div class="product-name">RESET<br>SERUM</div>
+            <div class="formula">Geformuleerd voor resultaat zonder compromis</div>
+            <div class="url">mauyi.nl</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /card -->
+
+    <button class="nav-btn nav-prev" onclick="go(-1)" aria-label="Vorige">
+      <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
+        <path d="M7 1L1 7L7 13" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <button class="nav-btn nav-next" onclick="go(1)" aria-label="Volgende">
+      <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
+        <path d="M1 1L7 7L1 13" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="dots" id="dots">
+    <div class="dot active" onclick="goSlide(0)"></div>
+    <div class="dot" onclick="goSlide(1)"></div>
+    <div class="dot" onclick="goSlide(2)"></div>
+    <div class="dot" onclick="goSlide(3)"></div>
+    <div class="dot" onclick="goSlide(4)"></div>
+  </div>
+  <div class="hint" id="hint">Slide 1 / 5</div>
+
+  <div class="dl-row">
+    <button class="dl-btn" onclick="downloadCurrent()">↓ Download slide</button>
+    <button class="dl-all-btn" onclick="downloadAll()">Download alle 5</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    const slides = document.querySelectorAll('.slide')
+    const dots   = document.querySelectorAll('.dot')
+    const hint   = document.getElementById('hint')
+    let cur = 0
+
+    function goSlide(n) {
+      slides[cur].classList.remove('active')
+      dots[cur].classList.remove('active')
+      cur = (n + slides.length) % slides.length
+      slides[cur].classList.add('active')
+      dots[cur].classList.add('active')
+      hint.textContent = `Slide ${cur + 1} / ${slides.length}`
+    }
+    function go(dir) { goSlide(cur + dir) }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') go(1)
+      if (e.key === 'ArrowLeft')  go(-1)
+    })
+
+    async function captureSlide(idx) {
+      const saved = cur
+      goSlide(idx)
+      await new Promise(r => setTimeout(r, 120))
+      const card = document.getElementById('card')
+      const canvas = await html2canvas(card, {
+        scale: 2.222,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: null,
+        logging: false,
+      })
+      goSlide(saved)
+      return canvas
+    }
+
+    async function downloadCurrent() {
+      const canvas = await captureSlide(cur)
+      const a = document.createElement('a')
+      a.download = `mauyi-timeline-${cur + 1}.png`
+      a.href = canvas.toDataURL('image/png')
+      a.click()
+    }
+
+    async function downloadAll() {
+      for (let i = 0; i < slides.length; i++) {
+        const canvas = await captureSlide(i)
+        const a = document.createElement('a')
+        a.download = `mauyi-timeline-${i + 1}.png`
+        a.href = canvas.toDataURL('image/png')
+        a.click()
+        await new Promise(r => setTimeout(r, 400))
+      }
+    }
+  </script>
+</body>
+</html>

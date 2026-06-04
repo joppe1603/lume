@@ -77,9 +77,9 @@ export default function Navbar() {
               {/* Logo */}
               <Link href="/" className="flex items-center gap-2.5 shrink-0 cursor-pointer group">
                 <svg width="28" height="28" viewBox="0 0 30 30" fill="none" aria-hidden className="transition-transform duration-300 group-hover:rotate-12">
-                  <circle cx="15" cy="15" r="13" fill="#C9A96E"/>
+                  <rect width="30" height="30" rx="15" fill="#C9A96E"/>
                   <circle cx="19" cy="15" r="10" fill="#FAFAF8"/>
-                  <circle cx="15" cy="15" r="13" fill="url(#logoGloss)" fillOpacity="0.12"/>
+                  <rect width="30" height="30" rx="15" fill="url(#logoGloss)" fillOpacity="0.12"/>
                   <defs>
                     <radialGradient id="logoGloss" cx="35%" cy="30%" r="60%">
                       <stop offset="0%" stopColor="white"/>
