@@ -85,7 +85,7 @@ export default function CommunityPageContent() {
   const [reviews, setReviews] = useState<Review[]>([])
   const [loading, setLoading] = useState(true)
   const [formState, setFormState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
-  const [form, setForm] = useState({ name: '', email: '', rating: 5, title: '', body: '' })
+  const [form, setForm] = useState({ name: '', rating: 5, title: '', body: '' })
 
   useEffect(() => {
     fetch('/api/reviews?slug=reset-serum')
@@ -104,7 +104,7 @@ export default function CommunityPageContent() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!form.name || !form.email || !form.body) return
+    if (!form.name || !form.body) return
     setFormState('sending')
     try {
       const res = await fetch('/api/reviews', {
@@ -114,7 +114,7 @@ export default function CommunityPageContent() {
       })
       if (res.ok) {
         setFormState('sent')
-        setForm({ name: '', email: '', rating: 5, title: '', body: '' })
+        setForm({ name: '', rating: 5, title: '', body: '' })
       } else {
         setFormState('error')
       }
@@ -323,29 +323,16 @@ export default function CommunityPageContent() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-stone-100 p-6 sm:p-8 space-y-5">
-                <div className="grid sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-[11px] font-bold uppercase tracking-[0.12em] text-[#9A9590] mb-2">Naam *</label>
-                    <input
-                      type="text"
-                      required
-                      value={form.name}
-                      onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-                      className="w-full border border-stone-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#C9A96E] transition-colors"
-                      placeholder="Sophie van den Berg"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[11px] font-bold uppercase tracking-[0.12em] text-[#9A9590] mb-2">E-mail *</label>
-                    <input
-                      type="email"
-                      required
-                      value={form.email}
-                      onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                      className="w-full border border-stone-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#C9A96E] transition-colors"
-                      placeholder="jouw@email.com"
-                    />
-                  </div>
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-[0.12em] text-[#9A9590] mb-2">Naam *</label>
+                  <input
+                    type="text"
+                    required
+                    value={form.name}
+                    onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                    className="w-full border border-stone-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#C9A96E] transition-colors"
+                    placeholder="Sophie van den Berg"
+                  />
                 </div>
 
                 <div>
