@@ -6,7 +6,18 @@ import { motion } from 'framer-motion'
 import { useState, useMemo } from 'react'
 import { getAllPosts, getFeaturedPost } from '@/lib/journal'
 
-const allPosts = getAllPosts()
+export type DynamicPostSummary = {
+  slug: string
+  title: string
+  excerpt: string
+  category: string
+  readTime: string
+  date: string
+  image: string
+  source: 'dynamic'
+}
+
+const staticPosts = getAllPosts()
 const featuredPost = getFeaturedPost()
 
 const categoryColors: Record<string, string> = {
@@ -18,11 +29,23 @@ const categoryColors: Record<string, string> = {
   Huidverzorging: 'bg-rose-50 text-rose-700',
 }
 
-const ALL_CATEGORIES = Array.from(new Set(allPosts.map((p) => p.category))).sort()
-
-export default function JournalPageContent() {
+export default function JournalPageContent({ dynamicPosts = [] }: { dynamicPosts?: DynamicPostSummary[] }) {
   const [query, setQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
+
+  // Merge: dynamic posts first (newest), then static posts (deduplicate by slug)
+  const allPosts = useMemo(() => {
+    const dynamicSlugs = new Set(dynamicPosts.map((p) => p.slug))
+    return [
+      ...dynamicPosts,
+      ...staticPosts.filter((p) => !dynamicSlugs.has(p.slug)),
+    ]
+  }, [dynamicPosts])
+
+  const ALL_CATEGORIES = useMemo(
+    () => Array.from(new Set(allPosts.map((p) => p.category))).sort(),
+    [allPosts]
+  )
 
   const isFiltering = query.trim().length > 0 || activeCategory !== null
 
@@ -41,7 +64,7 @@ export default function JournalPageContent() {
       )
     }
     return posts
-  }, [query, activeCategory])
+  }, [query, activeCategory, allPosts])
 
   const articlesToShow = isFiltering
     ? filteredArticles

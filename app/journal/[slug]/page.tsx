@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
+import { createClient } from '@supabase/supabase-js'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import JournalNewsletterBlock from '@/components/JournalNewsletterBlock'
@@ -10,8 +11,43 @@ import type { Section, FaqItem, ComparisonLink } from '@/lib/journal'
 
 const BASE_URL = 'https://mauyi.nl'
 
+// Dynamic posts from Supabase are rendered on-demand (not pre-built)
+export const dynamicParams = true
+
 export function generateStaticParams() {
   return getAllPosts().map((p) => ({ slug: p.slug }))
+}
+
+type DynamicPost = {
+  slug: string
+  title: string
+  excerpt: string
+  category: string
+  read_time: string
+  published_at: string
+  image_url: string | null
+  image_alt: string | null
+  meta_title: string | null
+  meta_description: string | null
+  html: string
+}
+
+async function getDynamicPost(slug: string): Promise<DynamicPost | null> {
+  try {
+    const client = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    )
+    const { data } = await client
+      .from('journal_posts')
+      .select('*')
+      .eq('slug', slug)
+      .eq('cms_status', 'published')
+      .single()
+    return data ?? null
+  } catch {
+    return null
+  }
 }
 
 export async function generateMetadata({
@@ -21,28 +57,48 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params
   const post = getPost(slug)
-  if (!post) return {}
-  return {
-    title: post.seo.title,
-    description: post.seo.description,
-    alternates: {
-      canonical: `${BASE_URL}/journal/${slug}`,
-    },
-    openGraph: {
+
+  if (post) {
+    return {
       title: post.seo.title,
       description: post.seo.description,
+      alternates: { canonical: `${BASE_URL}/journal/${slug}` },
+      openGraph: {
+        title: post.seo.title,
+        description: post.seo.description,
+        url: `${BASE_URL}/journal/${slug}`,
+        type: 'article',
+        publishedTime: post.dateISO,
+        authors: ['MAUYI'],
+        images: [{ url: `${BASE_URL}${post.image}`, width: 1200, alt: post.title }],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: post.seo.title,
+        description: post.seo.description,
+        images: [`${BASE_URL}${post.image}`],
+      },
+    }
+  }
+
+  const dyn = await getDynamicPost(slug)
+  if (!dyn) return {}
+  const title = dyn.meta_title ?? dyn.title
+  const description = dyn.meta_description ?? dyn.excerpt
+  const image = dyn.image_url ?? `${BASE_URL}/journal-serum.jpg`
+  return {
+    title,
+    description,
+    alternates: { canonical: `${BASE_URL}/journal/${slug}` },
+    openGraph: {
+      title, description,
       url: `${BASE_URL}/journal/${slug}`,
       type: 'article',
-      publishedTime: post.dateISO,
+      publishedTime: dyn.published_at,
       authors: ['MAUYI'],
-      images: [{ url: `${BASE_URL}${post.image}`, width: 1200, alt: post.title }],
+      images: [{ url: image, width: 1344, height: 768, alt: dyn.image_alt ?? dyn.title }],
     },
-    twitter: {
-      card: 'summary_large_image',
-      title: post.seo.title,
-      description: post.seo.description,
-      images: [`${BASE_URL}${post.image}`],
-    },
+    twitter: { card: 'summary_large_image', title, description, images: [image] },
   }
 }
 
@@ -147,7 +203,84 @@ export default async function JournalPostPage({
 }) {
   const { slug } = await params
   const post = getPost(slug)
-  if (!post) notFound()
+
+  // Dynamic post (from Supabase / n8n workflow)
+  if (!post) {
+    const dyn = await getDynamicPost(slug)
+    if (!dyn) notFound()
+
+    const date = new Date(dyn.published_at).toLocaleDateString('nl-NL', { month: 'long', year: 'numeric' })
+    const image = dyn.image_url ?? '/journal-serum.jpg'
+    const articleSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: dyn.title,
+      description: dyn.meta_description ?? dyn.excerpt,
+      image: dyn.image_url ?? `${BASE_URL}/journal-serum.jpg`,
+      datePublished: dyn.published_at,
+      dateModified: dyn.published_at,
+      author: { '@type': 'Organization', name: 'MAUYI', url: BASE_URL },
+      publisher: { '@type': 'Organization', name: 'MAUYI', url: BASE_URL, logo: { '@type': 'ImageObject', url: `${BASE_URL}/logo.png` } },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}/journal/${slug}` },
+    }
+
+    return (
+      <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+        <Navbar />
+        <main className="bg-[#FAF8F5] min-h-screen">
+          <div className="bg-white border-b border-stone-100">
+            <div className="max-w-3xl mx-auto px-6 sm:px-8 py-4">
+              <nav className="flex items-center gap-2 text-xs text-[#9A9590]">
+                <Link href="/" className="hover:text-[#C9A96E] transition-colors">Home</Link>
+                <span className="text-stone-300">/</span>
+                <Link href="/journal" className="hover:text-[#C9A96E] transition-colors">Journal</Link>
+                <span className="text-stone-300">/</span>
+                <span className="text-[#1A1A1A] font-medium line-clamp-1">{dyn.title}</span>
+              </nav>
+            </div>
+          </div>
+          <article className="max-w-3xl mx-auto px-6 sm:px-8 py-16">
+            <div className="mb-8">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-5 h-px bg-[#C9A96E]" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#C9A96E]">{dyn.category}</span>
+              </div>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1A1A1A] leading-[1.1] mb-5" style={{ fontFamily: 'var(--font-cormorant)' }}>
+                {dyn.title}
+              </h1>
+              <p className="text-[16px] text-[#6B6560] font-light leading-relaxed mb-6">{dyn.excerpt}</p>
+              <div className="flex items-center gap-4 text-[12px] text-[#9A9590]">
+                <span>MAUYI Journal</span>
+                <span>·</span>
+                <span>{date}</span>
+                <span>·</span>
+                <span>{dyn.read_time} lezen</span>
+              </div>
+            </div>
+            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden bg-stone-100 mb-12">
+              <Image src={image} alt={dyn.image_alt ?? dyn.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 768px" priority />
+            </div>
+            {/* HTML content from n8n/AI */}
+            <div
+              className="prose-journal"
+              dangerouslySetInnerHTML={{ __html: dyn.html }}
+            />
+            <JournalNewsletterBlock slug={slug} />
+            <div className="mt-10 pt-8 border-t border-stone-200">
+              <Link href="/journal" className="inline-flex items-center gap-2 text-[13px] text-[#9A9590] hover:text-[#C9A96E] transition-colors">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <path d="M10 6H2M6 2L2 6l4 4" />
+                </svg>
+                Terug naar Journal
+              </Link>
+            </div>
+          </article>
+        </main>
+        <Footer />
+      </>
+    )
+  }
 
   const related = getRelatedPosts(slug, post.category)
 

@@ -231,6 +231,70 @@ body::after {
 }
 
 /* ——————————————————————————————
+   PROSE JOURNAL (AI/n8n generated HTML articles)
+—————————————————————————————— */
+.prose-journal h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1A1A1A;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+.prose-journal h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1A1A1A;
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+.prose-journal h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1A1A1A;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.prose-journal p {
+  font-size: 15px;
+  color: #4A4540;
+  line-height: 1.85;
+  margin-bottom: 1rem;
+}
+.prose-journal ul {
+  margin: 0.5rem 0 1rem 0;
+  padding: 0;
+  list-style: none;
+}
+.prose-journal ul li {
+  font-size: 15px;
+  color: #4A4540;
+  line-height: 1.7;
+  padding-left: 1.25rem;
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+.prose-journal ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #C9A96E;
+}
+.prose-journal a {
+  color: #C9A96E;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose-journal a:hover {
+  color: #B8935A;
+}
+
+/* ——————————————————————————————
    INGREDIENT PILL
 —————————————————————————————— */
 .ingredient-pill {
