@@ -8,6 +8,20 @@ function supabase() {
   )
 }
 
+const CATEGORY_MAP: Record<string, string> = {
+  ingrediënten: 'Ingrediënten',
+  ingredienten: 'Ingrediënten',
+  routines: 'Routines',
+  routine: 'Routines',
+  wetenschap: 'Wetenschap',
+  filosofie: 'Filosofie',
+  huidverzorging: 'Huidverzorging',
+}
+
+function normalizeCategory(raw: string): string {
+  return CATEGORY_MAP[raw.toLowerCase().trim()] ?? (raw.charAt(0).toUpperCase() + raw.slice(1))
+}
+
 function deriveCategory(keywords: string[]): string {
   const all = keywords.join(' ').toLowerCase()
   if (all.match(/retinol|bakuchiol|niacinamide|ingrediënt|hyaluronzuur|panthenol/)) return 'Ingrediënten'
@@ -58,7 +72,7 @@ export async function POST(req: NextRequest) {
       image_url: post.image_url ?? null,
       image_alt: post.suggested_alt_text ?? post.title,
       image_prompt: post.image_prompt ?? null,
-      category: post.category ?? deriveCategory(keywords),
+      category: post.category ? normalizeCategory(post.category) : deriveCategory(keywords),
       read_time: post.read_time ?? deriveReadTime(post.html),
       cms_status: post.cms_status ?? 'draft',
       published_at: isPublished ? new Date().toISOString() : null,
