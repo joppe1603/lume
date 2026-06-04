@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
+import { track } from '@vercel/analytics'
 type SubmitState = 'idle' | 'loading' | 'error'
 
 export default function WaitlistForm({
@@ -68,6 +69,7 @@ export default function WaitlistForm({
       // ignore storage errors
     }
 
+    track('waitlist_signup', { source, product: productSlug ?? 'none' })
     redirectToThanks(trimmedEmail)
   }
 

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAUYI — Instagram Cards</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #C9A96E;
+      --dark: #1A1A1A;
+      --stone: #9A9590;
+      --warm: #FAF8F5;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #D8D2CB;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px;
+      gap: 20px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* ── Card ── */
+    .card {
+      width: 540px;
+      height: 540px;
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.18), 0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    .slide {
+      width: 100%; height: 100%;
+      position: absolute; top: 0; left: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .slide.active { opacity: 1; pointer-events: auto; }
+
+    /* ── Nav arrows ── */
+    .nav-btn {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(4px);
+      border: none;
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.14);
+      z-index: 20;
+      transition: all 0.18s;
+    }
+    .nav-btn:hover { background: white; box-shadow: 0 4px 16px rgba(0,0,0,0.18); }
+    .nav-prev { left: -17px; }
+    .nav-next { right: -17px; }
+
+    /* ── Dots ── */
+    .dots { display: flex; gap: 6px; align-items: center; }
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .dot.active { background: var(--dark); width: 18px; border-radius: 3px; }
+
+    .hint { font-size: 11px; color: rgba(0,0,0,0.35); letter-spacing: 0.04em; }
+
+    /* ────────────────────────────────────
+       SLIDE 1  —  Cover
+    ──────────────────────────────────── */
+    .s1 {
+      background: var(--dark);
+      display: flex;
+      flex-direction: column;
+      padding: 40px;
+    }
+    .s1-top {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+    .s1-logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      color: white;
+    }
+    .s1-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-bottom: 16px;
+    }
+    .eyebrow {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+    .s1-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 62px;
+      font-weight: 600;
+      line-height: 1.0;
+      color: white;
+      margin-bottom: 20px;
+    }
+    .s1-sub {
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.45);
+      font-weight: 300;
+      line-height: 1.65;
+      max-width: 340px;
+    }
+    .s1-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .swipe-hint {
+      font-size: 10px;
+      color: rgba(255,255,255,0.25);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      letter-spacing: 0.06em;
+    }
+    .s1-slide-dots {
+      display: flex; gap: 4px;
+    }
+    .s1-slide-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.18);
+    }
+    .s1-slide-dot:first-child { background: rgba(201,169,110,0.7); width: 12px; border-radius: 2px; }
+
+    /* ────────────────────────────────────
+       SLIDE 2  —  Side-by-side
+    ──────────────────────────────────── */
+    .s2 {
+      display: flex;
+      flex-direction: row;
+    }
+
+    /* Left panel — white */
+    .s2-panel-left {
+      flex: 1;
+      background: white;
+      padding: 28px 22px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      min-width: 0;
+    }
+
+    /* Right panel — lifestyle photo */
+    .s2-panel-right {
+      flex: 1;
+      position: relative;
+      background: url('https://mauyi.nl/reset-serum-new.jpg') center 15% / cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      text-align: right;
+      padding: 28px 22px 24px 16px;
+      gap: 11px;
+      min-width: 0;
+      overflow: hidden;
+    }
+    /* Gradient: keeps top photo visible, fades to near-white at bottom for text */
+    .s2-panel-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.05) 0%,
+        rgba(255,255,255,0.12) 30%,
+        rgba(250,248,245,0.72) 55%,
+        rgba(250,248,245,0.94) 72%,
+        rgba(250,248,245,0.98) 100%
+      );
+      pointer-events: none;
+    }
+    .s2-panel-right > * { position: relative; z-index: 1; }
+
+    .col-label {
+      font-size: 8.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+    .col-label.left { color: #B0AAA3; }
+    .col-label.right { color: var(--gold); }
+
+    /* Product images */
+    .bottles { display: flex; gap: 8px; align-items: flex-end; height: 96px; }
+
+    .prod-img {
+      height: 88px;
+      width: auto;
+      max-width: 58px;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.08));
+    }
+
+    .s2-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--dark);
+      line-height: 1;
+    }
+    .s2-price.gold { color: var(--gold); }
+    .s2-product-name {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--dark);
+      line-height: 1.4;
+    }
+    .s2-actives {
+      font-size: 9.5px;
+      color: #9A9590;
+      line-height: 1.9;
+      font-weight: 400;
+    }
+    .s2-actives .plus { color: var(--gold); font-weight: 600; }
+    .s2-note {
+      font-size: 8px;
+      color: #B0AAA3;
+      line-height: 1.5;
+      font-style: italic;
+      margin-top: auto;
+    }
+
+    /* ────────────────────────────────────
+       SLIDE 3  —  Ingredients
+    ──────────────────────────────────── */
+    .s3 {
+      background: var(--warm);
+      display: flex;
+      flex-direction: column;
+      padding: 32px;
+    }
+    .s3-title {
+      font-size: 8.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #C0BAB3;
+      text-align: center;
+      margin-bottom: 22px;
+    }
+    .s3-cols {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      flex: 1;
+      gap: 0;
+    }
+    .s3-col { display: flex; flex-direction: column; }
+    .s3-col.left { padding-right: 18px; }
+    .s3-col.right { padding-left: 18px; }
+    .s3-col-label {
+      font-size: 8px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 12px;
+    }
+    .s3-col-label.left { color: #B0AAA3; }
+    .s3-col-label.right { color: var(--gold); }
+    .s3-inci {
+      font-size: 9px;
+      line-height: 1.7;
+      color: #7A7470;
+      font-weight: 400;
+    }
+    .s3-inci.big {
+      font-size: 10.5px;
+      line-height: 2.0;
+      color: #5C5754;
+    }
+    .s3-inci .hi { color: var(--gold); font-weight: 600; }
+    .s3-count {
+      margin-top: 12px;
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .s3-count.left { color: #C0BAB3; }
+    .s3-count.right { color: var(--gold); }
+
+    /* ────────────────────────────────────
+       SLIDE 4  —  Outro / CTA
+    ──────────────────────────────────── */
+    .s4 {
+      background: var(--dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 52px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    /* subtle radial glow */
+    .s4::before {
+      content: '';
+      position: absolute;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(201,169,110,0.1) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .s4 > * { position: relative; z-index: 1; }
+    .s4 .eyebrow { margin-bottom: 20px; }
+    .s4-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 44px;
+      font-weight: 600;
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    .s4-sub {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 340px;
+      margin-bottom: 36px;
+    }
+    .s4-divider {
+      width: 32px; height: 1px;
+      background: rgba(201,169,110,0.4);
+      margin: 0 auto 32px;
+    }
+    .s4-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 36px;
+      background: linear-gradient(135deg, #C9A96E, #D4B47A);
+      color: var(--dark);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: 100px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <div class="card">
+
+      <!-- ── Slide 1: Cover ── -->
+      <div class="slide s1 active">
+        <div class="s1-top">
+          <svg width="22" height="22" viewBox="0 0 30 30" fill="none">
+            <circle cx="15" cy="15" r="13" fill="#C9A96E"/>
+            <circle cx="19" cy="15" r="10" fill="#1A1A1A"/>
+          </svg>
+          <span class="s1-logo-text">MAUYI</span>
+        </div>
+
+        <div class="s1-body">
+          <p class="eyebrow">Eerlijk over wat werkt</p>
+          <h1 class="s1-headline">Drie<br>flesjes.<br>Of één.</h1>
+          <p class="s1-sub">Dezelfde actieve stoffen. Maar The Ordinary vraagt drie producten, drie stappen en drie kansen op irritatie. Wij dachten: kan dit eenvoudiger?</p>
+        </div>
+
+        <div class="s1-footer">
+          <span class="swipe-hint">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            Swipe
+          </span>
+          <div class="s1-slide-dots">
+            <div class="s1-slide-dot"></div>
+            <div class="s1-slide-dot"></div>
+            <div class="s1-slide-dot"></div>
+            <div class="s1-slide-dot"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Slide 2: Comparison ── -->
+      <div class="slide s2">
+
+        <!-- Left panel: white background -->
+        <div class="s2-panel-left">
+          <span class="col-label left">The Ordinary routine</span>
+          <div class="bottles">
+            <img class="prod-img" src="https://theordinary.com/dw/image/v2/BFKJ_PRD/on/demandware.static/-/Sites-deciem-master/default/dwf2a8fcd2/Images/products/The%20Ordinary/rdn-retinol-0-5pct-in-squalane-30ml.png?sw=200&sh=200&sm=fit" alt="The Ordinary Retinol">
+            <img class="prod-img" src="https://theordinary.com/dw/image/v2/BFKJ_PRD/on/demandware.static/-/Sites-deciem-master/default/dwce8a7cdf/Images/products/The%20Ordinary/rdn-niacinamide-10pct-zinc-1pct-30ml.png?sw=200&sh=200&sm=fit" alt="The Ordinary Niacinamide">
+            <img class="prod-img" src="https://theordinary.com/dw/image/v2/BFKJ_PRD/on/demandware.static/-/Sites-deciem-master/default/dw67286abd/Images/products/The%20Ordinary/ord-hyaluronic-acid-2pct-B5-30ml-Clr-Acu.png?sw=200&sh=200&sm=fit" alt="The Ordinary Hyaluronic Acid">
+          </div>
+          <div class="s2-price">€20,70</div>
+          <div class="s2-product-name">3 producten<br>3 stappen</div>
+          <div class="s2-actives">
+            Retinol 0.5%<br>
+            Niacinamide 10%<br>
+            Hyaluronzuur 2%
+          </div>
+          <div class="s2-note">Apart kopen · Apart layeren<br>Volgorde onthouden</div>
+        </div>
+
+        <!-- Right panel: full lifestyle photo + gradient overlay -->
+        <div class="s2-panel-right">
+          <span class="col-label right">Reset Serum</span>
+          <!-- photo fills the top, text sits on the gradient fade below -->
+          <div style="flex:1;"></div>
+          <div class="s2-price gold">€58</div>
+          <div class="s2-product-name">1 product<br>1 stap</div>
+          <div class="s2-actives">
+            Retinol 0.3%<br>
+            Niacinamide 10%<br>
+            Hyaluronzuur 2%<br>
+            <span class="plus">+ Bakuchiol 0.5%</span>
+          </div>
+          <div class="s2-note">Stabiele formule · pH-geoptimaliseerd<br>Werkt samen, niet naast elkaar</div>
+        </div>
+
+      </div>
+
+      <!-- ── Slide 3: Ingredients ── -->
+      <div class="slide s3">
+        <p class="s3-title">Ingrediëntenlijst — wat zit er echt in?</p>
+        <div class="s3-cols">
+          <!-- Left: TO combined -->
+          <div class="s3-col left">
+            <div class="s3-col-label left">The Ordinary (3×)</div>
+            <p class="s3-inci">
+              Squalane, Caprylic/Capric Triglyceride,
+              <span class="hi">Retinol</span>, BHT —
+              Aqua, <span class="hi">Niacinamide</span>,
+              Pentylene Glycol, Zinc PCA,
+              Tamarindus Indica Seed Gum,
+              Xanthan Gum, Isoceteth-20,
+              Ethoxydiglycol, Phenoxyethanol,
+              Chlorphenesin —
+              Aqua, <span class="hi">Sodium Hyaluronate</span>,
+              Pentylene Glycol, Propanediol,
+              Sodium Hyaluronate Crosspolymer,
+              <span class="hi">Hyaluronic Acid</span>,
+              Inulin, Glycerin,
+              Coffea Sinensis Leaf Extract,
+              Sodium Metaphosphate,
+              PPG-26-Buteth-26,
+              PEG-40 Hydrogenated Castor Oil,
+              Carbomer, Triethanolamine,
+              Ethylhexylglycerin
+            </p>
+            <p class="s3-count left">26 ingrediënten · 3 producten</p>
+          </div>
+
+          <div style="background:#E0DBD5; width:1px;"></div>
+
+          <!-- Right: Reset Serum -->
+          <div class="s3-col right">
+            <div class="s3-col-label right">Reset Serum</div>
+            <p class="s3-inci big">
+              Aqua,<br>
+              <span class="hi">Niacinamide 10%</span>,<br>
+              Butylene Glycol,<br>
+              <span class="hi">Sodium Hyaluronate ×3</span>,<br>
+              <span class="hi">Retinol 0.3%</span>,<br>
+              <span class="hi">Bakuchiol 0.5%</span>,<br>
+              Glycerin,<br>
+              Hydroxyethylcellulose,<br>
+              Phenoxyethanol,<br>
+              Sodium Benzoate
+            </p>
+            <p class="s3-count right">10 ingrediënten · 1 product</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Slide 4: Outro ── -->
+      <div class="slide s4">
+        <p class="eyebrow">Reset Serum · MAUYI</p>
+        <h2 class="s4-headline">Eén serum.<br>Doet het werk<br>van drie.</h2>
+        <div class="s4-divider"></div>
+        <p class="s4-sub">Geformuleerd zodat de actieve stoffen samenwerken — niet stapelen. Minder stappen. Minder gissen. Meer effect.</p>
+        <span class="s4-cta">
+          mauyi.nl
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+
+    </div><!-- /card -->
+
+    <!-- Nav arrows -->
+    <button class="nav-btn nav-prev" onclick="changeSlide(-1)" aria-label="Vorige slide">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="nav-btn nav-next" onclick="changeSlide(1)" aria-label="Volgende slide">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </div><!-- /wrapper -->
+
+  <!-- Dots + hint -->
+  <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+    <div class="dots">
+      <div class="dot active" onclick="goSlide(0)"></div>
+      <div class="dot" onclick="goSlide(1)"></div>
+      <div class="dot" onclick="goSlide(2)"></div>
+      <div class="dot" onclick="goSlide(3)"></div>
+    </div>
+    <p class="hint">← → pijltjestoetsen</p>
+    <button onclick="downloadAll()" style="
+      margin-top:4px;
+      padding: 10px 24px;
+      background: #1A1A1A;
+      color: white;
+      border: none;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+    ">↓ Download alle 4 slides</button>
+  </div>
+
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script>
+    let current = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots   = document.querySelectorAll('.dot');
+
+    function goSlide(n) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = ((n % slides.length) + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+    }
+
+    function changeSlide(dir) { goSlide(current + dir); }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   changeSlide(-1);
+    });
+
+    async function downloadAll() {
+      const card = document.querySelector('.card');
+      const names = ['mauyi-slide-1-cover', 'mauyi-slide-2-vergelijking', 'mauyi-slide-3-ingredienten', 'mauyi-slide-4-outro'];
+      for (let i = 0; i < slides.length; i++) {
+        // Show only this slide
+        slides.forEach((s, j) => {
+          s.style.opacity = j === i ? '1' : '0';
+          s.style.transition = 'none';
+        });
+        await new Promise(r => setTimeout(r, 120));
+        const canvas = await html2canvas(card, { scale: 2, useCORS: true, allowTaint: true, backgroundColor: null });
+        const link = document.createElement('a');
+        link.download = names[i] + '.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        await new Promise(r => setTimeout(r, 300));
+      }
+      // Restore
+      slides.forEach((s, j) => {
+        s.style.opacity = j === current ? '1' : '0';
+      });
+    }
+  </script>
+</body>
+</html>

@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useReducer, useEffect, useState, ReactNode } from 'react'
 import { createShopifyCheckout } from '@/lib/shopify'
+import { track } from '@vercel/analytics'
 
 export type CartItem = {
   slug: string
@@ -34,6 +35,7 @@ const initialState: CartState = { items: [], isOpen: false }
 function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
     case 'ADD_ITEM': {
+      track('add_to_cart', { product: action.payload.name, price: action.payload.price })
       const existing = state.items.find((i) => i.slug === action.payload.slug)
       if (existing) {
         return {
@@ -136,6 +138,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
       return
     }
 
+    track('checkout_started', {
+      items: state.items.map((i) => i.name).join(', '),
+      total,
+      item_count: itemCount,
+    })
     setIsCheckingOut(true)
     try {
       const checkoutUrl = await createShopifyCheckout(lines)

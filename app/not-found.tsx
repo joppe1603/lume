@@ -76,19 +76,16 @@ export default function NotFound() {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link
-            href="/"
-            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-[13px] font-medium border border-[#C9A96E]/30 text-[#C9A96E] hover:border-[#C9A96E]/60 hover:bg-[#C9A96E]/5 transition-all duration-200"
+            href="/products/reset-serum"
+            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-[13px] font-medium bg-[#C9A96E] text-[#0F0E0C] hover:bg-[#D4B87A] transition-all duration-200"
           >
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="M10 6H2M6 2L2 6l4 4" />
-            </svg>
-            Terug naar home
+            Bekijk Reset Serum →
           </Link>
           <Link
-            href="/launch"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-[13px] font-medium text-stone-500 hover:text-stone-300 transition-colors"
+            href="/journal"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-[13px] font-medium border border-white/10 text-stone-400 hover:text-stone-200 hover:border-white/20 transition-all duration-200"
           >
-            Bekijk de lancering
+            Naar het Journal
           </Link>
         </div>
       </div>
