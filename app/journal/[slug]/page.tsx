@@ -32,6 +32,11 @@ type DynamicPost = {
   html: string
 }
 
+function sanitizeHtml(html: string): string {
+  // Fix double-quoted hrefs: href=""/path"" → href="/path"
+  return html.replace(/href=""([^"]*?)""/g, 'href="$1"')
+}
+
 async function getDynamicPost(slug: string): Promise<DynamicPost | null> {
   try {
     const client = createClient(
@@ -264,7 +269,7 @@ export default async function JournalPostPage({
             {/* HTML content from n8n/AI */}
             <div
               className="prose-journal"
-              dangerouslySetInnerHTML={{ __html: dyn.html }}
+              dangerouslySetInnerHTML={{ __html: sanitizeHtml(dyn.html) }}
             />
             <JournalNewsletterBlock slug={slug} />
             <div className="mt-10 pt-8 border-t border-stone-200">
