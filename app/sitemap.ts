@@ -1,19 +1,50 @@
 import type { MetadataRoute } from 'next'
+import { createClient } from '@supabase/supabase-js'
 import { getAllPosts } from '@/lib/journal'
 import { getPublicProducts } from '@/lib/products'
 
 const BASE_URL = 'https://mauyi.nl'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+async function getDynamicPostSlugs(): Promise<{ slug: string; published_at: string }[]> {
+  try {
+    const client = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    )
+    const { data } = await client
+      .from('journal_posts')
+      .select('slug, published_at')
+      .eq('cms_status', 'published')
+      .order('published_at', { ascending: false })
+    return data ?? []
+  } catch {
+    return []
+  }
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = getAllPosts()
   const products = getPublicProducts()
+  const dynamicPosts = await getDynamicPostSlugs()
 
-  const journalEntries: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: `${BASE_URL}/journal/${post.slug}`,
-    lastModified: new Date(post.dateISO),
-    changeFrequency: 'monthly',
-    priority: 0.7,
-  }))
+  const staticSlugs = new Set(posts.map((p) => p.slug))
+
+  const journalEntries: MetadataRoute.Sitemap = [
+    ...posts.map((post) => ({
+      url: `${BASE_URL}/journal/${post.slug}`,
+      lastModified: new Date(post.dateISO),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
+    ...dynamicPosts
+      .filter((p) => !staticSlugs.has(p.slug))
+      .map((post) => ({
+        url: `${BASE_URL}/journal/${post.slug}`,
+        lastModified: new Date(post.published_at),
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+      })),
+  ]
 
   const productEntries: MetadataRoute.Sitemap = products.map((product) => ({
     url: `${BASE_URL}/products/${product.slug}`,
