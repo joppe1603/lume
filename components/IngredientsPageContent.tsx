@@ -275,6 +275,31 @@ export default function IngredientsPageContent() {
         </div>
       </section>
 
+      {/* Ingredient deep-dives */}
+      <section className="py-12 bg-[#FAF8F5] border-t border-stone-100">
+        <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
+          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#9A9590] mb-5">Dieper in de wetenschap</p>
+          <div className="grid sm:grid-cols-3 gap-3">
+            {[
+              { href: '/ingredients/retinol', name: 'Retinol', sub: 'Werking, concentraties, hoe beginnen' },
+              { href: '/ingredients/niacinamide', name: 'Niacinamide', sub: 'De 10%-drempel, combinaties met retinol' },
+              { href: '/ingredients/bakuchiol', name: 'Bakuchiol', sub: 'Plantaardig alternatief, synergie' },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="bg-white rounded-xl border border-stone-100 px-5 py-4 hover:border-[#C9A96E]/40 hover:shadow-sm transition-all group"
+              >
+                <p className="text-[14px] font-semibold text-[#1A1A1A] group-hover:text-[#C9A96E] transition-colors mb-1">
+                  {item.name} →
+                </p>
+                <p className="text-[12px] text-[#9A9590] font-light">{item.sub}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Bottom CTA */}
       <section className="py-16 bg-[#FAF8F5] border-t border-stone-200">
         <div className="max-w-2xl mx-auto px-6 text-center">
