@@ -216,6 +216,17 @@ function getRelatedPosts(currentSlug: string, currentCategory: string) {
   return [...sameCategory, ...others].slice(0, 3)
 }
 
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]+>/g, '').trim()
+}
+
+function extractFaqItems(html: string): Array<{ q: string; a: string }> {
+  const faqMatch = html.match(/<h2>[^<]*(?:vragen|faq)[^<]*<\/h2>([\s\S]*)$/i)
+  if (!faqMatch) return []
+  const pairs = [...faqMatch[1].matchAll(/<h3>([\s\S]*?)<\/h3>\s*<p>([\s\S]*?)<\/p>/gi)]
+  return pairs.map(([, q, a]) => ({ q: stripHtml(q), a: stripHtml(a) }))
+}
+
 export default async function JournalPostPage({
   params,
 }: {
@@ -231,6 +242,8 @@ export default async function JournalPostPage({
 
     const date = new Date(dyn.published_at).toLocaleDateString('nl-NL', { month: 'long', year: 'numeric' })
     const image = dyn.image_url ?? '/journal-serum.jpg'
+    const related = getRelatedPosts(slug, dyn.category)
+    const faqItems = extractFaqItems(dyn.html)
     const articleSchema = {
       '@context': 'https://schema.org',
       '@type': 'Article',
@@ -243,10 +256,20 @@ export default async function JournalPostPage({
       publisher: { '@type': 'Organization', name: 'MAUYI', url: BASE_URL, logo: { '@type': 'ImageObject', url: `${BASE_URL}/logo.png` } },
       mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}/journal/${slug}` },
     }
+    const faqSchema = faqItems.length > 0 ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqItems.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    } : null
 
     return (
       <>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+        {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
         <Navbar />
         <main className="bg-[#FAF8F5] min-h-screen">
           <div className="bg-white border-b border-stone-100">
@@ -287,6 +310,30 @@ export default async function JournalPostPage({
               dangerouslySetInnerHTML={{ __html: sanitizeHtml(dyn.html) }}
             />
             <JournalNewsletterBlock slug={slug} />
+            {related.length > 0 && (
+              <div className="mt-16 pt-10 border-t border-stone-200">
+                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] mb-6">
+                  Gerelateerde artikelen
+                </p>
+                <div className="grid gap-4 sm:grid-cols-3">
+                  {related.map((r) => (
+                    <Link
+                      key={r.slug}
+                      href={`/journal/${r.slug}`}
+                      className="group block bg-white rounded-xl p-5 hover:shadow-md transition-shadow"
+                    >
+                      <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#C9A96E] mb-2 block">
+                        {r.category}
+                      </span>
+                      <p className="text-[14px] font-medium text-[#1A1A1A] leading-snug group-hover:text-[#C9A96E] transition-colors line-clamp-3">
+                        {r.title}
+                      </p>
+                      <p className="text-[12px] text-[#9A9590] mt-2">{r.readTime} lezen</p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
             <div className="mt-10 pt-8 border-t border-stone-200">
               <Link href="/journal" className="inline-flex items-center gap-2 text-[13px] text-[#9A9590] hover:text-[#C9A96E] transition-colors">
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
