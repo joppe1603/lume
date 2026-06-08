@@ -43,8 +43,13 @@ export async function generateMetadata({
       title: product.seo.title,
       description: product.seo.description,
       url: `${BASE_URL}/products/${slug}`,
-      images: [{ url: product.heroImage, width: 900, alt: product.name }],
+      images: [{ url: `${BASE_URL}${product.heroImage}`, width: 1200, height: 630, alt: product.seo.title }],
       type: 'website',
+    },
+    other: {
+      'product:price:amount': product.price?.toString() ?? '58',
+      'product:price:currency': 'EUR',
+      'product:brand': 'MAUYI',
     },
     twitter: {
       card: 'summary_large_image',

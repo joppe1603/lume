@@ -30,11 +30,6 @@ export const metadata: Metadata = {
   },
   description:
     'MAUYI Reset Serum: Retinol 0.3% + Niacinamide 10% + Bakuchiol in één parfumvrije formule voor gevoelige huid. Wetenschappelijk geformuleerde huidverzorging. €58, gratis verzending.',
-  keywords: [
-    'huidverzorging', 'serum', 'retinol serum', 'niacinamide serum', 'hyaluronzuur',
-    'MAUYI', 'skincare Nederland', 'vitamine C serum', 'bakuchiol', 'gevoelige huid serum',
-    'retinol 0.3', 'anti aging serum nederland', 'parfumvrij serum',
-  ],
   authors: [{ name: 'MAUYI B.V.', url: BASE_URL }],
   creator: 'MAUYI B.V.',
   publisher: 'MAUYI B.V.',

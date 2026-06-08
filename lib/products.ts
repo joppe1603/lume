@@ -121,6 +121,7 @@ const PRODUCTS: Product[] = [
     badge: 'Test',
     price: 0.02,
     size: '1ml',
+    hidden: true,
     availability: 'available',
     heroImage: '/reset-serum-new.jpg',
     description: 'Intern testproduct.',

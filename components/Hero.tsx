@@ -73,7 +73,7 @@ export default function Hero() {
               fontFamily: 'var(--font-cormorant)',
             }}
           >
-            Huid die
+            Retinol Serum
             <br />
             <em
               style={{
@@ -84,7 +84,7 @@ export default function Hero() {
                 fontStyle: 'italic',
               }}
             >
-              rust vindt.
+              voor gevoelige huid.
             </em>
           </motion.h1>
 
