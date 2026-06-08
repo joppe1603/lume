@@ -42,7 +42,7 @@ const faqSchema = {
       name: 'Hoe begin je met retinol zonder irritatie?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Begin 2× per week, bouw op naar dagelijks gebruik over 4-6 weken. Gebruik 's avonds op droge huid, gevolgd door een hydraterende moisturizer. Combineer met niacinamide (10%) om de irritatierespons te verminderen. Gebruik altijd SPF overdag — retinol verhoogt UV-gevoeligheid.',
+        text: "Begin 2× per week, bouw op naar dagelijks gebruik over 4-6 weken. Gebruik 's avonds op droge huid, gevolgd door een hydraterende moisturizer. Combineer met niacinamide (10%) om de irritatierespons te verminderen. Gebruik altijd SPF overdag — retinol verhoogt UV-gevoeligheid.",
       },
     },
     {
