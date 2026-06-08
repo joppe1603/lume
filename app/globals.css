@@ -288,12 +288,20 @@ body::after {
   background: #C9A96E;
 }
 .prose-journal a {
-  color: #C9A96E;
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  display: inline;
+  color: #B8935A;
+  background: #FDF8F0;
+  border: 1px solid rgba(201, 169, 110, 0.35);
+  border-radius: 5px;
+  padding: 1px 8px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 .prose-journal a:hover {
-  color: #B8935A;
+  background: rgba(201, 169, 110, 0.18);
+  border-color: rgba(201, 169, 110, 0.55);
+  color: #9A7A45;
 }
 .prose-journal .faq-cards {
   display: flex;
