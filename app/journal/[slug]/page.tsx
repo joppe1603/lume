@@ -34,7 +34,22 @@ type DynamicPost = {
 
 function sanitizeHtml(html: string): string {
   // Fix double-quoted hrefs: href=""/path"" → href="/path"
-  return html.replace(/href=""([^"]*?)""/g, 'href="$1"')
+  let result = html.replace(/href=""([^"]*?)""/g, 'href="$1"')
+
+  // Transform FAQ section: detect h2 heading with "vragen" or "faq", then
+  // wrap each subsequent h3+p pair in a styled card div
+  result = result.replace(
+    /(<h2>[^<]*(?:vragen|faq)[^<]*<\/h2>)([\s\S]*)$/i,
+    (_, heading, faqBody) => {
+      const cards = faqBody.replace(
+        /\s*<h3>([\s\S]*?)<\/h3>\s*<p>([\s\S]*?)<\/p>/gi,
+        '\n<div class="faq-card"><p class="faq-q">$1</p><p class="faq-a">$2</p></div>'
+      )
+      return heading + '\n<div class="faq-cards">' + cards + '\n</div>'
+    }
+  )
+
+  return result
 }
 
 async function getDynamicPost(slug: string): Promise<DynamicPost | null> {
