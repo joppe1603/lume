@@ -102,6 +102,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly' as const,
       priority: 0.9,
     },
+    {
+      url: `${BASE_URL}/products/reset-serum/voor-combinatiehuid`,
+      lastModified: new Date('2026-06-08'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/products/reset-serum/voor-vette-huid`,
+      lastModified: new Date('2026-06-08'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/products/reset-serum/voor-40-plus`,
+      lastModified: new Date('2026-06-08'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/products/reset-serum/voor-zonschade`,
+      lastModified: new Date('2026-06-08'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
   ]
 
   return [

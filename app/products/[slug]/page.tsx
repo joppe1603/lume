@@ -425,6 +425,10 @@ export default async function ProductPage({
                   { href: '/products/reset-serum/voor-droge-huid', label: 'Droge huid', desc: 'Zonder uitdroging' },
                   { href: '/products/reset-serum/voor-ongelijke-huidtextuur', label: 'Huidtextuur', desc: 'Gladde, verfijnde poriën' },
                   { href: '/products/reset-serum/voor-30-plus', label: '30+ anti-aging', desc: 'Preventieve collageenstimulatie' },
+                  { href: '/products/reset-serum/voor-combinatiehuid', label: 'Combinatiehuid', desc: 'T-zone en wangen in balans' },
+                  { href: '/products/reset-serum/voor-vette-huid', label: 'Vette huid', desc: 'Minder glans, kleinere poriën' },
+                  { href: '/products/reset-serum/voor-40-plus', label: '40+ anti-aging', desc: 'Diepere rimpels aanpakken' },
+                  { href: '/products/reset-serum/voor-zonschade', label: 'Zonschade', desc: 'Fotoveroudering terugdraaien' },
                 ].map((item) => (
                   <Link
                     key={item.href}
