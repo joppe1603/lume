@@ -401,6 +401,52 @@ export default async function ProductPage({
         {/* ─── 9. FAQ ───────────────────────────────────── */}
         <PDPFaq productName={product.name} />
 
+        {/* ─── 9e. USE-CASE LINKS (reset-serum only) ────── */}
+        {slug === 'reset-serum' && (
+          <section className="py-16 bg-[#FAF8F5] border-t border-stone-100">
+            <div className="max-w-5xl mx-auto px-6 sm:px-8">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-5 h-px bg-[#C9A96E]" />
+                <span className="section-label">Specifiek voor jou</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-semibold text-[#1A1A1A] mb-2 leading-tight">
+                Reset Serum voor jouw huidtype
+              </h2>
+              <p className="text-[14px] text-[#9A9590] font-light mb-8">
+                Elke huid is anders. Lees hoe Reset Serum werkt voor jouw specifieke huidkwestie.
+              </p>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                {[
+                  { href: '/products/reset-serum/voor-gevoelige-huid', label: 'Gevoelige huid', desc: 'Retinol zonder irritatie' },
+                  { href: '/products/reset-serum/voor-acne-littekens', label: 'Acne littekens', desc: 'Post-acne pigmentatie vervaagt' },
+                  { href: '/products/reset-serum/voor-rimpels', label: 'Rimpels', desc: 'Klinisch bewezen anti-aging' },
+                  { href: '/products/reset-serum/voor-pigmentatie', label: 'Pigmentatie', desc: 'Donkere vlekken bij de bron' },
+                  { href: '/products/reset-serum/voor-beginners', label: 'Beginners', desc: 'Eerste keer retinol' },
+                  { href: '/products/reset-serum/voor-droge-huid', label: 'Droge huid', desc: 'Zonder uitdroging' },
+                  { href: '/products/reset-serum/voor-ongelijke-huidtextuur', label: 'Huidtextuur', desc: 'Gladde, verfijnde poriën' },
+                  { href: '/products/reset-serum/voor-30-plus', label: '30+ anti-aging', desc: 'Preventieve collageenstimulatie' },
+                ].map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="group flex flex-col bg-white rounded-xl border border-stone-100 p-4 hover:border-[#C9A96E]/40 hover:shadow-sm transition-all duration-300"
+                  >
+                    <span className="text-[13px] font-semibold text-[#1A1A1A] group-hover:text-[#C9A96E] transition-colors mb-1">
+                      {item.label}
+                    </span>
+                    <span className="text-[11px] text-[#9A9590] font-light leading-snug flex-1">
+                      {item.desc}
+                    </span>
+                    <span className="mt-3 text-[10px] font-medium text-[#C9A96E] group-hover:underline underline-offset-2">
+                      Lees meer →
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* ─── 9d. JOURNAL LINKS ────────────────────────── */}
         <section className="py-16 bg-white border-t border-stone-100">
           <div className="max-w-3xl mx-auto px-6 sm:px-8">
