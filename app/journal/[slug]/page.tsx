@@ -223,8 +223,13 @@ function stripHtml(html: string): string {
 function extractFaqItems(html: string): Array<{ q: string; a: string }> {
   const faqMatch = html.match(/<h2>[^<]*(?:vragen|faq)[^<]*<\/h2>([\s\S]*)$/i)
   if (!faqMatch) return []
-  const pairs = [...faqMatch[1].matchAll(/<h3>([\s\S]*?)<\/h3>\s*<p>([\s\S]*?)<\/p>/gi)]
-  return pairs.map(([, q, a]) => ({ q: stripHtml(q), a: stripHtml(a) }))
+  const items: Array<{ q: string; a: string }> = []
+  const re = /<h3>([\s\S]*?)<\/h3>\s*<p>([\s\S]*?)<\/p>/gi
+  let m: RegExpExecArray | null
+  while ((m = re.exec(faqMatch[1])) !== null) {
+    items.push({ q: stripHtml(m[1]), a: stripHtml(m[2]) })
+  }
+  return items
 }
 
 export default async function JournalPostPage({
