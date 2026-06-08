@@ -53,6 +53,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.95,
   }))
 
+  const useCaseEntries: MetadataRoute.Sitemap = [
+    {
+      url: `${BASE_URL}/products/reset-serum/voor-gevoelige-huid`,
+      lastModified: new Date('2026-06-08'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
+  ]
+
   return [
     {
       url: BASE_URL,
@@ -61,6 +70,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     },
     ...productEntries,
+    ...useCaseEntries,
     {
       url: `${BASE_URL}/shop`,
       lastModified: new Date('2026-06-08'),
