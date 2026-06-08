@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAUYI — Instagram Story</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #C9A96E;
+      --gold-light: #E8C98A;
+      --dark: #0A0908;
+      --stone: #9A9590;
+      --warm: #FAF8F5;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #2A2520;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px;
+      gap: 20px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* ── Story card — 9:16 ── */
+    .card {
+      width: 405px;
+      height: 720px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.55), 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .slide {
+      width: 100%; height: 100%;
+      position: absolute; top: 0; left: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .slide.active { opacity: 1; pointer-events: auto; }
+
+    /* ── Tap zones ── */
+    .tap-prev {
+      position: absolute; left: 0; top: 0; width: 40%; height: 100%;
+      z-index: 10; cursor: pointer;
+    }
+    .tap-next {
+      position: absolute; right: 0; top: 0; width: 60%; height: 100%;
+      z-index: 10; cursor: pointer;
+    }
+
+    /* ── Progress bar ── */
+    .progress-bar {
+      position: absolute;
+      top: 12px; left: 12px; right: 12px;
+      display: flex;
+      gap: 4px;
+      z-index: 20;
+    }
+    .progress-seg {
+      flex: 1;
+      height: 2px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .progress-seg.done { background: rgba(255,255,255,0.85); }
+    .progress-seg.active { background: rgba(255,255,255,0.25); position: relative; }
+    .progress-seg.active::after {
+      content: '';
+      position: absolute; left: 0; top: 0; height: 100%;
+      background: rgba(255,255,255,0.85);
+      animation: fillBar 4s linear forwards;
+      border-radius: 2px;
+    }
+    @keyframes fillBar { from { width: 0% } to { width: 100% } }
+
+    /* ── Account bar ── */
+    .account-bar {
+      position: absolute;
+      top: 24px; left: 12px; right: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 20;
+    }
+    .account-avatar {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.5);
+      display: flex; align-items: center; justify-content: center;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .account-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: white;
+      letter-spacing: 0.02em;
+    }
+    .account-time {
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+      margin-left: 4px;
+    }
+
+    /* ════════════════════════════════
+       SLIDE 1 — Hook
+       Achtergrond: huid close-up
+    ════════════════════════════════ */
+    .s1 {
+      background: url('/editorial-avond.jpg') center / cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 0 60px;
+    }
+    .s1::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(10,9,8,0.25) 0%,
+        rgba(10,9,8,0.1) 30%,
+        rgba(10,9,8,0.65) 65%,
+        rgba(10,9,8,0.92) 100%
+      );
+    }
+    .s1-content {
+      position: relative;
+      padding: 0 36px;
+    }
+    .s1-eyebrow {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .s1-eyebrow::before {
+      content: '';
+      width: 18px; height: 1px;
+      background: var(--gold);
+      display: inline-block;
+    }
+    .s1-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px;
+      font-weight: 600;
+      line-height: 1.0;
+      color: white;
+      margin-bottom: 18px;
+    }
+    .s1-sub {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      font-weight: 300;
+      line-height: 1.6;
+      letter-spacing: 0.01em;
+    }
+    .swipe-up {
+      margin-top: 28px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ════════════════════════════════
+       SLIDE 2 — Probleem
+       Puur donker, typografie
+    ════════════════════════════════ */
+    .s2 {
+      background: var(--dark);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 40px 60px;
+      overflow: hidden;
+    }
+    .s2::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 340px; height: 340px;
+      background: radial-gradient(circle, rgba(201,169,110,0.06) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .s2-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+    }
+    .s2-question {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 40px;
+      font-weight: 600;
+      line-height: 1.1;
+      color: white;
+      margin-bottom: 32px;
+    }
+    .s2-question em {
+      font-style: italic;
+      color: rgba(255,255,255,0.55);
+    }
+    .s2-facts {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .s2-fact {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .s2-fact-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+    .s2-fact-text {
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.5);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+    .s2-fact-text strong {
+      color: rgba(255,255,255,0.85);
+      font-weight: 500;
+    }
+
+    /* ════════════════════════════════
+       SLIDE 3 — Inzicht
+       Achtergrond: ingrediënt foto
+    ════════════════════════════════ */
+    .s3 {
+      background: url('/ingredient-retinol.jpg') center / cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0;
+    }
+    .s3::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(10,9,8,0.15) 0%,
+        rgba(10,9,8,0.0) 25%,
+        rgba(10,9,8,0.75) 60%,
+        rgba(10,9,8,0.97) 100%
+      );
+    }
+    .s3-content {
+      position: relative;
+      padding: 36px 36px 60px;
+    }
+    .s3-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .s3-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 44px;
+      font-weight: 600;
+      line-height: 1.05;
+      color: white;
+      margin-bottom: 24px;
+    }
+    .s3-items {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .s3-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 10px;
+    }
+    .s3-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .s3-item-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.01em;
+    }
+    .s3-item-role {
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      font-weight: 300;
+      text-align: right;
+      max-width: 150px;
+    }
+
+    /* ════════════════════════════════
+       SLIDE 4 — Product / Oplossing
+       Achtergrond: productfoto
+    ════════════════════════════════ */
+    .s4 {
+      background: url('/reset-serum-new.jpg') center / cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0;
+    }
+    .s4::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(10,9,8,0.0) 0%,
+        rgba(10,9,8,0.0) 35%,
+        rgba(10,9,8,0.7) 62%,
+        rgba(10,9,8,0.96) 100%
+      );
+    }
+    .s4-content {
+      position: relative;
+      padding: 32px 36px 60px;
+    }
+    .s4-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(201,169,110,0.3);
+      border-radius: 100px;
+      padding: 5px 12px;
+      margin-bottom: 18px;
+    }
+    .s4-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 600;
+      line-height: 1.0;
+      color: white;
+      margin-bottom: 6px;
+    }
+    .s4-sub {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      font-weight: 300;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+    .s4-specs {
+      display: flex;
+      gap: 20px;
+    }
+    .s4-spec {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .s4-spec-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .s4-spec-label {
+      font-size: 9px;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ════════════════════════════════
+       SLIDE 5 — CTA
+       Puur donker, goud accent
+    ════════════════════════════════ */
+    .s5 {
+      background: var(--dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 44px 80px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .s5::before {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(201,169,110,0.09) 0%, transparent 65%);
+      border-radius: 50%;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .s5 > * { position: relative; z-index: 1; }
+    .s5-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 48px;
+    }
+    .s5-logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      color: white;
+    }
+    .s5-divider {
+      width: 28px; height: 1px;
+      background: rgba(201,169,110,0.4);
+      margin: 0 auto 44px;
+    }
+    .s5-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 46px;
+      font-weight: 600;
+      line-height: 1.1;
+      color: white;
+      margin-bottom: 20px;
+    }
+    .s5-headline em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 55%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .s5-sub {
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.35);
+      font-weight: 300;
+      line-height: 1.65;
+      margin-bottom: 52px;
+      letter-spacing: 0.01em;
+    }
+    .s5-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 15px 40px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--dark);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+    .s5-link {
+      font-size: 11px;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Nav dots ── */
+    .dots {
+      display: flex; gap: 6px; align-items: center;
+    }
+    .dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .dot.active {
+      background: white;
+      width: 16px;
+      border-radius: 3px;
+    }
+
+    .hint {
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.04em;
+    }
+
+    .download-btn {
+      margin-top: 4px;
+      padding: 11px 28px;
+      background: var(--gold);
+      color: var(--dark);
+      border: none;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: opacity 0.2s;
+    }
+    .download-btn:hover { opacity: 0.85; }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <div class="card">
+
+      <!-- Progress bar -->
+      <div class="progress-bar" id="progressBar">
+        <div class="progress-seg done"></div>
+        <div class="progress-seg"></div>
+        <div class="progress-seg"></div>
+        <div class="progress-seg"></div>
+        <div class="progress-seg"></div>
+      </div>
+
+      <!-- Account bar -->
+      <div class="account-bar">
+        <div class="account-avatar">
+          <svg width="14" height="14" viewBox="0 0 30 30" fill="none">
+            <circle cx="15" cy="15" r="13" fill="#0A0908"/>
+            <circle cx="19" cy="15" r="10" fill="white" opacity="0.9"/>
+          </svg>
+        </div>
+        <span class="account-name">mauyiskincare</span>
+        <span class="account-time">nu</span>
+      </div>
+
+      <!-- Tap zones -->
+      <div class="tap-prev" onclick="changeSlide(-1)"></div>
+      <div class="tap-next" onclick="changeSlide(1)"></div>
+
+      <!-- ══ SLIDE 1 — Hook ══ -->
+      <div class="slide s1 active">
+        <div class="s1-content">
+          <p class="s1-eyebrow">Merkverhaal</p>
+          <h1 class="s1-headline">Wij<br>begonnen<br>met een<br>vraag.</h1>
+          <p class="s1-sub">Waarom heeft gevoelige huid<br>altijd drie losse serums nodig?</p>
+          <div class="swipe-up">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            Tik voor meer
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SLIDE 2 — Probleem ══ -->
+      <div class="slide s2">
+        <p class="s2-label">Het probleem</p>
+        <p class="s2-question">Retinol.<br>Niacinamide.<br><em>Altijd apart.</em></p>
+        <div class="s2-facts">
+          <div class="s2-fact">
+            <div class="s2-fact-dot"></div>
+            <p class="s2-fact-text"><strong>Retinol irriteert</strong> gevoelige huid bij verkeerd gebruik</p>
+          </div>
+          <div class="s2-fact">
+            <div class="s2-fact-dot"></div>
+            <p class="s2-fact-text"><strong>Niacinamide beschermt</strong> — maar wordt apart verkocht</p>
+          </div>
+          <div class="s2-fact">
+            <div class="s2-fact-dot"></div>
+            <p class="s2-fact-text">Drie producten layeren betekent<strong> drie kansen op fouten</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SLIDE 3 — Inzicht ══ -->
+      <div class="slide s3">
+        <div class="s3-content">
+          <p class="s3-label">Wat de wetenschap zegt</p>
+          <h2 class="s3-headline">Ze werken<br>beter<br>samen.</h2>
+          <div class="s3-items">
+            <div class="s3-item">
+              <span class="s3-item-name">Retinol 0.3%</span>
+              <span class="s3-item-role">vernieuwt &amp; verbetert textuur</span>
+            </div>
+            <div class="s3-item">
+              <span class="s3-item-name">Niacinamide 10%</span>
+              <span class="s3-item-role">beschermt &amp; kalmeert</span>
+            </div>
+            <div class="s3-item">
+              <span class="s3-item-name">Bakuchiol 0.5%</span>
+              <span class="s3-item-role">verhoogt tolerantie</span>
+            </div>
+            <div class="s3-item">
+              <span class="s3-item-name">Hyaluronzuur ×3</span>
+              <span class="s3-item-role">72u hydratatie</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SLIDE 4 — Oplossing ══ -->
+      <div class="slide s4">
+        <div class="s4-content">
+          <div class="s4-badge">
+            <svg width="7" height="7" viewBox="0 0 8 8" fill="var(--gold)"><circle cx="4" cy="4" r="3"/></svg>
+            Night Reset Ritual
+          </div>
+          <h2 class="s4-headline">Dus maakten<br>we één<br>formule.</h2>
+          <p class="s4-sub">Zonder parfum. Zonder concessies.</p>
+          <div class="s4-specs">
+            <div class="s4-spec">
+              <span class="s4-spec-value">1</span>
+              <span class="s4-spec-label">product</span>
+            </div>
+            <div class="s4-spec">
+              <span class="s4-spec-value">4</span>
+              <span class="s4-spec-label">actieven</span>
+            </div>
+            <div class="s4-spec">
+              <span class="s4-spec-value">€58</span>
+              <span class="s4-spec-label">30ml</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SLIDE 5 — CTA ══ -->
+      <div class="slide s5">
+        <div class="s5-logo">
+          <svg width="22" height="22" viewBox="0 0 30 30" fill="none">
+            <circle cx="15" cy="15" r="13" fill="#C9A96E"/>
+            <circle cx="19" cy="15" r="10" fill="#0A0908"/>
+          </svg>
+          <span class="s5-logo-text">MAUYI</span>
+        </div>
+        <div class="s5-divider"></div>
+        <h2 class="s5-headline">Voor huid die<br>te veel heeft<br><em>meegemaakt.</em></h2>
+        <p class="s5-sub">Reset Serum — Retinol 0.3% + Niacinamide 10%<br>+ Bakuchiol. Parfumvrij. Voor gevoelige huid.</p>
+        <div class="s5-cta">
+          Bestel nu
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+        <p class="s5-link">mauyi.nl · link in bio</p>
+      </div>
+
+    </div><!-- /card -->
+  </div><!-- /wrapper -->
+
+  <!-- Controls -->
+  <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+    <div class="dots">
+      <div class="dot active" onclick="goSlide(0)"></div>
+      <div class="dot" onclick="goSlide(1)"></div>
+      <div class="dot" onclick="goSlide(2)"></div>
+      <div class="dot" onclick="goSlide(3)"></div>
+      <div class="dot" onclick="goSlide(4)"></div>
+    </div>
+    <p class="hint">← → pijltjestoetsen &nbsp;·&nbsp; tik op de kaart</p>
+    <button class="download-btn" onclick="downloadAll()">↓ Download alle 5 slides</button>
+  </div>
+
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script>
+    let current = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots   = document.querySelectorAll('.dot');
+    const segs   = document.querySelectorAll('.progress-seg');
+    const names  = [
+      'mauyi-story-1-hook',
+      'mauyi-story-2-probleem',
+      'mauyi-story-3-inzicht',
+      'mauyi-story-4-product',
+      'mauyi-story-5-cta'
+    ];
+
+    function updateProgress(n) {
+      segs.forEach((s, i) => {
+        s.className = 'progress-seg';
+        if (i < n) s.classList.add('done');
+        if (i === n) s.classList.add('active');
+      });
+    }
+
+    function goSlide(n) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = ((n % slides.length) + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+      updateProgress(current);
+    }
+
+    function changeSlide(dir) { goSlide(current + dir); }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   changeSlide(-1);
+    });
+
+    async function downloadAll() {
+      const card = document.querySelector('.card');
+      for (let i = 0; i < slides.length; i++) {
+        slides.forEach((s, j) => {
+          s.style.opacity = j === i ? '1' : '0';
+          s.style.transition = 'none';
+        });
+        // Hide UI overlays for clean export
+        document.querySelector('.progress-bar').style.display = 'none';
+        document.querySelector('.account-bar').style.display = 'none';
+        document.querySelectorAll('.tap-prev, .tap-next').forEach(el => el.style.display = 'none');
+        await new Promise(r => setTimeout(r, 150));
+        const canvas = await html2canvas(card, {
+          scale: 2,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: null,
+          width: 405,
+          height: 720
+        });
+        // Restore overlays
+        document.querySelector('.progress-bar').style.display = '';
+        document.querySelector('.account-bar').style.display = '';
+        document.querySelectorAll('.tap-prev, .tap-next').forEach(el => el.style.display = '');
+        const link = document.createElement('a');
+        link.download = names[i] + '.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        await new Promise(r => setTimeout(r, 350));
+      }
+      // Restore
+      slides.forEach((s, j) => {
+        s.style.opacity = '';
+        s.style.transition = '';
+      });
+      goSlide(current);
+    }
+  </script>
+</body>
+</html>
