@@ -60,6 +60,48 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly' as const,
       priority: 0.9,
     },
+    {
+      url: `${BASE_URL}/products/reset-serum/voor-acne-littekens`,
+      lastModified: new Date('2026-06-08'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/products/reset-serum/voor-rimpels`,
+      lastModified: new Date('2026-06-08'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/products/reset-serum/voor-pigmentatie`,
+      lastModified: new Date('2026-06-08'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/products/reset-serum/voor-beginners`,
+      lastModified: new Date('2026-06-08'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/products/reset-serum/voor-droge-huid`,
+      lastModified: new Date('2026-06-08'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/products/reset-serum/voor-ongelijke-huidtextuur`,
+      lastModified: new Date('2026-06-08'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/products/reset-serum/voor-30-plus`,
+      lastModified: new Date('2026-06-08'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
   ]
 
   return [
