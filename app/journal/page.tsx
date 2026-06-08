@@ -10,6 +10,7 @@ export const revalidate = 60 // refetch Supabase posts every 60 seconds
 export const metadata: Metadata = {
   title: 'Journal — Huidverzorging op Wetenschap',
   description: 'MAUYI Journal: eerlijke artikelen over retinol, niacinamide, bakuchiol, huidbarrière en skincare routines. Geen marketing — wel wetenschap.',
+  alternates: { canonical: 'https://mauyi.nl/journal' },
 }
 
 async function getDynamicPosts(): Promise<DynamicPostSummary[]> {

@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 export const metadata: Metadata = {
   title: 'Pers & Media | MAUYI',
   description: 'Persmateriaal voor MAUYI — productspecificaties, merkfeitjes, foto\'s en contactgegevens voor redacteuren en journalisten.',
+  alternates: { canonical: 'https://mauyi.nl/press' },
   openGraph: {
     title: 'Pers & Media | MAUYI',
     description: 'Persmateriaal voor MAUYI — productspecificaties, merkfeitjes en contactgegevens voor redacteuren en journalisten.',

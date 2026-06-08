@@ -6,6 +6,7 @@ import PhilosophyPageContent from '@/components/PhilosophyPageContent'
 export const metadata: Metadata = {
   title: 'Filosofie — Waarom Minder Huidverzorging Beter Werkt',
   description: 'De filosofie achter MAUYI: minder producten, betere formuleringen. Waarom wij geloven in wetenschappelijke eenvoud boven een complexe skincare routine.',
+  alternates: { canonical: 'https://mauyi.nl/philosophy' },
 }
 
 export default function PhilosophyPage() {

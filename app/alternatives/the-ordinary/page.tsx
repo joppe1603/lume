@@ -7,7 +7,7 @@ import Footer from '@/components/Footer'
 const BASE_URL = 'https://mauyi.nl'
 
 export const metadata: Metadata = {
-  title: 'The Ordinary Alternatief (2024): MAUYI als eenvoudiger alternatief | MAUYI',
+  title: `The Ordinary Alternatief (${new Date().getFullYear()}): MAUYI als eenvoudiger alternatief | MAUYI`,
   description: 'Op zoek naar een alternatief voor The Ordinary? MAUYI combineert retinol 0.3%, niacinamide 10% en hyaluronzuur in één formule — geen combinatiepuzzel, minder irritatie. Eerlijke vergelijking.',
   alternates: {
     canonical: `${BASE_URL}/alternatives/the-ordinary`,

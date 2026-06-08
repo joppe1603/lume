@@ -6,6 +6,7 @@ import WaaromMauyiContent from './WaaromMauyiContent'
 export const metadata: Metadata = {
   title: 'Waarom MAUYI | Huidverzorging zonder compromis',
   description: 'MAUYI bestaat omdat de huidverzorgingsindustrie te ingewikkeld is geworden. Lees onze filosofie, onze principes en wat we bewust weglaten.',
+  alternates: { canonical: 'https://mauyi.nl/waarom-mauyi' },
 }
 
 export default function WaaromMauyiPage() {

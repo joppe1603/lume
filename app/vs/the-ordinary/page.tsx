@@ -6,7 +6,7 @@ import Footer from '@/components/Footer'
 const BASE_URL = 'https://mauyi.nl'
 
 export const metadata: Metadata = {
-  title: 'MAUYI vs The Ordinary: eerlijke vergelijking (2024) | MAUYI',
+  title: `MAUYI vs The Ordinary: eerlijke vergelijking (${new Date().getFullYear()}) | MAUYI`,
   description: 'MAUYI vs The Ordinary — wat is het verschil? Vergelijk ingrediënten, formules, prijzen en gebruiksgemak. Welke past bij jouw huid en routine?',
   openGraph: {
     title: 'MAUYI vs The Ordinary | MAUYI',

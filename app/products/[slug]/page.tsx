@@ -420,9 +420,9 @@ export default async function ProductPage({
                   className="group flex flex-col bg-[#FAF8F5] rounded-xl border border-stone-100 p-5 hover:border-[#C9A96E]/30 hover:bg-white hover:shadow-sm transition-all duration-300"
                 >
                   <span className="section-label block mb-2">{article.category}</span>
-                  <p className="text-[14px] font-medium text-[#1A1A1A] leading-snug group-hover:text-[#C9A96E] transition-colors flex-1">
+                  <h3 className="text-[14px] font-medium text-[#1A1A1A] leading-snug group-hover:text-[#C9A96E] transition-colors flex-1">
                     {article.title}
-                  </p>
+                  </h3>
                   <span className="mt-4 text-[11px] text-[#C9A96E] font-medium group-hover:underline underline-offset-2">
                     Lees artikel →
                   </span>

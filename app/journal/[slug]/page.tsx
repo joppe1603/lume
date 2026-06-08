@@ -271,10 +271,21 @@ export default async function JournalPostPage({
       })),
     } : null
 
+    const breadcrumbSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
+        { '@type': 'ListItem', position: 2, name: 'Journal', item: `${BASE_URL}/journal` },
+        { '@type': 'ListItem', position: 3, name: dyn.title, item: `${BASE_URL}/journal/${slug}` },
+      ],
+    }
+
     return (
       <>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
         {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
         <Navbar />
         <main className="bg-[#FAF8F5] min-h-screen">
           <div className="bg-white border-b border-stone-100">
@@ -330,9 +341,9 @@ export default async function JournalPostPage({
                       <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#C9A96E] mb-2 block">
                         {r.category}
                       </span>
-                      <p className="text-[14px] font-medium text-[#1A1A1A] leading-snug group-hover:text-[#C9A96E] transition-colors line-clamp-3">
+                      <h3 className="text-[14px] font-medium text-[#1A1A1A] leading-snug group-hover:text-[#C9A96E] transition-colors line-clamp-3">
                         {r.title}
-                      </p>
+                      </h3>
                       <p className="text-[12px] text-[#9A9590] mt-2">{r.readTime} lezen</p>
                     </Link>
                   ))}
@@ -482,9 +493,9 @@ export default async function JournalPostPage({
                     <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#C9A96E] mb-2 block">
                       {r.category}
                     </span>
-                    <p className="text-[14px] font-medium text-[#1A1A1A] leading-snug group-hover:text-[#C9A96E] transition-colors line-clamp-3">
+                    <h3 className="text-[14px] font-medium text-[#1A1A1A] leading-snug group-hover:text-[#C9A96E] transition-colors line-clamp-3">
                       {r.title}
-                    </p>
+                    </h3>
                     <p className="text-[12px] text-[#9A9590] mt-2">{r.readTime} lezen</p>
                   </Link>
                 ))}

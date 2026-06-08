@@ -78,9 +78,15 @@ const organizationSchema = {
   '@type': 'Organization',
   name: 'MAUYI',
   url: BASE_URL,
+  logo: {
+    '@type': 'ImageObject',
+    url: `${BASE_URL}/logo.png`,
+    width: 512,
+    height: 512,
+  },
   description: 'Premium Nederlands huidverzorgingsmerk gebouwd op klinische wetenschap.',
   contactPoint: { '@type': 'ContactPoint', email: 'hallo@mauyi.nl', contactType: 'customer service' },
-  sameAs: ['https://www.instagram.com/mauyi', 'https://www.tiktok.com/@mauyi'],
+  sameAs: ['https://www.instagram.com/mauyiskincare', 'https://www.tiktok.com/@mauyi'],
 }
 
 const websiteSchema = {

@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: 'Veelgestelde Vragen — MAUYI Huidverzorging',
   description:
     'Veelgestelde vragen over MAUYI Reset Serum, retinol, niacinamide, ingrediënten, levering en gebruik. Eerlijke antwoorden over huidverzorging op wetenschap.',
+  alternates: { canonical: 'https://mauyi.nl/faq' },
 }
 
 const faqSchema = {
