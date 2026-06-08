@@ -451,6 +451,41 @@ export default async function ProductPage({
           </section>
         )}
 
+        {/* ─── 9f. ALTERNATIEVEN LINKS (reset-serum only) ── */}
+        {slug === 'reset-serum' && (
+          <section className="py-12 bg-white border-t border-stone-100">
+            <div className="max-w-5xl mx-auto px-6 sm:px-8">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-5 h-px bg-[#C9A96E]" />
+                <span className="section-label">Vergelijken</span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-semibold text-[#1A1A1A] mb-2 leading-tight">
+                MAUYI vs bekende merken
+              </h2>
+              <p className="text-[13px] text-[#9A9590] font-light mb-6">
+                Eerlijke vergelijking met retinolproducten die je misschien al kent.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { href: '/alternatives/the-ordinary', label: 'vs The Ordinary' },
+                  { href: '/alternatives/cerave', label: 'vs CeraVe' },
+                  { href: '/alternatives/la-roche-posay', label: 'vs La Roche-Posay' },
+                  { href: '/alternatives/paulas-choice', label: "vs Paula's Choice" },
+                  { href: '/alternatives/indeed-labs', label: 'vs Indeed Labs' },
+                ].map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="text-[12px] font-medium text-[#6B6560] bg-stone-100 hover:bg-[#C9A96E]/10 hover:text-[#C9A96E] border border-stone-200 hover:border-[#C9A96E]/30 px-3 py-1.5 rounded-lg transition-all duration-200"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* ─── 9d. JOURNAL LINKS ────────────────────────── */}
         <section className="py-16 bg-white border-t border-stone-100">
           <div className="max-w-3xl mx-auto px-6 sm:px-8">

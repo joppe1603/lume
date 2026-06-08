@@ -188,7 +188,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${BASE_URL}/alternatives/the-ordinary`,
-      lastModified: new Date('2025-06-01'),
+      lastModified: new Date('2026-06-08'),
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+    {
+      url: `${BASE_URL}/alternatives/cerave`,
+      lastModified: new Date('2026-06-08'),
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+    {
+      url: `${BASE_URL}/alternatives/la-roche-posay`,
+      lastModified: new Date('2026-06-08'),
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+    {
+      url: `${BASE_URL}/alternatives/paulas-choice`,
+      lastModified: new Date('2026-06-08'),
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+    {
+      url: `${BASE_URL}/alternatives/indeed-labs`,
+      lastModified: new Date('2026-06-08'),
       changeFrequency: 'monthly',
       priority: 0.85,
     },
