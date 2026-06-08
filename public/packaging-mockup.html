@@ -5,678 +5,335 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MAUYI — Packaging Mockup</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --gold: #C9A96E;
-      --gold-light: #E8C98A;
-      --gold-dim: rgba(201,169,110,0.35);
-      --dark: #0A0908;
-      --box-dark: #131110;
-      --box-side: #0D0C0B;
-      --box-top: #1A1714;
-    }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
-      background: #111009;
+      background: #0D0B09;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      padding: 48px 24px;
       font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-      padding: 60px 24px;
-      gap: 0;
     }
-
-    /* ── Grain overlay ── */
     .grain {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 100;
-      opacity: 0.04;
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 50; opacity: 0.04;
     }
-
-    /* ── Ambient light ── */
     .ambient {
-      position: fixed;
-      top: -200px; left: 50%;
-      transform: translateX(-50%);
-      width: 900px; height: 600px;
-      background: radial-gradient(ellipse, rgba(201,169,110,0.07) 0%, transparent 65%);
+      position: fixed; top: 0; left: 50%; transform: translateX(-50%);
+      width: 1100px; height: 600px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(201,169,110,0.07) 0%, transparent 60%);
       pointer-events: none;
     }
-
-    /* ── Stage ── */
-    .stage {
-      position: relative;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      gap: 20px;
-      perspective: 1800px;
-      padding-bottom: 40px;
-    }
-
-    /* ═══════════════════════════════════
-       3D BOX
-    ═══════════════════════════════════ */
-    .box-wrap {
-      position: relative;
-      transform-style: preserve-3d;
-      transform: rotateX(8deg) rotateY(-32deg);
-      width: 220px;
-      height: 280px;
-      margin-right: -28px;
-      z-index: 1;
-    }
-
-    .face {
-      position: absolute;
-      backface-visibility: visible;
-    }
-
-    /* Front face */
-    .face-front {
-      width: 220px;
-      height: 280px;
-      background: var(--box-dark);
-      transform: translateZ(65px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(201,169,110,0.08);
-      overflow: hidden;
-    }
-    .face-front::before {
-      content: '';
-      position: absolute;
-      inset: 8px;
-      border: 0.5px solid rgba(201,169,110,0.12);
-      pointer-events: none;
-    }
-
-    /* Right side face */
-    .face-right {
-      width: 130px;
-      height: 280px;
-      background: var(--box-side);
-      transform: rotateY(90deg) translateZ(155px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(0,0,0,0.5);
-    }
-
-    /* Top face */
-    .face-top {
-      width: 220px;
-      height: 130px;
-      background: var(--box-top);
-      transform: rotateX(90deg) translateZ(-140px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(201,169,110,0.06);
-    }
-
-    /* ── Front face content ── */
-    .front-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-      position: relative;
-      z-index: 1;
-      padding: 0 20px;
-      text-align: center;
-    }
-    .box-eyebrow {
-      font-size: 6px;
-      font-weight: 700;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--gold);
-      opacity: 0.7;
-      margin-bottom: 14px;
-    }
-    .box-brand {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 42px;
-      font-weight: 300;
-      letter-spacing: 0.32em;
-      color: #F5F2EC;
-      line-height: 1;
-      margin-bottom: 12px;
-    }
-    .box-divider {
-      width: 28px;
-      height: 0.5px;
-      background: var(--gold);
-      opacity: 0.45;
-      margin-bottom: 10px;
-    }
-    .box-product {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(245,242,236,0.6);
-      margin-bottom: 18px;
-    }
-    .box-moon {
-      width: 16px;
-      height: 16px;
-      margin-bottom: 18px;
-      opacity: 0.5;
-    }
-    .box-formula {
-      font-size: 5.5px;
-      font-weight: 400;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(201,169,110,0.55);
-      line-height: 2.2;
-      text-align: center;
-    }
-    .box-vol {
-      position: absolute;
-      bottom: 16px;
-      right: 18px;
-      font-size: 6px;
-      letter-spacing: 0.18em;
-      color: rgba(245,242,236,0.25);
-      font-weight: 400;
-    }
-    .box-nl {
-      position: absolute;
-      bottom: 16px;
-      left: 18px;
-      font-size: 5px;
-      letter-spacing: 0.12em;
-      color: rgba(245,242,236,0.2);
-      font-weight: 300;
-    }
-
-    /* ── Right face content ── */
-    .side-inner {
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      transform: rotate(180deg);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-    .side-brand {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 11px;
-      font-weight: 300;
-      letter-spacing: 0.35em;
-      color: rgba(245,242,236,0.4);
-      text-transform: uppercase;
-    }
-    .side-dot {
-      width: 2px; height: 2px;
-      border-radius: 50%;
-      background: var(--gold);
-      opacity: 0.3;
-    }
-    .side-product {
-      font-size: 7px;
-      letter-spacing: 0.22em;
-      color: rgba(201,169,110,0.35);
-      text-transform: uppercase;
-      font-weight: 400;
-    }
-
-    /* ── Top face content ── */
-    .top-inner {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 9px;
-      letter-spacing: 0.3em;
-      color: rgba(245,242,236,0.25);
-      text-transform: uppercase;
-      font-weight: 300;
-    }
-
-    /* ── Box shadow on surface ── */
-    .box-shadow {
-      position: absolute;
-      bottom: -8px;
-      left: 50%; transform: translateX(-50%);
-      width: 220px; height: 30px;
-      background: radial-gradient(ellipse, rgba(0,0,0,0.6) 0%, transparent 70%);
-      filter: blur(8px);
-    }
-
-    /* ═══════════════════════════════════
-       DROPPER BOTTLE (SVG)
-    ═══════════════════════════════════ */
-    .bottle-wrap {
-      position: relative;
-      z-index: 2;
-      margin-bottom: -4px;
-      filter: drop-shadow(0 40px 40px rgba(0,0,0,0.7)) drop-shadow(0 8px 16px rgba(0,0,0,0.5));
-    }
-
-    .bottle-svg {
-      width: 150px;
+    .mockup-svg {
+      width: 100%;
+      max-width: 860px;
       height: auto;
     }
-
-    /* ── Bottle shadow ── */
-    .bottle-shadow {
-      position: absolute;
-      bottom: -12px;
-      left: 50%; transform: translateX(-50%);
-      width: 80px; height: 20px;
-      background: radial-gradient(ellipse, rgba(0,0,0,0.7) 0%, transparent 70%);
-      filter: blur(6px);
-    }
-
-    /* ── Surface line ── */
-    .surface {
-      width: 500px;
-      max-width: 90vw;
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(201,169,110,0.12), transparent);
-    }
-
-    /* ── Label under stage ── */
     .caption {
-      margin-top: 48px;
+      margin-top: 28px;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
-    .caption-brand {
+    .cap-brand {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 13px;
+      font-size: 11px;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: rgba(245,242,236,0.22);
       font-weight: 300;
-      letter-spacing: 0.45em;
-      color: rgba(245,242,236,0.35);
-      text-transform: uppercase;
     }
-    .caption-product {
-      font-size: 10px;
-      letter-spacing: 0.22em;
-      color: rgba(201,169,110,0.5);
+    .cap-product {
+      font-size: 9px;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
+      color: rgba(201,169,110,0.38);
       font-weight: 400;
     }
-    .caption-dot-row {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      margin-top: 6px;
-    }
-    .caption-spec {
-      font-size: 9px;
-      letter-spacing: 0.14em;
-      color: rgba(245,242,236,0.2);
-      text-transform: uppercase;
-    }
-    .caption-sep {
-      width: 2px; height: 2px;
-      border-radius: 50%;
-      background: rgba(201,169,110,0.25);
-    }
-
-    /* ── Download button ── */
     .dl-btn {
-      margin-top: 40px;
-      padding: 12px 28px;
-      border: 1px solid rgba(201,169,110,0.25);
+      margin-top: 28px;
+      padding: 10px 24px;
+      border: 1px solid rgba(201,169,110,0.18);
       border-radius: 100px;
       background: transparent;
-      color: rgba(201,169,110,0.7);
-      font-size: 10px;
+      color: rgba(201,169,110,0.5);
+      font-size: 9px;
       font-weight: 600;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.25s;
       font-family: 'Inter', sans-serif;
     }
-    .dl-btn:hover {
-      border-color: rgba(201,169,110,0.6);
-      color: var(--gold);
-      background: rgba(201,169,110,0.05);
-    }
-
-    /* ── Color variant swatches ── */
-    .variants {
-      margin-top: 32px;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-    .variant-label {
-      font-size: 9px;
-      letter-spacing: 0.18em;
-      color: rgba(245,242,236,0.2);
-      text-transform: uppercase;
-      margin-right: 6px;
-    }
-    .swatch {
-      width: 20px; height: 20px;
-      border-radius: 50%;
-      cursor: pointer;
-      border: 1.5px solid transparent;
-      transition: border-color 0.2s;
-    }
-    .swatch.active { border-color: var(--gold); }
-    .swatch-noir { background: #131110; }
-    .swatch-sand { background: #C8B89A; }
-    .swatch-forest { background: #2A3028; }
-
-    @media (max-width: 600px) {
-      .box-wrap {
-        transform: rotateX(6deg) rotateY(-28deg) scale(0.7);
-        transform-origin: bottom right;
-      }
-      .bottle-svg { width: 110px; }
-      .surface { width: 340px; }
-    }
+    .dl-btn:hover { border-color: rgba(201,169,110,0.45); color: #C9A96E; }
   </style>
 </head>
 <body>
 
-  <!-- Grain -->
   <svg class="grain" aria-hidden>
     <filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
     <rect width="100%" height="100%" filter="url(#g)"/>
   </svg>
-
   <div class="ambient"></div>
 
-  <!-- Stage -->
-  <div class="stage">
+  <!--
+    ISOMETRIC BOX  W=175  D=95  H=250
+    iso right  = (+0.866, +0.5)
+    iso depth  = (−0.866, +0.5)
+    iso up     = (0, −1)
+    Anchor P1 (front-bottom-left) = (270, 358)
 
-    <!-- 3D Box -->
-    <div class="box-wrap" id="box3d">
+    P1  front-bottom-left   = (270, 358)
+    P2  front-bottom-right  = (270+152, 358+88)  = (422, 446)
+    P3  back-bottom-left    = (270−82,  358+48)  = (188, 406)
+    P4  back-bottom-right   = (422−82,  446+48)  = (340, 494)  ← surface
+    P5  front-top-left      = (270, 108)
+    P6  front-top-right     = (422, 196)
+    P7  back-top-left       = (188, 156)
+    P8  back-top-right      = (340, 244)
 
-      <!-- Front face -->
-      <div class="face face-front">
-        <div class="front-inner">
-          <div class="box-eyebrow">Night Reset Ritual</div>
-          <div class="box-brand">MAUYI</div>
-          <div class="box-divider"></div>
-          <div class="box-product">Reset Serum</div>
+    Bottle  cx=570  body x 538–606 (w=68)  y 60–478
+  -->
 
-          <!-- Moon icon -->
-          <svg class="box-moon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7z" fill="#C9A96E" opacity="0.6"/>
-          </svg>
+  <svg class="mockup-svg" viewBox="0 0 860 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- Box faces -->
+      <linearGradient id="gFront" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%"   stop-color="#201C16"/>
+        <stop offset="100%" stop-color="#171410"/>
+      </linearGradient>
+      <linearGradient id="gRight" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%"   stop-color="#0D0B09"/>
+        <stop offset="100%" stop-color="#0A0908"/>
+      </linearGradient>
+      <linearGradient id="gTop" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#332E24"/>
+        <stop offset="100%" stop-color="#22201A"/>
+      </linearGradient>
 
-          <div class="box-formula">
-            Retinol 0.3%<br>
-            Niacinamide 10%<br>
-            Bakuchiol 0.5%<br>
-            Hyaluronzuur ×3
-          </div>
-        </div>
-        <div class="box-vol">30 ML</div>
-        <div class="box-nl">NL · mauyi.nl</div>
-      </div>
+      <!-- Bottle glass -->
+      <linearGradient id="gGlass" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%"   stop-color="#5A2E0E" stop-opacity="0.48"/>
+        <stop offset="12%"  stop-color="#8B5028" stop-opacity="0.66"/>
+        <stop offset="28%"  stop-color="#C07840" stop-opacity="0.78"/>
+        <stop offset="44%"  stop-color="#D99A56" stop-opacity="0.85"/>
+        <stop offset="54%"  stop-color="#E6AA62" stop-opacity="0.88"/>
+        <stop offset="70%"  stop-color="#C88844" stop-opacity="0.79"/>
+        <stop offset="86%"  stop-color="#9A5E28" stop-opacity="0.62"/>
+        <stop offset="100%" stop-color="#582608" stop-opacity="0.44"/>
+      </linearGradient>
+      <linearGradient id="gLiquid" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%"   stop-color="#2E1408" stop-opacity="0.40"/>
+        <stop offset="42%"  stop-color="#5A3018" stop-opacity="0.52"/>
+        <stop offset="62%"  stop-color="#663820" stop-opacity="0.48"/>
+        <stop offset="100%" stop-color="#2A1006" stop-opacity="0.36"/>
+      </linearGradient>
+      <linearGradient id="gHilight" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="white" stop-opacity="0.15"/>
+        <stop offset="60%"  stop-color="white" stop-opacity="0.04"/>
+        <stop offset="100%" stop-color="white" stop-opacity="0"/>
+      </linearGradient>
 
-      <!-- Right side face -->
-      <div class="face face-right">
-        <div class="side-inner">
-          <span class="side-brand">Mauyi</span>
-          <div class="side-dot"></div>
-          <span class="side-product">Reset Serum</span>
-          <div class="side-dot"></div>
-          <span class="side-brand" style="font-size:8px;opacity:0.6">30 ml</span>
-        </div>
-      </div>
+      <!-- Gold -->
+      <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%"   stop-color="#7A5220"/>
+        <stop offset="20%"  stop-color="#B88838"/>
+        <stop offset="44%"  stop-color="#D4A858"/>
+        <stop offset="55%"  stop-color="#EAC870"/>
+        <stop offset="80%"  stop-color="#C09038"/>
+        <stop offset="100%" stop-color="#7A5220"/>
+      </linearGradient>
+      <linearGradient id="gGoldV" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#C09030"/>
+        <stop offset="35%"  stop-color="#D4A84A"/>
+        <stop offset="65%"  stop-color="#B88828"/>
+        <stop offset="100%" stop-color="#7A5010"/>
+      </linearGradient>
 
-      <!-- Top face -->
-      <div class="face face-top">
-        <div class="top-inner">Mauyi</div>
-      </div>
+      <!-- Label -->
+      <linearGradient id="gLabel" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%"   stop-color="#080706" stop-opacity="0.96"/>
+        <stop offset="12%"  stop-color="#0A0908" stop-opacity="0.98"/>
+        <stop offset="88%"  stop-color="#0A0908" stop-opacity="0.98"/>
+        <stop offset="100%" stop-color="#080706" stop-opacity="0.96"/>
+      </linearGradient>
 
-      <div class="box-shadow"></div>
-    </div>
+      <!-- Shadows -->
+      <radialGradient id="gShBox" cx="50%" cy="20%" r="60%">
+        <stop offset="0%"   stop-color="rgba(0,0,0,0.60)"/>
+        <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+      </radialGradient>
+      <radialGradient id="gShBottle" cx="50%" cy="20%" r="60%">
+        <stop offset="0%"   stop-color="rgba(0,0,0,0.65)"/>
+        <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+      </radialGradient>
+    </defs>
 
-    <!-- Dropper Bottle SVG -->
-    <div class="bottle-wrap">
-      <svg class="bottle-svg" viewBox="0 0 110 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <!-- Amber glass gradient -->
-          <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#8B5E3C" stop-opacity="0.55"/>
-            <stop offset="18%" stop-color="#A0703F" stop-opacity="0.75"/>
-            <stop offset="35%" stop-color="#C4945A" stop-opacity="0.85"/>
-            <stop offset="50%" stop-color="#D9A86A" stop-opacity="0.9"/>
-            <stop offset="65%" stop-color="#BF9255" stop-opacity="0.82"/>
-            <stop offset="82%" stop-color="#9A7040" stop-opacity="0.68"/>
-            <stop offset="100%" stop-color="#6B4A28" stop-opacity="0.5"/>
-          </linearGradient>
+    <!-- Cast shadows -->
+    <ellipse cx="295" cy="496" rx="165" ry="16" fill="url(#gShBox)"    opacity="0.9"/>
+    <ellipse cx="572" cy="488" rx="48"  ry="12" fill="url(#gShBottle)" opacity="0.95"/>
 
-          <!-- Glass highlight streak -->
-          <linearGradient id="highlight" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="white" stop-opacity="0.18"/>
-            <stop offset="100%" stop-color="white" stop-opacity="0.0"/>
-          </linearGradient>
+    <!-- ═══ ISOMETRIC BOX ═══ -->
 
-          <!-- Gold cap gradient -->
-          <linearGradient id="goldcap" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#8A6535"/>
-            <stop offset="25%" stop-color="#C9A96E"/>
-            <stop offset="50%" stop-color="#E8C98A"/>
-            <stop offset="75%" stop-color="#C9A96E"/>
-            <stop offset="100%" stop-color="#8A6535"/>
-          </linearGradient>
+    <!-- Right face (darkest) -->
+    <polygon points="422,446 340,494 340,244 422,196" fill="url(#gRight)"/>
 
-          <!-- Gold dropper tip -->
-          <linearGradient id="goldtip" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#8A6535"/>
-            <stop offset="50%" stop-color="#D4AE6F"/>
-            <stop offset="100%" stop-color="#7A5828"/>
-          </linearGradient>
+    <!-- Front face -->
+    <polygon points="270,358 422,446 422,196 270,108" fill="url(#gFront)"/>
 
-          <!-- Neck gradient -->
-          <linearGradient id="neck" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#7A5530" stop-opacity="0.6"/>
-            <stop offset="40%" stop-color="#C4945A" stop-opacity="0.8"/>
-            <stop offset="60%" stop-color="#D9A86A" stop-opacity="0.85"/>
-            <stop offset="100%" stop-color="#6B4020" stop-opacity="0.55"/>
-          </linearGradient>
+    <!-- Top face (lightest) -->
+    <polygon points="270,108 422,196 340,244 188,156" fill="url(#gTop)"/>
 
-          <!-- Inner liquid -->
-          <linearGradient id="liquid" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#4A2E10" stop-opacity="0.4"/>
-            <stop offset="40%" stop-color="#8B5E30" stop-opacity="0.55"/>
-            <stop offset="60%" stop-color="#9A6835" stop-opacity="0.5"/>
-            <stop offset="100%" stop-color="#3A2008" stop-opacity="0.35"/>
-          </linearGradient>
+    <!-- Edge highlights (light catching corners) -->
+    <line x1="270" y1="108" x2="422" y2="196" stroke="rgba(201,169,110,0.35)" stroke-width="0.9"/>
+    <line x1="270" y1="108" x2="188" y2="156" stroke="rgba(201,169,110,0.20)" stroke-width="0.6"/>
+    <line x1="270" y1="108" x2="270" y2="358" stroke="rgba(201,169,110,0.15)" stroke-width="0.5"/>
 
-          <!-- Specular reflection on bottle -->
-          <linearGradient id="specular" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="white" stop-opacity="0.06"/>
-            <stop offset="30%" stop-color="white" stop-opacity="0.03"/>
-            <stop offset="100%" stop-color="white" stop-opacity="0"/>
-          </linearGradient>
+    <!-- Inset border on front -->
+    <polygon points="279,364 413,450 413,202 279,116"
+             fill="none" stroke="rgba(201,169,110,0.10)" stroke-width="0.7"/>
 
-          <!-- Label bg -->
-          <linearGradient id="labelbg" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#0A0908" stop-opacity="0.9"/>
-            <stop offset="15%" stop-color="#0E0C0A" stop-opacity="0.95"/>
-            <stop offset="85%" stop-color="#0E0C0A" stop-opacity="0.95"/>
-            <stop offset="100%" stop-color="#0A0908" stop-opacity="0.9"/>
-          </linearGradient>
-        </defs>
+    <!-- ══ FRONT FACE TEXT ══════════════
+         matrix(a,b,0,1, P5.x, P5.y)
+         a = (422−270)/175 = 0.869
+         b = (196−108)/175 = 0.503
+         origin = P5 = (270, 108)
+    ════════════════════════════════ -->
+    <g transform="matrix(0.869,0.503,0,1,270,108)">
 
-        <!-- ── Rubber bulb / dropper top ── -->
-        <!-- Dropper tip (thin straw going up) -->
-        <rect x="51" y="2" width="8" height="22" rx="4" fill="url(#goldtip)"/>
-        <!-- Bulb -->
-        <ellipse cx="55" cy="34" rx="14" ry="18" fill="#1A1208"/>
-        <ellipse cx="55" cy="34" rx="14" ry="18" fill="none" stroke="rgba(201,169,110,0.25)" stroke-width="0.5"/>
-        <!-- Bulb highlight -->
-        <ellipse cx="49" cy="28" rx="4" ry="6" fill="white" opacity="0.04"/>
+      <text x="87" y="26" text-anchor="middle"
+            font-family="Inter,sans-serif" font-size="5.5" font-weight="600" letter-spacing="2.8"
+            fill="#C9A96E" opacity="0.52">NIGHT RESET RITUAL</text>
 
-        <!-- ── Gold collar top ── -->
-        <rect x="41" y="52" width="28" height="6" rx="2" fill="url(#goldcap)"/>
+      <text x="87" y="80" text-anchor="middle"
+            font-family="Cormorant Garamond,serif" font-size="32" font-weight="300" letter-spacing="11"
+            fill="#F2EDE4" opacity="0.90">MAUYI</text>
 
-        <!-- ── Cap / neck collar ── -->
-        <rect x="39" y="58" width="32" height="22" rx="3" fill="url(#goldcap)"/>
-        <!-- Cap knurl lines -->
-        <line x1="44" y1="59" x2="44" y2="79" stroke="rgba(0,0,0,0.2)" stroke-width="0.6"/>
-        <line x1="48" y1="59" x2="48" y2="79" stroke="rgba(0,0,0,0.2)" stroke-width="0.6"/>
-        <line x1="52" y1="59" x2="52" y2="79" stroke="rgba(0,0,0,0.2)" stroke-width="0.6"/>
-        <line x1="56" y1="59" x2="56" y2="79" stroke="rgba(0,0,0,0.2)" stroke-width="0.6"/>
-        <line x1="60" y1="59" x2="60" y2="79" stroke="rgba(0,0,0,0.2)" stroke-width="0.6"/>
-        <line x1="64" y1="59" x2="64" y2="79" stroke="rgba(0,0,0,0.2)" stroke-width="0.6"/>
-        <!-- Cap top highlight -->
-        <rect x="39" y="58" width="32" height="4" rx="2" fill="rgba(255,255,255,0.07)"/>
+      <line x1="50" y1="92" x2="124" y2="92" stroke="#C9A96E" stroke-width="0.45" opacity="0.36"/>
 
-        <!-- ── Neck ── -->
-        <path d="M44 80 L41 96 L69 96 L66 80 Z" fill="url(#neck)"/>
+      <text x="87" y="107" text-anchor="middle"
+            font-family="Inter,sans-serif" font-size="6.2" font-weight="400" letter-spacing="3.8"
+            fill="rgba(242,237,228,0.44)">RESET SERUM</text>
 
-        <!-- ── Bottle body ── -->
-        <!-- Main amber glass body -->
-        <rect x="20" y="96" width="70" height="210" rx="6" fill="url(#glass)"/>
+      <path d="M80,124 A9,9 0 0 1 92,114 A6,6 0 0 0 80,124z" fill="#C9A96E" opacity="0.30"/>
 
-        <!-- Inner liquid content (slightly smaller, darker) -->
-        <rect x="25" y="102" width="60" height="198" rx="4" fill="url(#liquid)"/>
+      <text x="87" y="150" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.2" font-weight="300" letter-spacing="1.8" fill="rgba(201,169,110,0.40)">Retinol 0.3%</text>
+      <text x="87" y="165" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.2" font-weight="300" letter-spacing="1.8" fill="rgba(201,169,110,0.36)">Niacinamide 10%</text>
+      <text x="87" y="180" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.2" font-weight="300" letter-spacing="1.8" fill="rgba(201,169,110,0.32)">Bakuchiol 0.5%</text>
+      <text x="87" y="195" text-anchor="middle" font-family="Inter,sans-serif" font-size="5.2" font-weight="300" letter-spacing="1.8" fill="rgba(201,169,110,0.26)">Hyaluronzuur ×3</text>
 
-        <!-- Glass edge reflection left -->
-        <rect x="20" y="96" width="8" height="210" rx="3" fill="url(#specular)" opacity="0.5"/>
+      <text x="12"  y="243" font-family="Inter,sans-serif" font-size="4.5" font-weight="300" letter-spacing="1.2" fill="rgba(242,237,228,0.14)">NL · mauyi.nl</text>
+      <text x="162" y="243" text-anchor="end" font-family="Inter,sans-serif" font-size="4.5" font-weight="300" letter-spacing="1.8" fill="rgba(242,237,228,0.14)">30 ML</text>
+    </g>
 
-        <!-- Glass edge reflection right -->
-        <rect x="82" y="96" width="8" height="210" rx="3" fill="rgba(0,0,0,0.25)"/>
+    <!-- ══ SIDE FACE TEXT ══════════════
+         matrix(−0.863, 0.505, 0, 1, P6.x, P6.y)
+         = matrix(−0.863, 0.505, 0, 1, 422, 196)
+    ════════════════════════════════ -->
+    <g transform="matrix(-0.863,0.505,0,1,422,196)">
+      <g transform="translate(47,125) rotate(-90)">
+        <text x="0" y="0" text-anchor="middle"
+              font-family="Cormorant Garamond,serif"
+              font-size="8" font-weight="300" letter-spacing="4"
+              fill="rgba(242,237,228,0.20)">MAUYI · RESET SERUM · 30 ML</text>
+      </g>
+    </g>
 
-        <!-- Main highlight streak (left-center) -->
-        <rect x="28" y="102" width="6" height="180" rx="3" fill="url(#highlight)"/>
+    <!-- ═══ DROPPER BOTTLE ═══
+         cx=572  body x 538–606 (w=68)  y top=60 bottom=480
+    ════════════════════════════ -->
 
-        <!-- Secondary subtle reflection -->
-        <rect x="38" y="108" width="2" height="140" rx="1" fill="white" opacity="0.035"/>
+    <!-- Dropper tip -->
+    <rect x="568" y="60" width="8" height="26" rx="4" fill="url(#gGold)"/>
 
-        <!-- ── Label ── -->
-        <rect x="24" y="140" width="62" height="120" rx="2" fill="url(#labelbg)"/>
-        <!-- Label fine border -->
-        <rect x="27" y="143" width="56" height="114" rx="1.5" fill="none" stroke="rgba(201,169,110,0.18)" stroke-width="0.5"/>
+    <!-- Rubber bulb -->
+    <ellipse cx="572" cy="106" rx="18" ry="22"  fill="#181310"/>
+    <ellipse cx="572" cy="106" rx="18" ry="22"  fill="none" stroke="rgba(201,169,110,0.18)" stroke-width="0.7"/>
+    <ellipse cx="565"  cy="97"  rx="4"  ry="6.5" fill="white" opacity="0.025"/>
 
-        <!-- Brand name -->
-        <text x="55" y="168" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-size="13" font-weight="300" letter-spacing="6" fill="#F5F2EC" opacity="0.9">MAUYI</text>
+    <!-- Top collar -->
+    <rect x="564" y="128" width="16" height="6"  rx="2" fill="url(#gGold)"/>
+    <rect x="564" y="128" width="16" height="2"  rx="1" fill="rgba(255,255,255,0.07)"/>
 
-        <!-- Thin divider -->
-        <line x1="40" y1="174" x2="70" y2="174" stroke="#C9A96E" stroke-width="0.4" opacity="0.45"/>
+    <!-- Knurled cap -->
+    <rect x="558" y="134" width="28" height="28" rx="3" fill="url(#gGoldV)"/>
+    <line x1="562" y1="135" x2="562" y2="161" stroke="rgba(0,0,0,0.15)" stroke-width="0.7"/>
+    <line x1="566" y1="135" x2="566" y2="161" stroke="rgba(0,0,0,0.15)" stroke-width="0.7"/>
+    <line x1="570" y1="135" x2="570" y2="161" stroke="rgba(0,0,0,0.15)" stroke-width="0.7"/>
+    <line x1="574" y1="135" x2="574" y2="161" stroke="rgba(0,0,0,0.15)" stroke-width="0.7"/>
+    <line x1="578" y1="135" x2="578" y2="161" stroke="rgba(0,0,0,0.15)" stroke-width="0.7"/>
+    <line x1="582" y1="135" x2="582" y2="161" stroke="rgba(0,0,0,0.15)" stroke-width="0.7"/>
+    <rect x="558" y="134" width="28" height="4" rx="2" fill="rgba(255,255,255,0.06)"/>
+    <rect x="558" y="159" width="28" height="3" rx="1.5" fill="url(#gGold)" opacity="0.85"/>
 
-        <!-- Product name -->
-        <text x="55" y="184" text-anchor="middle" font-family="'Inter', sans-serif" font-size="5.5" font-weight="400" letter-spacing="3" fill="#C9A96E" opacity="0.65">RESET SERUM</text>
+    <!-- Neck taper -->
+    <path d="M562,162 L538,176 L606,176 L582,162 Z" fill="url(#gGold)" opacity="0.72"/>
 
-        <!-- Moon icon on label -->
-        <path d="M52 194 A5 5 0 0 1 58 189 A3.5 3.5 0 0 0 52 194z" fill="#C9A96E" opacity="0.4"/>
+    <!-- Glass body -->
+    <rect x="538" y="176" width="68" height="296" rx="5"   fill="url(#gGlass)"/>
+    <rect x="544" y="182" width="56" height="284" rx="3.5" fill="url(#gLiquid)"/>
+    <!-- Left/right edge shading -->
+    <rect x="538" y="176" width="10" height="296" rx="4"  fill="rgba(0,0,0,0.22)"/>
+    <rect x="596" y="176" width="10" height="296" rx="4"  fill="rgba(0,0,0,0.30)"/>
+    <!-- Primary highlight -->
+    <rect x="546" y="182" width="7"  height="258" rx="3.5" fill="url(#gHilight)"/>
+    <!-- Faint secondary -->
+    <rect x="557" y="188" width="2.5" height="198" rx="1.2" fill="rgba(255,255,255,0.022)"/>
+    <!-- Base -->
+    <rect x="538" y="464" width="68" height="8" rx="3"  fill="rgba(55,26,8,0.42)"/>
+    <rect x="540" y="465" width="64" height="2" rx="1"  fill="rgba(255,255,255,0.022)"/>
 
-        <!-- Ingredients text -->
-        <text x="55" y="207" text-anchor="middle" font-family="'Inter', sans-serif" font-size="4.2" font-weight="300" letter-spacing="1.2" fill="rgba(245,242,236,0.28)">Retinol 0.3% · Niacinamide 10%</text>
-        <text x="55" y="215" text-anchor="middle" font-family="'Inter', sans-serif" font-size="4.2" font-weight="300" letter-spacing="1.2" fill="rgba(245,242,236,0.28)">Bakuchiol 0.5% · Hyaluronzuur</text>
+    <!-- Label -->
+    <rect x="541" y="215" width="62" height="140" rx="2.5" fill="url(#gLabel)"/>
+    <rect x="544" y="218" width="56" height="134" rx="1.5" fill="none" stroke="rgba(201,169,110,0.14)" stroke-width="0.5"/>
 
-        <!-- Parfumvrij badge -->
-        <text x="55" y="228" text-anchor="middle" font-family="'Inter', sans-serif" font-size="4" font-weight="400" letter-spacing="2" fill="rgba(201,169,110,0.35)">PARFUMVRIJ</text>
+    <text x="572" y="239" text-anchor="middle"
+          font-family="Cormorant Garamond,serif" font-size="12.5" font-weight="300" letter-spacing="5.5"
+          fill="#EDE8DF" opacity="0.86">MAUYI</text>
+    <line x1="556" y1="245" x2="588" y2="245" stroke="#C9A96E" stroke-width="0.4" opacity="0.36"/>
+    <text x="572" y="255" text-anchor="middle"
+          font-family="Inter,sans-serif" font-size="5" font-weight="500" letter-spacing="3"
+          fill="#C9A96E" opacity="0.56">RESET SERUM</text>
 
-        <!-- Volume -->
-        <text x="55" y="245" text-anchor="middle" font-family="'Inter', sans-serif" font-size="4.5" font-weight="300" letter-spacing="2" fill="rgba(245,242,236,0.2)">30 ML · 1 FL.OZ</text>
+    <path d="M568,264 A5,5 0 0 1 575,258 A3.5,3.5 0 0 0 568,264z" fill="#C9A96E" opacity="0.30"/>
 
-        <!-- ── Bottle base ── -->
-        <rect x="20" y="298" width="70" height="8" rx="3" fill="#5A3A1A" opacity="0.5"/>
-        <!-- Base highlight -->
-        <rect x="22" y="299" width="66" height="2" rx="1" fill="rgba(255,255,255,0.04)"/>
-      </svg>
-      <div class="bottle-shadow"></div>
-    </div>
+    <text x="572" y="279" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="300" letter-spacing="0.8" fill="rgba(242,237,228,0.26)">Retinol 0.3% · Niacinamide 10%</text>
+    <text x="572" y="288" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="300" letter-spacing="0.8" fill="rgba(242,237,228,0.20)">Bakuchiol 0.5% · Hyaluronzuur ×3</text>
+    <text x="572" y="302" text-anchor="middle" font-family="Inter,sans-serif" font-size="3.8" font-weight="500" letter-spacing="2.5" fill="rgba(201,169,110,0.30)">PARFUMVRIJ</text>
+    <text x="572" y="344" text-anchor="middle" font-family="Inter,sans-serif" font-size="4" font-weight="300" letter-spacing="1.8" fill="rgba(242,237,228,0.14)">30 ML · 1 FL.OZ</text>
 
-  </div>
+    <!-- Surface line -->
+    <line x1="80" y1="498" x2="780" y2="498" stroke="rgba(201,169,110,0.06)" stroke-width="0.8"/>
+  </svg>
 
-  <!-- Surface line -->
-  <div class="surface"></div>
-
-  <!-- Caption -->
   <div class="caption">
-    <div class="caption-brand">Mauyi Skincare</div>
-    <div class="caption-product">Reset Serum — Night Reset Ritual</div>
-    <div class="caption-dot-row">
-      <span class="caption-spec">Retinol 0.3%</span>
-      <div class="caption-sep"></div>
-      <span class="caption-spec">Niacinamide 10%</span>
-      <div class="caption-sep"></div>
-      <span class="caption-spec">30 ml</span>
-    </div>
+    <div class="cap-brand">Mauyi Skincare</div>
+    <div class="cap-product">Reset Serum &mdash; Night Reset Ritual &mdash; 30 ml</div>
   </div>
 
-  <!-- Colour variants -->
-  <div class="variants">
-    <span class="variant-label">Kleur</span>
-    <div class="swatch swatch-noir active" onclick="setVariant('noir', this)" title="Noir"></div>
-    <div class="swatch swatch-sand" onclick="setVariant('sand', this)" title="Sand"></div>
-    <div class="swatch swatch-forest" onclick="setVariant('forest', this)" title="Forest"></div>
-  </div>
-
-  <!-- Download -->
   <button class="dl-btn" onclick="downloadMockup()">↓ Download PNG</button>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script>
-    // Colour variant logic
-    const variants = {
-      noir:   { box: '#131110', side: '#0D0C0B', top: '#1A1714', body: '#111009' },
-      sand:   { box: '#2A2118', side: '#221B12', top: '#302518', body: '#1A1409' },
-      forest: { box: '#0E1610', side: '#0A120C', top: '#141E15', body: '#0A100B' },
-    }
-
-    function setVariant(name, el) {
-      document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'))
-      el.classList.add('active')
-      const v = variants[name]
-      document.querySelector('.face-front').style.background = v.box
-      document.querySelector('.face-right').style.background = v.side
-      document.querySelector('.face-top').style.background = v.top
-      document.body.style.background = v.body
-    }
-
-    // Download
     async function downloadMockup() {
       const btn = document.querySelector('.dl-btn')
       btn.textContent = 'Renderen...'
       try {
         const canvas = await html2canvas(document.body, {
-          backgroundColor: document.body.style.background || '#111009',
-          scale: 2,
-          useCORS: true,
-          logging: false,
+          backgroundColor: '#0D0B09', scale: 2, useCORS: true, logging: false,
         })
         const a = document.createElement('a')
-        a.download = 'mauyi-packaging-mockup.png'
+        a.download = 'mauyi-packaging.png'
         a.href = canvas.toDataURL('image/png')
         a.click()
-      } finally {
-        btn.textContent = '↓ Download PNG'
-      }
+      } finally { btn.textContent = '↓ Download PNG' }
     }
-
-    // Subtle box rotation on mouse move
-    const box = document.getElementById('box3d')
-    document.addEventListener('mousemove', (e) => {
-      const cx = window.innerWidth / 2
-      const cy = window.innerHeight / 2
-      const dx = (e.clientX - cx) / cx
-      const dy = (e.clientY - cy) / cy
-      box.style.transform = `rotateX(${8 - dy * 5}deg) rotateY(${-32 + dx * 7}deg)`
-    })
   </script>
-
 </body>
 </html>
