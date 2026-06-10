@@ -13,6 +13,10 @@ const footerLinks: Record<string, { label: string; href: string }[]> = {
   ],
   'Vergelijken': [
     { label: 'The Ordinary alternatief', href: '/alternatives/the-ordinary' },
+    { label: 'CeraVe alternatief',       href: '/alternatives/cerave' },
+    { label: 'La Roche-Posay alternatief', href: '/alternatives/la-roche-posay' },
+    { label: "Paula's Choice alternatief", href: '/alternatives/paulas-choice' },
+    { label: 'Indeed Labs alternatief',  href: '/alternatives/indeed-labs' },
     { label: 'MAUYI vs The Ordinary',    href: '/vs/the-ordinary' },
   ],
   'Producten': [

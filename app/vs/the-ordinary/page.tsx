@@ -362,19 +362,24 @@ export default function MauyiVsTheOrdinaryPage() {
           {/* Related pages */}
           <div className="border border-stone-100 rounded-2xl p-6 mb-12">
             <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#9A9590] mb-4">Meer vergelijkingen</p>
-            <Link
-              href="/alternatives/the-ordinary"
-              className="flex items-start gap-3 group"
-            >
-              <div>
-                <p className="text-[14px] font-semibold text-[#1A1A1A] group-hover:text-[#C9A96E] transition-colors">
-                  The Ordinary alternatief →
-                </p>
-                <p className="text-[13px] text-[#9A9590] font-light mt-0.5">
-                  Waarom mensen overstappen — en of MAUYI de juiste keuze is
-                </p>
-              </div>
-            </Link>
+            <div className="flex flex-col gap-4">
+              {[
+                { href: '/alternatives/the-ordinary', name: 'The Ordinary alternatief →', sub: 'Waarom mensen overstappen — en of MAUYI de juiste keuze is' },
+                { href: '/alternatives/cerave', name: 'CeraVe alternatief →', sub: 'MAUYI vs CeraVe: milde retinol vergeleken' },
+                { href: '/alternatives/la-roche-posay', name: 'La Roche-Posay alternatief →', sub: 'MAUYI vs Redermic R en andere LRP retinols' },
+                { href: '/alternatives/paulas-choice', name: "Paula's Choice alternatief →", sub: "MAUYI vs Paula's Choice: wetenschappelijk vergeleken" },
+                { href: '/alternatives/indeed-labs', name: 'Indeed Labs alternatief →', sub: 'MAUYI vs Bakuchiol Reface Serum en andere opties' },
+              ].map((item) => (
+                <Link key={item.href} href={item.href} className="flex items-start gap-3 group">
+                  <div>
+                    <p className="text-[14px] font-semibold text-[#1A1A1A] group-hover:text-[#C9A96E] transition-colors">
+                      {item.name}
+                    </p>
+                    <p className="text-[13px] text-[#9A9590] font-light mt-0.5">{item.sub}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
 
           {/* CTA */}
