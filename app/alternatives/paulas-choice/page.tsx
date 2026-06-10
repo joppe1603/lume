@@ -117,6 +117,8 @@ export default function PaulasChoiceAlternatiefPage() {
             <nav className="flex items-center gap-2 mb-8 text-[11px] text-stone-600 tracking-wide">
               <Link href="/" className="hover:text-[#C9A96E] transition-colors">Home</Link>
               <span>/</span>
+              <Link href="/alternatives" className="hover:text-[#C9A96E] transition-colors">Alternatieven</Link>
+              <span>/</span>
               <span className="text-stone-500">{"Paula's Choice Alternatief"}</span>
             </nav>
             <div className="flex items-center gap-3 mb-5">
@@ -238,6 +240,26 @@ export default function PaulasChoiceAlternatiefPage() {
                   </summary>
                   <p className="mt-3 text-[14px] text-[#6B6560] font-light leading-relaxed">{item.a}</p>
                 </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#FAF8F5] border-t border-stone-100">
+          <div className="max-w-3xl mx-auto px-6 sm:px-8 py-12">
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#9A9590] mb-5">Meer vergelijkingen</p>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {[
+                { href: '/alternatives/the-ordinary', name: 'The Ordinary alternatief', sub: 'Losse ingrediënten vs één formule' },
+                { href: '/alternatives/cerave', name: 'CeraVe alternatief', sub: 'Milde retinol vergeleken' },
+                { href: '/alternatives/la-roche-posay', name: 'La Roche-Posay alternatief', sub: 'Redermic R vs MAUYI Reset Serum' },
+                { href: '/alternatives/indeed-labs', name: 'Indeed Labs alternatief', sub: 'Bakuchiol Reface vs MAUYI' },
+                { href: '/alternatives', name: 'Alle alternatieven →', sub: 'Volledig overzicht van alle merken' },
+              ].map((item) => (
+                <Link key={item.href} href={item.href} className="bg-white rounded-xl border border-stone-100 px-5 py-4 hover:border-[#C9A96E]/40 hover:shadow-sm transition-all group">
+                  <p className="text-[14px] font-semibold text-[#1A1A1A] group-hover:text-[#C9A96E] transition-colors mb-1">{item.name}</p>
+                  <p className="text-[12px] text-[#9A9590] font-light">{item.sub}</p>
+                </Link>
               ))}
             </div>
           </div>
