@@ -22,13 +22,12 @@ function normalizeCategory(raw: string): string {
   return CATEGORY_MAP[raw.toLowerCase().trim()] ?? (raw.charAt(0).toUpperCase() + raw.slice(1))
 }
 
-function deriveCategory(keywords: string[]): string {
-  const all = keywords.join(' ').toLowerCase()
-  if (all.match(/retinol|bakuchiol|niacinamide|ingrediënt|hyaluronzuur|panthenol/)) return 'Ingrediënten'
-  if (all.match(/routine|avond|ochtend|stap/)) return 'Routines'
-  if (all.match(/wetenschap|studie|klinisch|onderzoek/)) return 'Wetenschap'
-  if (all.match(/filosof|minimalisme|intentioneel/)) return 'Filosofie'
-  if (all.match(/gevoelig|droog|vet|acne|rosacea|eczeem/)) return 'Huidverzorging'
+function deriveCategory(keywords: string[], slug?: string, title?: string): string {
+  const all = [...keywords, slug ?? '', title ?? ''].join(' ').toLowerCase()
+  if (all.match(/retinol|bakuchiol|niacinamide|ingrediënt|hyaluronzuur|hyaluronic|panthenol|vitamine.c|serum.gids|werking/)) return 'Ingrediënten'
+  if (all.match(/routine|avond|ochtend|stap|volgorde|skincare.routine/)) return 'Routines'
+  if (all.match(/wetenschap|studie|klinisch|onderzoek|bewezen/)) return 'Wetenschap'
+  if (all.match(/filosof|minimalisme|intentioneel|waarom.minder/)) return 'Filosofie'
   return 'Huidverzorging'
 }
 
@@ -72,7 +71,7 @@ export async function POST(req: NextRequest) {
       image_url: post.image_url ?? null,
       image_alt: post.suggested_alt_text ?? post.title,
       image_prompt: post.image_prompt ?? null,
-      category: post.category ? normalizeCategory(post.category) : deriveCategory(keywords),
+      category: post.category ? normalizeCategory(post.category) : deriveCategory(keywords, post.slug, post.title),
       read_time: post.read_time ?? deriveReadTime(post.html),
       cms_status: post.cms_status ?? 'draft',
       published_at: isPublished ? new Date().toISOString() : null,
