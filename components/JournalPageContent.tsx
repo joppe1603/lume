@@ -37,7 +37,7 @@ export default function JournalPageContent({ dynamicPosts = [] }: { dynamicPosts
   const allPosts = useMemo(() => {
     const dynamicSlugs = new Set(dynamicPosts.map((p) => p.slug))
     return [
-      ...dynamicPosts,
+      ...dynamicPosts.map((p) => ({ ...p, category: p.category.trim() })),
       ...staticPosts.filter((p) => !dynamicSlugs.has(p.slug)),
     ]
   }, [dynamicPosts])
