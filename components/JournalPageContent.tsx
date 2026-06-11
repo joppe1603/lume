@@ -30,7 +30,10 @@ const categoryColors: Record<string, string> = {
 }
 
 function normalizeCategory(cat: string): string {
-  return cat.trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  const trimmed = cat.trim()
+  // Map all variants of Ingrediënten (incl. DB encoding corruption like Ingrediä«nten)
+  if (/^ingredi/i.test(trimmed)) return 'Ingredienten'
+  return trimmed.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
 }
 
 export default function JournalPageContent({ dynamicPosts = [] }: { dynamicPosts?: DynamicPostSummary[] }) {
@@ -42,7 +45,7 @@ export default function JournalPageContent({ dynamicPosts = [] }: { dynamicPosts
     const dynamicSlugs = new Set(dynamicPosts.map((p) => p.slug))
     return [
       ...dynamicPosts.map((p) => ({ ...p, category: normalizeCategory(p.category) })),
-      ...staticPosts.filter((p) => !dynamicSlugs.has(p.slug)),
+      ...staticPosts.filter((p) => !dynamicSlugs.has(p.slug)).map((p) => ({ ...p, category: normalizeCategory(p.category) })),
     ]
   }, [dynamicPosts])
 
@@ -171,8 +174,8 @@ export default function JournalPageContent({ dynamicPosts = [] }: { dynamicPosts
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                 </div>
                 <div>
-                  <span className={`text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 rounded-full mb-4 inline-block ${categoryColors[featuredPost.category] || 'bg-stone-100 text-stone-600'}`}>
-                    {featuredPost.category}
+                  <span className={`text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 rounded-full mb-4 inline-block ${categoryColors[normalizeCategory(featuredPost.category)] || 'bg-stone-100 text-stone-600'}`}>
+                    {normalizeCategory(featuredPost.category)}
                   </span>
                   <h2 className="text-3xl sm:text-4xl font-semibold text-[#1A1A1A] leading-[1.1] mb-4 group-hover:text-[#C9A96E] transition-colors duration-200">
                     {featuredPost.title}
