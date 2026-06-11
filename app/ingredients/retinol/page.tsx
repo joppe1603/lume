@@ -80,8 +80,11 @@ const articleSchema = {
   url: `${BASE_URL}/ingredients/retinol`,
   datePublished: '2026-06-08',
   dateModified: '2026-06-08',
+  inLanguage: 'nl-NL',
+  keywords: 'retinol, vitamine A, celvernieuwing, collageenproductie, anti-aging, huidverzorging, retinol concentratie, retinol beginners',
   author: { '@type': 'Organization', name: 'MAUYI', url: BASE_URL },
   publisher: { '@type': 'Organization', name: 'MAUYI', url: BASE_URL },
+  isPartOf: { '@type': 'WebSite', name: 'MAUYI', url: BASE_URL },
   citation: [
     {
       '@type': 'ScholarlyArticle',

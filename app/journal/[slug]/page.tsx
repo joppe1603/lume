@@ -256,11 +256,15 @@ export default async function JournalPostPage({
       headline: dyn.title,
       description: dyn.meta_description ?? dyn.excerpt,
       image: dyn.image_url ?? `${BASE_URL}/journal-serum.jpg`,
+      url: `${BASE_URL}/journal/${slug}`,
       datePublished: dyn.published_at,
       dateModified: dyn.published_at,
+      inLanguage: 'nl-NL',
+      keywords: ['retinol', 'niacinamide', 'bakuchiol', 'huidverzorging', 'MAUYI', dyn.category].filter(Boolean).join(', '),
       author: { '@type': 'Organization', name: 'MAUYI', url: BASE_URL },
       publisher: { '@type': 'Organization', name: 'MAUYI', url: BASE_URL, logo: { '@type': 'ImageObject', url: `${BASE_URL}/logo.png` } },
       mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}/journal/${slug}` },
+      isPartOf: { '@type': 'Periodical', name: 'MAUYI Journal', url: `${BASE_URL}/journal` },
     }
     const faqSchema = faqItems.length > 0 ? {
       '@context': 'https://schema.org',
@@ -385,8 +389,11 @@ export default async function JournalPostPage({
     headline: post.title,
     description: post.seo.description,
     image: `${BASE_URL}${post.image}`,
+    url: `${BASE_URL}/journal/${slug}`,
     datePublished: post.dateISO,
     dateModified: post.dateISO,
+    inLanguage: 'nl-NL',
+    keywords: ['retinol', 'niacinamide', 'bakuchiol', 'huidverzorging', 'MAUYI', post.category].filter(Boolean).join(', '),
     author: { '@type': 'Organization', name: 'MAUYI', url: BASE_URL },
     publisher: {
       '@type': 'Organization',
@@ -395,6 +402,7 @@ export default async function JournalPostPage({
       logo: { '@type': 'ImageObject', url: `${BASE_URL}/logo.png` },
     },
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}/journal/${slug}` },
+    isPartOf: { '@type': 'Periodical', name: 'MAUYI Journal', url: `${BASE_URL}/journal` },
   }
 
   const breadcrumbSchema = {

@@ -243,6 +243,13 @@ export default async function ProductPage({
     '@type': 'WebPage',
     name: product.name,
     url: `${BASE_URL}/products/${slug}`,
+    inLanguage: 'nl-NL',
+    about: {
+      '@type': 'Product',
+      name: product.name,
+      description: product.description,
+      url: `${BASE_URL}/products/${slug}`,
+    },
     speakable: {
       '@type': 'SpeakableSpecification',
       cssSelector: ['h1', '.pdp-description', '.pdp-how-to-use'],

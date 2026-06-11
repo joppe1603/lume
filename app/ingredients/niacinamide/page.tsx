@@ -72,8 +72,11 @@ const articleSchema = {
   url: `${BASE_URL}/ingredients/niacinamide`,
   datePublished: '2026-06-08',
   dateModified: '2026-06-08',
+  inLanguage: 'nl-NL',
+  keywords: 'niacinamide, vitamine B3, nicotinamide, huidbarrière, sebumregulatie, pigmentvermindering, retinol combinatie',
   author: { '@type': 'Organization', name: 'MAUYI', url: BASE_URL },
   publisher: { '@type': 'Organization', name: 'MAUYI', url: BASE_URL },
+  isPartOf: { '@type': 'WebSite', name: 'MAUYI', url: BASE_URL },
   citation: [
     {
       '@type': 'ScholarlyArticle',

@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
+  inLanguage: 'nl-NL',
   mainEntity: [
     {
       '@type': 'Question',
@@ -116,6 +117,54 @@ const faqSchema = {
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'Begin 2–3x per week \'s avonds: reinig eerst je huid, breng het serum aan op droge huid, daarna je moisturizer. Bouw in 4–6 weken op naar dagelijks gebruik. Gebruik overdag altijd SPF — retinol maakt de huid tijdelijk iets gevoeliger voor zon.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Bevat het Reset Serum parfum of alcohol?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Nee. MAUYI Reset Serum is 100% parfumvrij en alcoholvrij. Er zijn geen essentiële oliën, geurstoffen of denatured alcohol in de formule. Dit maakt het geschikt voor de meest gevoelige huidtypes.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Hoe lang gaat een flesje Reset Serum mee?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Het Reset Serum is 30ml. Bij gebruik van 3–4 druppels per avond gaat een flesje gemiddeld 2 tot 3 maanden mee. Bij dagelijks gebruik circa 2 maanden, bij 3x per week circa 3 maanden.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Kan ik retinol combineren met niacinamide?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Ja — retinol en niacinamide zijn een ideale combinatie. Niacinamide buffert de irritatierespons van retinol, versterkt de huidbarrière en voegt eigenstandige voordelen toe (sebumregulatie, pigmentvermindering). MAUYI combineert beide in één formule zodat je geen aparte producten nodig hebt.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Wat doet niacinamide 10% voor de huid?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Niacinamide 10% versterkt de huidbarrière door ceramideproductie te stimuleren, vermindert sebumproductie, verlicht pigmentvlekken door melanosoomtransfer te remmen, heeft ontstekingsremmende eigenschappen en buffert irritatie van actieve ingrediënten. 10% is de klinisch effectieve drempel voor zichtbare resultaten.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Welk retinol serum is het beste voor gevoelige huid?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Voor gevoelige huid is een retinolserum met een lage concentratie (0.3%) en gebufferde formule het meest geschikt. MAUYI Reset Serum combineert retinol 0.3% met niacinamide 10% en bakuchiol 0.5% in een parfumvrije, alcoholvrije formule — specifiek ontwikkeld om effectief én tolerabel te zijn voor gevoelige huid.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Kan ik retinol overdag gebruiken?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Retinol wordt afgeraden voor overdag gebruik. Retinol is gevoelig voor UV-afbraak en maakt de huid tijdelijk gevoeliger voor zon. Gebruik het altijd \'s avonds en draag overdag SPF 30 of hoger.',
       },
     },
   ],

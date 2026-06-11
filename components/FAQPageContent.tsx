@@ -24,6 +24,18 @@ const categories = [
         q: 'Moet ik mijn hele routine vervangen?',
         a: 'Nee. MAUYI integreert in elke bestaande routine. Doe de quiz als je niet zeker weet welk product bij jou past. Maar eerlijk: de meeste klanten eindigen toch met alleen MAUYI.',
       },
+      {
+        q: 'Kan ik retinol combineren met niacinamide?',
+        a: 'Ja — retinol en niacinamide zijn een ideale combinatie. Niacinamide buffert de irritatierespons van retinol, versterkt de huidbarrière en voegt eigenstandige voordelen toe. MAUYI combineert beide in één formule.',
+      },
+      {
+        q: 'Welk retinol serum is het beste voor gevoelige huid?',
+        a: 'Voor gevoelige huid: laagste effectieve concentratie (0.3%), parfumvrij, alcoholvrij, gebufferd door niacinamide. MAUYI Reset Serum is specifiek ontwikkeld voor gevoelige huid — de formule minimaliseert irritatie zonder in te leveren op effectiviteit.',
+      },
+      {
+        q: 'Bevat het Reset Serum parfum of alcohol?',
+        a: 'Nee. Volledig parfumvrij en alcoholvrij. Geen essentiële oliën, geen denatured alcohol. Geschikt voor de meest gevoelige huidtypes.',
+      },
     ],
   },
   {
@@ -70,6 +82,14 @@ const categories = [
       {
         q: 'Kan ik het Reset Serum dagelijks gebruiken?',
         a: 'Begin 2–3x per week. Bouw in 4–6 weken op naar dagelijks gebruik. Dit geeft je huid de tijd om te wennen aan retinol zonder irritatie. Als je huid goed reageert, kun je overgaan naar dagelijks gebruik.',
+      },
+      {
+        q: 'Kan ik retinol overdag gebruiken?',
+        a: 'Nee. Retinol is gevoelig voor UV-afbraak en maakt de huid tijdelijk iets gevoeliger voor zon. Gebruik het altijd \'s avonds. Draag overdag SPF 30 of hoger.',
+      },
+      {
+        q: 'Hoe lang gaat een flesje mee?',
+        a: 'Het Reset Serum is 30ml. Bij 3–4 druppels per avond gaat het bij dagelijks gebruik circa 2 maanden mee, bij 3x per week circa 3 maanden.',
       },
     ],
   },

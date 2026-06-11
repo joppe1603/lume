@@ -72,8 +72,11 @@ const articleSchema = {
   url: `${BASE_URL}/ingredients/bakuchiol`,
   datePublished: '2026-06-08',
   dateModified: '2026-06-08',
+  inLanguage: 'nl-NL',
+  keywords: 'bakuchiol, plantaardig retinol, bakuchiol vs retinol, anti-aging, zwangerschap veilig, Psoralea corylifolia',
   author: { '@type': 'Organization', name: 'MAUYI', url: BASE_URL },
   publisher: { '@type': 'Organization', name: 'MAUYI', url: BASE_URL },
+  isPartOf: { '@type': 'WebSite', name: 'MAUYI', url: BASE_URL },
   citation: [
     {
       '@type': 'ScholarlyArticle',
