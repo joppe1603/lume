@@ -79,7 +79,9 @@ const organizationSchema = {
     width: 512,
     height: 512,
   },
-  description: 'Premium Nederlands huidverzorgingsmerk gebouwd op klinische wetenschap.',
+  description: 'MAUYI is een Nederlands premium skincare merk dat zich richt op minimale, wetenschappelijk onderbouwde formules voor de gevoelige huid. Het vlaggenschipproduct is het MAUYI Reset Serum: een combinatie van Retinol 0.3%, Niacinamide 10% en Bakuchiol in één parfumvrije, alcoholvrije formule.',
+  foundingLocation: { '@type': 'Place', addressCountry: 'NL', addressLocality: 'Nederland' },
+  knowsAbout: ['retinol', 'niacinamide', 'bakuchiol', 'gevoelige huid', 'huidbarrière', 'anti-aging skincare', 'parfumvrije huidverzorging'],
   contactPoint: { '@type': 'ContactPoint', email: 'hallo@mauyi.nl', contactType: 'customer service' },
   sameAs: ['https://www.instagram.com/mauyiskincare', 'https://www.tiktok.com/@mauyi'],
 }

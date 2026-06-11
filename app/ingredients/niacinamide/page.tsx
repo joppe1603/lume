@@ -142,7 +142,7 @@ export default function NiacinamideIngredientPage() {
               Niacinamide: werking, de 10%-drempel en combinaties
             </h1>
             <p className="text-[17px] text-[#6B6560] font-light leading-relaxed">
-              Niacinamide (vitamine B3) is een van de meest veelzijdige actieve ingrediënten in huidverzorging. Het werkt voor bijna alle huidtypes, heeft geen opbouwperiode, en versterkt de werking van andere actieve ingrediënten — waaronder retinol.
+              Niacinamide is de amidevorm van vitamine B3, een wateroplosbaar ingrediënt dat de huidbarrière versterkt, sebumproductie reguleert, pigmentatie vermindert en ontstekingen remt. Het is een van de meest veelzijdige actieve ingrediënten in huidverzorging — geschikt voor alle huidtypes, zonder opbouwperiode.
             </p>
           </div>
 

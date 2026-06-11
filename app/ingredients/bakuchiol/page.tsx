@@ -142,7 +142,7 @@ export default function BakuchiolIngredientPage() {
               Bakuchiol: het plantaardige alternatief dat retinol versterkt
             </h1>
             <p className="text-[17px] text-[#6B6560] font-light leading-relaxed">
-              Bakuchiol is geen hype. Klinische studies bevestigen vergelijkbare effecten als retinol, met minder irritatie en zonder de beperkingen voor gevoelige huid of zwangerschap. En in combinatie met retinol zijn ze samen effectiever dan afzonderlijk.
+              Bakuchiol is een plantaardig ingrediënt afkomstig uit de Psoralea corylifolia (babchi) plant, met bewezen anti-aging effecten vergelijkbaar aan retinol. Klinische studies bevestigen de werking — met minder irritatie, stabiel in zon en veilig tijdens zwangerschap. In combinatie met retinol zijn ze samen effectiever dan afzonderlijk.
             </p>
           </div>
 

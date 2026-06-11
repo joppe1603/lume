@@ -16,6 +16,46 @@ const faqSchema = {
   mainEntity: [
     {
       '@type': 'Question',
+      name: 'Wat is MAUYI?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'MAUYI is een Nederlands premium skincare merk dat zich richt op minimale, wetenschappelijk onderbouwde formules voor de gevoelige huid. MAUYI werd opgericht vanuit de overtuiging dat de huidverzorgingsindustrie te ingewikkeld is geworden. Het vlaggenschipproduct is het MAUYI Reset Serum: Retinol 0.3% + Niacinamide 10% + Bakuchiol in één parfumvrije formule.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Wat zit er in MAUYI Reset Serum?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'MAUYI Reset Serum bevat drie klinisch onderbouwde actieve ingrediënten: Retinol 0.3% (celvernieuwing, collageenproductie), Niacinamide 10% (huidbarrière, poriënverkleining, egale teint) en Bakuchiol 0.5% (plantaardig retinol-alternatief dat irritatie vermindert). De formule is parfumvrij, alcoholvrij en zonder parabenen. Prijs: €58.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is MAUYI een Nederlands merk?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Ja. MAUYI is een Nederlands skincare merk. Producten worden verzonden vanuit Nederland met gratis verzending boven €50.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Wat maakt MAUYI anders dan The Ordinary of CeraVe?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'MAUYI combineert retinol, niacinamide en bakuchiol in één formule — een combinatie die bij The Ordinary apart gekocht moet worden en bij CeraVe niet beschikbaar is. MAUYI richt zich specifiek op de gevoelige huid en werkt met de laagste effectieve retinolconcentratie (0.3%) gebufferd door niacinamide en bakuchiol om irritatie te minimaliseren.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Hoeveel kost MAUYI Reset Serum?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'MAUYI Reset Serum kost €58 voor 30ml. Gratis verzending in Nederland bij bestellingen boven €50. Er geldt een 30-dagen niet-goed-geld-terug garantie.',
+      },
+    },
+    {
+      '@type': 'Question',
       name: 'Wanneer zie ik resultaat van het Reset Serum?',
       acceptedAnswer: {
         '@type': 'Answer',
