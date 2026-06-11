@@ -104,12 +104,24 @@ const breadcrumbSchema = {
   ],
 }
 
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Niacinamide: werking, concentraties en combinaties',
+  url: `${BASE_URL}/ingredients/niacinamide`,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['h1', '.ingredient-definition'],
+  },
+}
+
 export default function NiacinamideIngredientPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableSchema) }} />
       <Navbar />
 
       <main className="bg-[#FAF8F5] min-h-screen">
@@ -141,7 +153,7 @@ export default function NiacinamideIngredientPage() {
             >
               Niacinamide: werking, de 10%-drempel en combinaties
             </h1>
-            <p className="text-[17px] text-[#6B6560] font-light leading-relaxed">
+            <p className="ingredient-definition text-[17px] text-[#6B6560] font-light leading-relaxed">
               Niacinamide is de amidevorm van vitamine B3, een wateroplosbaar ingrediënt dat de huidbarrière versterkt, sebumproductie reguleert, pigmentatie vermindert en ontstekingen remt. Het is een van de meest veelzijdige actieve ingrediënten in huidverzorging — geschikt voor alle huidtypes, zonder opbouwperiode.
             </p>
           </div>

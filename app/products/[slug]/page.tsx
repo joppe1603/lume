@@ -215,6 +215,29 @@ export default async function ProductPage({
     ],
   }
 
+  const speakableSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: product.name,
+    url: `${BASE_URL}/products/${slug}`,
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['h1', '.pdp-description', '.pdp-how-to-use'],
+    },
+  }
+
+  const howToSchema = product.howToUse.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: `Hoe gebruik je ${product.name}?`,
+    description: `Stap-voor-stap gebruiksaanwijzing voor ${product.name} van MAUYI.`,
+    step: product.howToUse.map((step, i) => ({
+      '@type': 'HowToStep',
+      position: i + 1,
+      text: step,
+    })),
+  } : null
+
   return (
     <>
       <script
@@ -229,6 +252,16 @@ export default async function ProductPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableSchema) }}
+      />
+      {howToSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+        />
+      )}
       <PDPScrollProgress />
       <Navbar />
 
@@ -261,7 +294,7 @@ export default async function ProductPage({
                 &ldquo;{product.emotion}&rdquo;
               </h2>
             )}
-            <p className="text-[17px] text-[#5C5754] leading-[1.8] font-light">
+            <p className="pdp-description text-[17px] text-[#5C5754] leading-[1.8] font-light">
               {product.longDescription}
             </p>
           </div>
@@ -321,7 +354,7 @@ export default async function ProductPage({
                 Hoe te gebruiken.
               </h2>
             </div>
-            <ol className="space-y-0">
+            <ol className="pdp-how-to-use space-y-0">
               {product.howToUse.map((step, i) => (
                 <li key={i} className="flex items-start gap-6 py-5 border-b border-white/6 last:border-0">
                   <span

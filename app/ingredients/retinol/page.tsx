@@ -112,12 +112,24 @@ const breadcrumbSchema = {
   ],
 }
 
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Retinol: werking, concentraties en gebruik',
+  url: `${BASE_URL}/ingredients/retinol`,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['h1', '.ingredient-definition'],
+  },
+}
+
 export default function RetinolIngredientPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableSchema) }} />
       <Navbar />
 
       <main className="bg-[#FAF8F5] min-h-screen">
@@ -149,7 +161,7 @@ export default function RetinolIngredientPage() {
             >
               Retinol: hoe het werkt, welke concentratie en hoe je begint
             </h1>
-            <p className="text-[17px] text-[#6B6560] font-light leading-relaxed">
+            <p className="ingredient-definition text-[17px] text-[#6B6560] font-light leading-relaxed">
               Retinol is een vorm van vitamine A die celvernieuwing stimuleert, collageenproductie verhoogt en fijne lijntjes, pigmentatie en textuurproblemen aanpakt. Het is het best gedocumenteerde anti-aging ingrediënt in huidverzorging, met decennia aan klinisch bewijs. De sleutel zit in de juiste concentratie en opbouw.
             </p>
           </div>
