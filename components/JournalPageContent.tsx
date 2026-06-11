@@ -23,7 +23,7 @@ const featuredPost = getFeaturedPost()
 const categoryColors: Record<string, string> = {
   Filosofie: 'bg-stone-100 text-stone-600',
   Wetenschap: 'bg-blue-50 text-blue-700',
-  Ingredienten: 'bg-[#FDF8F0] text-[#B8935A]',
+  'Ingrediënten': 'bg-[#FDF8F0] text-[#B8935A]',
   Routines: 'bg-green-50 text-green-700',
   Levensstijl: 'bg-purple-50 text-purple-700',
   Huidverzorging: 'bg-rose-50 text-rose-700',
@@ -31,9 +31,9 @@ const categoryColors: Record<string, string> = {
 
 function normalizeCategory(cat: string): string {
   const trimmed = cat.trim()
-  // Map all variants of Ingrediënten (incl. DB encoding corruption like Ingrediä«nten)
-  if (/^ingredi/i.test(trimmed)) return 'Ingredienten'
-  return trimmed.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  // Map all variants (incl. DB encoding corruption like Ingrediä«nten) → correct Ingrediënten
+  if (/^ingredi/i.test(trimmed)) return 'Ingrediënten'
+  return trimmed
 }
 
 export default function JournalPageContent({ dynamicPosts = [] }: { dynamicPosts?: DynamicPostSummary[] }) {
