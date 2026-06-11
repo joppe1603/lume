@@ -36,13 +36,13 @@ function sanitizeHtml(html: string): string {
   // Fix double-quoted hrefs: href=""/path"" → href="/path"
   let result = html.replace(/href=""([^"]*?)""/g, 'href="$1"')
 
-  // Transform FAQ section: detect h2 heading with "vragen" or "faq", then
-  // wrap each subsequent h3+p pair in a styled card div
+  // Transform FAQ section: detect h2 or h3 heading with "vragen" or "faq", then
+  // wrap each subsequent h3/h4+p pair in a styled card div
   result = result.replace(
-    /(<h2>[^<]*(?:vragen|faq)[^<]*<\/h2>)([\s\S]*)$/i,
+    /(<h[23]>[^<]*(?:vragen|faq)[^<]*<\/h[23]>)([\s\S]*)$/i,
     (_, heading, faqBody) => {
       const cards = faqBody.replace(
-        /\s*<h3>([\s\S]*?)<\/h3>\s*<p>([\s\S]*?)<\/p>/gi,
+        /\s*<h[34]>([\s\S]*?)<\/h[34]>\s*<p>([\s\S]*?)<\/p>/gi,
         '\n<div class="faq-card"><p class="faq-q">$1</p><p class="faq-a">$2</p></div>'
       )
       return heading + '\n<div class="faq-cards">' + cards + '\n</div>'
