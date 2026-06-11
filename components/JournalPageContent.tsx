@@ -23,10 +23,14 @@ const featuredPost = getFeaturedPost()
 const categoryColors: Record<string, string> = {
   Filosofie: 'bg-stone-100 text-stone-600',
   Wetenschap: 'bg-blue-50 text-blue-700',
-  Ingrediënten: 'bg-[#FDF8F0] text-[#B8935A]',
+  Ingredienten: 'bg-[#FDF8F0] text-[#B8935A]',
   Routines: 'bg-green-50 text-green-700',
   Levensstijl: 'bg-purple-50 text-purple-700',
   Huidverzorging: 'bg-rose-50 text-rose-700',
+}
+
+function normalizeCategory(cat: string): string {
+  return cat.trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
 }
 
 export default function JournalPageContent({ dynamicPosts = [] }: { dynamicPosts?: DynamicPostSummary[] }) {
@@ -37,7 +41,7 @@ export default function JournalPageContent({ dynamicPosts = [] }: { dynamicPosts
   const allPosts = useMemo(() => {
     const dynamicSlugs = new Set(dynamicPosts.map((p) => p.slug))
     return [
-      ...dynamicPosts.map((p) => ({ ...p, category: p.category.trim() })),
+      ...dynamicPosts.map((p) => ({ ...p, category: normalizeCategory(p.category) })),
       ...staticPosts.filter((p) => !dynamicSlugs.has(p.slug)),
     ]
   }, [dynamicPosts])
