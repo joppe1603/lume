@@ -13,6 +13,7 @@ const BASE_URL = 'https://mauyi.nl'
 
 // Dynamic posts from Supabase are rendered on-demand (not pre-built)
 export const dynamicParams = true
+export const revalidate = 60
 
 export function generateStaticParams() {
   return getAllPosts().map((p) => ({ slug: p.slug }))
