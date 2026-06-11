@@ -72,6 +72,36 @@ const faqSchema = {
   ],
 }
 
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Retinol: werking, concentraties en hoe je het correct gebruikt',
+  description: 'Wetenschappelijk onderbouwde uitleg over retinol: celvernieuwing, optimale concentratie, opbouwschema en hoe je irritatie voorkomt.',
+  url: `${BASE_URL}/ingredients/retinol`,
+  datePublished: '2026-06-08',
+  dateModified: '2026-06-08',
+  author: { '@type': 'Organization', name: 'MAUYI', url: BASE_URL },
+  publisher: { '@type': 'Organization', name: 'MAUYI', url: BASE_URL },
+  citation: [
+    {
+      '@type': 'ScholarlyArticle',
+      name: 'Improvement of naturally aged skin with vitamin A (retinol)',
+      author: 'Kafi R, Kwak HS, Schumaker WE, et al.',
+      datePublished: '2007',
+      isPartOf: { '@type': 'Periodical', name: 'Archives of Dermatology' },
+      sameAs: 'https://doi.org/10.1001/archderm.143.5.606',
+    },
+    {
+      '@type': 'ScholarlyArticle',
+      name: 'Topical retinol improves fine wrinkles associated with natural aging',
+      author: 'Shupack J, et al.',
+      datePublished: '1993',
+      isPartOf: { '@type': 'Periodical', name: 'Journal of Investigative Dermatology' },
+      sameAs: 'https://doi.org/10.1111/1523-1747.ep12362860',
+    },
+  ],
+}
+
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -86,6 +116,7 @@ export default function RetinolIngredientPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Navbar />
 

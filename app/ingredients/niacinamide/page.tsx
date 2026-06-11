@@ -64,6 +64,36 @@ const faqSchema = {
   ],
 }
 
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Niacinamide: werking, concentraties en combinaties met andere ingrediënten',
+  description: 'Wetenschappelijk onderbouwde uitleg over niacinamide (vitamine B3): huidbarrière, sebumregulatie, pigmentvermindering en synergie met retinol.',
+  url: `${BASE_URL}/ingredients/niacinamide`,
+  datePublished: '2026-06-08',
+  dateModified: '2026-06-08',
+  author: { '@type': 'Organization', name: 'MAUYI', url: BASE_URL },
+  publisher: { '@type': 'Organization', name: 'MAUYI', url: BASE_URL },
+  citation: [
+    {
+      '@type': 'ScholarlyArticle',
+      name: 'Niacinamide: A B vitamin that improves aging facial skin appearance',
+      author: 'Bissett DL, Oblong JE, Berge CA',
+      datePublished: '2005',
+      isPartOf: { '@type': 'Periodical', name: 'Dermatologic Surgery' },
+      sameAs: 'https://doi.org/10.1097/00042728-200507001-00011',
+    },
+    {
+      '@type': 'ScholarlyArticle',
+      name: 'The effect of 2% niacinamide on facial sebum production',
+      author: 'Draelos ZD, Matsubara A, Smiles K',
+      datePublished: '2006',
+      isPartOf: { '@type': 'Periodical', name: 'Journal of Cosmetic and Laser Therapy' },
+      sameAs: 'https://doi.org/10.1080/14764170600740577',
+    },
+  ],
+}
+
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -78,6 +108,7 @@ export default function NiacinamideIngredientPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Navbar />
 

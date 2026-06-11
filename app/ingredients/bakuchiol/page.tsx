@@ -64,6 +64,36 @@ const faqSchema = {
   ],
 }
 
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Bakuchiol: werking, verschil met retinol en hoe je het gebruikt',
+  description: 'Wetenschappelijk onderbouwde uitleg over bakuchiol: klinische studies, vergelijking met retinol, optimale concentratie en synergiewerking.',
+  url: `${BASE_URL}/ingredients/bakuchiol`,
+  datePublished: '2026-06-08',
+  dateModified: '2026-06-08',
+  author: { '@type': 'Organization', name: 'MAUYI', url: BASE_URL },
+  publisher: { '@type': 'Organization', name: 'MAUYI', url: BASE_URL },
+  citation: [
+    {
+      '@type': 'ScholarlyArticle',
+      name: 'Prospective, randomized, double-blind assessment of topical bakuchiol and retinol for facial photoageing',
+      author: 'Dhaliwal S, Rybak I, Ellis SR, et al.',
+      datePublished: '2019',
+      isPartOf: { '@type': 'Periodical', name: 'British Journal of Dermatology' },
+      sameAs: 'https://doi.org/10.1111/bjd.16918',
+    },
+    {
+      '@type': 'ScholarlyArticle',
+      name: 'Bakuchiol: a retinol-like functional compound that regulates skin differentiation and photoaging',
+      author: 'Chaudhuri RK, Bojanowski K',
+      datePublished: '2014',
+      isPartOf: { '@type': 'Periodical', name: 'International Journal of Cosmetic Science' },
+      sameAs: 'https://doi.org/10.1111/ics.12117',
+    },
+  ],
+}
+
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -78,6 +108,7 @@ export default function BakuchiolIngredientPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Navbar />
 
