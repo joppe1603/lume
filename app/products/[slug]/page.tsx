@@ -171,6 +171,29 @@ export default async function ProductPage({
         datePublished: r.created_at.slice(0, 10),
       })),
     }),
+    mentions: [
+      {
+        '@type': 'Thing',
+        name: 'Retinol',
+        description: 'Vorm van vitamine A die celvernieuwing stimuleert en collageenproductie verhoogt.',
+        url: `${BASE_URL}/ingredients/retinol`,
+        sameAs: ['https://en.wikipedia.org/wiki/Retinol', 'https://pubchem.ncbi.nlm.nih.gov/compound/Retinol'],
+      },
+      {
+        '@type': 'Thing',
+        name: 'Niacinamide',
+        description: 'Amidevorm van vitamine B3 die de huidbarrière versterkt en irritatie van retinol buffert.',
+        url: `${BASE_URL}/ingredients/niacinamide`,
+        sameAs: ['https://en.wikipedia.org/wiki/Nicotinamide', 'https://pubchem.ncbi.nlm.nih.gov/compound/Nicotinamide'],
+      },
+      {
+        '@type': 'Thing',
+        name: 'Bakuchiol',
+        description: 'Plantaardig ingrediënt met retinol-achtige effecten, stabiel in zon en veilig tijdens zwangerschap.',
+        url: `${BASE_URL}/ingredients/bakuchiol`,
+        sameAs: ['https://en.wikipedia.org/wiki/Bakuchiol', 'https://pubchem.ncbi.nlm.nih.gov/compound/Bakuchiol'],
+      },
+    ],
   }
 
   const breadcrumbSchema = {

@@ -92,6 +92,16 @@ const articleSchema = {
       sameAs: 'https://doi.org/10.1080/14764170600740577',
     },
   ],
+  about: {
+    '@type': 'Thing',
+    name: 'Niacinamide',
+    description: 'Niacinamide (nicotinamide) is de amidevorm van vitamine B3. Het versterkt de huidbarrière, reguleert sebumproductie, vermindert pigmentatie en buffert irritatie van actieve ingrediënten zoals retinol.',
+    sameAs: [
+      'https://en.wikipedia.org/wiki/Nicotinamide',
+      'https://examine.com/supplements/vitamin-b3/',
+      'https://pubchem.ncbi.nlm.nih.gov/compound/Nicotinamide',
+    ],
+  },
 }
 
 const breadcrumbSchema = {

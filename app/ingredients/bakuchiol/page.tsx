@@ -92,6 +92,15 @@ const articleSchema = {
       sameAs: 'https://doi.org/10.1111/ics.12117',
     },
   ],
+  about: {
+    '@type': 'Thing',
+    name: 'Bakuchiol',
+    description: 'Bakuchiol is een plantaardige verbinding uit de Psoralea corylifolia plant met bewezen anti-aging effecten vergelijkbaar aan retinol. Het is stabiel in zon, niet irriterend en veilig tijdens zwangerschap.',
+    sameAs: [
+      'https://en.wikipedia.org/wiki/Bakuchiol',
+      'https://pubchem.ncbi.nlm.nih.gov/compound/Bakuchiol',
+    ],
+  },
 }
 
 const breadcrumbSchema = {

@@ -100,6 +100,16 @@ const articleSchema = {
       sameAs: 'https://doi.org/10.1111/1523-1747.ep12362860',
     },
   ],
+  about: {
+    '@type': 'Thing',
+    name: 'Retinol',
+    description: 'Retinol is een vorm van vitamine A (retinoïde) die celvernieuwing stimuleert en collageenproductie verhoogt. Het is het meest onderzochte anti-aging ingrediënt in huidverzorging.',
+    sameAs: [
+      'https://en.wikipedia.org/wiki/Retinol',
+      'https://examine.com/supplements/vitamin-a/',
+      'https://pubchem.ncbi.nlm.nih.gov/compound/Retinol',
+    ],
+  },
 }
 
 const breadcrumbSchema = {
