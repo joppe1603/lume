@@ -528,7 +528,7 @@ export default async function ProductPage({
               <p className="text-[13px] text-[#9A9590] font-light mb-6">
                 Eerlijke vergelijking met retinolproducten die je misschien al kent.
               </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 items-center">
                 {[
                   { href: '/alternatives/the-ordinary', label: 'vs The Ordinary' },
                   { href: '/alternatives/cerave', label: 'vs CeraVe' },
@@ -544,6 +544,12 @@ export default async function ProductPage({
                     {item.label}
                   </Link>
                 ))}
+                <Link
+                  href="/alternatives"
+                  className="text-[12px] font-semibold text-[#C9A96E] hover:text-[#D4B47A] px-3 py-1.5 transition-colors"
+                >
+                  Bekijk alle vergelijkingen →
+                </Link>
               </div>
             </div>
           </section>

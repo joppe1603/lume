@@ -126,6 +126,48 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly' as const,
       priority: 0.9,
     },
+    {
+      url: `${BASE_URL}/products/reset-serum/voor-50-plus`,
+      lastModified: new Date('2026-06-12'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/products/reset-serum/voor-mannen`,
+      lastModified: new Date('2026-06-12'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/products/reset-serum/voor-grote-porieen`,
+      lastModified: new Date('2026-06-12'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/products/reset-serum/voor-dofheid`,
+      lastModified: new Date('2026-06-12'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/products/reset-serum/voor-hyperpigmentatie`,
+      lastModified: new Date('2026-06-12'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/products/reset-serum/hoe-te-gebruiken`,
+      lastModified: new Date('2026-06-12'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.85,
+    },
+    {
+      url: `${BASE_URL}/products/reset-serum/bijwerkingen`,
+      lastModified: new Date('2026-06-12'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.85,
+    },
   ]
 
   return [
