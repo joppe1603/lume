@@ -247,6 +247,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
+      url: `${BASE_URL}/vs/cerave`,
+      lastModified: new Date('2026-06-12'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/vs/la-roche-posay`,
+      lastModified: new Date('2026-06-12'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/alternatives/neutrogena`,
+      lastModified: new Date('2026-06-12'),
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+    {
+      url: `${BASE_URL}/alternatives/vichy`,
+      lastModified: new Date('2026-06-12'),
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+    {
       url: `${BASE_URL}/routine`,
       lastModified: new Date('2025-01-01'),
       changeFrequency: 'monthly',
