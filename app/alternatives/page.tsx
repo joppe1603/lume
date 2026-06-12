@@ -67,6 +67,22 @@ const competitors = [
     searchVolume: '~100/mnd',
     reason: 'Ondoorzichtige formulering',
   },
+  {
+    href: '/alternatives/neutrogena',
+    name: 'Neutrogena',
+    tagline: 'alternatief voor Rapid Wrinkle Repair',
+    detail: 'Neutrogena vermeldt geen retinolconcentratie op de verpakking en bevat geen niacinamide. MAUYI biedt 0.3% retinol (expliciet vermeld) gebufferd met niacinamide 10%.',
+    searchVolume: '~150/mnd',
+    reason: 'Geen concentratie vermeld, geen niacinamidebuffer',
+  },
+  {
+    href: '/alternatives/vichy',
+    name: 'Vichy',
+    tagline: 'alternatief voor LiftActiv Retinol Specialist',
+    detail: 'Vichy LiftActiv bevat parfum en 0.2% retinol zonder niacinamidebuffer. MAUYI is parfumvrij, bevat 0.3% retinol en combineert dit met niacinamide 10%.',
+    searchVolume: '~120/mnd',
+    reason: 'Parfum in formule, lagere retinolconcentratie',
+  },
 ]
 
 export default function AlternativesIndexPage() {
@@ -168,19 +184,25 @@ export default function AlternativesIndexPage() {
             </p>
           </div>
 
-          {/* Cross-link to vs page */}
+          {/* Cross-link to vs pages */}
           <div className="border border-stone-100 rounded-2xl p-6 mb-12">
             <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#9A9590] mb-4">Directe vergelijking</p>
-            <Link href="/vs/the-ordinary" className="flex items-start gap-3 group">
-              <div>
-                <p className="text-[14px] font-semibold text-[#1A1A1A] group-hover:text-[#C9A96E] transition-colors">
-                  MAUYI vs The Ordinary — uitgebreide vergelijking →
-                </p>
-                <p className="text-[13px] text-[#9A9590] font-light mt-0.5">
-                  Ingredient-voor-ingredient vergelijking, met prijsberekening en voor-wie-tabel
-                </p>
-              </div>
-            </Link>
+            <div className="space-y-4">
+              {[
+                { href: '/vs/the-ordinary', title: 'MAUYI vs The Ordinary →', desc: 'Ingredient-voor-ingredient vergelijking, met prijsberekening en voor-wie-tabel' },
+                { href: '/vs/cerave', title: 'MAUYI vs CeraVe →', desc: 'Concentratietransparantie, bakuchiol en ceramides vergeleken' },
+                { href: '/vs/la-roche-posay', title: 'MAUYI vs La Roche-Posay →', desc: '0.3% vs 0.1% retinol — concentratie, niacinamide en parfumvrij' },
+              ].map((link) => (
+                <Link key={link.href} href={link.href} className="flex items-start gap-3 group">
+                  <div>
+                    <p className="text-[14px] font-semibold text-[#1A1A1A] group-hover:text-[#C9A96E] transition-colors">
+                      {link.title}
+                    </p>
+                    <p className="text-[13px] text-[#9A9590] font-light mt-0.5">{link.desc}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
 
           {/* CTA */}
