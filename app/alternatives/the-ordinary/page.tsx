@@ -114,6 +114,8 @@ export default function TheOrdinaryAlternativePage() {
             <nav className="flex items-center gap-2 text-xs text-[#9A9590]">
               <Link href="/" className="hover:text-[#C9A96E] transition-colors">Home</Link>
               <span>/</span>
+              <Link href="/alternatives" className="hover:text-[#C9A96E] transition-colors">Alternatieven</Link>
+              <span>/</span>
               <span className="text-[#1A1A1A] font-medium">The Ordinary alternatief</span>
             </nav>
           </div>
@@ -296,16 +298,23 @@ export default function TheOrdinaryAlternativePage() {
           {/* Related */}
           <div className="border border-stone-100 rounded-2xl p-6 mb-12">
             <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#9A9590] mb-4">Meer vergelijkingen</p>
-            <Link href="/vs/the-ordinary" className="flex items-start gap-3 group">
-              <div>
-                <p className="text-[14px] font-semibold text-[#1A1A1A] group-hover:text-[#C9A96E] transition-colors">
-                  MAUYI vs The Ordinary →
-                </p>
-                <p className="text-[13px] text-[#9A9590] font-light mt-0.5">
-                  Directe vergelijking op formule, prijs en gebruiksgemak
-                </p>
-              </div>
-            </Link>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {[
+                { href: '/vs/the-ordinary', name: 'MAUYI vs The Ordinary →', sub: 'Directe vergelijking op formule, prijs en gebruiksgemak' },
+                { href: '/alternatives/cerave', name: 'CeraVe alternatief →', sub: 'Milde retinol vergeleken' },
+                { href: '/alternatives/la-roche-posay', name: 'La Roche-Posay alternatief →', sub: 'Redermic R vs MAUYI Reset Serum' },
+                { href: '/alternatives/neutrogena', name: 'Neutrogena alternatief →', sub: 'Geen concentratie vermeld vs transparante formule' },
+                { href: '/alternatives/vichy', name: 'Vichy alternatief →', sub: 'Parfum in retinolserum vs parfumvrij' },
+                { href: '/alternatives', name: 'Alle alternatieven →', sub: 'Volledig overzicht van alle merken' },
+              ].map((item) => (
+                <Link key={item.href} href={item.href} className="flex items-start gap-3 group">
+                  <div>
+                    <p className="text-[14px] font-semibold text-[#1A1A1A] group-hover:text-[#C9A96E] transition-colors">{item.name}</p>
+                    <p className="text-[13px] text-[#9A9590] font-light mt-0.5">{item.sub}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
 
           {/* CTA */}

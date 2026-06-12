@@ -260,6 +260,8 @@ export default function LaRochePosayAlternatiefPage() {
               {[
                 { href: '/alternatives/the-ordinary', name: 'The Ordinary alternatief', sub: 'Losse ingrediënten vs één formule' },
                 { href: '/alternatives/cerave', name: 'CeraVe alternatief', sub: 'Milde retinol vergeleken' },
+                { href: '/alternatives/neutrogena', name: 'Neutrogena alternatief', sub: 'Geen concentratie vermeld vs transparant' },
+                { href: '/alternatives/vichy', name: 'Vichy alternatief', sub: 'Parfum in retinolserum vs parfumvrij' },
                 { href: '/alternatives/paulas-choice', name: "Paula's Choice alternatief", sub: 'Wetenschappelijke formules vergeleken' },
                 { href: '/alternatives/indeed-labs', name: 'Indeed Labs alternatief', sub: 'Bakuchiol Reface vs MAUYI' },
                 { href: '/alternatives', name: 'Alle alternatieven →', sub: 'Volledig overzicht van alle merken' },

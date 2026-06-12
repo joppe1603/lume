@@ -255,6 +255,8 @@ export default function IndeedLabsAlternatiefPage() {
                 { href: '/alternatives/the-ordinary', name: 'The Ordinary alternatief', sub: 'Losse ingrediënten vs één formule' },
                 { href: '/alternatives/cerave', name: 'CeraVe alternatief', sub: 'Milde retinol vergeleken' },
                 { href: '/alternatives/la-roche-posay', name: 'La Roche-Posay alternatief', sub: 'Redermic R vs MAUYI Reset Serum' },
+                { href: '/alternatives/neutrogena', name: 'Neutrogena alternatief', sub: 'Geen concentratie vermeld vs transparant' },
+                { href: '/alternatives/vichy', name: 'Vichy alternatief', sub: 'Parfum in retinolserum vs parfumvrij' },
                 { href: '/alternatives/paulas-choice', name: "Paula's Choice alternatief", sub: 'Wetenschappelijke formules vergeleken' },
                 { href: '/alternatives', name: 'Alle alternatieven →', sub: 'Volledig overzicht van alle merken' },
               ].map((item) => (

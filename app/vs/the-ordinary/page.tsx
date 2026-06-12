@@ -367,6 +367,8 @@ export default function MauyiVsTheOrdinaryPage() {
                 { href: '/alternatives/the-ordinary', name: 'The Ordinary alternatief →', sub: 'Waarom mensen overstappen — en of MAUYI de juiste keuze is' },
                 { href: '/alternatives/cerave', name: 'CeraVe alternatief →', sub: 'MAUYI vs CeraVe: milde retinol vergeleken' },
                 { href: '/alternatives/la-roche-posay', name: 'La Roche-Posay alternatief →', sub: 'MAUYI vs Redermic R en andere LRP retinols' },
+                { href: '/alternatives/neutrogena', name: 'Neutrogena alternatief →', sub: 'Geen concentratie vermeld vs transparante formule' },
+                { href: '/alternatives/vichy', name: 'Vichy alternatief →', sub: 'Parfum in retinolserum vs parfumvrij' },
                 { href: '/alternatives/paulas-choice', name: "Paula's Choice alternatief →", sub: "MAUYI vs Paula's Choice: wetenschappelijk vergeleken" },
                 { href: '/alternatives/indeed-labs', name: 'Indeed Labs alternatief →', sub: 'MAUYI vs Bakuchiol Reface Serum en andere opties' },
               ].map((item) => (

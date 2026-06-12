@@ -15,7 +15,7 @@ const exploreLinks = [
   { label: 'Journal',             href: '/journal',                 desc: 'Editoriaal & wetenschap' },
   { label: 'Community',           href: '/community',               desc: 'Verhalen van echte mensen' },
   { label: 'FAQ',                 href: '/faq',                     desc: 'Goede vragen. Eerlijke antwoorden.' },
-  { label: 'vs The Ordinary',     href: '/alternatives/the-ordinary', desc: 'MAUYI vergeleken met The Ordinary' },
+  { label: 'Merkvergelijkingen',  href: '/alternatives',              desc: 'MAUYI vergeleken met bekende merken' },
 ]
 
 
