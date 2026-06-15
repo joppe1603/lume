@@ -245,7 +245,7 @@ export default async function ProductPage({
     url: `${BASE_URL}/products/${slug}`,
     inLanguage: 'nl-NL',
     about: {
-      '@type': 'Product',
+      '@type': 'Thing',
       name: product.name,
       description: product.description,
       url: `${BASE_URL}/products/${slug}`,
