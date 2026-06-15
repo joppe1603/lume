@@ -90,6 +90,26 @@ const productSchema = {
     priceCurrency: 'EUR',
     availability: 'https://schema.org/InStock',
     url: `${BASE_URL}/products/reset-serum`,
+    seller: { '@type': 'Organization', name: 'MAUYI' },
+    shippingDetails: {
+      '@type': 'OfferShippingDetails',
+      shippingRate: { '@type': 'MonetaryAmount', value: '0', currency: 'EUR' },
+      shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'NL' },
+      deliveryTime: {
+        '@type': 'ShippingDeliveryTime',
+        handlingTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 1, unitCode: 'DAY' },
+        transitTime: { '@type': 'QuantitativeValue', minValue: 1, maxValue: 3, unitCode: 'DAY' },
+      },
+    },
+    hasMerchantReturnPolicy: {
+      '@type': 'MerchantReturnPolicy',
+      applicableCountry: 'NL',
+      returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+      merchantReturnDays: 30,
+      returnMethod: 'https://schema.org/ReturnByMail',
+      returnFees: 'https://schema.org/FreeReturn',
+      merchantReturnLink: `${BASE_URL}/retourbeleid`,
+    },
   },
 }
 
