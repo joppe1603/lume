@@ -492,6 +492,13 @@ export default async function ProductPage({
                   { href: '/products/reset-serum/voor-vette-huid', label: 'Vette huid', desc: 'Minder glans, kleinere poriën' },
                   { href: '/products/reset-serum/voor-40-plus', label: '40+ anti-aging', desc: 'Diepere rimpels aanpakken' },
                   { href: '/products/reset-serum/voor-zonschade', label: 'Zonschade', desc: 'Fotoveroudering terugdraaien' },
+                  { href: '/products/reset-serum/voor-50-plus', label: '50+ anti-aging', desc: 'Hormonale huid & menopauze' },
+                  { href: '/products/reset-serum/voor-mannen', label: 'Mannen', desc: 'Eenvoudige routine, snel resultaat' },
+                  { href: '/products/reset-serum/voor-grote-porieen', label: 'Grote poriën', desc: 'Talgregulatie & poriënverkleining' },
+                  { href: '/products/reset-serum/voor-dofheid', label: 'Doffe huid', desc: 'Glans & egale huidtoon' },
+                  { href: '/products/reset-serum/voor-hyperpigmentatie', label: 'Hyperpigmentatie', desc: 'Donkere vlekken vervaagd' },
+                  { href: '/products/reset-serum/hoe-te-gebruiken', label: 'Hoe te gebruiken', desc: 'Stap-voor-stap handleiding' },
+                  { href: '/products/reset-serum/bijwerkingen', label: 'Bijwerkingen', desc: 'Wat te verwachten' },
                 ].map((item) => (
                   <Link
                     key={item.href}
