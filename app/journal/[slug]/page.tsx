@@ -323,7 +323,7 @@ export default async function JournalPostPage({
               </div>
             </div>
             <div className="relative aspect-[16/9] rounded-2xl overflow-hidden bg-stone-100 mb-12">
-              <Image src={image} alt={dyn.image_alt ?? dyn.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 768px" priority />
+              <Image src={image} alt={dyn.image_alt ?? dyn.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 768px" priority unoptimized={image.startsWith('http')} />
             </div>
             {/* HTML content from n8n/AI */}
             <div
