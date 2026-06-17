@@ -100,7 +100,7 @@ const PRODUCTS: Product[] = [
       { quote: 'Poriën veel minder zichtbaar na 5 weken. Dit is mijn nieuwe vaste serum.', author: 'Noor Bakker', location: 'Rotterdam', skin: 'Gemengde huid', weeks: '5 weken', rating: 5, initials: 'NB', color: 'bg-indigo-400' },
     ],
     relatedSlugs: [],
-    seo: { title: 'Reset Serum — Retinol 0.3% Serum met Niacinamide 10% | MAUYI', description: 'Retinol 0.3% + Bakuchiol + Niacinamide 10% in één parfumvrij serum. Celvernieuwing, poriënverfijning en 72u hydratatie — ook voor gevoelige huid. €58, gratis verzending.' },
+    seo: { title: 'Reset Serum — Retinol 0.3% + Niacinamide 10%', description: 'Retinol 0.3% + Bakuchiol + Niacinamide 10% in één parfumvrij serum. Celvernieuwing, poriënverfijning en 72u hydratatie — ook voor gevoelige huid. €58, gratis verzending.' },
     emotion: 'Gebouwd voor huid die te veel heeft meegemaakt.',
     textureNote: 'Waterig en bijna doorzichtig. Trekt in binnen 45 seconden. Geen restlaag. Geen kleverig gevoel. Werkt terwijl je slaapt.',
     textureImages: [
