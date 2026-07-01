@@ -1,10 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useCart } from '@/contexts/CartContext'
 import { getAllProducts } from '@/lib/products'
+import { getAnonymousId, getSessionId, trackEvent } from '@/lib/tracking'
 
 const FREE_SHIPPING = 75
 const STANDARD_SHIPPING = 4.99
@@ -62,6 +63,26 @@ export default function CheckoutForm() {
   const shippingCost = subtotal >= FREE_SHIPPING ? 0 : (shipMethod === 'express' ? 7.95 : STANDARD_SHIPPING)
   const orderTotal = subtotal + shippingCost
 
+  useEffect(() => {
+    void trackEvent({
+      event_name: 'checkout_step_viewed',
+      properties: {
+        step,
+        step_name: STEPS[step],
+        subtotal,
+        shipping_cost: shippingCost,
+        total: orderTotal,
+        item_count: cartItems.reduce((s, i) => s + i.quantity, 0),
+        items: cartItems.map((item) => ({
+          product_slug: item.slug,
+          product_name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+        })),
+      },
+    })
+  }, [step])
+
   // Lock suggestion at mount — never changes, disappears once added to cart
   const [suggestedProduct] = useState(() =>
     getAllProducts().find(
@@ -84,26 +105,92 @@ export default function CheckoutForm() {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
+  function selectShippingMethod(method: 'standard' | 'express') {
+    setShipMethod(method)
+    void trackEvent({
+      event_name: 'shipping_method_selected',
+      properties: {
+        method,
+        subtotal,
+        shipping_cost: method === 'express' ? 7.95 : subtotal >= FREE_SHIPPING ? 0 : STANDARD_SHIPPING,
+      },
+    })
+  }
+
+  function goToStep(nextStep: Step) {
+    void trackEvent({
+      event_name: 'checkout_step_completed',
+      properties: {
+        from_step: step,
+        from_step_name: STEPS[step],
+        to_step: nextStep,
+        to_step_name: STEPS[nextStep],
+        has_email: Boolean(form.email),
+        country: form.country,
+        subtotal,
+        total: orderTotal,
+      },
+    })
+    setStep(nextStep)
+  }
+
   async function submitToMollie() {
     setError('')
     setLoading(true)
     const total = cartItems.reduce((s, i) => s + i.price * i.quantity, 0)
     const shipping = total >= FREE_SHIPPING ? 0 : (shipMethod === 'express' ? 7.95 : STANDARD_SHIPPING)
+    void trackEvent({
+      event_name: 'payment_redirect_started',
+      properties: {
+        provider: 'mollie',
+        subtotal: total,
+        shipping,
+        total: total + shipping,
+        shipping_method: shipMethod,
+        item_count: cartItems.reduce((s, i) => s + i.quantity, 0),
+        items: cartItems.map((item) => ({
+          product_slug: item.slug,
+          product_name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+        })),
+      },
+    })
     try {
       const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: cartItems, form, total: total + shipping }),
+        body: JSON.stringify({
+          items: cartItems,
+          form,
+          total: total + shipping,
+          tracking: {
+            anonymousId: getAnonymousId(),
+            sessionId: getSessionId(),
+          },
+        }),
       })
       const data = await res.json()
       if (!res.ok) {
         setError(data.error ?? 'Er is iets misgegaan. Probeer het opnieuw.')
+        void trackEvent({
+          event_name: 'payment_redirect_failed',
+          properties: { provider: 'mollie', reason: data.error ?? 'unknown', total: total + shipping },
+        })
         setLoading(false)
         return
       }
+      void trackEvent({
+        event_name: 'payment_redirect_created',
+        properties: { provider: 'mollie', total: total + shipping },
+      })
       window.location.href = data.checkoutUrl
     } catch {
       setError('Er is iets misgegaan. Probeer het opnieuw.')
+      void trackEvent({
+        event_name: 'payment_redirect_failed',
+        properties: { provider: 'mollie', reason: 'network_or_unknown', total: total + shipping },
+      })
       setLoading(false)
     }
   }
@@ -317,8 +404,8 @@ export default function CheckoutForm() {
                   <h2 className="text-[13px] font-semibold text-[#1A1A1A]">Bezorgmethode</h2>
                 </div>
                 <div className="p-6 space-y-2">
-                  <ShipOption checked={shipMethod === 'standard'} onChange={() => setShipMethod('standard')} title="Standaard · PostNL" meta="2–4 werkdagen" right={subtotal >= FREE_SHIPPING ? 'Gratis' : '€4,99'}/>
-                  <ShipOption checked={shipMethod === 'express'} onChange={() => setShipMethod('express')} title="Express · morgen in huis" meta="Bestel voor 22:00" right="€7,95"/>
+                  <ShipOption checked={shipMethod === 'standard'} onChange={() => selectShippingMethod('standard')} title="Standaard · PostNL" meta="2–4 werkdagen" right={subtotal >= FREE_SHIPPING ? 'Gratis' : '€4,99'}/>
+                  <ShipOption checked={shipMethod === 'express'} onChange={() => selectShippingMethod('express')} title="Express · morgen in huis" meta="Bestel voor 22:00" right="€7,95"/>
                 </div>
               </section>
             </form>
@@ -413,7 +500,7 @@ export default function CheckoutForm() {
           {/* ── Navigation ── */}
           <div className="flex items-center justify-between pt-1">
             {step > 0 ? (
-              <button type="button" onClick={() => setStep((step - 1) as Step)} className="text-[13px] text-[#9A9590] hover:text-[#1A1A1A] transition-colors flex items-center gap-1.5">
+              <button type="button" onClick={() => goToStep((step - 1) as Step)} className="text-[13px] text-[#9A9590] hover:text-[#1A1A1A] transition-colors flex items-center gap-1.5">
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden><path d="M8 6H2M4 3L1 6l3 3"/></svg>
                 Terug
               </button>
@@ -428,7 +515,7 @@ export default function CheckoutForm() {
               <button
                 type="button"
                 disabled={(step === 0 && !canGoStep1) || (step === 1 && !canGoStep2)}
-                onClick={() => setStep((step + 1) as Step)}
+                onClick={() => goToStep((step + 1) as Step)}
                 className="btn-gold px-8 py-3.5 rounded-2xl font-semibold text-[14px] tracking-[0.01em] disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2 active:scale-[0.99] transition-transform"
               >
                 {step === 0 && 'Naar bezorging'}

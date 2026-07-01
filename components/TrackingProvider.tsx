@@ -2,8 +2,10 @@
 
 import { useEffect, useRef } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
+import { useReportWebVitals } from 'next/web-vitals'
 import {
   buildFingerprint,
+  getAttributionContext,
   getAnonymousId,
   getConsent,
   getSessionId,
@@ -27,8 +29,23 @@ export default function TrackingProvider() {
   const searchParams = useSearchParams()
   const fingerprintSentRef = useRef(false)
   const scrollMilestonesRef = useRef<Set<number>>(new Set())
+  const clickHistoryRef = useRef<Array<{ x: number; y: number; at: number; label: string }>>([])
+  const visibleProductsRef = useRef<Set<string>>(new Set())
+
+  useReportWebVitals((metric) => {
+    void trackEvent({
+      event_name: 'web_vital_reported',
+      properties: {
+        name: metric.name,
+        value: metric.value,
+        rating: metric.rating,
+        id: metric.id,
+      },
+    })
+  })
 
   useEffect(() => {
+    getAttributionContext()
     if (markSessionStarted()) {
       void trackEvent({ event_name: 'session_started' })
     }
@@ -42,11 +59,48 @@ export default function TrackingProvider() {
       page_path: query ? `${pathname}?${query}` : pathname,
       properties: {
         title: document.title,
+        content_group: pathname.split('/').filter(Boolean)[0] || 'home',
+        product_slug: pathname.startsWith('/products/') ? pathname.split('/')[2] : undefined,
       },
     })
   }, [pathname, searchParams])
 
   useEffect(() => {
+    function reportPerformance() {
+      const nav = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined
+      if (!nav) return
+      void trackEvent({
+        event_name: 'performance_navigation_reported',
+        properties: {
+          type: nav.type,
+          dns: Math.round(nav.domainLookupEnd - nav.domainLookupStart),
+          connect: Math.round(nav.connectEnd - nav.connectStart),
+          ttfb: Math.round(nav.responseStart - nav.requestStart),
+          response: Math.round(nav.responseEnd - nav.responseStart),
+          domInteractive: Math.round(nav.domInteractive),
+          domComplete: Math.round(nav.domComplete),
+        },
+      })
+    }
+
+    if (document.readyState === 'complete') {
+      reportPerformance()
+    } else {
+      window.addEventListener('load', reportPerformance, { once: true })
+      return () => window.removeEventListener('load', reportPerformance)
+    }
+  }, [])
+
+  useEffect(() => {
+    function handleCustomTrack(event: Event) {
+      const detail = (event as CustomEvent<{ event_name?: string; properties?: Record<string, unknown> }>).detail
+      if (!detail?.event_name) return
+      void trackEvent({
+        event_name: detail.event_name,
+        properties: detail.properties ?? {},
+      })
+    }
+
     function handleClick(event: MouseEvent) {
       const element = nearestTrackableElement(event.target)
       if (!element) return
@@ -55,15 +109,50 @@ export default function TrackingProvider() {
       const href = anchor?.getAttribute('href') ?? null
       const isOutbound = href ? /^https?:\/\//.test(href) && !href.includes(window.location.host) : false
       const eventName = element.getAttribute('data-track') ?? (isOutbound ? 'outbound_link_clicked' : 'ui_clicked')
+      const label = textLabel(element)
+
+      clickHistoryRef.current = [
+        ...clickHistoryRef.current.filter((item) => Date.now() - item.at < 2500),
+        { x: event.clientX, y: event.clientY, at: Date.now(), label },
+      ]
+
+      const repeatedClicks = clickHistoryRef.current.filter(
+        (item) => Math.abs(item.x - event.clientX) < 30 && Math.abs(item.y - event.clientY) < 30
+      )
+      if (repeatedClicks.length >= 3) {
+        void trackEvent({
+          event_name: 'rage_click_detected',
+          properties: {
+            label,
+            x: event.clientX,
+            y: event.clientY,
+            count: repeatedClicks.length,
+          },
+        })
+      }
+
+      if (!anchor && element.tagName.toLowerCase() !== 'button' && !element.getAttribute('data-track')) {
+        void trackEvent({
+          event_name: 'dead_click_detected',
+          properties: {
+            label,
+            tag: element.tagName.toLowerCase(),
+            x: event.clientX,
+            y: event.clientY,
+          },
+        })
+      }
 
       void trackEvent({
         event_name: eventName,
         properties: {
-          label: textLabel(element),
+          label,
           tag: element.tagName.toLowerCase(),
           href,
           outbound: isOutbound,
           id: element.id || undefined,
+          product_slug: element.getAttribute('data-product-slug') || anchor?.getAttribute('data-product-slug') || undefined,
+          product_name: element.getAttribute('data-product-name') || anchor?.getAttribute('data-product-name') || undefined,
         },
       })
     }
@@ -113,6 +202,7 @@ export default function TrackingProvider() {
       })
     }
 
+    window.addEventListener('mauyi:track', handleCustomTrack)
     document.addEventListener('click', handleClick, { capture: true })
     document.addEventListener('submit', handleSubmit, { capture: true })
     document.addEventListener('change', handleChange, { capture: true })
@@ -121,6 +211,7 @@ export default function TrackingProvider() {
     document.addEventListener('ended', handleVideo, { capture: true })
 
     return () => {
+      window.removeEventListener('mauyi:track', handleCustomTrack)
       document.removeEventListener('click', handleClick, { capture: true })
       document.removeEventListener('submit', handleSubmit, { capture: true })
       document.removeEventListener('change', handleChange, { capture: true })
@@ -129,6 +220,31 @@ export default function TrackingProvider() {
       document.removeEventListener('ended', handleVideo, { capture: true })
     }
   }, [])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return
+        const element = entry.target
+        const slug = element.getAttribute('data-product-slug')
+        if (!slug || visibleProductsRef.current.has(slug)) return
+        visibleProductsRef.current.add(slug)
+
+        void trackEvent({
+          event_name: 'product_impression_viewed',
+          properties: {
+            product_slug: slug,
+            product_name: element.getAttribute('data-product-name') || undefined,
+            list_name: element.getAttribute('data-product-list') || undefined,
+            position: element.getAttribute('data-product-position') || undefined,
+          },
+        })
+      })
+    }, { threshold: 0.55 })
+
+    document.querySelectorAll('[data-track-product-impression="true"]').forEach((element) => observer.observe(element))
+    return () => observer.disconnect()
+  }, [pathname])
 
   useEffect(() => {
     let ticking = false
@@ -156,6 +272,36 @@ export default function TrackingProvider() {
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    function handleBeforeUnload() {
+      const maxScroll = Math.round((window.scrollY / Math.max(1, document.documentElement.scrollHeight - window.innerHeight)) * 100)
+      void trackEvent({
+        event_name: 'session_page_exited',
+        properties: {
+          time_on_page_ms: Math.round(performance.now()),
+          max_scroll_estimate: Math.min(100, maxScroll),
+        },
+      })
+    }
+
+    function handleVisibilityChange() {
+      void trackEvent({
+        event_name: document.visibilityState === 'hidden' ? 'page_hidden' : 'page_visible',
+        properties: {
+          visibility_state: document.visibilityState,
+          time_on_page_ms: Math.round(performance.now()),
+        },
+      })
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    window.addEventListener('beforeunload', handleBeforeUnload)
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+    }
   }, [])
 
   useEffect(() => {

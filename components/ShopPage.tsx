@@ -108,6 +108,19 @@ export default function ShopPage() {
     ? visibleProducts
     : visibleProducts.filter(p => p.categories.includes(activeFilter))
 
+  function selectFilter(filter: string) {
+    setActiveFilter(filter)
+    window.dispatchEvent(new CustomEvent('mauyi:track', {
+      detail: {
+        event_name: 'product_filter_selected',
+        properties: {
+          filter,
+          result_count: filter === 'Alles' ? visibleProducts.length : visibleProducts.filter(p => p.categories.includes(filter)).length,
+        },
+      },
+    }))
+  }
+
   return (
     <main>
       {/* Hero */}
@@ -143,7 +156,7 @@ export default function ShopPage() {
               <button
                 key={f}
                 type="button"
-                onClick={() => setActiveFilter(f)}
+                onClick={() => selectFilter(f)}
                 className={`px-5 py-2 rounded-full text-sm font-medium transition-all cursor-pointer ${
                   activeFilter === f
                     ? 'bg-[#1A1A1A] text-white'
@@ -173,7 +186,15 @@ export default function ShopPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <Link href={`/products/${product.slug}`} className="group block bg-white rounded-2xl border border-stone-100 hover:border-stone-200 overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-stone-100">
+                  <Link
+                    href={`/products/${product.slug}`}
+                    className="group block bg-white rounded-2xl border border-stone-100 hover:border-stone-200 overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-stone-100"
+                    data-track-product-impression="true"
+                    data-product-slug={product.slug}
+                    data-product-name={product.name}
+                    data-product-list={`shop:${activeFilter}`}
+                    data-product-position={i + 1}
+                  >
                     {/* Image */}
                     <div className="relative aspect-[4/3] bg-[#F5EFE6] overflow-hidden">
                       <Image

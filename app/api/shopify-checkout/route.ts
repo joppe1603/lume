@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getTrackingSupabase } from '@/lib/tracking-server'
 
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData()
     const linesJson = formData.get('lines') as string
+    const anonymousId = formData.get('anonymousId') as string | null
+    const sessionId = formData.get('sessionId') as string | null
+    const cartSnapshotRaw = formData.get('cartSnapshot') as string | null
 
     if (!linesJson) {
       return NextResponse.redirect(new URL('/', req.url), 303)
@@ -28,7 +32,7 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify({
         query: `mutation cartCreate($lines: [CartLineInput!]!) {
           cartCreate(input: { lines: $lines }) {
-            cart { checkoutUrl }
+            cart { id checkoutUrl }
             userErrors { message }
           }
         }`,
@@ -37,7 +41,8 @@ export async function POST(req: NextRequest) {
     })
 
     const json = await res.json()
-    const checkoutUrl = json.data?.cartCreate?.cart?.checkoutUrl
+    const cart = json.data?.cartCreate?.cart
+    const checkoutUrl = cart?.checkoutUrl
 
     if (!checkoutUrl) {
       const errMsg = JSON.stringify(json.errors ?? json.data?.cartCreate?.userErrors ?? json)
@@ -45,6 +50,27 @@ export async function POST(req: NextRequest) {
       return new Response(`<h2>Checkout fout</h2><pre>${errMsg}</pre>`, {
         status: 200,
         headers: { 'Content-Type': 'text/html' },
+      })
+    }
+
+    if (anonymousId && sessionId) {
+      let cartSnapshot: Record<string, unknown> = {}
+      try {
+        cartSnapshot = cartSnapshotRaw ? JSON.parse(cartSnapshotRaw) : {}
+      } catch {
+        cartSnapshot = {}
+      }
+
+      await getTrackingSupabase()?.from('tracking_events').insert({
+        event_name: 'shopify_checkout_created',
+        anonymous_id: anonymousId,
+        session_id: sessionId,
+        properties: {
+          source: 'slide_cart_form',
+          shopify_cart_id: cart.id,
+          checkout_host: new URL(checkoutUrl).host,
+          ...cartSnapshot,
+        },
       })
     }
 

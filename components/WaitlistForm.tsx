@@ -4,6 +4,7 @@ import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { track } from '@vercel/analytics'
+import { getAnonymousId, getSessionId, trackEvent } from '@/lib/tracking'
 type SubmitState = 'idle' | 'loading' | 'error'
 
 export default function WaitlistForm({
@@ -48,13 +49,25 @@ export default function WaitlistForm({
     const res = await fetch('/api/waitlist', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: trimmedEmail, source, productSlug: productSlug ?? null }),
+      body: JSON.stringify({
+        email: trimmedEmail,
+        source,
+        productSlug: productSlug ?? null,
+        tracking: {
+          anonymousId: getAnonymousId(),
+          sessionId: getSessionId(),
+        },
+      }),
     })
 
     if (!res.ok) {
       const data = await res.json().catch(() => ({}))
       setState('error')
       setErrorMsg(data.error ?? 'Er ging iets mis. Probeer het opnieuw.')
+      void trackEvent({
+        event_name: 'waitlist_signup_failed',
+        properties: { source, product_slug: productSlug ?? null, reason: data.error ?? 'unknown' },
+      })
       return
     }
 
@@ -70,6 +83,10 @@ export default function WaitlistForm({
     }
 
     track('waitlist_signup', { source, product: productSlug ?? 'none' })
+    void trackEvent({
+      event_name: 'waitlist_signup_completed',
+      properties: { source, product_slug: productSlug ?? null },
+    })
     redirectToThanks(trimmedEmail)
   }
 

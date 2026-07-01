@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { getTrackingSupabase } from '@/lib/tracking-server'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.mauyi.nl'
 
 export async function POST(req: NextRequest) {
   try {
-    const { items, form, total } = await req.json()
+    const { items, form, total, tracking } = await req.json()
 
     if (!items?.length || !form?.email || !form?.name) {
       return NextResponse.json({ error: 'Vul alle verplichte velden in.' }, { status: 400 })
@@ -39,6 +40,28 @@ export async function POST(req: NextRequest) {
     if (dbError || !order) {
       console.error('Supabase error:', dbError)
       return NextResponse.json({ error: 'Bestelling kon niet worden opgeslagen.' }, { status: 500 })
+    }
+
+    if (tracking?.anonymousId && tracking?.sessionId) {
+      await getTrackingSupabase()?.from('tracking_events').insert({
+        event_name: 'order_created',
+        anonymous_id: tracking.anonymousId,
+        session_id: tracking.sessionId,
+        properties: {
+          order_id: order.id,
+          total,
+          item_count: items.reduce((sum: number, item: { quantity?: number }) => sum + (item.quantity ?? 0), 0),
+          email_domain: String(form.email).split('@')[1],
+          country: form.country,
+          city: form.city,
+          items: items.map((item: { slug?: string; name?: string; price?: number; quantity?: number }) => ({
+            product_slug: item.slug,
+            product_name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+          })),
+        },
+      })
     }
 
     // Create Mollie payment via direct API call

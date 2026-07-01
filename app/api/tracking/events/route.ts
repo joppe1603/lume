@@ -13,6 +13,7 @@ type IncomingEvent = {
   fingerprint?: Record<string, unknown>
   network?: Record<string, unknown>
   properties?: Record<string, unknown>
+  attribution?: Record<string, unknown>
   consent?: Record<string, unknown>
 }
 
@@ -43,7 +44,10 @@ export async function POST(req: NextRequest) {
       device: clampObject(event.device),
       fingerprint: clampObject(event.fingerprint),
       network: { ...network, ...clampObject(event.network) },
-      properties: clampObject(event.properties),
+      properties: {
+        ...clampObject(event.properties),
+        attribution: clampObject(event.attribution),
+      },
       consent: clampObject(event.consent),
     }))
 
@@ -65,4 +69,3 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json({ ok: true, persisted: true })
 }
-

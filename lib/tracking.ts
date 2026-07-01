@@ -21,6 +21,7 @@ const CONSENT_KEY = 'mauyi-cookie-consent'
 const ANON_KEY = 'mauyi-anonymous-id'
 const SESSION_KEY = 'mauyi-session-id'
 const SESSION_STARTED_KEY = 'mauyi-session-started'
+const ATTRIBUTION_KEY = 'mauyi-attribution'
 const CONSENT_VERSION = '2026-07-01'
 
 function createId(prefix: string) {
@@ -138,6 +139,48 @@ export function getDeviceContext() {
   }
 }
 
+export function getAttributionContext() {
+  const current = typeof window !== 'undefined' ? new URL(window.location.href) : null
+  const query = current?.searchParams
+  const stored = readStorage(ATTRIBUTION_KEY)
+  let parsedStored: Record<string, unknown> | null = null
+  try {
+    parsedStored = stored ? JSON.parse(stored) as Record<string, unknown> : null
+  } catch {
+    parsedStored = null
+  }
+
+  const clickIds = {
+    gclid: query?.get('gclid') ?? undefined,
+    fbclid: query?.get('fbclid') ?? undefined,
+    ttclid: query?.get('ttclid') ?? undefined,
+    msclkid: query?.get('msclkid') ?? undefined,
+  }
+  const utm = {
+    source: query?.get('utm_source') ?? undefined,
+    medium: query?.get('utm_medium') ?? undefined,
+    campaign: query?.get('utm_campaign') ?? undefined,
+    content: query?.get('utm_content') ?? undefined,
+    term: query?.get('utm_term') ?? undefined,
+  }
+  const hasNewAttribution = Object.values({ ...clickIds, ...utm }).some(Boolean)
+
+  if (!hasNewAttribution && parsedStored) return parsedStored
+
+  const attribution = {
+    firstLandingPage: parsedStored?.firstLandingPage ?? window.location.href,
+    firstReferrer: parsedStored?.firstReferrer ?? document.referrer ?? '',
+    latestLandingPage: window.location.href,
+    latestReferrer: document.referrer ?? '',
+    utm,
+    clickIds,
+    capturedAt: new Date().toISOString(),
+  }
+
+  writeStorage(ATTRIBUTION_KEY, JSON.stringify(attribution))
+  return attribution
+}
+
 async function sha256(value: string) {
   const encoded = new TextEncoder().encode(value)
   const digest = await crypto.subtle.digest('SHA-256', encoded)
@@ -200,6 +243,7 @@ export async function buildFingerprint() {
 
 export async function trackEvent(event: TrackingEvent) {
   const consent = getConsent()
+  const attribution = consent.analytics || consent.marketing ? getAttributionContext() : {}
   const payload = {
     anonymous_id: getAnonymousId(),
     session_id: getSessionId(),
@@ -208,6 +252,7 @@ export async function trackEvent(event: TrackingEvent) {
     page_path: event.page_path ?? window.location.pathname,
     referrer: event.referrer ?? document.referrer,
     properties: event.properties ?? {},
+    attribution,
     consent,
     device: consent.analytics || consent.fingerprinting ? getDeviceContext() : {},
   }
@@ -253,4 +298,3 @@ export function markSessionStarted() {
     return true
   }
 }
-

@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useCart } from '@/contexts/CartContext'
+import { getAnonymousId, getSessionId, trackEvent } from '@/lib/tracking'
 
 const FREE_SHIPPING_THRESHOLD = 75
 
@@ -15,12 +16,20 @@ export default function SlideCart() {
   const { state, dispatch, total, itemCount } = useCart()
   const { isOpen, items } = state
   const [isCheckingOut, setIsCheckingOut] = useState(false)
+  const [trackingIds, setTrackingIds] = useState({ anonymousId: '', sessionId: '' })
 
   // Lock body scroll
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [isOpen])
+
+  useEffect(() => {
+    setTrackingIds({
+      anonymousId: getAnonymousId(),
+      sessionId: getSessionId(),
+    })
+  }, [])
 
   const suggestion = ROUTINE_SUGGESTIONS.find(
     (s) => !items.some((item) => item.slug === s.slug)
@@ -32,6 +41,27 @@ export default function SlideCart() {
 
   const shippingCost = freeShipping ? 0 : 4.99
   const orderTotal = total + shippingCost
+
+  function trackFormCheckoutStart() {
+    setIsCheckingOut(true)
+    void trackEvent({
+      event_name: 'shopify_checkout_started',
+      properties: {
+        source: 'slide_cart_form',
+        total,
+        shipping_cost: shippingCost,
+        order_total: orderTotal,
+        item_count: itemCount,
+        items: items.map((item) => ({
+          product_slug: item.slug,
+          product_name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+          subscription: Boolean(item.subscription),
+        })),
+      },
+    })
+  }
 
   return (
     <AnimatePresence>
@@ -297,7 +327,7 @@ export default function SlideCart() {
                 <form
                   method="POST"
                   action="/api/shopify-checkout"
-                  onSubmit={() => setIsCheckingOut(true)}
+                  onSubmit={trackFormCheckoutStart}
                 >
                   <input
                     type="hidden"
@@ -307,6 +337,24 @@ export default function SlideCart() {
                         .filter((i) => i.shopifyVariantId)
                         .map((i) => ({ merchandiseId: i.shopifyVariantId, quantity: i.quantity }))
                     )}
+                  />
+                  <input type="hidden" name="anonymousId" value={trackingIds.anonymousId} />
+                  <input type="hidden" name="sessionId" value={trackingIds.sessionId} />
+                  <input
+                    type="hidden"
+                    name="cartSnapshot"
+                    value={JSON.stringify({
+                      total,
+                      shippingCost,
+                      orderTotal,
+                      itemCount,
+                      items: items.map((item) => ({
+                        slug: item.slug,
+                        name: item.name,
+                        price: item.price,
+                        quantity: item.quantity,
+                      })),
+                    })}
                   />
                   <button
                     type="submit"

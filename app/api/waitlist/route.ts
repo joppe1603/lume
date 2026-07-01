@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { Resend } from 'resend'
 import { renderWaitlistEmail } from '@/emails/WaitlistConfirmation'
+import { getTrackingSupabase } from '@/lib/tracking-server'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.mauyi.nl'
 
@@ -110,7 +111,12 @@ export async function POST(req: NextRequest) {
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
   )
-  let body: { email?: string; source?: string; productSlug?: string }
+  let body: {
+    email?: string
+    source?: string
+    productSlug?: string
+    tracking?: { anonymousId?: string; sessionId?: string }
+  }
   try {
     body = await req.json()
   } catch {
@@ -149,6 +155,21 @@ export async function POST(req: NextRequest) {
       // Don't fail the request if email sending fails — the signup succeeded
       console.error('[waitlist/route] Resend error:', emailError)
     }
+  }
+
+  if (body.tracking?.anonymousId && body.tracking?.sessionId) {
+    await getTrackingSupabase()?.from('tracking_events').insert({
+      event_name: 'lead_created',
+      anonymous_id: body.tracking.anonymousId,
+      session_id: body.tracking.sessionId,
+      properties: {
+        lead_type: 'waitlist',
+        source: body.source ?? 'unknown',
+        product_slug: body.productSlug ?? null,
+        duplicate: isDuplicate,
+        email_domain: email.split('@')[1],
+      },
+    })
   }
 
   return NextResponse.json({ ok: true, duplicate: isDuplicate })

@@ -3,6 +3,7 @@
 import { createContext, useContext, useReducer, useEffect, useState, ReactNode } from 'react'
 import { createShopifyCheckout } from '@/lib/shopify'
 import { track } from '@vercel/analytics'
+import { trackEvent } from '@/lib/tracking'
 
 export type CartItem = {
   slug: string
@@ -36,6 +37,16 @@ function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
     case 'ADD_ITEM': {
       track('add_to_cart', { product: action.payload.name, price: action.payload.price })
+      void trackEvent({
+        event_name: 'cart_item_added',
+        properties: {
+          product_slug: action.payload.slug,
+          product_name: action.payload.name,
+          price: action.payload.price,
+          size: action.payload.size,
+          subscription: Boolean(action.payload.subscription),
+        },
+      })
       const existing = state.items.find((i) => i.slug === action.payload.slug)
       if (existing) {
         return {
@@ -52,9 +63,34 @@ function cartReducer(state: CartState, action: CartAction): CartState {
         items: [...state.items, { ...action.payload, quantity: 1 }],
       }
     }
-    case 'REMOVE_ITEM':
+    case 'REMOVE_ITEM': {
+      const removed = state.items.find((i) => i.slug === action.payload)
+      if (removed) {
+        void trackEvent({
+          event_name: 'cart_item_removed',
+          properties: {
+            product_slug: removed.slug,
+            product_name: removed.name,
+            price: removed.price,
+            quantity: removed.quantity,
+          },
+        })
+      }
       return { ...state, items: state.items.filter((i) => i.slug !== action.payload) }
-    case 'UPDATE_QTY':
+    }
+    case 'UPDATE_QTY': {
+      const changed = state.items.find((i) => i.slug === action.payload.slug)
+      if (changed) {
+        void trackEvent({
+          event_name: 'cart_quantity_updated',
+          properties: {
+            product_slug: changed.slug,
+            product_name: changed.name,
+            previous_quantity: changed.quantity,
+            next_quantity: action.payload.qty,
+          },
+        })
+      }
       if (action.payload.qty <= 0) {
         return { ...state, items: state.items.filter((i) => i.slug !== action.payload.slug) }
       }
@@ -64,6 +100,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
           i.slug === action.payload.slug ? { ...i, quantity: action.payload.qty } : i
         ),
       }
+    }
     case 'CLEAR_CART':
       return { ...state, items: [], isOpen: false }
     case 'RESTORE':
@@ -143,9 +180,32 @@ export function CartProvider({ children }: { children: ReactNode }) {
       total,
       item_count: itemCount,
     })
+    void trackEvent({
+      event_name: 'shopify_checkout_started',
+      properties: {
+        total,
+        item_count: itemCount,
+        items: state.items.map((item) => ({
+          product_slug: item.slug,
+          product_name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+          subscription: Boolean(item.subscription),
+        })),
+      },
+    })
     setIsCheckingOut(true)
     try {
-      const checkoutUrl = await createShopifyCheckout(lines)
+      const { cartId, checkoutUrl } = await createShopifyCheckout(lines)
+      void trackEvent({
+        event_name: 'shopify_checkout_created',
+        properties: {
+          shopify_cart_id: cartId,
+          checkout_host: new URL(checkoutUrl).host,
+          total,
+          item_count: itemCount,
+        },
+      })
       // Use anchor click for reliable navigation on iOS Safari
       const a = document.createElement('a')
       a.href = checkoutUrl
@@ -154,6 +214,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
       document.body.removeChild(a)
     } catch (err) {
       console.error('Shopify checkout error:', err)
+      void trackEvent({
+        event_name: 'shopify_checkout_failed',
+        properties: {
+          reason: err instanceof Error ? err.message : 'unknown',
+          total,
+          item_count: itemCount,
+        },
+      })
       setIsCheckingOut(false)
     }
   }

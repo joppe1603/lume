@@ -32,10 +32,10 @@ type CartCreateData = {
 }
 
 /**
- * Creates a Shopify cart with the given line items and returns the checkout URL.
+ * Creates a Shopify cart with the given line items and returns its checkout URL.
  * merchandiseId must be a Shopify variant GID: "gid://shopify/ProductVariant/123456789"
  */
-export async function createShopifyCheckout(lines: CartLineInput[]): Promise<string> {
+export async function createShopifyCheckout(lines: CartLineInput[]): Promise<{ cartId: string; checkoutUrl: string }> {
   const data = await shopifyFetch<CartCreateData>(
     `mutation cartCreate($lines: [CartLineInput!]!) {
       cartCreate(input: { lines: $lines }) {
@@ -55,5 +55,8 @@ export async function createShopifyCheckout(lines: CartLineInput[]): Promise<str
     throw new Error(data.cartCreate.userErrors[0].message)
   }
 
-  return data.cartCreate.cart.checkoutUrl
+  return {
+    cartId: data.cartCreate.cart.id,
+    checkoutUrl: data.cartCreate.cart.checkoutUrl,
+  }
 }

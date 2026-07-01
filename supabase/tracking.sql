@@ -82,3 +82,67 @@ create policy "service role can manage consent records"
   using (auth.role() = 'service_role')
   with check (auth.role() = 'service_role');
 
+create or replace view tracking_daily_event_counts as
+select
+  date_trunc('day', occurred_at)::date as day,
+  event_name,
+  count(*) as events,
+  count(distinct anonymous_id) as visitors,
+  count(distinct session_id) as sessions
+from tracking_events
+group by 1, 2
+order by 1 desc, 3 desc;
+
+create or replace view tracking_top_pages_7d as
+select
+  page_path,
+  count(*) filter (where event_name = 'page_viewed') as pageviews,
+  count(distinct anonymous_id) as visitors,
+  count(*) filter (where event_name = 'waitlist_signup_completed') as waitlist_signups,
+  count(*) filter (where event_name in ('shopify_checkout_started', 'payment_redirect_started')) as checkout_starts
+from tracking_events
+where occurred_at >= now() - interval '7 days'
+group by 1
+order by pageviews desc nulls last;
+
+create or replace view tracking_checkout_funnel_7d as
+select
+  event_name,
+  count(*) as events,
+  count(distinct anonymous_id) as visitors,
+  count(distinct session_id) as sessions
+from tracking_events
+where occurred_at >= now() - interval '7 days'
+  and event_name in (
+    'cart_item_added',
+    'shopify_checkout_started',
+    'shopify_checkout_created',
+    'shopify_checkout_failed',
+    'checkout_step_viewed',
+    'payment_redirect_started',
+    'order_created'
+  )
+group by event_name
+order by case event_name
+  when 'cart_item_added' then 1
+  when 'shopify_checkout_started' then 2
+  when 'shopify_checkout_created' then 3
+  when 'checkout_step_viewed' then 4
+  when 'payment_redirect_started' then 5
+  when 'order_created' then 6
+  else 99
+end;
+
+create or replace view tracking_revenue_events_30d as
+select
+  occurred_at,
+  anonymous_id,
+  session_id,
+  event_name,
+  (properties->>'total')::numeric as total,
+  properties->>'shopify_cart_id' as shopify_cart_id,
+  properties->'items' as items,
+  properties->'attribution' as attribution
+from tracking_events
+where occurred_at >= now() - interval '30 days'
+  and event_name in ('shopify_checkout_created', 'order_created', 'payment_redirect_created');
