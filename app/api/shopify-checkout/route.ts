@@ -61,19 +61,6 @@ export async function POST(req: NextRequest) {
         cartSnapshot = {}
       }
 
-      await getTrackingSupabase()?.from('shopify_checkout_sessions').upsert({
-        shopify_cart_id: cart.id,
-        shopify_cart_token: String(cart.id).split('/').pop()?.split('?')[0] ?? null,
-        anonymous_id: anonymousId,
-        session_id: sessionId,
-        checkout_url: checkoutUrl,
-        checkout_host: new URL(checkoutUrl).host,
-        total: typeof cartSnapshot.orderTotal === 'number' ? cartSnapshot.orderTotal : null,
-        item_count: typeof cartSnapshot.itemCount === 'number' ? cartSnapshot.itemCount : null,
-        items: cartSnapshot,
-        updated_at: new Date().toISOString(),
-      }, { onConflict: 'shopify_cart_id' })
-
       await getTrackingSupabase()?.from('tracking_events').insert({
         event_name: 'shopify_checkout_created',
         anonymous_id: anonymousId,

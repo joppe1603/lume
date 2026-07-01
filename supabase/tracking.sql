@@ -57,49 +57,9 @@ create table if not exists consent_records (
 create index if not exists consent_records_anonymous_idx on consent_records (anonymous_id, created_at desc);
 create index if not exists consent_records_user_idx on consent_records (user_id, created_at desc);
 
-create table if not exists shopify_checkout_sessions (
-  shopify_cart_id text primary key,
-  shopify_cart_token text null,
-  anonymous_id text not null,
-  session_id text not null,
-  checkout_url text null,
-  checkout_host text null,
-  total numeric null,
-  item_count integer null,
-  items jsonb not null default '{}',
-  network jsonb not null default '{}',
-  created_at timestamptz not null default now(),
-  updated_at timestamptz not null default now()
-);
-
-create index if not exists shopify_checkout_sessions_token_idx on shopify_checkout_sessions (shopify_cart_token);
-create index if not exists shopify_checkout_sessions_anon_idx on shopify_checkout_sessions (anonymous_id, created_at desc);
-create index if not exists shopify_checkout_sessions_session_idx on shopify_checkout_sessions (session_id, created_at desc);
-
-create table if not exists shopify_webhook_events (
-  id uuid primary key default gen_random_uuid(),
-  topic text null,
-  shop_domain text null,
-  shopify_order_id text null,
-  shopify_order_gid text null,
-  shopify_cart_token text null,
-  shopify_checkout_token text null,
-  payload jsonb not null default '{}',
-  matched_anonymous_id text null,
-  matched_session_id text null,
-  created_at timestamptz not null default now()
-);
-
-create index if not exists shopify_webhook_events_topic_idx on shopify_webhook_events (topic, created_at desc);
-create index if not exists shopify_webhook_events_order_idx on shopify_webhook_events (shopify_order_id);
-create index if not exists shopify_webhook_events_cart_idx on shopify_webhook_events (shopify_cart_token);
-create index if not exists shopify_webhook_events_checkout_idx on shopify_webhook_events (shopify_checkout_token);
-
 alter table tracking_events enable row level security;
 alter table visitor_profiles enable row level security;
 alter table consent_records enable row level security;
-alter table shopify_checkout_sessions enable row level security;
-alter table shopify_webhook_events enable row level security;
 
 drop policy if exists "service role can manage tracking events" on tracking_events;
 create policy "service role can manage tracking events"
@@ -118,20 +78,6 @@ create policy "service role can manage visitor profiles"
 drop policy if exists "service role can manage consent records" on consent_records;
 create policy "service role can manage consent records"
   on consent_records
-  for all
-  using (auth.role() = 'service_role')
-  with check (auth.role() = 'service_role');
-
-drop policy if exists "service role can manage shopify checkout sessions" on shopify_checkout_sessions;
-create policy "service role can manage shopify checkout sessions"
-  on shopify_checkout_sessions
-  for all
-  using (auth.role() = 'service_role')
-  with check (auth.role() = 'service_role');
-
-drop policy if exists "service role can manage shopify webhook events" on shopify_webhook_events;
-create policy "service role can manage shopify webhook events"
-  on shopify_webhook_events
   for all
   using (auth.role() = 'service_role')
   with check (auth.role() = 'service_role');
@@ -199,38 +145,94 @@ select
   properties->'attribution' as attribution
 from tracking_events
 where occurred_at >= now() - interval '30 days'
-  and event_name in ('shopify_checkout_created', 'order_created', 'payment_redirect_created', 'purchase_completed', 'orders_paid');
+  and event_name in ('shopify_checkout_created', 'order_created', 'payment_redirect_created');
 
-create or replace view tracking_shopify_purchases_30d as
-select
-  created_at,
-  topic,
-  shopify_order_id,
-  shopify_order_gid,
-  matched_anonymous_id,
-  matched_session_id,
-  (payload->>'total')::numeric as total,
-  payload->>'currency' as currency,
-  payload->>'financial_status' as financial_status,
-  payload->>'email_domain' as email_domain,
-  payload->'items' as items,
-  payload->>'landing_site' as landing_site,
-  payload->>'referring_site' as referring_site
-from shopify_webhook_events
-where created_at >= now() - interval '30 days'
-  and topic in ('orders/paid', 'orders/create', 'orders/updated')
-order by created_at desc;
+create or replace view tracking_visitor_intelligence_latest as
+select distinct on (anonymous_id)
+  anonymous_id,
+  session_id,
+  occurred_at,
+  page_path,
+  properties->>'visitor_segment' as visitor_segment,
+  (properties->>'intent_score')::integer as intent_score,
+  (properties->>'friction_score')::integer as friction_score,
+  (properties->>'engagement_score')::integer as engagement_score,
+  (properties->>'active_time_ms')::integer as active_time_ms,
+  (properties->>'time_on_page_ms')::integer as time_on_page_ms,
+  (properties->>'max_scroll')::integer as max_scroll,
+  (properties->>'click_count')::integer as click_count,
+  (properties->>'rage_click_count')::integer as rage_click_count,
+  (properties->>'dead_click_count')::integer as dead_click_count,
+  (properties->>'form_focus_count')::integer as form_focus_count,
+  (properties->>'product_signals')::integer as product_signals,
+  (properties->>'commerce_signals')::integer as commerce_signals,
+  properties->>'product_slug' as product_slug,
+  properties->'attribution' as attribution
+from tracking_events
+where event_name = 'visitor_intelligence_snapshot'
+order by anonymous_id, occurred_at desc;
 
-create or replace view tracking_shopify_webhook_match_rate_30d as
+create or replace view tracking_high_intent_visitors_24h as
+select *
+from tracking_visitor_intelligence_latest
+where occurred_at >= now() - interval '24 hours'
+  and intent_score >= 65
+order by intent_score desc, engagement_score desc, occurred_at desc;
+
+create or replace view tracking_hot_but_stuck_24h as
+select *
+from tracking_visitor_intelligence_latest
+where occurred_at >= now() - interval '24 hours'
+  and intent_score >= 50
+  and friction_score >= 35
+order by friction_score desc, intent_score desc, occurred_at desc;
+
+create or replace view tracking_product_affinity_7d as
 select
-  topic,
-  count(*) as webhook_events,
-  count(*) filter (where matched_anonymous_id is not null) as matched_events,
-  round(
-    100.0 * count(*) filter (where matched_anonymous_id is not null) / nullif(count(*), 0),
-    2
-  ) as match_rate_pct
-from shopify_webhook_events
-where created_at >= now() - interval '30 days'
-group by topic
-order by webhook_events desc;
+  coalesce(properties->>'product_slug', page_path) as product_or_page,
+  count(distinct anonymous_id) as visitors,
+  count(*) filter (where event_name = 'product_impression_viewed') as impressions,
+  count(*) filter (where event_name = 'page_viewed') as pageviews,
+  count(*) filter (where event_name = 'cart_item_added') as cart_adds,
+  count(*) filter (where event_name in ('shopify_checkout_started', 'shopify_checkout_created')) as checkout_starts,
+  avg((properties->>'intent_score')::integer) filter (where event_name = 'visitor_intelligence_snapshot') as avg_intent_score,
+  avg((properties->>'friction_score')::integer) filter (where event_name = 'visitor_intelligence_snapshot') as avg_friction_score
+from tracking_events
+where occurred_at >= now() - interval '7 days'
+  and (
+    properties ? 'product_slug'
+    or page_path like '/products/%'
+  )
+group by 1
+order by checkout_starts desc, cart_adds desc, avg_intent_score desc nulls last;
+
+create or replace view tracking_friction_points_7d as
+select
+  page_path,
+  event_name,
+  properties->>'label' as label,
+  properties->>'field' as field,
+  count(*) as events,
+  count(distinct anonymous_id) as visitors
+from tracking_events
+where occurred_at >= now() - interval '7 days'
+  and event_name in ('rage_click_detected', 'dead_click_detected', 'form_field_engaged')
+group by 1, 2, 3, 4
+order by events desc, visitors desc;
+
+create or replace view tracking_remarketing_segments_7d as
+select
+  anonymous_id,
+  max(occurred_at) as last_seen_at,
+  max((properties->>'intent_score')::integer) filter (where event_name = 'visitor_intelligence_snapshot') as max_intent_score,
+  max((properties->>'friction_score')::integer) filter (where event_name = 'visitor_intelligence_snapshot') as max_friction_score,
+  bool_or(event_name = 'cart_item_added') as added_to_cart,
+  bool_or(event_name in ('shopify_checkout_started', 'shopify_checkout_created')) as started_checkout,
+  bool_or(event_name in ('purchase_completed', 'orders_paid', 'order_created')) as purchased,
+  array_remove(array_agg(distinct properties->>'product_slug'), null) as product_slugs,
+  max(properties->>'visitor_segment') filter (where event_name = 'visitor_intelligence_snapshot') as latest_segment
+from tracking_events
+where occurred_at >= now() - interval '7 days'
+group by anonymous_id
+having not bool_or(event_name in ('purchase_completed', 'orders_paid', 'order_created'))
+order by started_checkout desc, added_to_cart desc, max_intent_score desc nulls last;
