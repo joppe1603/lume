@@ -57,9 +57,34 @@ create table if not exists consent_records (
 create index if not exists consent_records_anonymous_idx on consent_records (anonymous_id, created_at desc);
 create index if not exists consent_records_user_idx on consent_records (user_id, created_at desc);
 
+create table if not exists tracking_automation_actions (
+  id uuid primary key default gen_random_uuid(),
+  action_key text not null unique,
+  action_type text not null,
+  priority integer not null default 3,
+  status text not null default 'open',
+  anonymous_id text null,
+  session_id text null,
+  page_path text null,
+  product_slug text null,
+  title text not null,
+  recommendation text not null,
+  evidence jsonb not null default '{}',
+  due_at timestamptz null,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  resolved_at timestamptz null
+);
+
+create index if not exists tracking_automation_actions_status_idx on tracking_automation_actions (status, priority, created_at desc);
+create index if not exists tracking_automation_actions_type_idx on tracking_automation_actions (action_type, created_at desc);
+create index if not exists tracking_automation_actions_anon_idx on tracking_automation_actions (anonymous_id, created_at desc);
+create index if not exists tracking_automation_actions_product_idx on tracking_automation_actions (product_slug, created_at desc);
+
 alter table tracking_events enable row level security;
 alter table visitor_profiles enable row level security;
 alter table consent_records enable row level security;
+alter table tracking_automation_actions enable row level security;
 
 drop policy if exists "service role can manage tracking events" on tracking_events;
 create policy "service role can manage tracking events"
@@ -78,6 +103,13 @@ create policy "service role can manage visitor profiles"
 drop policy if exists "service role can manage consent records" on consent_records;
 create policy "service role can manage consent records"
   on consent_records
+  for all
+  using (auth.role() = 'service_role')
+  with check (auth.role() = 'service_role');
+
+drop policy if exists "service role can manage tracking automation actions" on tracking_automation_actions;
+create policy "service role can manage tracking automation actions"
+  on tracking_automation_actions
   for all
   using (auth.role() = 'service_role')
   with check (auth.role() = 'service_role');
@@ -236,3 +268,35 @@ where occurred_at >= now() - interval '7 days'
 group by anonymous_id
 having not bool_or(event_name in ('purchase_completed', 'orders_paid', 'order_created'))
 order by started_checkout desc, added_to_cart desc, max_intent_score desc nulls last;
+
+create or replace view tracking_open_automation_actions as
+select
+  id,
+  action_type,
+  priority,
+  status,
+  title,
+  recommendation,
+  anonymous_id,
+  session_id,
+  page_path,
+  product_slug,
+  evidence,
+  due_at,
+  created_at,
+  updated_at
+from tracking_automation_actions
+where status = 'open'
+order by priority asc, created_at desc;
+
+create or replace view tracking_automation_action_counts_7d as
+select
+  action_type,
+  status,
+  count(*) as actions,
+  min(priority) as highest_priority,
+  max(created_at) as last_created_at
+from tracking_automation_actions
+where created_at >= now() - interval '7 days'
+group by action_type, status
+order by highest_priority asc, actions desc;

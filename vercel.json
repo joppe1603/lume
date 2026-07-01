@@ -11,6 +11,10 @@
     {
       "path": "/api/cron/tracking-intelligence",
       "schedule": "30 8 * * *"
+    },
+    {
+      "path": "/api/cron/tracking-automation",
+      "schedule": "0 * * * *"
     }
   ]
 }
