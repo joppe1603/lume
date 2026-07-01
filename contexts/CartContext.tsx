@@ -3,7 +3,7 @@
 import { createContext, useContext, useReducer, useEffect, useState, ReactNode } from 'react'
 import { createShopifyCheckout } from '@/lib/shopify'
 import { track } from '@vercel/analytics'
-import { trackEvent } from '@/lib/tracking'
+import { getAnonymousId, getSessionId, trackEvent } from '@/lib/tracking'
 
 export type CartItem = {
   slug: string
@@ -197,6 +197,28 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setIsCheckingOut(true)
     try {
       const { cartId, checkoutUrl } = await createShopifyCheckout(lines)
+      const anonymousId = getAnonymousId()
+      const sessionId = getSessionId()
+      await fetch('/api/tracking/shopify-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        keepalive: true,
+        body: JSON.stringify({
+          anonymous_id: anonymousId,
+          session_id: sessionId,
+          shopify_cart_id: cartId,
+          checkout_url: checkoutUrl,
+          total,
+          item_count: itemCount,
+          items: state.items.map((item) => ({
+            product_slug: item.slug,
+            product_name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+            subscription: Boolean(item.subscription),
+          })),
+        }),
+      }).catch(() => null)
       void trackEvent({
         event_name: 'shopify_checkout_created',
         properties: {

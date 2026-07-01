@@ -57,9 +57,49 @@ create table if not exists consent_records (
 create index if not exists consent_records_anonymous_idx on consent_records (anonymous_id, created_at desc);
 create index if not exists consent_records_user_idx on consent_records (user_id, created_at desc);
 
+create table if not exists shopify_checkout_sessions (
+  shopify_cart_id text primary key,
+  shopify_cart_token text null,
+  anonymous_id text not null,
+  session_id text not null,
+  checkout_url text null,
+  checkout_host text null,
+  total numeric null,
+  item_count integer null,
+  items jsonb not null default '{}',
+  network jsonb not null default '{}',
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create index if not exists shopify_checkout_sessions_token_idx on shopify_checkout_sessions (shopify_cart_token);
+create index if not exists shopify_checkout_sessions_anon_idx on shopify_checkout_sessions (anonymous_id, created_at desc);
+create index if not exists shopify_checkout_sessions_session_idx on shopify_checkout_sessions (session_id, created_at desc);
+
+create table if not exists shopify_webhook_events (
+  id uuid primary key default gen_random_uuid(),
+  topic text null,
+  shop_domain text null,
+  shopify_order_id text null,
+  shopify_order_gid text null,
+  shopify_cart_token text null,
+  shopify_checkout_token text null,
+  payload jsonb not null default '{}',
+  matched_anonymous_id text null,
+  matched_session_id text null,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists shopify_webhook_events_topic_idx on shopify_webhook_events (topic, created_at desc);
+create index if not exists shopify_webhook_events_order_idx on shopify_webhook_events (shopify_order_id);
+create index if not exists shopify_webhook_events_cart_idx on shopify_webhook_events (shopify_cart_token);
+create index if not exists shopify_webhook_events_checkout_idx on shopify_webhook_events (shopify_checkout_token);
+
 alter table tracking_events enable row level security;
 alter table visitor_profiles enable row level security;
 alter table consent_records enable row level security;
+alter table shopify_checkout_sessions enable row level security;
+alter table shopify_webhook_events enable row level security;
 
 drop policy if exists "service role can manage tracking events" on tracking_events;
 create policy "service role can manage tracking events"
@@ -78,6 +118,20 @@ create policy "service role can manage visitor profiles"
 drop policy if exists "service role can manage consent records" on consent_records;
 create policy "service role can manage consent records"
   on consent_records
+  for all
+  using (auth.role() = 'service_role')
+  with check (auth.role() = 'service_role');
+
+drop policy if exists "service role can manage shopify checkout sessions" on shopify_checkout_sessions;
+create policy "service role can manage shopify checkout sessions"
+  on shopify_checkout_sessions
+  for all
+  using (auth.role() = 'service_role')
+  with check (auth.role() = 'service_role');
+
+drop policy if exists "service role can manage shopify webhook events" on shopify_webhook_events;
+create policy "service role can manage shopify webhook events"
+  on shopify_webhook_events
   for all
   using (auth.role() = 'service_role')
   with check (auth.role() = 'service_role');
@@ -145,4 +199,38 @@ select
   properties->'attribution' as attribution
 from tracking_events
 where occurred_at >= now() - interval '30 days'
-  and event_name in ('shopify_checkout_created', 'order_created', 'payment_redirect_created');
+  and event_name in ('shopify_checkout_created', 'order_created', 'payment_redirect_created', 'purchase_completed', 'orders_paid');
+
+create or replace view tracking_shopify_purchases_30d as
+select
+  created_at,
+  topic,
+  shopify_order_id,
+  shopify_order_gid,
+  matched_anonymous_id,
+  matched_session_id,
+  (payload->>'total')::numeric as total,
+  payload->>'currency' as currency,
+  payload->>'financial_status' as financial_status,
+  payload->>'email_domain' as email_domain,
+  payload->'items' as items,
+  payload->>'landing_site' as landing_site,
+  payload->>'referring_site' as referring_site
+from shopify_webhook_events
+where created_at >= now() - interval '30 days'
+  and topic in ('orders/paid', 'orders/create', 'orders/updated')
+order by created_at desc;
+
+create or replace view tracking_shopify_webhook_match_rate_30d as
+select
+  topic,
+  count(*) as webhook_events,
+  count(*) filter (where matched_anonymous_id is not null) as matched_events,
+  round(
+    100.0 * count(*) filter (where matched_anonymous_id is not null) / nullif(count(*), 0),
+    2
+  ) as match_rate_pct
+from shopify_webhook_events
+where created_at >= now() - interval '30 days'
+group by topic
+order by webhook_events desc;
