@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 }
 
-const lastUpdated = '18 mei 2026'
+const lastUpdated = '1 juli 2026'
 
 export default function PrivacyPage() {
   return (
@@ -51,13 +51,16 @@ export default function PrivacyPage() {
 
             <section>
               <h2 className="text-[18px] font-semibold text-[#1A1A1A] mb-3">2. Welke gegevens verzamelen wij</h2>
-              <p>Wij verzamelen uitsluitend de volgende gegevens:</p>
+              <p>Afhankelijk van hoe je MAUYI gebruikt, verzamelen wij de volgende gegevens:</p>
               <ul className="mt-3 space-y-2 list-none pl-0">
                 {[
                   { label: 'E-mailadres', desc: 'Wanneer je je inschrijft voor de wachtlijst of nieuwsbrief.' },
-                  { label: 'Herkomstpagina', desc: 'Van welke pagina je je hebt ingeschreven (bijv. "homepage" of "productpagina"), zodat wij begrijpen hoe mensen ons vinden.' },
-                  { label: 'Aanmelddatum', desc: 'Het tijdstip van inschrijving.' },
-                  { label: 'Cookiegegevens', desc: 'Alleen indien je daarvoor toestemming hebt gegeven. Zie sectie 6.' },
+                  { label: 'Bestelgegevens', desc: 'Naam, e-mailadres, adres, producten en orderstatus wanneer je een bestelling plaatst.' },
+                  { label: 'Herkomst- en campagnedata', desc: 'Pagina, referrer en UTM-parameters zodat wij begrijpen hoe mensen MAUYI vinden.' },
+                  { label: 'Gebruiksdata op onze website', desc: 'Paginaweergaven, klikken, formulierstappen, interne zoekopdrachten en outbound links binnen MAUYI.' },
+                  { label: 'Technische gegevens', desc: 'IP-hash, user agent, browser, apparaat, schermgrootte, taal, tijdzone en foutmeldingen.' },
+                  { label: 'Deviceherkenning', desc: 'Alleen met toestemming of waar strikt noodzakelijk voor beveiliging: browser- en apparaatsignalen zoals canvas/WebGL-capabilities, opgeslagen als hashes waar mogelijk.' },
+                  { label: 'Toestemmingsgegevens', desc: 'Welke cookie- en trackingkeuzes je hebt gemaakt, wanneer en voor welke versie van dit beleid.' },
                 ].map((item) => (
                   <li key={item.label} className="flex gap-3">
                     <span className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
@@ -66,17 +69,19 @@ export default function PrivacyPage() {
                 ))}
               </ul>
               <p className="mt-4">
-                Wij verzamelen <strong className="text-[#1A1A1A] font-medium">geen</strong> betaalgegevens, geen adresgegevens en geen gevoelige persoonsgegevens.
+                Wij volgen niet wat je buiten MAUYI op andere websites zoekt of bekijkt. Betaalgegevens worden verwerkt door onze betaalprovider; MAUYI bewaart zelf geen volledige kaart- of bankgegevens.
               </p>
             </section>
 
             <section>
               <h2 className="text-[18px] font-semibold text-[#1A1A1A] mb-3">3. Waarom verwerken wij jouw gegevens</h2>
-              <p>Wij verwerken jouw e-mailadres uitsluitend voor de volgende doeleinden:</p>
+              <p>Wij verwerken gegevens voor de volgende doeleinden:</p>
               <ul className="mt-3 space-y-2 list-none pl-0">
                 {[
-                  'Het sturen van een persoonlijk bericht wanneer MAUYI producten beschikbaar komen (lanceringsmelding).',
-                  'Het delen van relevante updates over de voortgang van de productontwikkeling, uitsluitend indien je dit verwacht op basis van je inschrijving.',
+                  'Het verwerken van wachtlijstinschrijvingen, bestellingen en klantenservice.',
+                  'Het meten en verbeteren van pagina’s, formulieren, checkout en campagnes.',
+                  'Het voorkomen van spam, fraude, misbruik, scraping en technische storingen.',
+                  'Het tonen en meten van relevante marketing wanneer je daarvoor toestemming hebt gegeven.',
                 ].map((item, i) => (
                   <li key={i} className="flex gap-3">
                     <span className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
@@ -92,26 +97,28 @@ export default function PrivacyPage() {
             <section>
               <h2 className="text-[18px] font-semibold text-[#1A1A1A] mb-3">4. Grondslag voor verwerking</h2>
               <p>
-                De verwerking van jouw e-mailadres is gebaseerd op jouw <strong className="text-[#1A1A1A] font-medium">toestemming</strong> (art. 6 lid 1 sub a AVG). Je geeft deze toestemming door je vrijwillig in te schrijven voor de wachtlijst. Je kunt deze toestemming op elk moment intrekken.
+                Wij verwerken gegevens op basis van toestemming, uitvoering van een overeenkomst, gerechtvaardigd belang voor beveiliging en verbetering van onze website, of een wettelijke verplichting. Marketing, analytics en deviceherkenning gebruiken wij alleen wanneer jij daarvoor toestemming geeft, tenzij een beperkte verwerking strikt noodzakelijk is voor beveiliging of fraudepreventie.
               </p>
             </section>
 
             <section>
               <h2 className="text-[18px] font-semibold text-[#1A1A1A] mb-3">5. Bewaartermijn</h2>
               <p>
-                Wij bewaren jouw gegevens totdat de lancering van het betreffende product heeft plaatsgevonden en de wachtlijst niet langer actief is, of totdat je je afmeldt. Daarna worden jouw gegevens binnen 30 dagen verwijderd.
+                Wachtlijst- en nieuwsbriefgegevens bewaren wij totdat je je afmeldt of de lijst niet langer actief is. Ordergegevens bewaren wij zolang dat nodig is voor levering, klantenservice en wettelijke administratieplichten. Ruwe trackingevents bewaren wij in principe maximaal 12 maanden; geaggregeerde analytics kunnen langer bewaard blijven. Ruwe fingerprintcomponenten vermijden wij waar mogelijk of verwijderen wij binnen 30 dagen; hashes en risicosignalen bewaren wij maximaal 12 maanden, tenzij misbruiksonderzoek langer nodig maakt.
               </p>
             </section>
 
             <section>
               <h2 className="text-[18px] font-semibold text-[#1A1A1A] mb-3">6. Cookies</h2>
               <p>
-                Onze website gebruikt cookies. Je kunt kiezen welke cookies je accepteert via de cookiebanner die verschijnt bij je eerste bezoek.
+                Onze website gebruikt cookies en vergelijkbare technieken. Je kunt kiezen welke categorieën je accepteert via de cookiebanner die verschijnt bij je eerste bezoek.
               </p>
               <ul className="mt-3 space-y-3 list-none pl-0">
                 {[
-                  { label: 'Noodzakelijke cookies', desc: 'Altijd actief. Vereist voor het correct functioneren van de website. Slaan jouw cookievoorkeur op.' },
-                  { label: 'Analytische cookies', desc: 'Alleen met jouw toestemming. Helpen ons begrijpen hoe bezoekers onze website gebruiken (anoniem en geaggregeerd).' },
+                  { label: 'Noodzakelijke cookies', desc: 'Altijd actief. Vereist voor het correct functioneren van de website, winkelwagen, beveiliging en het opslaan van jouw voorkeuren.' },
+                  { label: 'Analytische cookies', desc: 'Alleen met jouw toestemming. Helpen ons begrijpen welke pagina’s, klikken en formulieren goed werken.' },
+                  { label: 'Marketingcookies', desc: 'Alleen met jouw toestemming. Helpen campagnes te meten en relevante advertenties of doelgroepen te maken via toegestane platformen.' },
+                  { label: 'Deviceherkenning', desc: 'Alleen met jouw toestemming, behalve beperkte noodzakelijke beveiligingssignalen. Helpt terugkerende apparaten, fraude en misbruik te herkennen.' },
                 ].map((item) => (
                   <li key={item.label} className="flex gap-3">
                     <span className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
@@ -124,10 +131,10 @@ export default function PrivacyPage() {
             <section>
               <h2 className="text-[18px] font-semibold text-[#1A1A1A] mb-3">7. Derde partijen</h2>
               <p>
-                Wij maken gebruik van <strong className="text-[#1A1A1A] font-medium">Supabase</strong> (Supabase Inc., VS) voor de opslag van wachtlijstgegevens. Supabase verwerkt gegevens in overeenstemming met de AVG en heeft standaard contractbepalingen (SCC&apos;s) getekend. Meer informatie: <a href="https://supabase.com/privacy" className="text-[#C9A96E] underline underline-offset-2" target="_blank" rel="noreferrer">supabase.com/privacy</a>.
+                Wij maken gebruik van <strong className="text-[#1A1A1A] font-medium">Supabase</strong> voor opslag van wachtlijst-, order-, consent- en trackinggegevens. Supabase verwerkt gegevens in overeenstemming met de AVG en gebruikt waar nodig standaard contractbepalingen. Meer informatie: <a href="https://supabase.com/privacy" className="text-[#C9A96E] underline underline-offset-2" target="_blank" rel="noreferrer">supabase.com/privacy</a>.
               </p>
               <p className="mt-3">
-                Wij delen jouw gegevens niet met andere derde partijen, tenzij wij daartoe wettelijk verplicht zijn.
+                Voor betalingen gebruiken wij Mollie. Voor e-mailcommunicatie kunnen wij Resend gebruiken. Voor hosting en technische analytics gebruiken wij Vercel. Wij delen gegevens niet met derden voor verkoop, en beperken iedere verwerking tot wat nodig is voor de genoemde doeleinden of waarvoor jij toestemming hebt gegeven.
               </p>
             </section>
 

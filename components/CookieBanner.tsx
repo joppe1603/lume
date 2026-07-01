@@ -3,28 +3,28 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-
-const STORAGE_KEY = 'mauyi-cookie-consent'
+import { defaultConsent, fullConsent, hasStoredConsent, setConsent, syncConsent, trackEvent } from '@/lib/tracking'
 
 export default function CookieBanner() {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY)
-      if (!stored) setVisible(true)
-    } catch {
-      // localStorage blocked (private mode etc.)
-    }
+    if (!hasStoredConsent()) setVisible(true)
   }, [])
 
   function accept() {
-    try { localStorage.setItem(STORAGE_KEY, 'all') } catch { /* */ }
+    const consent = fullConsent()
+    setConsent(consent)
+    void syncConsent(consent)
+    void trackEvent({ event_name: 'consent_updated', properties: { choice: 'all' } })
     setVisible(false)
   }
 
   function necessary() {
-    try { localStorage.setItem(STORAGE_KEY, 'necessary') } catch { /* */ }
+    const consent = defaultConsent()
+    setConsent(consent)
+    void syncConsent(consent)
+    void trackEvent({ event_name: 'consent_updated', properties: { choice: 'necessary' } })
     setVisible(false)
   }
 
@@ -54,7 +54,7 @@ export default function CookieBanner() {
                   Wij gebruiken cookies
                 </p>
                 <p className="text-stone-500 text-[12px] font-light leading-relaxed">
-                  Voor analytics en een betere ervaring. Lees ons{' '}
+                  Voor analytics, marketingmeting en deviceherkenning als je toestemming geeft. Lees ons{' '}
                   <Link href="/privacy" className="text-[#C9A96E] underline underline-offset-2 hover:text-[#E8C98A] transition-colors">
                     privacybeleid
                   </Link>
