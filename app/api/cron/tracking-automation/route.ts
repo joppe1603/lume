@@ -313,7 +313,7 @@ export async function GET(req: NextRequest) {
       }, {}),
     })
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unknown tracking automation error'
+    const message = error instanceof Error ? error.message : JSON.stringify(error)
     console.error('[tracking-automation] Unhandled error:', error)
     return NextResponse.json({ error: 'Tracking automation failed', details: message }, { status: 500 })
   }
