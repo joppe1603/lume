@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { Resend } from 'resend'
 
+export const dynamic = 'force-dynamic'
+
 type HighIntentVisitor = {
   anonymous_id: string
   session_id: string
@@ -158,41 +160,42 @@ async function upsertActions(actions: AutomationAction[]) {
 }
 
 export async function GET(req: NextRequest) {
-  if (req.headers.get('Authorization') !== `Bearer ${process.env.CRON_SECRET}`) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  }
+  try {
+    if (req.headers.get('Authorization') !== `Bearer ${process.env.CRON_SECRET}`) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
 
-  const db = supabase()
-  const day = actionDay()
-  const [
-    highIntentRes,
-    hotButStuckRes,
-    frictionRes,
-    productAffinityRes,
-    remarketingRes,
-  ] = await Promise.all([
-    db.from('tracking_high_intent_visitors_24h').select('*').limit(75),
-    db.from('tracking_hot_but_stuck_24h').select('*').limit(75),
-    db.from('tracking_friction_points_7d').select('*').limit(75),
-    db.from('tracking_product_affinity_7d').select('*').limit(75),
-    db.from('tracking_remarketing_segments_7d').select('*').limit(100),
-  ])
+    const db = supabase()
+    const day = actionDay()
+    const [
+      highIntentRes,
+      hotButStuckRes,
+      frictionRes,
+      productAffinityRes,
+      remarketingRes,
+    ] = await Promise.all([
+      db.from('tracking_high_intent_visitors_24h').select('*').limit(75),
+      db.from('tracking_hot_but_stuck_24h').select('*').limit(75),
+      db.from('tracking_friction_points_7d').select('*').limit(75),
+      db.from('tracking_product_affinity_7d').select('*').limit(75),
+      db.from('tracking_remarketing_segments_7d').select('*').limit(100),
+    ])
 
-  const errors = [highIntentRes, hotButStuckRes, frictionRes, productAffinityRes, remarketingRes]
-    .map((result) => result.error?.message)
-    .filter(Boolean)
+    const errors = [highIntentRes, hotButStuckRes, frictionRes, productAffinityRes, remarketingRes]
+      .map((result) => result.error?.message)
+      .filter(Boolean)
 
-  if (errors.length) {
-    console.error('[tracking-automation] Supabase view errors:', errors)
-    return NextResponse.json({ error: 'View query failed', details: errors }, { status: 500 })
-  }
+    if (errors.length) {
+      console.error('[tracking-automation] Supabase view errors:', errors)
+      return NextResponse.json({ error: 'View query failed', details: errors }, { status: 500 })
+    }
 
-  const highIntent = (highIntentRes.data ?? []) as HighIntentVisitor[]
-  const hotButStuck = (hotButStuckRes.data ?? []) as HighIntentVisitor[]
-  const frictionPoints = (frictionRes.data ?? []) as FrictionPoint[]
-  const productAffinity = (productAffinityRes.data ?? []) as ProductAffinity[]
-  const remarketing = (remarketingRes.data ?? []) as RemarketingSegment[]
-  const actions: AutomationAction[] = []
+    const highIntent = (highIntentRes.data ?? []) as HighIntentVisitor[]
+    const hotButStuck = (hotButStuckRes.data ?? []) as HighIntentVisitor[]
+    const frictionPoints = (frictionRes.data ?? []) as FrictionPoint[]
+    const productAffinity = (productAffinityRes.data ?? []) as ProductAffinity[]
+    const remarketing = (remarketingRes.data ?? []) as RemarketingSegment[]
+    const actions: AutomationAction[] = []
 
   for (const visitor of remarketing) {
     const productSlug = visitor.product_slugs?.[0] ?? null
@@ -301,13 +304,17 @@ export async function GET(req: NextRequest) {
     })
   }
 
-  return NextResponse.json({
-    ok: true,
-    actions: deduped.length,
-    byType: deduped.reduce<Record<string, number>>((acc, action) => {
-      acc[action.action_type] = (acc[action.action_type] ?? 0) + 1
-      return acc
-    }, {}),
-  })
+    return NextResponse.json({
+      ok: true,
+      actions: deduped.length,
+      byType: deduped.reduce<Record<string, number>>((acc, action) => {
+        acc[action.action_type] = (acc[action.action_type] ?? 0) + 1
+        return acc
+      }, {}),
+    })
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Unknown tracking automation error'
+    console.error('[tracking-automation] Unhandled error:', error)
+    return NextResponse.json({ error: 'Tracking automation failed', details: message }, { status: 500 })
+  }
 }
-
