@@ -14,7 +14,7 @@
     },
     {
       "path": "/api/cron/tracking-automation",
-      "schedule": "0 * * * *"
+      "schedule": "45 8 * * *"
     }
   ]
 }
