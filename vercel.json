@@ -7,6 +7,10 @@
     {
       "path": "/api/cron/daily-tasks",
       "schedule": "0 10 * * *"
+    },
+    {
+      "path": "/api/cron/tracking-intelligence",
+      "schedule": "30 8 * * *"
     }
   ]
 }
