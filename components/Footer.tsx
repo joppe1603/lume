@@ -205,19 +205,19 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Made by Vonk */}
+        {/* Made by Clamz */}
         <div className="mt-6 flex justify-center sm:justify-start">
           <a
-            href="https://vonk.agency/?utm_source=mauyi&utm_medium=footer-credit&utm_campaign=made-by-vonk"
+            href="https://clamz.nl/?utm_source=mauyi&utm_medium=footer-credit&utm_campaign=made-by-clamz"
             target="_blank"
             rel="noopener"
-            aria-label="Website gemaakt door Vonk"
+            aria-label="Website gemaakt door Clamz"
             className="group inline-flex items-center gap-1.5 text-sm text-stone-600 transition-opacity hover:opacity-80"
           >
             <svg viewBox="0 0 24 24" aria-hidden fill="currentColor" style={{ color: '#FF6A3D' }} className="h-3.5 w-3.5">
               <path d="M12 1.5 13.9 9.4 22 12l-8.1 2.6L12 22.5 10.1 14.6 2 12l8.1-2.6L12 1.5Z" />
             </svg>
-            <span>Website door <span className="font-semibold" style={{ color: '#FF6A3D' }}>Vonk</span></span>
+            <span>Website door <span className="font-semibold" style={{ color: '#FF6A3D' }}>Clamz</span></span>
           </a>
         </div>
       </div>
