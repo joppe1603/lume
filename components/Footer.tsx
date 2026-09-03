@@ -208,7 +208,7 @@ export default function Footer() {
         {/* Made by Clamz */}
         <div className="mt-6 flex justify-center sm:justify-start">
           <a
-            href="https://clamz.nl/?utm_source=mauyi&utm_medium=footer-credit&utm_campaign=made-by-clamz"
+            href="https://clamz.nl/gemaakt-door-clamz?utm_source=mauyi&utm_medium=footer-credit&utm_campaign=made-by-clamz"
             target="_blank"
             rel="noopener"
             aria-label="Website gemaakt door Clamz"
